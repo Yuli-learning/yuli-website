@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found — Yuli</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+</head>
+<body>
+  <!--#include virtual="/site/partials/header.html" -->
+  <main id="main" class="container" style="min-height:60vh;display:flex;align-items:center">
+    <section class="card" style="width:100%">
+      <h1>We can’t find that page</h1>
+      <p>Try searching or head back to a main page.</p>
+      <form role="search" action="/search" method="get" class="form" style="margin:12px 0">
+        <label for="q">Search</label>
+        <input id="q" name="q" />
+      </form>
+      <p>
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/about.html">About</a>
+        <a class="btn" href="/site/contact.html">Contact</a>
+      </p>
+    </section>
+  </main>
+  <!--#include virtual="/site/partials/footer.html" -->
+</body>
+</html>

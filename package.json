@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "verify:specs": "node scripts/verify-spec-links.mjs"
+  },
+  "dependencies": {
+    "firebase": "^12.0.0"
+  }
+}

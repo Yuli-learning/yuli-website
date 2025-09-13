@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Header Test</title>
+    <style>
+        .test-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: white;
+            height: 60px;
+        }
+        .test-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .test-info {
+            flex: 1;
+        }
+        .test-name {
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .test-status {
+            color: #666;
+            font-size: 12px;
+            margin: 0;
+        }
+        .test-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .test-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <div class="test-avatar">L</div>
+        <div class="test-info">
+            <div class="test-name">Lukas Jovaisa</div>
+            <div class="test-status">Online</div>
+        </div>
+        <div class="test-actions">
+            <button class="test-btn">📞</button>
+            <button class="test-btn">📹</button>
+            <button class="test-btn">⋮</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+:root{
+  /* Yuli palette (pull brand blue from existing buttons if available) */
+  --brand:#2563eb;             /* Windsurf: if a primary button color exists, use that instead */
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --text:#0f172a;
+  --muted:#667085;
+  --ring:#e5e7eb;
+
+  --bubble-sent:#eef4ff;       /* light blue */
+  --bubble-sent-border:#dbe7ff;
+  --bubble-recv:#ffffff;       /* white */
+  --bubble-recv-border:#edf2f7;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--text)}
+.panel{background:var(--panel); border:1px solid var(--ring); border-radius:16px; box-shadow:0 1px 6px rgba(16,24,40,.04)}
+
+.app{display:grid; grid-template-columns:360px 1fr; gap:16px; padding:20px}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .app.show-list .sidebar{display:block}
+  .app.show-list .chat{display:none}
+}
+
+/* Sidebar */
+.sidebar{padding:12px; height:calc(100vh - 120px)}
+.search{padding:10px 12px; border:1px solid var(--ring); border-radius:12px; width:100%; background:#fafbff}
+.list{margin-top:10px; overflow:auto; max-height:calc(100% - 56px)}
+.item{display:grid; grid-template-columns:40px 1fr auto; gap:10px; align-items:center; padding:10px; border-radius:12px; cursor:pointer}
+.item:hover{background:#f8fafc}
+.item.active{outline:2px solid rgba(37,99,235,.12); background:#f1f5ff}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e6eefc;color:#274690;font-weight:700}
+.item .name{font-weight:600}
+.item .preview{color:var(--muted); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.item .time{color:var(--muted); font-size:12px}
+
+/* Chat pane */
+.chat{display:grid; grid-template-rows:auto 1fr auto; height:calc(100vh - 120px)}
+.chat .header{display:flex; align-items:center; gap:10px; padding:8px 16px; border-bottom:1px solid var(--ring); min-height:50px !important}
+.chat .header .title{font-weight:700; margin:0; line-height:1.2}
+.chat .header .chat-partner{display:flex; align-items:center; gap:10px; flex:1; margin:0}
+.chat .header .chat-partner > div{margin:0}
+.chat .header .chat-actions{display:flex; gap:8px; margin-left:auto}
+
+/* Messages */
+.messages{padding:16px; overflow:auto; background:linear-gradient(#fff, #fafbfd)}
+.msg{
+  max-width:58%;               /* smaller bubbles */
+  margin:4px 0;                /* tighter vertical spacing */
+  padding:8px 10px;            /* compact padding */
+  font-size:14px; line-height:1.35;
+  border-radius:12px;
+  word-wrap:break-word; white-space:pre-wrap;
+}
+.msg.sent{
+  margin-left:auto;
+  background:var(--bubble-sent);
+  border:1px solid var(--bubble-sent-border);
+  border-bottom-right-radius:8px;   /* subtle "tail" */
+}
+.msg.recv{
+  margin-right:auto;
+  background:var(--bubble-recv);
+  border:1px solid var(--bubble-recv-border);
+  border-bottom-left-radius:8px;
+}
+.msg .time{
+  display:block; font-size:10px; color:var(--muted);
+  margin-top:2px; text-align:right;
+}
+
+.day{display:flex; justify-content:center; margin:8px 0}
+.day span{background:#eef2f6; color:#334155; font-size:12px; padding:3px 8px; border-radius:999px}
+
+/* Composer */
+.composer{
+  display:flex; gap:8px; align-items:center;
+  padding:10px; border-top:1px solid var(--ring); background:var(--panel);
+}
+.composer textarea{
+  flex:1; resize:none; min-height:40px; max-height:140px;
+  padding:10px 12px; border:1px solid var(--ring); border-radius:12px; background:#fff;
+}
+.composer button{
+  height:40px; padding:0 14px; border:none; border-radius:12px;
+  background:var(--brand); color:#fff; font-weight:600; cursor:pointer;
+}
+.composer button:disabled{opacity:.6; cursor:not-allowed}
+
+/* Small hover lift for bubbles */
+.msg:hover{box-shadow:0 1px 4px rgba(16,24,40,.06)}
+
+/* (rolled back compact bubble overrides) */

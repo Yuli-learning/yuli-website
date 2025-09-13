@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Policy — Yuli Tutoring</title>
+  <link rel="canonical" href="https://yuli.uk/legal/cookies" />
+  <meta name="description" content="Cookie policy explaining categories, purposes, and how to manage preferences." />
+  <meta property="og:title" content="Cookie Policy — Yuli Tutoring" />
+  <meta property="og:description" content="Essential and analytics cookies explained, with controls." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+  <link rel="stylesheet" href="/site/assets/components.css" />
+  <link rel="stylesheet" href="/site/assets/neo.css" />
+  <style>
+    /* Professional Cookie Page Styling - Matching Terms Design */
+    :root {
+      --yuli-primary: #4361EE;
+      --yuli-primary-dark: #3A56D6;
+      --yuli-accent: #e95d7b;
+      --yuli-ink: #1e293b;
+      --yuli-muted: #64748b;
+      --yuli-border: #e2e8f0;
+      --yuli-light: #f8fafc;
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,.05);
+      --shadow-elevated: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-strong: 0 12px 40px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--yuli-ink);
+      background: #fafbfc;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section - Matching Terms */
+    .cookies-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      padding: clamp(32px, 4vw, 64px) 0;
+      position: relative;
+    }
+
+    .cookies-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% -10%;
+      height: 320px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.02) 0%, rgba(233, 93, 123, 0.02) 100%);
+      border-radius: 24px;
+    }
+
+    .cookies-hero-copy {
+      z-index: 2;
+    }
+
+    .breadcrumbs {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumbs a {
+      color: var(--yuli-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--yuli-primary);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--yuli-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cookies-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, var(--yuli-ink) 0%, var(--yuli-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--yuli-muted);
+      margin: 0 0 24px 0;
+      max-width: 50ch;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .meta-row a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .meta-row a:hover {
+      text-decoration: underline;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--yuli-primary) !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--yuli-primary-dark) !important;
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--yuli-primary);
+      border-color: var(--yuli-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--yuli-light);
+      border-color: var(--yuli-primary);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yuli-border);
+      background: white;
+      box-shadow: var(--shadow-subtle);
+      color: var(--yuli-ink);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .chip--emphasis {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .cookies-hero-art {
+      justify-self: end;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 10px 28px rgba(17, 24, 39, 0.12));
+    }
+
+    .cookies-hero-art img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Cookie Content Section */
+    .cookies-content {
+      padding: 64px 0;
+    }
+
+    .cookies-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .cookies-main {
+      min-width: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .toc h3 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--yuli-ink);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin: 0 0 8px 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--yuli-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      background: var(--yuli-light);
+      color: var(--yuli-primary);
+    }
+
+    /* Cookie Sections */
+    .cookie-section {
+      margin-bottom: 48px;
+    }
+
+    .cookie-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
+    }
+
+    .cookie-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--yuli-primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .cookie-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--yuli-ink);
+      margin: 0 0 16px 0;
+      line-height: 1.3;
+    }
+
+    .cookie-content-text p {
+      margin: 0 0 16px 0;
+      color: var(--yuli-ink);
+      line-height: 1.7;
+    }
+
+    .cookie-content-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cookie-content-text a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-content-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-content-text ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .cookie-content-text li {
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    /* Cookie Table */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .cookie-table thead {
+      background: var(--yuli-primary);
+      color: white;
+    }
+
+    .cookie-table th,
+    .cookie-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--yuli-border);
+    }
+
+    .cookie-table th {
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cookie-table td {
+      font-size: 14px;
+    }
+
+    .cookie-table tbody tr:hover {
+      background: var(--yuli-light);
+    }
+
+    .cookie-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Cookie Categories */
+    .cookie-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .category-card {
+      background: var(--yuli-light);
+      border: 2px solid var(--yuli-border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--yuli-primary);
+      transform: translateY(-2px);
+    }
+
+    .category-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--yuli-ink);
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--yuli-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .category-description {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1100px) {
+      .cookies-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .toc {
+        position: static;
+        order: -1;
+        background: var(--yuli-light);
+        border: none;
+        padding: 20px;
+      }
+
+      .toc h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--yuli-muted);
+      }
+
+      .toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .toc a {
+        padding: 6px 12px;
+        background: white;
+        border: 1px solid var(--yuli-border);
+        border-radius: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .cookies-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .cookies-hero-art {
+        order: -1;
+        justify-self: center;
+        max-width: 280px;
+      }
+
+      .cookie-categories {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .cookies-hero {
+        padding: 32px 0;
+      }
+
+      .cookies-hero-art {
+        display: none;
+      }
+
+      .cookies-content {
+        padding: 32px 0;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .cookie-section {
+        margin-bottom: 32px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+
+      .cookie-table {
+        font-size: 12px;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        padding: 12px 16px;
+      }
+    }
+
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <!--#include virtual="/site/partials/header.html" -->
+  <main id="main">
+    <section class="cookies">
+      <!-- Hero Section -->
+      <div class="cookies-hero container">
+        <div class="cookies-hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <a href="/">Home</a> › <a href="/support">Support</a> › <span aria-current="page">Cookie Policy</span>
+          </nav>
+          <span class="eyebrow">Clear information</span>
+          <h1>Cookie Policy</h1>
+          <div class="meta-row">
+            <span>Last updated: <strong>5 September 2025</strong></span>
+            <a href="#" aria-label="Download PDF">Download PDF</a>
+          </div>
+          <p class="lead">How we use cookies and similar technologies on our website.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/site/contact.html">Contact us</a>
+            <a class="btn btn-ghost" href="#manage-cookies">Manage preferences</a>
+          </div>
+          <div class="chips">
+            <span class="chip chip--emphasis">Essential only</span>
+            <span class="chip">No tracking</span>
+            <span class="chip">Full control</span>
+            <span class="chip">GDPR compliant</span>
+          </div>
+        </div>
+        <div class="cookies-hero-art">
+          <img src="/assets/logos/cookies.svg" alt="Cookie policy illustration" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Cookie Content -->
+      <div class="cookies-content">
+        <div class="container">
+          <div class="cookies-grid">
+            <div class="cookies-main">
+              <!-- Section 1: What Are Cookies -->
+              <div class="cookie-section">
+                <article class="card" id="what-are-cookies">
+                  <div class="cookie-number">1</div>
+                  <h2 class="cookie-title">What are cookies</h2>
+                  <div class="cookie-content-text">
+                    <p>Cookies are small text files stored on your device when you visit our website. They help us provide essential functionality and improve your experience.</p>
+                    <p>We use cookies responsibly and only collect what's necessary for the website to function properly.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 2: Cookie Categories -->
+              <div class="cookie-section">
+                <article class="card" id="cookie-categories">
+                  <div class="cookie-number">2</div>
+                  <h2 class="cookie-title">Cookie categories</h2>
+                  <div class="cookie-content-text">
+                    <p>We use two main categories of cookies:</p>
+                    
+                    <div class="cookie-categories">
+                      <div class="category-card">
+                        <h3 class="category-title">
+                          <span class="category-icon">!</span>
+                          Essential Cookies
+                        </h3>
+                        <p class="category-description">
+                          Required for the website to function properly. These include security, authentication, and basic functionality cookies. Cannot be disabled.
+                        </p>
+                      </div>
+                      
+                      <div class="category-card">
+                        <h3 class="category-title">
+                          <span class="category-icon">📊</span>
+                          Analytics Cookies
+                        </h3>
+                        <p class="category-description">
+                          Optional cookies that help us understand how visitors use our site. All data is anonymized and used only to improve our services.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 3: Cookie Details -->
+              <div class="cookie-section">
+                <article class="card" id="cookie-details">
+                  <div class="cookie-number">3</div>
+                  <h2 class="cookie-title">Cookie details</h2>
+                  <div class="cookie-content-text">
+                    <p>Here are the specific cookies we use:</p>
+                    
+                    <table class="cookie-table">
+                      <thead>
+                        <tr>
+                          <th>Cookie Name</th>
+                          <th>Purpose</th>
+                          <th>Expiry</th>
+                          <th>Category</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><code>yuli_consent</code></td>
+                          <td>Stores your cookie preferences</td>
+                          <td>12 months</td>
+                          <td>Essential</td>
+                        </tr>
+                        <tr>
+                          <td><code>yuli_session</code></td>
+                          <td>Maintains your session security</td>
+                          <td>Session</td>
+                          <td>Essential</td>
+                        </tr>
+                        <tr>
+                          <td><code>_ga</code></td>
+                          <td>Google Analytics visitor tracking</td>
+                          <td>2 years</td>
+                          <td>Analytics</td>
+                        </tr>
+                        <tr>
+                          <td><code>_ga_*</code></td>
+                          <td>Google Analytics session data</td>
+                          <td>2 years</td>
+                          <td>Analytics</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 4: Third-Party Services -->
+              <div class="cookie-section">
+                <article class="card" id="third-party">
+                  <div class="cookie-number">4</div>
+                  <h2 class="cookie-title">Third-party services</h2>
+                  <div class="cookie-content-text">
+                    <p>We may use trusted third-party services that set their own cookies:</p>
+                    <ul>
+                      <li><strong>Google Analytics:</strong> Website usage statistics (anonymized IP addresses)</li>
+                      <li><strong>Video platforms:</strong> For embedded tutorial videos (only when you play them)</li>
+                      <li><strong>Payment processors:</strong> Secure payment handling (only during checkout)</li>
+                    </ul>
+                    <p>These services have their own privacy policies and cookie practices.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 5: Managing Cookies -->
+              <div class="cookie-section">
+                <article class="card" id="manage-cookies">
+                  <div class="cookie-number">5</div>
+                  <h2 class="cookie-title">Managing your preferences</h2>
+                  <div class="cookie-content-text">
+                    <p>You have full control over which cookies we use:</p>
+                    <ul>
+                      <li><strong>Cookie banner:</strong> Appears on your first visit - choose your preferences</li>
+                      <li><strong>Browser settings:</strong> Block or delete cookies in your browser preferences</li>
+                      <li><strong>Contact us:</strong> Email us to discuss your preferences</li>
+                    </ul>
+                    <p>Note: Disabling essential cookies may affect website functionality.</p>
+                    
+                    <div style="margin-top: 24px; padding: 20px; background: var(--yuli-light); border-radius: 12px; border-left: 4px solid var(--yuli-primary);">
+                      <p style="margin: 0; font-weight: 500; color: var(--yuli-ink);">
+                        <strong>Current status:</strong> You can review and change your cookie preferences at any time by clearing your browser data and revisiting our site.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 6: Updates and Contact -->
+              <div class="cookie-section">
+                <article class="card" id="updates">
+                  <div class="cookie-number">6</div>
+                  <h2 class="cookie-title">Updates and contact</h2>
+                  <div class="cookie-content-text">
+                    <p>We may update this cookie policy from time to time. Any changes will be posted on this page with an updated date.</p>
+                    <p>If you have questions about our use of cookies, please don't hesitate to contact us.</p>
+                    <p>Related policies: <a href="/site/legal/privacy.html">Privacy Policy</a> • <a href="/site/legal/terms.html">Terms and Conditions</a></p>
+                    
+                    <div style="margin-top: 24px;">
+                      <a class="btn btn-primary" href="/site/contact.html">Contact support</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc" aria-label="On this page">
+              <h3>On this page</h3>
+              <ul>
+                <li><a href="#what-are-cookies">What are cookies</a></li>
+                <li><a href="#cookie-categories">Cookie categories</a></li>
+                <li><a href="#cookie-details">Cookie details</a></li>
+                <li><a href="#third-party">Third-party services</a></li>
+                <li><a href="#manage-cookies">Managing preferences</a></li>
+                <li><a href="#updates">Updates and contact</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--#include virtual="/site/partials/footer.html" -->
+</body>
+</html>

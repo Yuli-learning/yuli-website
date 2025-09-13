@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Access Test</h1>
+    <div id="results"></div>
+    
+    <h2>Quick Links</h2>
+    <p><a href="pages/tutor-dashboard.html">Direct Dashboard Link</a></p>
+    <p><a href="index.html">Back to Home</a></p>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        // Test 1: Check if we can access the dashboard directly
+        addResult('Testing dashboard access...', 'info');
+        
+        // Test 2: Check localStorage for auth state
+        const authData = localStorage.getItem('firebase:authUser:AIzaSyBy-UuSbSmrnVn7V2ub3w1MnalzhOitpu0:[DEFAULT]');
+        if (authData) {
+            addResult('✓ Found auth data in localStorage', 'success');
+            try {
+                const parsed = JSON.parse(authData);
+                addResult(`✓ User email: ${parsed.email}`, 'success');
+            } catch (e) {
+                addResult('⚠ Auth data exists but cannot parse', 'error');
+            }
+        } else {
+            addResult('✗ No auth data found in localStorage', 'error');
+        }
+
+        // Test 3: Try to redirect to dashboard after 2 seconds
+        setTimeout(() => {
+            addResult('Attempting to redirect to dashboard...', 'info');
+            window.location.href = 'pages/tutor-dashboard.html';
+        }, 2000);
+    </script>
+</body>
+</html>

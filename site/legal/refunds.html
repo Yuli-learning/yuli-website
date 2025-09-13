@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Refund Policy — Yuli Tutoring</title>
+  <link rel="canonical" href="https://yuli.uk/legal/refunds" />
+  <meta name="description" content="Refund policy for cancelled sessions and eligibility criteria." />
+  <meta property="og:title" content="Refund Policy — Yuli Tutoring" />
+  <meta property="og:description" content="Eligibility, process, and timelines for refunds and credits." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+  <link rel="stylesheet" href="/site/assets/components.css" />
+  <link rel="stylesheet" href="/site/assets/neo.css" />
+  <style>
+    /* Professional Refund Policy Page Styling - Matching Design System */
+    :root {
+      --yuli-primary: #4361EE;
+      --yuli-primary-dark: #3A56D6;
+      --yuli-accent: #e95d7b;
+      --yuli-ink: #1e293b;
+      --yuli-muted: #64748b;
+      --yuli-border: #e2e8f0;
+      --yuli-light: #f8fafc;
+      --yuli-success: #10b981;
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,.05);
+      --shadow-elevated: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-strong: 0 12px 40px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--yuli-ink);
+      background: #fafbfc;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .refunds-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      padding: clamp(32px, 4vw, 64px) 0;
+      position: relative;
+    }
+
+    .refunds-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% -10%;
+      height: 320px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.02) 0%, rgba(233, 93, 123, 0.02) 100%);
+      border-radius: 24px;
+    }
+
+    .refunds-hero-copy {
+      z-index: 2;
+    }
+
+    .breadcrumbs {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumbs a {
+      color: var(--yuli-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--yuli-primary);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--yuli-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .refunds-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, var(--yuli-ink) 0%, var(--yuli-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--yuli-muted);
+      margin: 0 0 24px 0;
+      max-width: 50ch;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .meta-row a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .meta-row a:hover {
+      text-decoration: underline;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--yuli-primary) !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--yuli-primary-dark) !important;
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--yuli-primary);
+      border-color: var(--yuli-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--yuli-light);
+      border-color: var(--yuli-primary);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yuli-border);
+      background: white;
+      box-shadow: var(--shadow-subtle);
+      color: var(--yuli-ink);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .chip--emphasis {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .refunds-hero-art {
+      justify-self: end;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 10px 28px rgba(17, 24, 39, 0.12));
+    }
+
+    .refunds-hero-art img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Refunds Content Section */
+    .refunds-content {
+      padding: 64px 0;
+    }
+
+    .refunds-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .refunds-main {
+      min-width: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .toc h3 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--yuli-ink);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin: 0 0 8px 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--yuli-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      background: var(--yuli-light);
+      color: var(--yuli-primary);
+    }
+
+    /* Refund Sections */
+    .refund-section {
+      margin-bottom: 48px;
+    }
+
+    .refund-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
+    }
+
+    .refund-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--yuli-primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .refund-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--yuli-ink);
+      margin: 0 0 16px 0;
+      line-height: 1.3;
+    }
+
+    .refund-content-text p {
+      margin: 0 0 16px 0;
+      color: var(--yuli-ink);
+      line-height: 1.7;
+    }
+
+    .refund-content-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .refund-content-text a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .refund-content-text a:hover {
+      text-decoration: underline;
+    }
+
+    .refund-content-text ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .refund-content-text li {
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    /* Special Info Boxes */
+    .info-box {
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.1) 100%);
+      border: 2px solid rgba(67, 97, 238, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .info-title {
+      color: var(--yuli-primary);
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-icon {
+      width: 20px;
+      height: 20px;
+      background: var(--yuli-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .info-content {
+      color: #1e3a8a;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border: 2px solid rgba(245, 158, 11, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .warning-title {
+      color: #d97706;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .warning-icon {
+      width: 20px;
+      height: 20px;
+      background: #d97706;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .warning-content {
+      color: #92400e;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1100px) {
+      .refunds-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .toc {
+        position: static;
+        order: -1;
+        background: var(--yuli-light);
+        border: none;
+        padding: 20px;
+      }
+
+      .toc h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--yuli-muted);
+      }
+
+      .toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .toc a {
+        padding: 6px 12px;
+        background: white;
+        border: 1px solid var(--yuli-border);
+        border-radius: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .refunds-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .refunds-hero-art {
+        order: -1;
+        justify-self: center;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .refunds-hero {
+        padding: 32px 0;
+      }
+
+      .refunds-hero-art {
+        display: none;
+      }
+
+      .refunds-content {
+        padding: 32px 0;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .refund-section {
+        margin-bottom: 32px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <!--#include virtual="/site/partials/header.html" -->
+  <main id="main">
+    <section class="refunds">
+      <!-- Hero Section -->
+      <div class="refunds-hero container">
+        <div class="refunds-hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <a href="/">Home</a> › <a href="/site/faqs.html">Support</a> › <span aria-current="page">Refund Policy</span>
+          </nav>
+          <span class="eyebrow">Fair and transparent</span>
+          <h1>Refund Policy</h1>
+          <div class="meta-row">
+            <span>Last updated: <strong>5 September 2025</strong></span>
+            <a href="#" aria-label="Download PDF">Download PDF</a>
+          </div>
+          <p class="lead">Clear guidelines for refunds, credits, and cancellations.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/site/contact.html">Request refund</a>
+            <a class="btn btn-ghost" href="#process">How it works</a>
+          </div>
+          <div class="chips">
+            <span class="chip chip--emphasis">Fair process</span>
+            <span class="chip">24-hour notice</span>
+            <span class="chip">Quick processing</span>
+            <span class="chip">Clear criteria</span>
+          </div>
+        </div>
+        <div class="refunds-hero-art">
+          <img src="/assets/logos/refund.svg" alt="Refund policy illustration" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Refunds Content -->
+      <div class="refunds-content">
+        <div class="container">
+          <div class="refunds-grid">
+            <div class="refunds-main">
+              <!-- Section 1: Eligibility -->
+              <div class="refund-section">
+                <article class="card" id="eligibility">
+                  <div class="refund-number">1</div>
+                  <h2 class="refund-title">Refund eligibility</h2>
+                  <div class="refund-content-text">
+                    <p>You may be eligible for a refund or credit in the following situations:</p>
+                    <ul>
+                      <li><strong>If I cancel a session:</strong> You may choose a full refund or credit for a future session</li>
+                      <li><strong>If you cancel with 24+ hours notice:</strong> You may receive a credit for rebooking</li>
+                      <li><strong>Technical issues on my end:</strong> Full refund or free rescheduling</li>
+                      <li><strong>Unsatisfactory service:</strong> We'll work together to find a fair solution</li>
+                    </ul>
+
+                    <div class="warning-box">
+                      <h3 class="warning-title">
+                        <span class="warning-icon">!</span>
+                        Please note
+                      </h3>
+                      <p class="warning-content">
+                        Cancellations with less than 24 hours' notice or no-shows may be charged in full, as outlined in our Terms & Conditions.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 2: Refund Process -->
+              <div class="refund-section">
+                <article class="card" id="process">
+                  <div class="refund-number">2</div>
+                  <h2 class="refund-title">How to request a refund</h2>
+                  <div class="refund-content-text">
+                    <p>Requesting a refund is straightforward. Simply follow these steps:</p>
+                    <ul>
+                      <li><strong>Contact me:</strong> Email <a href="mailto:yuli.learning.uk@gmail.com">yuli.learning.uk@gmail.com</a></li>
+                      <li><strong>Include details:</strong> Your name, session date/time, and reason for the refund request</li>
+                      <li><strong>Wait for confirmation:</strong> I'll respond within 24 hours with next steps</li>
+                      <li><strong>Receive your refund:</strong> Processing typically takes 3-5 business days</li>
+                    </ul>
+
+                    <div class="info-box">
+                      <h3 class="info-title">
+                        <span class="info-icon">i</span>
+                        Processing times
+                      </h3>
+                      <p class="info-content">
+                        Refunds are usually processed within 3-5 business days. The time it takes to appear in your account may vary depending on your payment method and bank.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 3: Payment Methods -->
+              <div class="refund-section">
+                <article class="card" id="payment-methods">
+                  <div class="refund-number">3</div>
+                  <h2 class="refund-title">Refund methods</h2>
+                  <div class="refund-content-text">
+                    <p>Refunds will be issued using the same payment method used for the original transaction:</p>
+                    <ul>
+                      <li><strong>Bank transfer:</strong> 1-3 business days</li>
+                      <li><strong>Credit/debit card:</strong> 3-5 business days</li>
+                      <li><strong>PayPal:</strong> 1-2 business days</li>
+                      <li><strong>Other methods:</strong> Varies, typically 3-5 business days</li>
+                    </ul>
+                    <p>If the original payment method is no longer available, we'll work with you to find an alternative solution.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 4: Credits and Rescheduling -->
+              <div class="refund-section">
+                <article class="card" id="credits">
+                  <div class="refund-number">4</div>
+                  <h2 class="refund-title">Credits and rescheduling</h2>
+                  <div class="refund-content-text">
+                    <p>In many cases, you may prefer a credit over a refund:</p>
+                    <ul>
+                      <li><strong>Session credits:</strong> Valid for 6 months from issue date</li>
+                      <li><strong>Flexible scheduling:</strong> Use credits to book future sessions at your convenience</li>
+                      <li><strong>No additional fees:</strong> Credits maintain their full value</li>
+                      <li><strong>Easy rebooking:</strong> Simply mention your credit when booking</li>
+                    </ul>
+                    <p>Credits are often more convenient than refunds and allow you to continue your learning journey when it suits you better.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 5: Non-Refundable Items -->
+              <div class="refund-section">
+                <article class="card" id="non-refundable">
+                  <div class="refund-number">5</div>
+                  <h2 class="refund-title">Non-refundable items</h2>
+                  <div class="refund-content-text">
+                    <p>The following items are generally not eligible for refunds:</p>
+                    <ul>
+                      <li><strong>Partially used lesson packages:</strong> Individual sessions from multi-session packages that have already begun</li>
+                      <li><strong>Expired credits:</strong> Credits that have passed their 6-month validity period</li>
+                      <li><strong>Late cancellations:</strong> Sessions cancelled with less than 24 hours' notice</li>
+                      <li><strong>No-show sessions:</strong> Sessions where the student doesn't attend without notice</li>
+                    </ul>
+
+                    <div class="info-box">
+                      <h3 class="info-title">
+                        <span class="info-icon">i</span>
+                        Exceptional circumstances
+                      </h3>
+                      <p class="info-content">
+                        I understand that genuine emergencies happen. If you have exceptional circumstances, please get in touch and we'll discuss options on a case-by-case basis.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 6: Contact and Support -->
+              <div class="refund-section">
+                <article class="card" id="contact">
+                  <div class="refund-number">6</div>
+                  <h2 class="refund-title">Questions and support</h2>
+                  <div class="refund-content-text">
+                    <p>If you have any questions about our refund policy or need help with a specific situation, I'm here to help.</p>
+                    <p><strong>Email:</strong> <a href="mailto:yuli.learning.uk@gmail.com">yuli.learning.uk@gmail.com</a></p>
+                    <p><strong>Response time:</strong> Within 24 hours</p>
+                    <p>I aim to resolve all refund requests fairly and promptly. Your satisfaction with our service is important to me.</p>
+                    <p>Related policies: <a href="/site/legal/terms.html">Terms and Conditions</a> • <a href="/site/legal/privacy.html">Privacy Policy</a></p>
+                    
+                    <div style="margin-top: 24px;">
+                      <a class="btn btn-primary" href="/site/contact.html">Contact support</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc" aria-label="On this page">
+              <h3>On this page</h3>
+              <ul>
+                <li><a href="#eligibility">Refund eligibility</a></li>
+                <li><a href="#process">How to request</a></li>
+                <li><a href="#payment-methods">Refund methods</a></li>
+                <li><a href="#credits">Credits and rescheduling</a></li>
+                <li><a href="#non-refundable">Non-refundable items</a></li>
+                <li><a href="#contact">Questions and support</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--#include virtual="/site/partials/footer.html" -->
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Yuli – Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --brand-primary: #4361EE;   /* Yuli Blue */
+      --brand-secondary: #2F46D6; /* Darker Blue for hover/gradients */
+      --text-strong: #0F172A;     /* Slate 900 */
+      --text-muted: #475569;      /* Slate 600 */
+      --text-soft: #64748B;       /* Slate 500 */
+      --surface: #FFFFFF;
+      --surface-soft: #F8FAFC;    /* light panel bg */
+      --border: #E2E8F0;          /* Slate 200 */
+      --success: #16A34A;         /* for approved badge */
+      --pending: #6B7280;         /* neutral for pending */
+    }
+
+    body { 
+      font-family: ui-sans-serif, system-ui, Arial; 
+      margin: 0; 
+      background: var(--surface-soft);
+    }
+    
+    /* Header styles matching site navigation */
+    header { 
+      background: var(--surface); 
+      padding: 15px 0; 
+      border-bottom: 1px solid var(--border); 
+      margin-bottom: 24px; 
+    }
+    .container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 0 20px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .logo { 
+  font-size: 24px; 
+  font-weight: 700; 
+  color: #4361EE; 
+  text-decoration: none;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+    .logo span { 
+      color: #FF69B4; 
+    }
+    .back-btn { 
+      color: var(--text-soft); 
+      text-decoration: none; 
+      padding: 8px 16px; 
+      border-radius: 8px; 
+      transition: background 0.2s; 
+    }
+    .back-btn:hover { 
+      background: var(--surface-soft); 
+    }
+    
+    /* Main content layout */
+    .profile-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Top profile card */
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15,23,42,.06);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+    }
+    
+    .avatar-section {
+      position: relative;
+    }
+    
+    .avatar-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #f3f4f6;
+    }
+    
+    .avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .avatar-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 600 14px/1 ui-sans-serif, system-ui;
+      opacity: 0;
+      transition: opacity .2s ease;
+      cursor: pointer;
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .avatar-wrap:hover .avatar-overlay {
+      opacity: 1;
+    }
+    
+    .profile-info h1 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-strong);
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%) 1;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    
+    .profile-info .email {
+      color: var(--text-soft);
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    
+    .profile-info .phone {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+    
+    .profile-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+    }
+    
+    .rate-status {
+      text-align: right;
+    }
+    
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 0;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    
+    .btn-primary {
+      background: var(--brand-primary);
+      color: var(--surface);
+    }
+    
+    .btn-primary:hover {
+      background: var(--brand-secondary);
+    }
+    
+    .btn-primary:focus {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+    
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--border);
+    }
+    
+    .btn-secondary:focus {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+    
+    .btn-danger {
+      background: #ef4444;
+      color: var(--surface);
+    }
+    
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+    
+    .btn-danger:focus {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+    
+    /* Icon utilities */
+    .icon {
+      width: 24px; 
+      height: 24px;
+      color: var(--brand-primary);
+      flex-shrink: 0;
+    }
+    .icon--muted { 
+      color: var(--text-soft); 
+    }
+    
+    /* Skeleton loading */
+    .skeleton {
+      display: block; 
+      width: 100%; 
+      height: 12px; 
+      border-radius: 8px;
+      background: linear-gradient(90deg, #f2f6fb 25%, #e9eef6 50%, #f2f6fb 75%);
+      background-size: 200% 100%; 
+      animation: shimmer 1.2s infinite;
+    }
+    .skeleton--title { height: 16px; width: 60%; margin-bottom: 8px; }
+    .skeleton--subtitle { height: 12px; width: 40%; }
+    .skeleton--row { height: 20px; margin-bottom: 12px; }
+    
+    @keyframes shimmer { 
+      0% { background-position: 200% 0; } 
+      100% { background-position: -200% 0; }
+    }
+    
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Empty states */
+    .empty {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      padding: 32px 16px;
+      text-align: center;
+    }
+    .empty__title { 
+      color: var(--text-strong); 
+      font-weight: 600; 
+      font-size: 16px;
+      margin: 0;
+    }
+    .empty__desc { 
+      color: var(--text-soft); 
+      font-size: 14px;
+      margin: 0;
+    }
+    .empty__cta { 
+      color: var(--brand-primary); 
+      text-decoration: none; 
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .empty__cta:hover { 
+      text-decoration: underline; 
+    }
+    
+    /* Badge components */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge--approved { 
+      border-color: rgba(22,163,74,.25); 
+      color: var(--success); 
+      background: #ECFDF5; 
+    }
+    .badge--pending { 
+      color: var(--pending); 
+    }
+    
+    /* Discount section */
+    .discount-section {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--surface-soft);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .discount-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .discount-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-strong);
+    }
+    
+    .discount-actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    /* Main dashboard grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .dashboard-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .dashboard-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15,23,42,.06);
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(15,23,42,.08);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-strong);
+      margin: 0;
+    }
+    
+    .card-subtitle {
+      color: var(--text-soft);
+      font-size: 14px;
+      margin: 0;
+    }
+    
+    .card-content {
+      min-height: 120px;
+    }
+    
+    /* Loading states */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--text-soft);
+    }
+    
+    /* List items */
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .list-item:last-child {
+      border-bottom: none;
+    }
+    
+    .list-item-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--surface-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+    
+    .list-item-content {
+      flex: 1;
+    }
+    
+    .list-item-title {
+      font-weight: 500;
+      color: var(--text-strong);
+      font-size: 14px;
+      margin: 0 0 2px 0;
+    }
+    
+    .list-item-subtitle {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0;
+    }
+    
+    .list-item-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+    
+    /* Footer */
+    .profile-footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+    
+    .profile-footer a {
+      color: var(--brand-primary);
+      text-decoration: none;
+    }
+    
+    .profile-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      
+      .profile-right {
+        align-items: flex-start;
+        width: 100%;
+      }
+      
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .dashboard-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .profile-content {
+        padding: 0 16px;
+      }
+      
+      .profile-card {
+        padding: 24px;
+      }
+      
+      .profile-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .avatar-wrap {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo">Yuli<span>.</span></a>
+      <a href="#" class="back-btn" id="backLink">← Back to Home</a>
+    </div>
+  </header>
+
+  <div class="profile-content">
+    <!-- Top Profile Card -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-left">
+          <div class="avatar-section">
+      <div class="avatar-wrap" id="avatarWrap">
+        <img id="avatarImg" class="avatar" alt="Avatar">
+              <div class="avatar-overlay">
+                <i class="fas fa-camera"></i> Edit photo
+              </div>
+        <input id="fileInput" type="file" accept="image/*" style="display:none" />
+      </div>
+          </div>
+          <div class="profile-info">
+            <h1 id="displayName">—</h1>
+            <div class="email" id="email">—</div>
+            <div class="phone" id="phone" style="display: none;">—</div>
+      </div>
+    </div>
+        <div class="profile-right">
+          <div class="rate-status" id="rateStatus">
+            <!-- Rate status will be populated by JavaScript -->
+          </div>
+          <div class="profile-actions">
+            <button id="editProfileBtn" class="btn btn-secondary">
+              <i class="fas fa-edit"></i> Edit profile
+            </button>
+            <button id="signOutBtn" class="btn btn-danger">
+              <i class="fas fa-sign-out-alt"></i> Sign out
+            </button>
+    </div>
+  </div>
+  </div>
+
+  <!-- Discount Eligibility Section -->
+      <div class="discount-section" id="discountSection" style="display: none;">
+        <div class="discount-header">
+          <div class="discount-title">Discount Eligibility</div>
+          <div class="discount-actions" id="discountActions">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+        <div id="discountStatus">
+        <!-- Status will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+    <!-- Teaching Preferences Card -->
+    <div class="profile-card" id="teachingPreferencesCard" style="display: none;">
+      <div class="profile-header">
+        <div class="profile-left">
+          <h2>Teaching Preferences</h2>
+          <p class="card-subtitle">Configure your subjects, rates, and availability</p>
+        </div>
+        <div class="profile-right">
+          <button class="btn btn-primary" id="savePreferencesBtn">
+            <i class="fas fa-save"></i> Save Preferences
+          </button>
+        </div>
+      </div>
+      
+      <div class="preferences-content">
+        <!-- Subjects & Levels -->
+        <div class="form-section">
+          <h3 class="section-title">Subjects & Levels</h3>
+          <div class="subjects-grid" id="subjectsGrid">
+            <!-- Populated by JavaScript -->
+          </div>
+          <button class="btn btn-secondary" id="addSubjectBtn">
+            <i class="fas fa-plus"></i> Add Subject
+          </button>
+        </div>
+        
+        <!-- Exam Boards -->
+        <div class="form-section">
+          <h3 class="section-title">Exam Boards</h3>
+          <div class="exam-boards-grid">
+            <label class="checkbox-label">
+              <input type="checkbox" name="examBoards" value="AQA">
+              <span class="checkbox-text">AQA</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="examBoards" value="Edexcel">
+              <span class="checkbox-text">Edexcel</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="examBoards" value="OCR">
+              <span class="checkbox-text">OCR</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="examBoards" value="WJEC">
+              <span class="checkbox-text">WJEC</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Year Groups -->
+        <div class="form-section">
+          <h3 class="section-title">Year Groups</h3>
+          <div class="year-groups-grid">
+            <label class="checkbox-label">
+              <input type="checkbox" name="yearGroups" value="7-9">
+              <span class="checkbox-text">Years 7-9</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="yearGroups" value="10-11">
+              <span class="checkbox-text">Years 10-11 (GCSE)</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="yearGroups" value="12-13">
+              <span class="checkbox-text">Years 12-13 (A-Level)</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Teaching Modality -->
+        <div class="form-section">
+          <h3 class="section-title">Teaching Modality</h3>
+          <div class="modality-options">
+            <label class="radio-label">
+              <input type="radio" name="modality" value="online">
+              <span class="radio-text">Online Only</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="modality" value="in-person">
+              <span class="radio-text">In-Person Only</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="modality" value="both">
+              <span class="radio-text">Both Online & In-Person</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Rate & Availability -->
+        <div class="form-section">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="hourlyRate">Hourly Rate (£)</label>
+              <input type="number" id="hourlyRate" class="form-input" min="15" max="100" step="5" placeholder="25">
+            </div>
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="acceptingNewStudents">
+                <span class="checkbox-text">Currently accepting new students</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Availability -->
+        <div class="form-section">
+          <h3 class="section-title">Availability</h3>
+          <div class="availability-grid" id="availabilityGrid">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Grid - Row 1 -->
+    <div class="dashboard-grid">
+      <!-- Upcoming Sessions -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <div>
+            <h3 class="card-title">Upcoming Sessions</h3>
+            <p class="card-subtitle">Scheduled lessons</p>
+          </div>
+        </div>
+        <div class="card-content" id="upcomingSessions">
+          <div class="skeleton--title"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--subtitle"></div>
+        </div>
+      </div>
+
+      <!-- Lesson History -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <div>
+            <h3 class="card-title">Lesson History</h3>
+            <p class="card-subtitle">Past sessions</p>
+          </div>
+        </div>
+        <div class="card-content" id="lessonHistory">
+          <div class="skeleton--title"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--subtitle"></div>
+        </div>
+      </div>
+
+            <!-- Payments -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          <div>
+            <h3 class="card-title">Payments</h3>
+            <p class="card-subtitle">Recent transactions</p>
+          </div>
+        </div>
+        <div class="card-content" id="payments">
+          <div class="skeleton--title"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--subtitle"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Grid - Row 2 -->
+    <div class="dashboard-grid-2">
+      <!-- Progress -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          <div>
+            <h3 class="card-title">Progress</h3>
+            <p class="card-subtitle">Learning statistics</p>
+          </div>
+        </div>
+        <div class="card-content" id="progress">
+          <div class="skeleton--title"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--row"></div>
+          <div class="skeleton--subtitle"></div>
+        </div>
+      </div>
+
+      <!-- Messages / Notes -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <div>
+            <h3 class="card-title">Messages</h3>
+            <p class="card-subtitle">Communication</p>
+          </div>
+        </div>
+        <div class="card-content" id="messages">
+          <div class="empty">
+            <svg class="icon icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <h3 class="empty__title">Messages will appear here when enabled</h3>
+            <p class="empty__desc">Direct messaging with tutors coming soon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Footer -->
+  <div class="profile-footer" id="profileFooter">
+    <!-- Footer content will be populated by JavaScript -->
+  </div>
+
+  <!-- Hidden elements for discount upload -->
+  <input id="discountProofInput" type="file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+
+  <script type="module" src="./lib/authBoot.js"></script>
+  <script type="module" src="./lib/profile.js"></script>
+  <script type="module">
+    // Add click handlers for header links
+    import { go } from "./lib/nav.js";
+    document.querySelector('.logo').addEventListener('click', (e) => {
+  e.preventDefault();
+  go('/');
+});
+    document.getElementById('backLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      go('/');
+    });
+  </script>
+</body>
+</html>

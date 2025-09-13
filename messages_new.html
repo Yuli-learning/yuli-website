@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Messages</title>
+
+  <!-- Minimal styles -->
+  <style>
+    :root { --bg:#f7f8fb; --card:#fff; --muted:#6b7280; --primary:#4f46e5; --border:#e5e7eb; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
+    .wrap{max-width:1200px;margin:24px auto;padding:0 16px}
+    header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+    header a{color:var(--muted);text-decoration:none}
+    .grid{display:grid;grid-template-columns:320px 1fr;gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .list{padding:16px}
+    .list h3{margin:0 0 10px}
+    .row{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:10px;cursor:pointer}
+    .row:hover{background:#f3f4f6}
+    .row.active{background:#eef2ff}
+    .name{font-weight:600}
+    .meta{color:var(--muted);font-size:12px}
+    .avatar{width:36px;height:36px;border-radius:9999px;display:block;background:#e5e7eb;border:1px solid var(--border)}
+    .chat{display:flex;flex-direction:column;height:70vh}
+    .chat .header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+    .chat .header .title{font-weight:700}
+    .messages{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+    .bubble{align-self:flex-end;max-width:70%;background:var(--primary);color:#fff;padding:10px 12px;border-radius:16px 16px 4px 16px}
+    .bubble.other{align-self:flex-start;background:#e5e7eb;color:#111;border-radius:16px 16px 16px 4px}
+    .time{display:block;color:#9ca3af;font-size:11px;margin-top:4px}
+    form.send{display:flex;align-items:center;gap:8px;padding:12px;border-top:1px solid var(--border)}
+    .input{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+    button.primary{background:var(--primary);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+    .empty{padding:32px;color:var(--muted)}
+
+    /* Profile modal */
+    #profileBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none}
+    #profileModal{position:fixed;inset:0;display:none;place-items:center}
+    #profileModal .card{width:520px;max-width:calc(100vw - 32px);padding:20px}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .modal-body{display:grid;grid-template-columns:100px 1fr;gap:16px}
+    .avatar-lg{width:100px;height:100px;border-radius:9999px;border:1px solid var(--border);background:#e5e7eb}
+    .close{cursor:pointer;color:var(--muted)}
+    .clickable{cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h2 style="margin:0">Yuli.</h2>
+      <a href="javascript:history.back()">← Back to Tutor Dashboard</a>
+    </header>
+
+    <div class="grid">
+      <!-- Sidebar -->
+      <div class="card">
+        <div class="list">
+          <h3>Messages</h3>
+          <input id="search" placeholder="Search students or messages…" class="input" style="margin:8px 0 12px" />
+          <div id="conversationList"></div>
+        </div>
+      </div>
+
+      <!-- Chat -->
+      <div class="card chat">
+        <div class="header">
+          <img class="avatar clickable" id="headerAvatar" alt="Avatar" />
+          <span class="title clickable" id="headerName">Select a conversation</span>
+        </div>
+        <div class="messages" id="messages">
+          <div class="empty">Select a conversation to start messaging.</div>
+        </div>
+        <form class="send" id="sendForm">
+          <input id="messageInput" class="input" placeholder="Type a message…" />
+          <button class="primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile modal -->
+  <div id="profileBackdrop"></div>
+  <div id="profileModal">
+    <div class="card">
+      <div class="modal-head">
+        <strong id="profileName">User</strong>
+        <span class="close" id="profileClose">✕</span>
+      </div>
+      <div class="modal-body">
+        <img id="profilePhoto" class="avatar-lg" alt="User photo" />
+        <div>
+          <div style="margin-bottom:6px"><b>Email:</b> <span id="profileEmail">—</span></div>
+          <div><b>Bio:</b> <div id="profileBio" style="white-space:pre-wrap"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase (modular v10) -->
+  <script type="module">
+    import { initializeApp, getApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import {
+      getFirestore, doc, getDoc, setDoc, addDoc, collection,
+      serverTimestamp, onSnapshot, query, where, orderBy, limit
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import {
+      getAuth, onAuthStateChanged, signInAnonymously
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    // --------- 1) PASTE YOUR CONFIG HERE ----------
+    const firebaseConfig = {
+      apiKey: "AIzaSyBy-UuSbSmrnVn7V2ub3w1MnalzhOitpu0",
+      authDomain: "yuli-tutoring-platform.firebaseapp.com",
+      projectId: "yuli-tutoring-platform",
+      storageBucket: "yuli-tutoring-platform.appspot.com",
+      messagingSenderId: "1070288563693",
+      appId: "1:1070288563693:web:eaffd3f0a599ef48198be4"
+    };
+    // ----------------------------------------------
+
+    // init app (reuse if already created)
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+    const auth = getAuth(app);
+
+    // tiny utils
+    const $ = s => document.querySelector(s);
+    const listEl = $('#conversationList');
+    const msgEl  = $('#messages');
+    const headerName = $('#headerName');
+    const headerAvatar = $('#headerAvatar');
+    const sendForm = $('#sendForm');
+    const input = $('#messageInput');
+
+    // SVG fallback avatar
+    function fallbackSVG() {
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+          <rect width="100%" height="100%" fill="#e5e7eb"/>
+          <circle cx="60" cy="44" r="24" fill="#cbd5e1"/>
+          <rect x="20" y="80" width="80" height="28" rx="14" fill="#cbd5e1"/>
+        </svg>`);
+    }
+    function setImg(el, url, alt='User') {
+      const f = fallbackSVG();
+      el.src = url || f; el.alt = alt; el.onerror = () => el.src = f;
+    }
+
+    // profile cache + loaders
+    const userCache = new Map();
+    async function getUserProfile(uid) {
+      if (!uid) return null;
+      if (userCache.has(uid)) return userCache.get(uid);
+      const snap = await getDoc(doc(db, 'users', uid));
+      let prof = null;
+      if (snap.exists()) {
+        const d = snap.data();
+        prof = {
+          uid,
+          displayName: d.displayName || d.name || d.fullName || 'User',
+          photoURL: d.photoURL || d.photoUrl || '',
+          email: d.email || '',
+          bio: d.bio || ''
+        };
+      }
+      userCache.set(uid, prof);
+      return prof;
+    }
+    function otherMember(conv, myUid) {
+      return Array.isArray(conv.members) ? conv.members.find(u => u !== myUid) : null;
+    }
+
+    // live conversation list
+    let convUnsub = null, msgUnsub = null, currentConv = null, currentPartner = null, me = null;
+
+    onAuthStateChanged(auth, async (u) => {
+      if (!u) {
+        await signInAnonymously(auth);
+        return;
+      }
+      me = u.uid;
+
+      // subscribe to all conversations where I'm a member
+      if (convUnsub) convUnsub();
+      const q = query(
+        collection(db, 'conversations'),
+        where('members', 'array-contains', me),
+        orderBy('updatedAt', 'desc'),
+        limit(50)
+      );
+      convUnsub = onSnapshot(q, async (qs) => {
+        const raw = qs.docs.map(d => ({ id: d.id, ...d.data() }));
+        // enrich with participant profile for DMs
+        const enriched = [];
+        for (const c of raw) {
+          let participant = null;
+          if (c.type === 'dm') {
+            const ouid = otherMember(c, me);
+            participant = await getUserProfile(ouid);
+          }
+          enriched.push({
+            ...c,
+            participant,
+            displayName: participant?.displayName || c.name || 'User',
+            photoURL: participant?.photoURL || c.photoURL || ''
+          });
+        }
+        renderList(enriched);
+        // auto-select first if nothing opened
+        if (!currentConv && enriched.length) openConversation(enriched[0].id);
+      }, (err) => {
+        console.warn('[conversations] If you see "requires an index", click the link Firestore prints to create it once.');
+        console.error(err);
+      });
+    });
+
+    function renderList(items) {
+      listEl.innerHTML = '';
+      const term = ($('#search').value || '').toLowerCase();
+      items
+        .filter(i => !term || (i.displayName || '').toLowerCase().includes(term))
+        .forEach(i => {
+          const row = document.createElement('div');
+          row.className = 'row' + (currentConv?.id === i.id ? ' active' : '');
+          const img = document.createElement('img');
+          img.className = 'avatar';
+          setImg(img, i.photoURL, i.displayName);
+          const box = document.createElement('div');
+          const name = document.createElement('div');
+          name.className = 'name';
+          name.textContent = i.displayName || 'User';
+          const meta = document.createElement('div');
+          meta.className = 'meta';
+          meta.textContent = (i.lastMessage || '').slice(0, 40);
+          box.append(name, meta);
+          row.append(img, box);
+          row.addEventListener('click', () => openConversation(i.id));
+          listEl.appendChild(row);
+        });
+    }
+    $('#search').addEventListener('input', () => {
+      // we re-render via the next snapshot; this keeps it simple
+      // (or you can keep the last items and filter here)
+    });
+
+    async function openConversation(cid) {
+      // stop previous messages stream
+      if (msgUnsub) { msgUnsub(); msgUnsub = null; }
+      currentConv = null; currentPartner = null;
+      msgEl.innerHTML = '<div class="empty">Loading…</div>';
+
+      const snap = await getDoc(doc(db, 'conversations', cid));
+      if (!snap.exists()) { msgEl.innerHTML = '<div class="empty">Conversation not found.</div>'; return; }
+      const conv = { id: cid, ...snap.data() };
+      currentConv = conv;
+
+      // DM partner
+      if (conv.type === 'dm') {
+        const ouid = otherMember(conv, me);
+        currentPartner = await getUserProfile(ouid);
+        headerName.textContent = currentPartner?.displayName || 'User';
+        setImg(headerAvatar, currentPartner?.photoURL, currentPartner?.displayName || 'User');
+      } else {
+        headerName.textContent = conv.name || 'Group';
+        setImg(headerAvatar, conv.photoURL, conv.name || 'Group');
+      }
+
+      // wire profile modal openers
+      headerName.classList.add('clickable'); headerAvatar.classList.add('clickable');
+      const openProfile = () => { if (currentPartner) showProfile(currentPartner); };
+      headerName.onclick = openProfile; headerAvatar.onclick = openProfile;
+
+      // live messages
+      const mq = query(
+        collection(db, 'conversations', cid, 'messages'),
+        orderBy('createdAt', 'asc'),
+        limit(200)
+      );
+      msgUnsub = onSnapshot(mq, (qs) => {
+        const rows = qs.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderMessages(rows);
+      });
+    }
+
+    function renderMessages(rows) {
+      msgEl.innerHTML = '';
+      if (!rows.length) {
+        msgEl.innerHTML = '<div class="empty">No messages yet.</div>';
+        return;
+      }
+      for (const m of rows) {
+        const mine = m.senderId === me;
+        const b = document.createElement('div');
+        b.className = 'bubble' + (mine ? '' : ' other');
+        b.textContent = m.text || '';
+        const t = document.createElement('span');
+        t.className = 'time';
+        const dt = (m.createdAt && m.createdAt.toDate) ? m.createdAt.toDate() : null;
+        t.textContent = dt ? dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '…';
+        b.appendChild(t);
+        msgEl.appendChild(b);
+      }
+      msgEl.scrollTop = msgEl.scrollHeight;
+    }
+
+    // send a message
+    sendForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = (input.value || '').trim();
+      if (!text || !currentConv) return;
+      input.value = '';
+      await addDoc(collection(db, 'conversations', currentConv.id, 'messages'), {
+        text,
+        senderId: me,
+        createdAt: serverTimestamp()
+      });
+      await setDoc(doc(db, 'conversations', currentConv.id), {
+        lastMessage: text.slice(0, 200),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    });
+
+    // profile modal
+    const backdrop = $('#profileBackdrop');
+    const modal = $('#profileModal');
+    const closeBtn = $('#profileClose');
+    function showProfile(p) {
+      $('#profileName').textContent = p.displayName || 'User';
+      $('#profileEmail').textContent = p.email || '—';
+      $('#profileBio').textContent = p.bio || '';
+      setImg($('#profilePhoto'), p.photoURL, p.displayName || 'User');
+      backdrop.style.display = 'block';
+      modal.style.display = 'grid';
+    }
+    function closeProfile() {
+      modal.style.display = 'none';
+      backdrop.style.display = 'none';
+    }
+    backdrop.addEventListener('click', closeProfile);
+    closeBtn.addEventListener('click', closeProfile);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProfile(); });
+
+    // Optional helper you can call from console to start a DM with someone:
+    window.startDirectChatWith = async (otherUid) => {
+      const cid = directConversationId(me, otherUid);
+      // create doc if missing
+      const ref = doc(db, 'conversations', cid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          type: 'dm',
+          members: [me, otherUid],
+          lastMessage: '',
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
+      openConversation(cid);
+      return cid;
+    };
+
+    function directConversationId(a, b) {
+      const [x, y] = [String(a), String(b)].sort();
+      return `direct_${x}__${y}`;
+    }
+  </script>
+</body>
+</html>

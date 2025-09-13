@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Session | Yuli</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Footer CSS - Matched to gcse-mathematics.html -->
+    <style id="footer-compact-overrides">
+      footer { 
+        background: #1e2031;
+        color: rgba(255,255,255,.86);
+        padding: 84px 0 40px;
+      }
+      
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 36px;
+        max-width: 1200px;
+        margin: 0 auto 36px;
+        padding: 0 20px;
+        align-items: start;
+      }
+      
+      .footer-brand { 
+        display: flex; 
+        flex-direction: column; 
+      }
+      
+      .footer-brand h3 { 
+        margin: 0 0 10px;
+        font-size: 1.6rem;
+        color: #fff;
+      }
+      
+      .footer-brand h3 span {
+        color: #4361EE; /* Yuli blue accent color */
+      }
+      
+      .footer-contact { 
+        display: grid; 
+        gap: 6px; 
+        margin-top: 0; 
+      }
+      
+      .footer-contact a { 
+        color: rgba(255,255,255,.78); 
+        text-decoration: none; 
+        font-size: .98rem; 
+        transition: color 0.2s ease;
+      }
+      
+      .footer-contact a:hover { 
+        color: #fff; 
+        text-decoration: underline; 
+      }
+      
+      .footer-social { 
+        display: flex; 
+        gap: 14px; 
+        margin-top: 12px; 
+      }
+      
+      .footer-social a { 
+        width: 34px; 
+        height: 34px; 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        color: rgba(255,255,255,.86); 
+        border: 1px solid rgba(255,255,255,.2); 
+        border-radius: 50%; 
+        transition: all .2s ease; 
+        text-decoration: none; 
+      }
+      
+      .footer-social a:hover { 
+        color: #fff; 
+        border-color: rgba(255,255,255,.36); 
+        transform: translateY(-1px); 
+        background: transparent;
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px); 
+      }
+      
+      .footer-section {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      
+      .footer-heading { 
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+      
+      .footer-links a {
+        color: rgba(255,255,255,.78);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+      }
+      
+      .footer-links a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      
+      .footer-bottom {
+        padding-top: 36px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 20px 0;
+        text-align: center;
+        color: rgba(255,255,255,.6);
+        font-size: 0.9rem;
+      }
+      
+      .footer-bottom p { 
+        color: rgba(255,255,255,0.7); 
+        font-size: 0.9rem; 
+        margin: 0;
+      }
+      
+      @media (max-width: 900px) {
+        .footer-grid { 
+          grid-template-columns: repeat(2, 1fr);
+          row-gap: 30px;
+        }
+        
+        .footer-links {
+          text-align: center;
+        }
+        
+        .footer-links a:hover {
+          transform: none;
+        }
+      }
+      
+      @media (max-width: 640px) {
+        .footer-grid { 
+          grid-template-columns: 1fr; 
+          gap: 30px;
+        }
+        
+        .footer-section {
+          text-align: center;
+        }
+        
+        .footer-heading::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+    
+    <style>
+        :root {
+            --yuli-primary: #4361EE;
+            --yuli-navy: #1e293b;
+            --yuli-dark-blue: #334155;
+            --yuli-light-blue: #e0f2fe;
+            --yuli-accent-blue: #0ea5e9;
+            --text-dark: #1f2937;
+            --text-muted: #64748b;
+            --text-light: #ffffff;
+            --bg-navy: #0f172a;
+            --bg-blue-tint: #f1f8ff;
+            --card-bg: #ffffff;
+            --border-light: #e5e7eb;
+            --border-blue: #bfdbfe;
+            --shadow-soft: 0 4px 6px -1px rgba(30, 41, 59, 0.1), 0 2px 4px -1px rgba(30, 41, 59, 0.06);
+            --dark: #0f172a; /* Dark background color for footer */
+            --shadow-medium: 0 10px 15px -3px rgba(30, 41, 59, 0.1), 0 4px 6px -2px rgba(30, 41, 59, 0.05);
+            --shadow-blue: 0 10px 25px -5px rgba(67,97,238,0.2);
+            --success: #16a34a;
+            --error: #dc2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-blue-tint);
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4361EE;
+            text-decoration: none;
+            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .logo span {
+            color: #FF69B4;
+        }
+
+        .back-button {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            color: var(--yuli-primary);
+            background: var(--yuli-light-blue);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Left Column - Hero Section */
+        .hero-section {
+            padding: 2rem 0;
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .subject-badge {
+            display: inline-block;
+            background: var(--yuli-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* What Happens Next Section */
+        .what-happens-next {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--yuli-primary);
+            font-size: 1.1rem;
+        }
+
+        .timeline-steps {
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+            padding: 0.5rem 0;
+        }
+
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--yuli-light-blue);
+            color: var(--yuli-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+            font-weight: 500;
+        }
+
+        .timeline-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .timeline-timing {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: var(--bg-blue-tint);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box-title i {
+            color: var(--yuli-primary);
+            font-size: 0.9rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            margin-bottom: 1.75rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 0.25rem 0;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-item-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            min-width: 120px;
+            flex-shrink: 0;
+            padding-top: 0.1rem;
+        }
+
+        .info-item-value {
+            color: var(--text-muted);
+            line-height: 1.7;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .session-structure-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 0.25rem 0;
+        }
+
+        .session-structure-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .session-timing {
+            font-weight: 600;
+            color: var(--yuli-primary);
+            min-width: 160px;
+            flex-shrink: 0;
+            padding-top: 0.1rem;
+        }
+
+        .session-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .booking-illustration {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .booking-illustration img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 32px rgba(67, 97, 238, 0.1));
+        }
+
+        /* Right Column - Booking Form */
+        .booking-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-light);
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-steps {
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background: var(--bg-blue-tint);
+            transition: all 0.2s ease;
+        }
+
+        .step-header:hover {
+            background: var(--yuli-light-blue);
+        }
+
+        .step-header.completed {
+            background: #f1f8ff;
+            color: #1f2937;
+        }
+
+        .step-header.completed:hover {
+            background: #f1f8ff;
+        }
+
+        .step-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--yuli-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .step-header.completed .step-number {
+            background: var(--yuli-primary);
+            color: white;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .step-header.completed .step-title {
+            color: #1f2937;
+        }
+
+        .step-summary {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .step-header.completed .step-summary {
+            color: #64748b;
+        }
+
+        .step-icon {
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        .step-header.completed .step-icon {
+            color: var(--text-muted);
+        }
+
+        .step-content {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .required {
+            color: var(--error);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--yuli-primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .form-select {
+            background: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        .continue-button {
+            width: 100%;
+            background: var(--yuli-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .continue-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-blue);
+        }
+
+        .continue-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            background: var(--text-muted);
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-header {
+            background: var(--yuli-primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .calendar-nav:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .calendar-month {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-day-header {
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-blue-tint);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: var(--yuli-light-blue);
+        }
+
+        .calendar-day.other-month {
+            color: var(--text-muted);
+            opacity: 0.4;
+        }
+
+        .calendar-day.selected {
+            background: var(--yuli-primary);
+            color: white;
+        }
+
+        .calendar-day.today {
+            background: var(--yuli-accent-blue);
+            color: white;
+        }
+
+        .calendar-day.today:not(.selected) {
+            background: var(--yuli-light-blue);
+            color: var(--yuli-primary);
+            font-weight: 600;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .time-slot {
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .time-slot:hover {
+            border-color: var(--yuli-primary);
+            background: var(--yuli-light-blue);
+        }
+
+        .time-slot.selected {
+            background: var(--yuli-primary);
+            color: white;
+            border-color: var(--yuli-primary);
+        }
+
+        .time-slot.unavailable {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f3f4f6;
+        }
+
+        .time-slot.unavailable:hover {
+            border-color: var(--border-light);
+            background: #f3f4f6;
+        }
+
+        /* Session Duration */
+        .duration-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .duration-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .duration-option:hover {
+            border-color: var(--yuli-primary);
+            background: var(--yuli-light-blue);
+        }
+
+        .duration-option.selected {
+            border-color: var(--yuli-primary);
+            background: var(--yuli-primary);
+            color: white;
+        }
+
+        .duration-time {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .duration-price {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Contact Details */
+        .contact-details {
+            display: block;
+        }
+
+        .contact-method {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-option {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-option:hover {
+            border-color: var(--yuli-primary);
+            background: var(--yuli-light-blue);
+        }
+
+        .contact-option.selected {
+            background: var(--yuli-primary);
+            color: white;
+            border-color: var(--yuli-primary);
+        }
+
+        /* Summary & Submit */
+        .booking-summary {
+            background: var(--bg-blue-tint);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .summary-label {
+            color: var(--text-muted);
+        }
+
+        .summary-value {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .total-price {
+            border-top: 1px solid var(--border-light);
+            padding-top: 0.75rem;
+            margin-top: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: var(--yuli-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-blue);
+            background: var(--yuli-dark-blue);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .disclaimer {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Footer Styles - ensuring compatibility with footer-compact-overrides */
+        footer {
+            background: linear-gradient(135deg, var(--bg-navy) 0%, var(--yuli-navy) 100%);
+            color: var(--text-light);
+            position: relative;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            /* This will be styled by the footer-compact-overrides */
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.78);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .booking-card {
+                position: static;
+                padding: 1.5rem;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .duration-selector {
+                flex-direction: column;
+            }
+
+            .what-happens-next {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">Yuli<span>.</span></a>
+            <a href="/pages/subjects/gcse-mathematics.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Mathematics
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Column - Hero -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="subject-badge" id="subjectBadge">GCSE Mathematics</div>
+                <h1>Book Your Session</h1>
+                <p class="hero-description">
+                    Choose your preferred date and time for a personalised tutoring session. 
+                    We'll confirm your booking and send you the session details via your preferred contact method.
+                </p>
+
+                <!-- What Happens Next Section -->
+                <div class="what-happens-next">
+                    <h3 class="section-title">
+                        <i class="fas fa-route"></i>
+                        What Happens Next
+                    </h3>
+
+                    <div class="timeline-steps">
+                        <div class="timeline-step">
+                            <div class="timeline-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-timing">Immediately</div>
+                                <div class="timeline-description">Booking confirmation email sent to your inbox</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-step">
+                            <div class="timeline-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-timing">Within 2 hours</div>
+                                <div class="timeline-description">Session link and preparation guide delivered</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-step">
+                            <div class="timeline-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-timing">24 hours before</div>
+                                <div class="timeline-description">Reminder email with session materials</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-step">
+                            <div class="timeline-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-timing">Day of session</div>
+                                <div class="timeline-description">Join link active 10 minutes early</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-step">
+                            <div class="timeline-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-timing">After session</div>
+                                <div class="timeline-description">Progress summary and next steps sent to parents</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">
+                            <i class="fas fa-desktop"></i>
+                            Technical Setup
+                        </div>
+                        <div class="info-item">
+                            <span class="info-item-label">Platform:</span>
+                            <span class="info-item-value">Microsoft Teams (link provided after booking)</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-item-label">You'll need:</span>
+                            <span class="info-item-value">Stable internet, headphones, pen & paper</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-item-label">Test connection:</span>
+                            <span class="info-item-value">5-minute setup check available</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-item-label">Support:</span>
+                            <span class="info-item-value">Phone number provided for technical issues</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">
+                            <i class="fas fa-play-circle"></i>
+                            First Session Structure
+                        </div>
+                        <div class="session-structure-item">
+                            <span class="session-timing">Opening (10 mins):</span>
+                            <span class="session-description">Goals discussion and level assessment</span>
+                        </div>
+                        <div class="session-structure-item">
+                            <span class="session-timing">Main session (35-45 mins):</span>
+                            <span class="session-description">Diagnostic teaching and practice</span>
+                        </div>
+                        <div class="session-structure-item">
+                            <span class="session-timing">Closing (5-10 mins):</span>
+                            <span class="session-description">Feedback and planning next steps</span>
+                        </div>
+                        <div class="session-structure-item">
+                            <span class="session-timing">Parent update:</span>
+                            <span class="session-description">Email summary within 24 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Booking Form -->
+        <div class="booking-card">
+            <div class="booking-steps">
+                <!-- Step 1: Course Details -->
+                <div class="step" id="step1">
+                    <div class="step-header" onclick="openStep(1)">
+                        <div class="step-header-left">
+                            <div class="step-number">1</div>
+                            <div>
+                                <div class="step-title">Course Details</div>
+                                <div class="step-summary" id="step1Summary" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content" id="step1Content">
+                        <div class="form-group">
+                            <label class="form-label" for="examBoard">Exam Board <span class="required">*</span></label>
+                            <select id="examBoard" class="form-select" required>
+                                <option value="">Select exam board...</option>
+                                <option value="AQA">AQA</option>
+                                <option value="Edexcel">Edexcel (Pearson)</option>
+                                <option value="OCR">OCR</option>
+                                <option value="WJEC">WJEC</option>
+                                <option value="CIE">CIE (Cambridge International)</option>
+                                <option value="Other">Other</option>
+                                <option value="Not sure">Not sure</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="currentGrade">Current Grade <span class="required">*</span></label>
+                            <select id="currentGrade" class="form-select" required>
+                                <option value="">Select current grade...</option>
+                                <option value="Grade 3">Grade 3</option>
+                                <option value="Grade 4">Grade 4</option>
+                                <option value="Grade 5">Grade 5</option>
+                                <option value="Grade 6">Grade 6</option>
+                                <option value="Grade 7">Grade 7</option>
+                                <option value="Grade 8">Grade 8</option>
+                                <option value="Grade 9">Grade 9</option>
+                                <option value="Not sure">Not sure - we can assess this</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="targetGrade">Target Grade <span class="required">*</span></label>
+                            <select id="targetGrade" class="form-select" required>
+                                <option value="">Select target grade...</option>
+                                <option value="Grade 4">Grade 4 (Standard Pass)</option>
+                                <option value="Grade 5">Grade 5 (Strong Pass)</option>
+                                <option value="Grade 6">Grade 6</option>
+                                <option value="Grade 7">Grade 7</option>
+                                <option value="Grade 8">Grade 8</option>
+                                <option value="Grade 9">Grade 9</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="specificAreas">Specific Areas to Focus On (Optional)</label>
+                            <textarea id="specificAreas" class="form-input" rows="3" placeholder="e.g., Algebra, Quadratic equations, Trigonometry..."></textarea>
+                        </div>
+
+                        <button class="continue-button" id="continueToDateTime" disabled>
+                            <i class="fas fa-arrow-right"></i>
+                            Continue to Date & Time
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Select Date & Time -->
+                <div class="step" id="step2">
+                    <div class="step-header" onclick="openStep(2)">
+                        <div class="step-header-left">
+                            <div class="step-number">2</div>
+                            <div>
+                                <div class="step-title">Select Date & Time</div>
+                                <div class="step-summary" id="step2Summary" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content" id="step2Content" style="display: none;">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="calendar-nav" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="calendar-month" id="currentMonth"></div>
+                                <button class="calendar-nav" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="calendar-grid" id="calendarGrid">
+                                <!-- Calendar will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="time-slots" id="timeSlots" style="display: none;">
+                            <!-- Time slots will be generated when date is selected -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Session Duration -->
+                <div class="step" id="step3">
+                    <div class="step-header" onclick="openStep(3)">
+                        <div class="step-header-left">
+                            <div class="step-number">3</div>
+                            <div>
+                                <div class="step-title">Session Duration</div>
+                                <div class="step-summary" id="step3Summary" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content" id="step3Content" style="display: none;">
+                        <div class="duration-selector" id="durationSelector">
+                            <div class="duration-option" data-duration="60" data-price="20">
+                                <div class="duration-time">1 Hour</div>
+                                <div class="duration-price">£20</div>
+                            </div>
+                            <div class="duration-option" data-duration="90" data-price="30">
+                                <div class="duration-time">90 Minutes</div>
+                                <div class="duration-price">£30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contact Details -->
+                <div class="step" id="step4">
+                    <div class="step-header" onclick="openStep(4)">
+                        <div class="step-header-left">
+                            <div class="step-number">4</div>
+                            <div>
+                                <div class="step-title">Contact Details</div>
+                                <div class="step-summary" id="step4Summary" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content" id="step4Content" style="display: none;">
+                        <div class="contact-details" id="contactDetails">
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address</label>
+                                <input type="email" id="email" class="form-input" value="student@example.com" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+44 7700 900000" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Preferred Contact Method</label>
+                                <div class="contact-method">
+                                    <div class="contact-option selected" data-method="email">
+                                        <i class="fas fa-envelope"></i> Email
+                                    </div>
+                                    <div class="contact-option" data-method="phone">
+                                        <i class="fas fa-phone"></i> Phone
+                                    </div>
+                                    <div class="contact-option" data-method="sms">
+                                        <i class="fas fa-sms"></i> SMS
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="notes">Additional Notes (Optional)</label>
+                                <textarea id="notes" class="form-input" rows="3" placeholder="Any specific topics you'd like to focus on or questions you have..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Summary -->
+            <div class="booking-summary" id="bookingSummary" style="display: none;">
+                <div class="summary-title">Booking Summary</div>
+                <div class="summary-item">
+                    <span class="summary-label">Subject:</span>
+                    <span class="summary-value" id="summarySubject">GCSE Mathematics</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Exam Board:</span>
+                    <span class="summary-value" id="summaryExamBoard">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Current → Target:</span>
+                    <span class="summary-value" id="summaryGrades">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Date:</span>
+                    <span class="summary-value" id="summaryDate">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Time:</span>
+                    <span class="summary-value" id="summaryTime">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Duration:</span>
+                    <span class="summary-value" id="summaryDuration">-</span>
+                </div>
+                <div class="summary-item total-price">
+                    <span class="summary-label">Total:</span>
+                    <span class="summary-value" id="summaryTotal">£0</span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="submit-button" id="submitBooking" style="display: none;">
+                <i class="fas fa-calendar-check"></i>
+                Confirm Booking
+            </button>
+
+            <p class="disclaimer">
+                We may contact you to adjust the time if there are any scheduling conflicts. 
+                You'll receive a confirmation email with session details within 24 hours.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Yuli<span>.</span></h3>
+                    <div class="footer-contact">
+                        <a href="mailto:yuli.learning.uk@gmail.com" class="footer-email">yuli.learning.uk@gmail.com</a>
+                        <a href="tel:+447856210325" class="footer-phone">+447856210325</a>
+                    </div>
+                    <div class="footer-social" aria-label="Social media">
+                        <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/yuli.learning/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/about.html">About Yuli</a></li>
+                        <li><a href="/site/careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
+                        <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
+                        <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/contact.html">Contact Us</a></li>
+                        <li><a href="/site/faqs.html">FAQs</a></li>
+                        <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yuli. All rights reserved.</p>
+                <p>Designed and built with ❤️ for quality education</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Booking form state
+        let bookingData = {
+            subject: 'GCSE Mathematics',
+            examBoard: null,
+            currentGrade: null,
+            targetGrade: null,
+            specificAreas: null,
+            date: null,
+            time: null,
+            duration: null,
+            price: null,
+            contactMethod: 'email'
+        };
+
+        // Calendar functionality
+        let currentDate = new Date();
+        let selectedDate = null;
+        let currentOpenStep = 1;
+
+        // Step management functions
+        function openStep(stepNumber) {
+            // If step is completed and we're clicking its header, reopen it
+            if (stepNumber < currentOpenStep || (stepNumber === currentOpenStep && isStepCompleted(stepNumber))) {
+                reopenStep(stepNumber);
+                return;
+            }
+            
+            // Only allow opening next step if current is completed
+            if (stepNumber > currentOpenStep && !isStepCompleted(currentOpenStep)) {
+                return;
+            }
+        }
+
+        function reopenStep(stepNumber) {
+            // Hide all step contents
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}Content`).style.display = 'none';
+                document.getElementById(`step${i}Summary`).style.display = 'none';
+                document.querySelector(`#step${i} .step-header`).classList.remove('completed');
+                
+                // Reset step title display
+                document.querySelector(`#step${i} .step-title`).style.display = 'block';
+            }
+            
+            // Show selected step content
+            document.getElementById(`step${stepNumber}Content`).style.display = 'block';
+            currentOpenStep = stepNumber;
+            
+            // Update completed states for steps before current
+            for (let i = 1; i < stepNumber; i++) {
+                if (isStepCompleted(i)) {
+                    markStepCompleted(i);
+                }
+            }
+            
+            // Hide summary and submit if reopening earlier steps
+            if (stepNumber < 4) {
+                document.getElementById('bookingSummary').style.display = 'none';
+                document.getElementById('submitBooking').style.display = 'none';
+            } else if (stepNumber === 4 && isStepCompleted(1) && isStepCompleted(2) && isStepCompleted(3)) {
+                document.getElementById('bookingSummary').style.display = 'block';
+                document.getElementById('submitBooking').style.display = 'block';
+            }
+        }
+
+        function isStepCompleted(stepNumber) {
+            switch(stepNumber) {
+                case 1: return bookingData.examBoard && bookingData.currentGrade && bookingData.targetGrade;
+                case 2: return bookingData.date && bookingData.time;
+                case 3: return bookingData.duration && bookingData.price;
+                case 4: return true; // Contact step is always "completable"
+                default: return false;
+            }
+        }
+
+        function markStepCompleted(stepNumber) {
+            const stepHeader = document.querySelector(`#step${stepNumber} .step-header`);
+            const stepSummary = document.getElementById(`step${stepNumber}Summary`);
+            
+            stepHeader.classList.add('completed');
+            stepSummary.style.display = 'block';
+            
+            // Update summary text
+            switch(stepNumber) {
+                case 1:
+                    if (bookingData.examBoard && bookingData.currentGrade && bookingData.targetGrade) {
+                        const currentShort = bookingData.currentGrade.replace('Grade ', '');
+                        const targetShort = bookingData.targetGrade.replace('Grade ', '').split(' ')[0];
+                        stepSummary.textContent = `${bookingData.examBoard} • ${currentShort} → ${targetShort}`;
+                    }
+                    break;
+                case 2:
+                    if (bookingData.date && bookingData.time) {
+                        const dateStr = bookingData.date.toLocaleDateString('en-GB', { 
+                            weekday: 'long', 
+                            day: 'numeric', 
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                        stepSummary.textContent = `${dateStr} at ${bookingData.time}`;
+                    }
+                    break;
+                case 3:
+                    if (bookingData.duration && bookingData.price) {
+                        const durationText = bookingData.duration === 60 ? '1 Hour' : '90 Minutes';
+                        stepSummary.textContent = `${durationText} session - £${bookingData.price}`;
+                    }
+                    break;
+                case 4:
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    stepSummary.textContent = `${email}${phone ? ' • ' + phone : ''}`;
+                    break;
+            }
+        }
+
+        function moveToStep(stepNumber) {
+            if (stepNumber > currentOpenStep) {
+                // Mark current step as completed
+                markStepCompleted(currentOpenStep);
+                
+                // Hide current step content
+                document.getElementById(`step${currentOpenStep}Content`).style.display = 'none';
+                
+                // Show next step content
+                document.getElementById(`step${stepNumber}Content`).style.display = 'block';
+                currentOpenStep = stepNumber;
+                
+                // Show summary and submit if we're on step 4
+                if (stepNumber === 4) {
+                    updateSummary();
+                    document.getElementById('bookingSummary').style.display = 'block';
+                    document.getElementById('submitBooking').style.display = 'block';
+                }
+            }
+        }
+
+        // Course Details Event Listeners
+        function validateCourseDetails() {
+            const examBoard = document.getElementById('examBoard').value;
+            const currentGrade = document.getElementById('currentGrade').value;
+            const targetGrade = document.getElementById('targetGrade').value;
+            const continueButton = document.getElementById('continueToDateTime');
+            
+            if (examBoard && currentGrade && targetGrade) {
+                continueButton.disabled = false;
+                bookingData.examBoard = examBoard;
+                bookingData.currentGrade = currentGrade;
+                bookingData.targetGrade = targetGrade;
+                bookingData.specificAreas = document.getElementById('specificAreas').value;
+            } else {
+                continueButton.disabled = true;
+            }
+        }
+
+        document.getElementById('examBoard').addEventListener('change', validateCourseDetails);
+        document.getElementById('currentGrade').addEventListener('change', validateCourseDetails);
+        document.getElementById('targetGrade').addEventListener('change', validateCourseDetails);
+        document.getElementById('specificAreas').addEventListener('input', function() {
+            bookingData.specificAreas = this.value;
+        });
+
+        document.getElementById('continueToDateTime').addEventListener('click', function() {
+            moveToStep(2);
+        });
+
+        // Initialize calendar with current month
+        function initCalendar() {
+            const today = new Date();
+            currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
+            updateCalendarDisplay();
+        }
+
+        function updateCalendarDisplay() {
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+            document.getElementById('currentMonth').textContent = 
+                `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            
+            generateCalendarGrid();
+        }
+
+        function generateCalendarGrid() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            // Day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-day-header';
+                header.textContent = day;
+                grid.appendChild(header);
+            });
+            
+            // Get first day of month and number of days
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+            
+            // Generate 42 days (6 weeks)
+            for (let i = 0; i < 42; i++) {
+                const day = new Date(startDate);
+                day.setDate(startDate.getDate() + i);
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day.getDate();
+                
+                // Add classes for styling
+                if (day.getMonth() !== currentDate.getMonth()) {
+                    dayElement.classList.add('other-month');
+                }
+                
+                if (isToday(day)) {
+                    dayElement.classList.add('today');
+                }
+                
+                if (day < new Date().setHours(0,0,0,0)) {
+                    dayElement.classList.add('past');
+                    dayElement.style.opacity = '0.3';
+                    dayElement.style.cursor = 'not-allowed';
+                } else {
+                    dayElement.addEventListener('click', () => selectDate(day));
+                }
+                
+                grid.appendChild(dayElement);
+            }
+        }
+
+        function isToday(date) {
+            const today = new Date();
+            return date.toDateString() === today.toDateString();
+        }
+
+        function selectDate(date) {
+            // Remove previous selection
+            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked date
+            event.target.classList.add('selected');
+            
+            selectedDate = date;
+            bookingData.date = date;
+            
+            // Show time slots
+            document.getElementById('timeSlots').style.display = 'grid';
+            generateTimeSlots();
+        }
+
+        function generateTimeSlots() {
+            const timeSlots = document.getElementById('timeSlots');
+            timeSlots.innerHTML = '';
+            
+            // Generate time slots from 9 AM to 8 PM
+            const slots = [
+                '09:00', '10:00', '11:00', '12:00',
+                '13:00', '14:00', '15:00', '16:00',
+                '17:00', '18:00', '19:00', '20:00'
+            ];
+            
+            slots.forEach(time => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                slot.textContent = time;
+                
+                // Randomly make some slots unavailable for demo
+                if (Math.random() > 0.8) {
+                    slot.classList.add('unavailable');
+                    slot.innerHTML = `${time}<br><small>Contact us</small>`;
+                } else {
+                    slot.addEventListener('click', () => selectTime(time));
+                }
+                
+                timeSlots.appendChild(slot);
+            });
+        }
+
+        function selectTime(time) {
+            // Remove previous selection
+            document.querySelectorAll('.time-slot.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection
+            event.target.classList.add('selected');
+            
+            bookingData.time = time;
+            
+            // Move to next step
+            moveToStep(3);
+        }
+
+        // Navigation controls
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateCalendarDisplay();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateCalendarDisplay();
+        });
+
+        // Duration selection
+        document.querySelectorAll('.duration-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.duration-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                option.classList.add('selected');
+                
+                bookingData.duration = parseInt(option.dataset.duration);
+                bookingData.price = parseInt(option.dataset.price);
+                
+                moveToStep(4);
+            });
+        });
+
+        // Contact method selection
+        document.querySelectorAll('.contact-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.contact-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                option.classList.add('selected');
+                bookingData.contactMethod = option.dataset.method;
+            });
+        });
+
+        // Update summary
+        function updateSummary() {
+            if (bookingData.examBoard) {
+                document.getElementById('summaryExamBoard').textContent = bookingData.examBoard;
+            }
+            
+            if (bookingData.currentGrade && bookingData.targetGrade) {
+                const currentShort = bookingData.currentGrade.replace('Grade ', '');
+                const targetShort = bookingData.targetGrade.replace('Grade ', '').split(' ')[0];
+                document.getElementById('summaryGrades').textContent = `${currentShort} → ${targetShort}`;
+            }
+            
+            if (bookingData.date) {
+                document.getElementById('summaryDate').textContent = 
+                    bookingData.date.toLocaleDateString('en-GB', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
+            }
+            
+            if (bookingData.time) {
+                document.getElementById('summaryTime').textContent = bookingData.time;
+            }
+            
+            if (bookingData.duration) {
+                const durationText = bookingData.duration === 60 ? '1 Hour' : '90 Minutes';
+                document.getElementById('summaryDuration').textContent = durationText;
+            }
+            
+            if (bookingData.price) {
+                document.getElementById('summaryTotal').textContent = `£${bookingData.price}`;
+            }
+        }
+
+        // Form submission
+        document.getElementById('submitBooking').addEventListener('click', function() {
+            // Validate form
+            const phone = document.getElementById('phone').value;
+            if (!phone) {
+                alert('Please enter your phone number');
+                return;
+            }
+            
+            // Prepare booking data for email
+            const emailData = {
+                subject: bookingData.subject,
+                examBoard: bookingData.examBoard,
+                currentGrade: bookingData.currentGrade,
+                targetGrade: bookingData.targetGrade,
+                specificAreas: bookingData.specificAreas,
+                date: bookingData.date ? bookingData.date.toLocaleDateString('en-GB', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }) : '',
+                time: bookingData.time,
+                duration: bookingData.duration === 60 ? '1 Hour' : '90 Minutes',
+                price: bookingData.price,
+                email: document.getElementById('email').value,
+                phone: phone,
+                contactMethod: bookingData.contactMethod,
+                notes: document.getElementById('notes').value
+            };
+            
+            // Create email body
+            const emailBody = `
+New Booking Request - Yuli Tutoring
+
+Subject: ${emailData.subject}
+
+COURSE DETAILS:
+Exam Board: ${emailData.examBoard}
+Current Grade: ${emailData.currentGrade}
+Target Grade: ${emailData.targetGrade}
+Specific Areas: ${emailData.specificAreas || 'None specified'}
+
+SESSION DETAILS:
+Date: ${emailData.date}
+Time: ${emailData.time}
+Duration: ${emailData.duration}
+Price: £${emailData.price}
+
+STUDENT DETAILS:
+Email: ${emailData.email}
+Phone: ${emailData.phone}
+Preferred Contact: ${emailData.contactMethod}
+
+Additional Notes:
+${emailData.notes || 'None'}
+
+---
+Sent from Yuli Booking System
+            `.trim();
+            
+            // Create mailto link
+            const mailtoLink = `mailto:yuli.learning.uk@gmail.com?subject=New Booking Request - ${emailData.subject}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show confirmation message
+            setTimeout(() => {
+                alert('Booking request sent! Please check your email client. We\'ll confirm your session within 24 hours.');
+            }, 500);
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('44')) {
+                value = '+' + value;
+            } else if (value.startsWith('0')) {
+                value = '+44' + value.substring(1);
+            } else if (value.length > 0 && !value.startsWith('+')) {
+                value = '+44' + value;
+            }
+            e.target.value = value;
+        });
+
+        // Get subject from URL parameters or referrer
+        function getSubjectFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const subject = urlParams.get('subject');
+            
+            if (subject) {
+                document.getElementById('subjectBadge').textContent = subject;
+                document.getElementById('summarySubject').textContent = subject;
+                bookingData.subject = subject;
+            } else {
+                // Try to get from referrer
+                const referrer = document.referrer;
+                if (referrer.includes('gcse-mathematics')) {
+                    const subjectText = 'GCSE Mathematics';
+                    document.getElementById('subjectBadge').textContent = subjectText;
+                    document.getElementById('summarySubject').textContent = subjectText;
+                    bookingData.subject = subjectText;
+                } else if (referrer.includes('a-level')) {
+                    const subjectText = 'A-Level Mathematics';
+                    document.getElementById('subjectBadge').textContent = subjectText;
+                    document.getElementById('summarySubject').textContent = subjectText;
+                    bookingData.subject = subjectText;
+                }
+            }
+        }
+
+        // Real-time form validation
+        document.getElementById('phone').addEventListener('blur', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = 'var(--success)';
+            } else {
+                this.style.borderColor = 'var(--error)';
+            }
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            getSubjectFromURL();
+            initCalendar();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" class="app-loading">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages - Yuli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/css/chat-theme.css">
+  <link rel="stylesheet" href="assets/css/messages.css">
+  <style>
+    .gradient-yuli {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    }
+    
+    .pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .5;
+      }
+    }
+    
+    .conversation-item.active {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left: 4px solid #2563eb;
+    }
+    
+    .message-bubble {
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 16px;
+      background: #f1f5f9;
+      border-radius: 18px;
+      margin: 8px 0;
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #64748b;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    
+    @keyframes typing {
+      0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+      }
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    .sidebar-tab.active {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+    }
+    
+    .sidebar-tab {
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar-tab:hover:not(.active) {
+      background: #f1f5f9;
+    }
+    
+    .status-indicator {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+    
+    .status-online { background: #10b981; }
+    .status-away { background: #f59e0b; }
+    .status-offline { background: #6b7280; }
+    
+    .message-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #2563eb;
+      border-color: transparent;
+    }
+    
+    .conversation-search:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #2563eb;
+      border-color: transparent;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 1024px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block !important; }
+    }
+    
+    @media (min-width: 1024px) {
+      .desktop-only { display: block !important; }
+      .mobile-only { display: none !important; }
+    }
+    
+    /* Smooth transitions */
+    .transition-panel {
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Custom scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
+    /* Empty state styles */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: #64748b;
+    }
+    
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    
+    .disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+  </style>
+  <script>
+    // Ensure loading class present as early as possible
+    try { document.documentElement.classList.add('app-loading'); } catch(_) {}
+  </script>
+</head>
+<body class="font-inter bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+  <!-- Header (matches Tutor Dashboard style) -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo" id="logoLink">Yuli<span>.</span></a>
+      <a href="/pages/tutor-dashboard.html" class="back-btn" id="backToTutorDashboard">← Back to Tutor Dashboard</a>
+    </div>
+  </header>
+  <!-- Revolutionary Three-Panel Messaging Interface -->
+  <main class="flex-1 overflow-hidden">
+    <div class="max-w-7xl mx-auto h-[calc(100vh-4rem)] p-4">
+      <div class="grid grid-cols-12 gap-4 h-full">
+        
+        <!-- Panel 1: Conversations List (Left) -->
+        <div class="col-span-12 lg:col-span-3 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col overflow-hidden" id="conversationsPanel">
+          <!-- Header -->
+          <div class="gradient-yuli p-6 text-white">
+            <div class="flex items-center justify-between">
+              <h1 class="text-xl font-bold">Messages</h1>
+              <button class="p-2 hover:bg-white/20 rounded-lg transition-colors" id="newChatBtn" title="Start new conversation">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Search Bar -->
+          <div class="p-4 border-b border-slate-100">
+            <div class="relative">
+              <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+              <input 
+                type="text" 
+                placeholder="Search students or messages..." 
+                class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all conversation-search"
+                id="searchInput"
+              />
+            </div>
+          </div>
+          
+          <!-- Conversations List -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar" id="conversationsList">
+            <!-- Empty State -->
+            <div class="empty-state h-full">
+              <i class="fas fa-comments"></i>
+              <h3 class="text-lg font-semibold mb-2">No conversations yet</h3>
+              <p class="text-sm">Start a conversation with your students to see them here.</p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Panel 2: Chat Interface (Center) -->
+        <div class="col-span-12 lg:col-span-6 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col overflow-hidden" id="chatPanel">
+          <!-- Chat Header (Hidden when no conversation selected) -->
+          <div class="gradient-surface border-b border-slate-200 p-4 hidden" id="chatHeader">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <button class="lg:hidden p-2 hover:bg-slate-100 rounded-lg transition-colors" id="backToChatList">
+                  <i class="fas fa-arrow-left text-slate-600"></i>
+                </button>
+                <div class="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center" id="chatAvatar">
+                  <i class="fas fa-user text-slate-400"></i>
+                </div>
+                <div>
+                  <h2 class="font-semibold text-slate-800 cursor-pointer hover:text-blue-600 transition-colors" id="chatUserName">Select a conversation</h2>
+                  <p class="text-sm text-slate-500 flex items-center gap-1" id="chatStatus">
+                    <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                    No conversation selected
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors" id="callBtn">
+                  <i class="fas fa-phone text-slate-600"></i>
+                </button>
+                <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors" id="videoBtn">
+                  <i class="fas fa-video text-slate-600"></i>
+                </button>
+                <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors" id="moreOptionsBtn">
+                  <i class="fas fa-ellipsis-v text-slate-600"></i>
+                </button>
+                  placeholder="Select a conversation to start typing..." 
+                  class="w-full resize-none border border-slate-200 rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all max-h-32 message-input"
+                  rows="1"
+                  id="messageInput"
+                  disabled
+                ></textarea>
+                <button class="absolute right-2 bottom-2 p-2 hover:bg-slate-100 rounded-lg transition-colors" id="emojiBtn">
+                  <i class="fas fa-smile text-slate-600"></i>
+                </button>
+              </div>
+              <button class="gradient-yuli text-white p-3 rounded-xl hover:scale-105 transition-transform" id="sendBtn" disabled>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+
+  <!-- Confirm Modal (reusable) -->
+  <div id="confirmModal" style="display:none;position:fixed;inset:0;z-index:3000;background:rgba(15,23,42,.45);align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:100%;max-width:380px;overflow:hidden;">
+      <div style="padding:16px 18px;border-bottom:1px solid #eef2f7;">
+        <strong style="color:#0f172a;">Confirm action</strong>
+      </div>
+      <div style="padding:16px 18px;color:#334155;" id="confirmText">Are you sure?</div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eef2f7;">
+        <button id="confirmNo" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:10px;background:#fff;color:#334155;cursor:pointer;">Cancel</button>
+        <button id="confirmYes" style="padding:8px 12px;border:1px solid #ef4444;border-radius:10px;background:#fee2e2;color:#b91c1c;cursor:pointer;">Delete</button>
+      </div>
+    </div>
+  </div>
+
+          <!-- Chat thread fills available space between header and send bar -->
+          <div id="messageThread" style="flex:1;border:1px solid #eee;border-radius:12px;padding:12px;margin:12px 16px 8px 16px;overflow-y:auto;overflow-x:hidden;"></div>
+
+          <div id="simpleSendBar" style="display:flex;gap:8px;align-items:center;padding:0 16px 16px 16px;">
+            <input id="chatInput" type="text" placeholder="Type a message…" style="flex:1;padding:10px;border:1px solid #ddd;border-radius:10px;">
+            <button id="chatSendBtn" style="padding:10px 14px;border:1px solid #ddd;border-radius:10px;cursor:pointer;">Send</button>
+          </div>
+
+        </div>
+        
+        <!-- Panel 3: Context-Aware Sidebar (Right) - Revolutionary Feature -->
+        <div class="col-span-12 lg:col-span-3 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col overflow-hidden" id="contextSidebar">
+          <!-- Dynamic Header -->
+          <div class="gradient-surface border-b border-slate-200 p-4">
+            <h2 class="font-semibold text-slate-800" id="sidebarTitle">Dashboard</h2>
+          </div>
+          
+          <!-- Dynamic Content Area -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar" id="sidebarContent" style="overflow-x:hidden;">
+            <!-- Dashboard View (Default - Empty State) -->
+            <div class="p-6 space-y-6" id="dashboardView">
+              <div class="text-center">
+                <div class="w-16 h-16 gradient-yuli rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-chart-line text-white text-2xl"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-800">Quick Dashboard</h3>
+              </div>
+              
+              <!-- Upcoming Sessions (Empty) -->
+              <div>
+                <h4 class="font-semibold text-slate-800 mb-3">Upcoming Sessions</h4>
+                <div class="empty-state py-8">
+                  <i class="fas fa-calendar-alt text-2xl"></i>
+                  <p class="text-sm mt-2">No upcoming sessions</p>
+                </div>
+              </div>
+              
+              <!-- Quick Stats (Empty) -->
+              <div>
+                <h4 class="font-semibold text-slate-800 mb-3">Today's Overview</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-slate-50 rounded-xl p-3 text-center">
+                    <div class="text-xl font-bold text-slate-600">0</div>
+                    <div class="text-xs text-slate-600">Sessions</div>
+                  </div>
+                  <div class="bg-slate-50 rounded-xl p-3 text-center">
+                    <div class="text-xl font-bold text-slate-600">0</div>
+                    <div class="text-xs text-slate-600">Messages</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Announcements (Empty) -->
+              <div>
+                <h4 class="font-semibold text-slate-800 mb-3">Announcements</h4>
+                <div class="empty-state py-8">
+                  <i class="fas fa-bullhorn text-2xl"></i>
+                  <p class="text-sm mt-2">No announcements</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Profile View (Hidden by default, shows when user selected) -->
+            <div class="p-6 space-y-6 hidden" id="profileView">
+              <div class="empty-state h-full">
+                <i class="fas fa-user-circle"></i>
+                <h3 class="text-lg font-semibold mb-2">Select a user to view their profile</h3>
+                <p class="text-sm">Choose a conversation to see student details and actions.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Sidebar Toggle Buttons -->
+          <div class="border-t border-slate-200 p-4">
+            <div class="flex gap-2">
+              <button class="flex-1 py-2 px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg transition-colors sidebar-tab" id="profileTabBtn">
+                Profile
+              </button>
+              <button class="flex-1 py-2 px-3 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg transition-colors sidebar-tab active" id="dashboardTabBtn">
+                Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- People Picker Modal used by /js/messages.js -->
+  <div id="peopleModal" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.45);align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.15);width:100%;max-width:520px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #eef2f7;">
+        <strong>Start a new chat</strong>
+        <button id="closePeopleModal" aria-label="Close" style="border:none;background:transparent;font-size:20px;cursor:pointer;color:#64748b;">×</button>
+      </div>
+      <div style="padding:12px 16px;display:flex;gap:8px;align-items:center;">
+        <select id="roleFilter" style="border:1px solid #e5e7eb;border-radius:10px;padding:8px 10px;">
+          <option value="all">All</option>
+          <option value="student">Students</option>
+          <option value="parent">Parents</option>
+          <option value="tutor">Tutors</option>
+          <option value="admin">Admins</option>
+        </select>
+        <input id="peopleSearch" type="text" placeholder="Search name or email…" style="flex:1;border:1px solid #e5e7eb;border-radius:10px;padding:8px 10px;">
+      </div>
+      <div id="peopleList" style="max-height:60vh;overflow:auto;"></div>
+    </div>
+  </div>
+
+  <!-- Enhanced Profile Modal -->
+  <div id="profileModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 relative">
+      <button id="closeProfileModal" class="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg transition-colors">
+        <i class="fas fa-times text-slate-600"></i>
+      </button>
+      
+      <div class="text-center">
+        <div class="w-24 h-24 bg-slate-200 rounded-2xl mx-auto mb-4 flex items-center justify-center" id="modalProfilePhoto">
+          <i class="fas fa-user text-slate-400 text-2xl"></i>
+        </div>
+        <h3 id="modalProfileName" class="text-xl font-bold text-slate-800 mb-2">No user selected</h3>
+        <p id="modalProfileEmail" class="text-slate-600 mb-4">Select a conversation to view profile</p>
+        <p id="modalProfileBio" class="text-slate-600 text-sm leading-relaxed">User profile information will appear here when a conversation is selected.</p>
+      </div>
+      
+      <div class="mt-6 flex gap-3">
+        <button class="flex-1 gradient-yuli text-white py-2 rounded-lg font-medium hover:scale-105 transition-transform disabled" id="scheduleBtn">
+          <i class="fas fa-calendar mr-2"></i>Schedule
+        </button>
+        <button class="flex-1 border border-slate-200 text-slate-700 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors disabled" id="emailBtn">
+          <i class="fas fa-envelope mr-2"></i>Email
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emoji Picker Modal -->
+  <div id="emojiPicker" class="fixed bottom-20 right-4 bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 z-40 hidden">
+    <div class="grid grid-cols-6 gap-2">
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="😀">😀</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="😊">😊</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="😍">😍</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="🤔">🤔</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="👍">👍</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="👎">👎</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="❤️">❤️</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="🔥">🔥</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="🎉">🎉</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="💯">💯</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="🚀">🚀</button>
+      <button class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-xl" data-emoji="⭐">⭐</button>
+    </div>
+  </div>
+
+  <!-- Pristine Empty Shell - Ready for Data Integration -->
+  <!-- TODO: Add Firebase SDK scripts when ready to integrate with real data -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script> -->
+  <!-- ... -->
+  </div>
+
+  <!-- Wire functional messaging module (creates DMs, opens thread, enables sending) -->
+  <script type="module" src="./js/messages.js"></script>
+  <script>
+    // Reveal after DOM is ready (messages UI builds after data, but fade-in avoids flashes)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        try { document.documentElement.classList.remove('app-loading'); } catch(_) {}
+      });
+    } else {
+      try { document.documentElement.classList.remove('app-loading'); } catch(_) {}
+    }
+  </script>
+</body>
+</html>

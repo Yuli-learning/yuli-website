@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="en" class="app-loading">
+<head>
+  <meta charset="utf-8"/>
+  <title>Yuli — Tutor Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <base href="/">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js"></script>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="assets/css/tutor-dashboard-new.css">
+  <link rel="stylesheet" href="assets/css/tutor-dashboard-clean.css">
+  <style>
+    /* Tutor Dashboard specific: override global body background */
+    body.tutor-dashboard { background: #ffffff !important; }
+  </style>
+  
+  <script src="assets/js/tutor-dashboard-render.js"></script>
+  <script src="assets/js/tutor-dashboard-utils.js"></script>
+  <script defer src="assets/js/tutor-dashboard-simple.js"></script>
+  <script>
+    // Ensure the class is present as early as possible
+    try{ document.documentElement.classList.add('app-loading'); }catch(_){ }
+  </script>
+</head>
+<body class="tutor-dashboard">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo" id="logoLink">Yuli<span>.</span></a>
+      <a href="/" class="back-btn" id="backLink">← Back to Home</a>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1>Tutor Dashboard</h1>
+        <p class="page-subtitle">Manage your teaching sessions and students</p>
+      </div>
+      
+      <!-- Sticky Action Bar -->
+      <div class="action-bar-sticky" id="actionBarSticky">
+        <div class="action-bar" id="actionBar">
+          <button class="btn btn-primary" id="btnPrepareLesson" data-action="prepare" aria-label="Prepare lesson materials">
+            <i class="fas fa-book-open" aria-hidden="true"></i> Prepare Lesson
+          </button>
+          <button class="btn btn-secondary" id="btnAssignHomework" data-action="homework" aria-label="Assign homework to students">
+            <i class="fas fa-tasks" aria-hidden="true"></i> Assign Homework
+          </button>
+          <button class="btn btn-secondary" id="btnMessageStudent" data-action="message" aria-label="Send message to student">
+            <i class="fas fa-comment" aria-hidden="true"></i> Message Student
+          </button>
+          <button class="btn btn-secondary" id="btnScheduleSession" data-action="schedule" aria-label="Schedule new teaching session">
+            <i class="fas fa-calendar-plus" aria-hidden="true"></i> Schedule Session
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content Layout -->
+      <div class="dashboard-layout">
+        <!-- Primary Column (8/12) -->
+        <div class="primary-column">
+          <!-- Up Next -->
+          <div class="profile-card" id="upNextCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+              <div>
+                <h3 class="card-title" id="upNextTitle">Up next</h3>
+                <p class="card-subtitle" id="upNextSubtitle">Your next scheduled session</p>
+              </div>
+            </div>
+            <div class="card-content" id="upNextContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+              <div class="skeleton--subtitle"></div>
+            </div>
+          </div>
+
+          <!-- Today's Sessions -->
+          <div class="profile-card" id="todayCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Today</h3>
+                <p class="card-subtitle">Your sessions today</p>
+              </div>
+              <a href="#" class="view-all-link" id="viewAllToday" style="display: none;">View all</a>
+            </div>
+            <div class="card-content" id="todayContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+              <div class="skeleton--subtitle"></div>
+            </div>
+          </div>
+
+          <!-- Availability -->
+          <div class="profile-card" id="availabilityCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Availability</h3>
+                <p class="card-subtitle">Your teaching hours</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btnEditAvailability">Set availability</button>
+            </div>
+            <div class="card-content" id="availabilityContent">
+              <div class="empty-state">
+                <div class="empty-state-message">No availability set</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assigned Students -->
+          <div class="profile-card" id="studentsCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Assigned Students</h3>
+                <p class="card-subtitle">Students assigned to you</p>
+              </div>
+              <a href="#" class="view-all-link" id="viewAllStudents" style="display: none;">View all</a>
+            </div>
+            <div class="card-content" id="studentsContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+              <div class="skeleton--subtitle"></div>
+            </div>
+          </div>
+
+          <!-- Ready for Marking -->
+          <div class="profile-card" id="homeworkCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M9 11l3 3l8-8"/>
+                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9s4.03-9 9-9c1.51 0 2.93.37 4.18 1.03"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Ready for marking</h3>
+                <p class="card-subtitle">Homework to grade</p>
+              </div>
+              <a href="#" class="view-all-link" id="viewAllHomework" style="display: none;">View all</a>
+            </div>
+            <div class="card-content" id="homeworkContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+              <div class="skeleton--subtitle"></div>
+            </div>
+          </div>
+
+          <!-- New Messages -->
+          <div class="profile-card" id="messagesCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <div>
+                <h3 class="card-title">New messages</h3>
+                <p class="card-subtitle">Recent conversations</p>
+              </div>
+              <a href="#" class="view-all-link" id="viewAllMessages" style="display: none;">View all</a>
+            </div>
+            <div class="card-content" id="messagesContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+              <div class="skeleton--subtitle"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Rail (Sidebar - 4/12) -->
+        <aside class="right-rail" id="rightRail">
+          <!-- Notifications -->
+          <div class="profile-card" id="notificationsCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Notifications</h3>
+                <p class="card-subtitle">Latest updates</p>
+              </div>
+              <span class="unread-dot" id="unreadDot" style="display: none;"></span>
+              <button class="btn btn-sm btn-secondary" id="markAllReadBtn" style="display: none;" aria-label="Mark all notifications as read">
+                Mark all read
+              </button>
+            </div>
+            <div class="card-content" id="notificationsContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+            </div>
+          </div>
+
+          <!-- Alerts -->
+          <div class="profile-card" id="alertsCard" style="display: none;">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Alerts</h3>
+                <p class="card-subtitle">Critical updates</p>
+              </div>
+            </div>
+            <div class="card-content" id="alertsContent">
+              <!-- Alerts populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Earnings -->
+          <div class="profile-card" id="earningsCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Earnings</h3>
+                <p class="card-subtitle">This month</p>
+              </div>
+            </div>
+            <div class="card-content" id="earningsContent">
+              <div class="earnings-display">
+                <div class="earnings-amount" id="earningsAmount">—</div>
+                <div class="earnings-subtitle" id="earningsSubtitle">Month-to-date</div>
+                <div class="last-payout" id="lastPayout"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resources (compact) -->
+          <div class="profile-card" id="resourcesCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10,9 9,9 8,9"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Resources</h3>
+                <p class="card-subtitle">Teaching materials</p>
+              </div>
+              <div class="card-header-actions">
+                <button id="open-resources" class="link-button">Browse specifications <span class="icon-external" aria-hidden="true"></span></button>
+              </div>
+            </div>
+            <div class="card-content" id="resources-mini" role="button" tabindex="0">
+              <p class="muted">Official exam board specification links.</p>
+            </div>
+          </div>
+
+          <!-- Pinned Students -->
+          <div class="profile-card" id="pinnedStudentsCard">
+            <div class="card-header">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M12 17l-2 2l2 2l2-2l-2-2z"/>
+                <path d="M12 3l2 2l-2 2l-2-2l2-2z"/>
+                <path d="M12 3v14"/>
+              </svg>
+              <div>
+                <h3 class="card-title">Pinned Students</h3>
+                <p class="card-subtitle">Quick access</p>
+              </div>
+              <a href="/pages/students.html?pinMode=true" class="view-all-link">Manage pins</a>
+            </div>
+            <div class="card-content" id="pinnedStudentsContent">
+              <div class="skeleton--title"></div>
+              <div class="skeleton--row"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <style>
+    /* Scoped styles for Availability modal only */
+    /* Div-based modal backdrop */
+    #modalAvailability.modal-backdrop { 
+      position: fixed; inset: 0; background: rgba(17,24,39,0.42);
+      backdrop-filter: saturate(120%) blur(2px);
+      display: none;
+      z-index: 2147483647; /* max stack to ensure it sits above any UI */
+    }
+    #modalAvailability.modal-backdrop.open { display: block; }
+    #modalAvailability.modal-backdrop .modal-content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 24px 48px rgba(2,6,23,0.18);
+      width: min(1800px, 98vw);
+      pointer-events: auto;
+    }
+    /* Prevent background scroll when modal is open */
+    body.no-scroll { overflow: hidden; }
+    #modalAvailability .modal-content {
+      padding: 0;
+      background: #fff;
+      border-radius: 20px;
+      max-height: min(92vh, 920px);
+      overflow: hidden;
+      animation: modalIn .18s ease-out;
+      border: 1px solid #e2e8f0;
+      box-sizing: border-box;
+      width: min(1800px, 98vw); /* enforce wide modal explicitly on the content element */
+      max-width: none;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }
+    #modalAvailability .modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px 16px 28px;
+      border-bottom: 1px solid #e2e8f0;
+      background: linear-gradient(180deg, #ffffff 0%, #ffffff 70%, rgba(255,255,255,0.98) 100%);
+      border-radius: 16px 16px 0 0;
+    }
+    #modalAvailability .modal-header h3 { margin: 0; font-size: 20px; font-weight: 700; color: #0f172a; letter-spacing: -0.025em; }
+    #modalAvailability .modal-close { 
+      width: 32px; height: 32px; border-radius: 8px; border: 0; background: #f8fafc; color: #64748b; 
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s;
+    }
+    #modalAvailability .modal-close:hover { background: #f1f5f9; color: #475569; }
+    #modalAvailability .modal-body { padding: 0 32px 20px 32px; overflow: auto; max-height: calc(min(92vh, 920px) - 148px); }
+    #modalAvailability .modal-form .form-group { margin-bottom: 24px; }
+    #modalAvailability .form-label { 
+      display: block; margin-bottom: 8px; font-weight: 600; color: #374151; font-size: 14px;
+    }
+    #modalAvailability .form-input { 
+      width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; 
+      font-size: 14px; background: #f9fafb; color: #6b7280;
+    }
+    #modalAvailability .availability-grid { 
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; 
+      margin-top: 8px; 
+    }
+    #modalAvailability .availability-grid::before { 
+      content: 'Weekly availability'; grid-column: 1 / -1; 
+      display: block; margin: 4px 2px; color: #334155; font-weight: 700; font-size: 14px; letter-spacing: -0.01em;
+    }
+    #modalAvailability .day-section { 
+      background: #fafbfc; border: 1px solid #e5e7eb; border-radius: 12px; 
+      padding: 18px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      transition: all 0.15s; min-height: 180px; display: flex; flex-direction: column;
+    }
+    #modalAvailability .day-section .ranges { flex: 1; }
+    #modalAvailability .day-section:hover { border-color: #d1d5db; box-shadow: 0 4px 10px rgba(15,23,42,0.06); transform: translateY(-1px); }
+    #modalAvailability .day-header { 
+      display: flex; align-items: center; justify-content: space-between; 
+      margin-bottom: 14px; gap: 12px;
+    }
+    #modalAvailability .day-label { 
+      font-weight: 700; color: #111827; font-size: 15px; 
+      letter-spacing: -0.01em; min-width: 40px;
+    }
+    #modalAvailability .add-range { 
+      color: #4f46e5; background: #eef2ff; border: 1px solid #e0e7ff; 
+      cursor: pointer; font-weight: 600; padding: 6px 10px; border-radius: 6px; 
+      font-size: 12px; transition: all 0.15s;
+    }
+    #modalAvailability .add-range:hover { background: #e0e7ff; border-color: #c7d2fe; }
+    #modalAvailability .ranges { 
+      display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; 
+      min-height: 48px; padding: 2px 0; 
+    }
+    #modalAvailability .range-row { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    #modalAvailability .range-chip { 
+      display: inline-flex; align-items: center; gap: 8px; 
+      padding: 8px 14px; border-radius: 20px; 
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); 
+      color: #3730a3; border: 1px solid #c7d2fe; 
+      font-weight: 600; font-size: 13px;
+      box-shadow: 0 1px 2px rgba(79,70,229,0.1);
+    }
+    #modalAvailability .chip-actions { display: inline-flex; gap: 4px; }
+    #modalAvailability .chip-btn { 
+      border: 0; background: transparent; color: #4f46e5; cursor: pointer; 
+      font-weight: 600; padding: 2px 6px; border-radius: 4px; font-size: 12px;
+      transition: all 0.15s;
+    }
+    #modalAvailability .chip-btn:hover { background: rgba(79,70,229,0.1); }
+    #modalAvailability .chip-remove { color: #6b7280; }
+    #modalAvailability .chip-remove:hover { color: #ef4444; background: rgba(239,68,68,0.1); }
+    /* Inline editor: use flexible rows that wrap, preventing overlap */
+    #modalAvailability .range-editor { 
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px; 
+      row-gap: 10px; /* slightly larger vertical gap when wrapping */
+      width: 100%; flex: 1 0 100%;
+    }
+    #modalAvailability .range-editor > * { min-width: 0; }
+    /* Make time inputs readable even with the built-in clock icon */
+    #modalAvailability .range-editor input[type="time"] {
+      width: auto; min-width: 120px; flex: 1 1 150px; box-sizing: border-box;
+      padding: 8px 34px 8px 10px; /* extra right padding for the clock icon */
+      border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #111827;
+      font-size: 14px; line-height: 1.2;
+    }
+    /* Separator (the dash) should not shrink */
+    #modalAvailability .range-editor .range-sep { flex: 0 0 auto; color: #64748b; }
+    /* Place actions on the next line when space is limited to avoid overlap */
+    #modalAvailability .range-editor .save-range { flex: 1 0 100%; order: 4; margin-top: 2px; }
+    #modalAvailability .range-editor .cancel-edit { flex: 0 0 auto; order: 5; margin-top: 2px; }
+    /* Tweak the built-in picker icon so it doesn’t overlap the text */
+    #modalAvailability .range-editor input[type="time"]::-webkit-calendar-picker-indicator {
+      padding: 0; margin: 0 6px 0 0; opacity: 0.85; cursor: pointer;
+    }
+    /* Firefox (and others) fallbacks */
+    #modalAvailability .range-editor input[type="time"]::-moz-focus-inner { border: 0; }
+    #modalAvailability .range-editor .save-range { border: 0; background: #4f46e5; color: #fff; border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+    #modalAvailability .range-editor .save-range:hover { filter: brightness(0.95); }
+    #modalAvailability .range-editor .cancel-edit { border: 0; background: transparent; color: #64748b; cursor: pointer; }
+    #modalAvailability .modal-actions { 
+      position: sticky; bottom: 0; z-index: 2; 
+      display: flex; justify-content: flex-end; gap: 12px; 
+      padding: 20px 28px 24px 28px; 
+      background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, #fff 20px); 
+      border-top: 1px solid #e5e7eb; margin-top: 16px;
+      border-radius: 0 0 16px 16px;
+    }
+    #modalAvailability .btn { 
+      padding: 10px 20px; border-radius: 12px; font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: all 0.15s; border: 1px solid;
+    }
+    #modalAvailability .btn-secondary { 
+      background: #fff; color: #374151; border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 16px; font-weight: 600; 
+    }
+    #modalAvailability .btn-secondary:hover { 
+      background: #f9fafb; border-color: #9ca3af; color: #4b5563;
+    }
+    #modalAvailability .btn-primary { 
+      background: linear-gradient(180deg, #5b3df5 0%, #5335f2 100%); color: #fff; border: 0; border-radius: 12px; 
+      padding: 10px 18px; font-weight: 700; letter-spacing: 0.01em; 
+      box-shadow: 0 8px 18px rgba(83,53,242,0.28);
+    }
+    #modalAvailability .btn-primary:hover { filter: brightness(1.02); transform: translateY(-1px); }
+    #modalAvailability .btn-primary:active { transform: translateY(0); }
+    #modalAvailability .btn-primary:disabled { 
+      background: #d1d5db; border-color: #d1d5db; color: #9ca3af; cursor: not-allowed;
+    }
+    #modalAvailability .modal-tools { 
+      display: flex; justify-content: space-between; align-items: flex-start; 
+      padding: 20px 0 24px 0; gap: 16px; 
+      border-bottom: 1px solid #f1f5f9; margin-bottom: 24px;
+    }
+    #modalAvailability .tool-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    #modalAvailability .tool-btn { 
+      border: 1px solid #e2e8f0; background: #fff; color: #374151; 
+      border-radius: 8px; padding: 8px 14px; cursor: pointer; 
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-size: 13px; font-weight: 500;
+      transition: all 0.15s;
+    }
+    #modalAvailability .tool-btn:hover { background: #f9fafb; border-color: #d1d5db; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    /* Scrollbar aesthetics inside modal */
+    #modalAvailability .modal-body::-webkit-scrollbar { width: 10px; }
+    #modalAvailability .modal-body::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 8px; }
+    #modalAvailability .modal-body { scrollbar-color: #e2e8f0 transparent; scrollbar-width: thin; }
+
+    @media (max-width: 900px) { #modalAvailability .availability-grid { grid-template-columns: 1fr; } }
+    /* Availability summary styles moved to assets/css/tutor-dashboard-clean.css */
+    /* Resources header link-button */
+    .card-header-actions { margin-left: auto; }
+    .link-button { background: none; border: none; font-weight: 600; cursor: pointer; font-size: 13px; color: var(--primary); }
+    .link-button:hover { text-decoration: underline; }
+    .icon-external { display: inline-block; width: 1em; height: 1em; margin-left: .25rem; }
+  </style>
+
+  <!-- Drawer root (backdrop + panel will be injected here) -->
+  <div id="resources-drawer-root" aria-hidden="true"></div>
+  <!-- Availability Modal -->
+  <div id="modalAvailability" class="modal-backdrop" aria-labelledby="availabilityTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="availabilityTitle">Set Availability</h3>
+        <button class="modal-close" aria-label="Close availability modal">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-tools">
+          <div class="tool-group">
+            <button type="button" class="tool-btn" id="copyMonToWeekdays">Copy Mon → Weekdays</button>
+            <button type="button" class="tool-btn" id="clearAllDays">Clear all</button>
+          </div>
+          <div class="tool-group">
+            <button type="button" class="tool-btn" id="presetWeekdaysEvenings">Preset: Weekdays 16:00–20:00</button>
+          </div>
+        </div>
+        <form id="formAvailability" class="modal-form">
+          <div class="form-group">
+            <label class="form-label">Timezone</label>
+            <input type="text" id="availTimezone" class="form-input" readonly>
+          </div>
+          <div class="form-group">
+            <div class="availability-grid">
+              <!-- Multiple ranges per day -->
+              <div class="day-section" data-day="1">
+                <div class="day-header">
+                  <span class="day-label">Mon</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="1">Add time</button>
+                </div>
+                <div class="ranges" id="monRanges"></div>
+              </div>
+              <div class="day-section" data-day="2">
+                <div class="day-header">
+                  <span class="day-label">Tue</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="2">Add time</button>
+                </div>
+                <div class="ranges" id="tueRanges"></div>
+              </div>
+              <div class="day-section" data-day="3">
+                <div class="day-header">
+                  <span class="day-label">Wed</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="3">Add time</button>
+                </div>
+                <div class="ranges" id="wedRanges"></div>
+              </div>
+              <div class="day-section" data-day="4">
+                <div class="day-header">
+                  <span class="day-label">Thu</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="4">Add time</button>
+                </div>
+                <div class="ranges" id="thuRanges"></div>
+              </div>
+              <div class="day-section" data-day="5">
+                <div class="day-header">
+                  <span class="day-label">Fri</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="5">Add time</button>
+                </div>
+                <div class="ranges" id="friRanges"></div>
+              </div>
+              <div class="day-section" data-day="6">
+                <div class="day-header">
+                  <span class="day-label">Sat</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="6">Add time</button>
+                </div>
+                <div class="ranges" id="satRanges"></div>
+              </div>
+              <div class="day-section" data-day="0">
+                <div class="day-header">
+                  <span class="day-label">Sun</span>
+                  <button type="button" class="btn btn-tertiary btn-xs add-range" data-day="0">Add time</button>
+                </div>
+                <div class="ranges" id="sunRanges"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btnSaveAvailability" disabled>Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <dialog id="modalSchedule" class="modal" aria-labelledby="scheduleTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="scheduleTitle">Schedule Session</h3>
+        <button class="modal-close" aria-label="Close schedule session modal">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="formSchedule" class="modal-form">
+        <div class="form-group">
+          <label for="schedStudent" class="form-label">Student</label>
+          <select id="schedStudent" class="form-input" required>
+            <option value="">Select a student...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="schedSubject" class="form-label">Subject</label>
+          <input type="text" id="schedSubject" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="schedStart" class="form-label">Start Time</label>
+          <input type="datetime-local" id="schedStart" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="schedEnd" class="form-label">End Time</label>
+          <input type="datetime-local" id="schedEnd" class="form-input" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" data-action="cancel" aria-label="Cancel scheduling session">Cancel</button>
+          <button type="submit" class="btn btn-primary" aria-label="Confirm and schedule session">Schedule Session</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Navigation script -->
+  <script type="module">
+    import { go } from "./lib/nav.js";
+    
+    // Header navigation
+    document.getElementById('logoLink')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      go('/');
+    });
+    document.getElementById('backLink')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      go('/');
+    });
+    // Message Student -> Messages page
+    document.getElementById('btnMessageStudent')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      go('/messages');
+    });
+    
+    // Sticky action bar behavior
+    const actionBarSticky = document.getElementById('actionBarSticky');
+    if (actionBarSticky) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) {
+            actionBarSticky.classList.add('stuck');
+          } else {
+            actionBarSticky.classList.remove('stuck');
+          }
+        },
+        { threshold: 0, rootMargin: '-1px 0px 0px 0px' }
+      );
+      
+      // Create a sentinel element to observe
+      const sentinel = document.createElement('div');
+      sentinel.style.height = '1px';
+      sentinel.style.position = 'absolute';
+      sentinel.style.top = '0';
+      sentinel.style.left = '0';
+      sentinel.style.width = '100%';
+      sentinel.style.pointerEvents = 'none';
+      actionBarSticky.parentNode.insertBefore(sentinel, actionBarSticky);
+      
+      observer.observe(sentinel);
+    }
+
+    // --- Availability publisher helpers ---
+    async function publishAvailability({ uid, timezone, weeklySlots, subjects, examBoards }) {
+      // Config
+      const windowDays = 28; // publish horizon
+      const sessionMinutes = 60; // slot duration
+
+      // Clean future unbooked existing slots
+      const now = new Date();
+      try {
+        const availRef = collection(db, 'availability');
+        const q = query(
+          availRef,
+          where('tutorId', '==', uid),
+          where('isBooked', '==', false),
+          where('start', '>=', Timestamp.fromDate(now))
+        );
+        const snap = await getDocs(q);
+        const deletions = [];
+        snap.forEach(d => deletions.push(deleteDoc(d.ref)));
+        await Promise.allSettled(deletions);
+      } catch (e) {
+        console.warn('Cleanup old availability failed (continuing)', e);
+      }
+
+      // Generate date list
+      const startDay = new Date();
+      startDay.setHours(0,0,0,0);
+      const days = Array.from({length: windowDays}, (_,i) => {
+        const d = new Date(startDay);
+        d.setDate(startDay.getDate() + i);
+        return d;
+      });
+
+      // Build a map dayOfWeek -> ranges
+      const byDay = weeklySlots.reduce((acc, s) => {
+        (acc[s.day] ||= []).push(s);
+        return acc;
+      }, {});
+
+      // Helper: create Date in browser timezone for day+time (HH:MM)
+      function makeLocalDate(baseDate, hhmm) {
+        const [hh, mm] = (hhmm || '00:00').split(':').map(n=>parseInt(n,10)||0);
+        const d = new Date(baseDate);
+        d.setHours(hh, mm, 0, 0);
+        return d;
+      }
+
+      const writes = [];
+      for (const dayDate of days) {
+        const dow = dayDate.getDay();
+        const ranges = byDay[dow] || [];
+        if (!ranges.length) continue;
+
+        for (const rng of ranges) {
+          const rangeStart = makeLocalDate(dayDate, rng.start);
+          const rangeEnd = makeLocalDate(dayDate, rng.end);
+          if (!(rangeEnd > rangeStart)) continue;
+
+          // Split into sessionMinutes increments
+          let cursor = new Date(rangeStart);
+          while (new Date(cursor.getTime() + sessionMinutes*60000) <= rangeEnd) {
+            const slotStart = new Date(cursor);
+            const slotEnd = new Date(cursor.getTime() + sessionMinutes*60000);
+            // For each subject/level, create a slot
+            const subs = Array.isArray(subjects) && subjects.length ? subjects : [{subject: 'Mathematics', level: 'GCSE'}];
+            for (const s of subs) {
+              writes.push(addDoc(collection(db, 'availability'), {
+                tutorId: uid,
+                subject: s.subject,
+                level: s.level,
+                examBoards: Array.isArray(examBoards) ? examBoards : [],
+                start: Timestamp.fromDate(slotStart),
+                end: Timestamp.fromDate(slotEnd),
+                isBooked: false,
+                timezone: timezone || null,
+                createdAt: serverTimestamp()
+              }));
+            }
+            cursor = new Date(cursor.getTime() + sessionMinutes*60000);
+          }
+        }
+      }
+
+      if (writes.length) {
+        // Limit concurrency to avoid flooding
+        const chunkSize = 100;
+        for (let i=0; i<writes.length; i+=chunkSize) {
+          const chunk = writes.slice(i, i+chunkSize);
+          await Promise.allSettled(chunk);
+        }
+      }
+    }
+
+  </script>
+
+  <!-- Availability logic -->
+  <script type="module">
+    import { auth, db } from "../lib/firebaseClient.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { doc, getDoc, setDoc, updateDoc, serverTimestamp, collection, query, where, getDocs, deleteDoc, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    const btnEdit = document.getElementById('btnEditAvailability');
+    const modal = document.getElementById('modalAvailability');
+    const form = document.getElementById('formAvailability');
+    const tzInput = document.getElementById('availTimezone');
+    const content = document.getElementById('availabilityContent');
+
+    const DAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const DAY_PREFIX = {0:'sun',1:'mon',2:'tue',3:'wed',4:'thu',5:'fri',6:'sat'};
+
+    tzInput && (tzInput.value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
+
+    let uid = null;
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return;
+      uid = user.uid;
+      await loadAvailability();
+    });
+
+    // Focus management
+    const FOCUSABLE_SELECTOR = 'a[href], area[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let lastFocusedEl = null;
+    let trapHandler = null;
+
+    const enableFocusTrap = () => {
+      const focusables = Array.from(modal.querySelectorAll(FOCUSABLE_SELECTOR)).filter(el => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+      trapHandler = (e) => {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      };
+      modal.addEventListener('keydown', trapHandler);
+    };
+
+    const disableFocusTrap = () => {
+      if (trapHandler) modal.removeEventListener('keydown', trapHandler);
+      trapHandler = null;
+    };
+
+    const openModal = () => {
+      if (!modal) return;
+      // Ensure modal is a direct child of body to avoid stacking context issues
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+      // Remember last focused element
+      lastFocusedEl = document.activeElement;
+      // Focus first interactive element for accessibility
+      const first = modal.querySelector(FOCUSABLE_SELECTOR);
+      first && first.focus();
+      enableFocusTrap();
+    };
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+      disableFocusTrap();
+      // Restore focus
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      } else if (btnEdit) {
+        btnEdit.focus();
+      }
+    };
+
+    // Open/close bindings
+    btnEdit?.addEventListener('click', openModal);
+    modal?.querySelector('[data-action="cancel"]')?.addEventListener('click', closeModal);
+    modal?.querySelector('.modal-close')?.addEventListener('click', closeModal);
+    // Backdrop click closes (only when clicking the backdrop, not inner content)
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    // Escape key closes when open
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal();
+    });
+
+    // Add time range buttons
+    modal?.querySelectorAll('.add-range').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const day = Number((e.currentTarget).getAttribute('data-day'));
+        addRangeEl(day, '', '', true);
+      });
+    });
+
+    // Remove via delegation
+    modal?.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && target.closest && target.closest('.remove-range')) {
+        const row = target.closest('.range-row');
+        row?.parentNode?.removeChild(row);
+      }
+      if (target && target.classList && target.classList.contains('edit-range')) {
+        const row = target.closest('.range-row');
+        switchToEditor(row);
+      }
+      if (target && target.classList && target.classList.contains('cancel-edit')) {
+        const row = target.closest('.range-row');
+        switchToChip(row);
+      }
+      if (target && target.classList && target.classList.contains('save-range')) {
+        const row = target.closest('.range-row');
+        const s = row.querySelector('.avail-start')?.value || '';
+        const eVal = row.querySelector('.avail-end')?.value || '';
+        if (!s || !eVal || eVal <= s) return;
+        row.dataset.start = s;
+        row.dataset.end = eVal;
+        switchToChip(row);
+      }
+    });
+
+    // Quick tools
+    document.getElementById('copyMonToWeekdays')?.addEventListener('click', () => {
+      const src = document.getElementById('monRanges');
+      const vals = [...src.querySelectorAll('.range-row')].map(r => ({ start: r.dataset.start || r.querySelector('.avail-start')?.value || '', end: r.dataset.end || r.querySelector('.avail-end')?.value || '' })).filter(v => v.start && v.end && v.end > v.start);
+      for (const day of [2,3,4,5]) { // Tue-Fri
+        const prefix = DAY_PREFIX[day];
+        const c = document.getElementById(prefix+'Ranges');
+        if (!c) continue; c.innerHTML='';
+        vals.forEach(v => addRangeEl(day, v.start, v.end, false));
+      }
+      updateSaveState();
+    });
+    document.getElementById('clearAllDays')?.addEventListener('click', () => {
+      for (const prefix of Object.values(DAY_PREFIX)) {
+        const c = document.getElementById(prefix+'Ranges');
+        if (c) c.innerHTML='';
+      }
+      updateSaveState();
+    });
+    document.getElementById('presetWeekdaysEvenings')?.addEventListener('click', () => {
+      for (const day of [1,2,3,4,5]) {
+        const prefix = DAY_PREFIX[day];
+        const c = document.getElementById(prefix+'Ranges');
+        if (!c) continue; c.innerHTML='';
+        addRangeEl(day, '16:00', '20:00', false);
+      }
+      updateSaveState();
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!uid) return;
+      const slots = collectSlotsFromForm();
+      const timezone = tzInput?.value || 'UTC';
+      const ref = doc(db, 'users', uid);
+      const payload = { availability: { timezone, slots, updatedAt: serverTimestamp() } };
+      try {
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          await updateDoc(ref, payload);
+        } else {
+          await setDoc(ref, { role: 'tutor', ...payload }, { merge: true });
+        }
+        // After saving weekly pattern, publish discrete availability slots for booking
+        try {
+          const fresh = await getDoc(ref);
+          const userData = fresh.exists() ? fresh.data() : {};
+          const teachingPrefs = userData?.teachingPreferences || {};
+          await publishAvailability({
+            uid,
+            timezone,
+            weeklySlots: slots,
+            subjects: Array.isArray(teachingPrefs.subjects) ? teachingPrefs.subjects : [],
+            examBoards: Array.isArray(teachingPrefs.examBoards) ? teachingPrefs.examBoards : []
+          });
+        } catch (pubErr) {
+          console.error('Publish availability failed', pubErr);
+        }
+        closeModal();
+        renderAvailabilitySummary(slots, timezone);
+        updateSaveState();
+      } catch (err) {
+        console.error('Save availability failed', err);
+        alert('Failed to save availability');
+      }
+    });
+
+    async function loadAvailability() {
+      if (!uid) return;
+      try {
+        const ref = doc(db, 'users', uid);
+        const snap = await getDoc(ref);
+        const data = snap.exists() ? snap.data() : null;
+        const avail = data?.availability || { timezone: tzInput?.value, slots: [] };
+        populateForm(avail);
+        renderAvailabilitySummary(avail.slots || [], avail.timezone);
+        updateSaveState();
+      } catch (err) {
+        console.error('Load availability failed', err);
+      }
+    }
+
+    function populateForm(avail) {
+      if (tzInput && avail.timezone) tzInput.value = avail.timezone;
+      // Clear all day containers
+      for (const [dStr, prefix] of Object.entries(DAY_PREFIX)) {
+        const container = document.getElementById(prefix + 'Ranges');
+        if (container) container.innerHTML = '';
+      }
+      const slots = Array.isArray(avail.slots) ? avail.slots : [];
+      // Group by day
+      const byDay = slots.reduce((acc, s) => {
+        if (!acc[s.day]) acc[s.day] = [];
+        acc[s.day].push(s);
+        return acc;
+      }, {});
+      for (const day of Object.keys(DAY_PREFIX).map(n=>Number(n))) {
+        const daySlots = byDay[day] || [];
+        if (daySlots.length === 0) continue; // leave empty until user clicks Add time
+        for (const s of daySlots) addRangeEl(day, s.start || '', s.end || '', false);
+      }
+    }
+
+    function collectSlotsFromForm() {
+      const slots = [];
+      for (const [dStr, prefix] of Object.entries(DAY_PREFIX)) {
+        const day = Number(dStr);
+        const container = document.getElementById(prefix + 'Ranges');
+        if (!container) continue;
+        container.querySelectorAll('.range-row').forEach(row => {
+          const start = row.dataset.start || row.querySelector('.avail-start')?.value || '';
+          const end = row.dataset.end || row.querySelector('.avail-end')?.value || '';
+          if (start && end && end > start) slots.push({ day, start, end });
+        });
+      }
+      // Merge overlapping ranges within the same day (simple pass)
+      return mergeOverlaps(slots);
+    }
+
+    function addRangeEl(day, start, end, editing = false) {
+      const prefix = DAY_PREFIX[day];
+      const container = document.getElementById(prefix + 'Ranges');
+      if (!container) return;
+      const row = document.createElement('div');
+      row.className = 'range-row';
+      if (!editing && start && end) {
+        row.dataset.start = start; row.dataset.end = end;
+        row.innerHTML = chipHtml(start, end);
+      } else {
+        row.innerHTML = editorHtml(start, end);
+      }
+      container.appendChild(row);
+      // listen for input changes to update save state
+      row.addEventListener('input', () => updateSaveState());
+    }
+
+    function chipHtml(start, end) {
+      return `
+        <span class="range-chip">${start}–${end}</span>
+        <span class="chip-actions">
+          <button type="button" class="chip-btn edit-range">Edit</button>
+          <button type="button" class="chip-btn chip-remove remove-range" aria-label="Remove">✕</button>
+        </span>
+      `;
+    }
+
+    function editorHtml(start, end) {
+      return `
+        <div class="range-editor">
+          <input type="time" class="form-input avail-start" value="${start}"> —
+          <input type="time" class="form-input avail-end" value="${end}">
+          <button type="button" class="save-range">Save</button>
+          <button type="button" class="cancel-edit">Cancel</button>
+        </div>
+      `;
+    }
+
+    function switchToEditor(row) {
+      const s = row.dataset.start || '';
+      const e = row.dataset.end || '';
+      row.innerHTML = editorHtml(s, e);
+    }
+
+    function switchToChip(row) {
+      const s = row.querySelector('.avail-start')?.value || row.dataset.start || '';
+      const e = row.querySelector('.avail-end')?.value || row.dataset.end || '';
+      if (s && e && e > s) { row.dataset.start = s; row.dataset.end = e; }
+      const ds = row.dataset.start, de = row.dataset.end;
+      if (ds && de) row.innerHTML = chipHtml(ds, de);
+      else row.remove();
+      updateSaveState();
+    }
+
+    function mergeOverlaps(slots) {
+      const byDay = slots.reduce((acc, s) => {
+        (acc[s.day] ||= []).push({ ...s });
+        return acc;
+      }, {});
+      const merged = [];
+      for (const [dStr, arr] of Object.entries(byDay)) {
+        const day = Number(dStr);
+        arr.sort((a,b)=>a.start.localeCompare(b.start));
+        let cur = null;
+        for (const r of arr) {
+          if (!cur) { cur = { ...r }; continue; }
+          if (r.start <= cur.end) {
+            if (r.end > cur.end) cur.end = r.end; // extend
+          } else {
+            merged.push({ day, start: cur.start, end: cur.end });
+            cur = { ...r };
+          }
+        }
+        if (cur) merged.push({ day, start: cur.start, end: cur.end });
+      }
+      return merged;
+    }
+
+    function renderAvailabilitySummary(slots, timezone) {
+      if (!content) return;
+      if (!slots || slots.length === 0) {
+        content.innerHTML = `<div class="empty-state"><div class="empty-state-message">No availability set</div></div>`;
+        const btn = document.getElementById('btnEditAvailability');
+        if (btn) btn.textContent = 'Set availability';
+        return;
+      }
+      // Merge by day and render horizontal weekly timetable
+      const byDay = slots.reduce((acc, s) => {
+        (acc[s.day] ||= []).push(s);
+        return acc;
+      }, {});
+      const order = [1,2,3,4,5,6,0];
+      let html = `<div class="avail-summary-grid">`;
+      for (const d of order) {
+        html += `<div class="avail-day-column">`;
+        html += `<span class="avail-day-label">${DAY_LABELS[d]}</span>`;
+        html += `<div class="avail-slots">`;
+        const arr = (byDay[d] || []).sort((a,b)=>a.start.localeCompare(b.start));
+        if (arr.length) {
+          for (const r of arr) {
+            html += `<span class=\"avail-chip\">${r.start}–${r.end}</span>`;
+          }
+        } else {
+          html += `<span class=\"avail-chip unavailable\">Unavailable</span>`;
+        }
+        html += `</div></div>`;
+      }
+      html += `</div>`;
+      if (timezone) {
+        html += `<div class=\"avail-timezone\">Timezone: ${timezone}</div>`;
+      }
+      content.innerHTML = html;
+      const btn = document.getElementById('btnEditAvailability');
+      if (btn) btn.textContent = 'Edit availability';
+    }
+
+    function updateSaveState() {
+      const submit = document.getElementById('btnSaveAvailability');
+      if (!submit) return;
+      const slots = collectSlotsFromForm();
+      submit.disabled = !(slots && slots.length > 0);
+    }
+  </script>
+
+  <!-- Resources mini + drawer -->
+  <script type="module">
+    import { renderResourcesMini, openResourcesDrawer } from "../lib/resources.js";
+    const mini = document.getElementById('resources-mini');
+    renderResourcesMini(mini);
+    const btn = document.getElementById('open-resources');
+    if (btn) btn.addEventListener('click', () => openResourcesDrawer());
+    if (mini) {
+      mini.addEventListener('click', () => openResourcesDrawer());
+    }
+  </script>
+
+  <!-- Reveal the page smoothly once DOM is ready (no auth-gated header here) -->
+  <script>
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        try { document.documentElement.classList.remove('app-loading'); } catch (_) {}
+      });
+    } else {
+      try { document.documentElement.classList.remove('app-loading'); } catch (_) {}
+    }
+  </script>
+</body>
+</html>

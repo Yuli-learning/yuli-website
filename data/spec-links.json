@@ -1,0 +1,263 @@
+{
+  "_comment": "Official exam board specification landing pages. Add new subjects by copying the structure. Use only official domains: aqa.org.uk, qualifications.pearson.com, ocr.org.uk, eduqas.co.uk (or wjec.co.uk for Wales), ccea.org.uk. Omit boards that do not offer a subject/level.",
+  "Maths": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/mathematics/gcse/mathematics-8300" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/mathematics-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/mathematics-j560-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/mathematics-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/mathematics-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-mathematics-0580/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/mathematics/as-and-a-level/mathematics-7357" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/mathematics-2017.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/mathematics-a-h240-h640-from-2017/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/mathematics-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/mathematics-2018" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-mathematics-9709/" }
+    ]
+  },
+  "English Language": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/english/gcse/english-language-8700" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/english-language-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/english-language-j351-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/english-language-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/english-language-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-english-first-language-0500/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/english/as-and-a-level/english-language-7701-7702" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/english-language-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/english-language-h070-h470-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/english-language-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/english-language-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-english-language-9093/" }
+    ]
+  },
+  "English Literature": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/english/gcse/english-literature-8702" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/english-literature-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/english-literature-j352-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/english-literature-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/english-literature-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/english-literature-0475/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/english/as-and-a-level/english-literature-a-7712" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/english-literature-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/english-literature-h072-h472-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/english-literature-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/english-literature-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-english-literature-9695/" }
+    ]
+  },
+  "Biology": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/biology/gcse/biology-8461/specification/specification-at-a-glance" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/content/dam/pdf/GCSE/Science/2016/Specification/gcse-biology-spec.pdf" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/images/234594-specification-accredited-gcse-gateway-science-suite-biology-a-j247.pdf" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/media/gg2joueu/eduqas-gcse-biology-spec-from-2016-e.pdf" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/downloads/docs/Specifications/GCSE/GCSE%20Biology%20%282017%29/GCSE%20Biology%20%282017%29-specification-Standard.pdf" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-biology-0610/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/biology/a-level/biology-7402/specification/specification-at-a-glance" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/content/dam/pdf/A%20Level/biology-a/2015/specification-and-sample-assessment-materials/9781446930885-gce2015-a-bioa-spec.pdf" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/biology-a-h020-h420-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/biology-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/biology-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-biology-9700/" }
+    ]
+  },
+  "Chemistry": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/science/gcse/chemistry-8462" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/chemistry-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/gateway-science/chemistry-a-j248-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/chemistry-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/chemistry-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-chemistry-0620/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/science/as-and-a-level/chemistry-7404-7405" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/chemistry-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/chemistry-a-h032-h432-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/chemistry-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/chemistry-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-chemistry-9701/" }
+    ]
+  },
+  "Physics": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/science/gcse/physics-8463" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/physics-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/gateway-science/physics-a-j249-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/physics-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/physics-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-physics-0625/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/science/as-and-a-level/physics-7407-7408" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/physics-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/physics-a-h156-h556-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/physics-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/physics-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-physics-9702/" }
+    ]
+  },
+  "History": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/history/gcse/history-8145" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/history-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/history-b-schools-history-project-j411-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/history-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/history-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-history-0470/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/history/as-and-a-level/history-7041-7042" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/history-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/history-a-h105-h505-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/history-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/history-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-history-9489/" }
+    ]
+  },
+  "Geography": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/geography/gcse/geography-8035" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/geography-a-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/geography-b-j384-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/geography-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/geography-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-geography-0460/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/geography/as-and-a-level/geography-7036-7037" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/geography-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/geography-h081-h481-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/geography-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/geography-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-geography-9696/" }
+    ]
+  },
+  "Computer Science": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/computer-science-and-it/gcse/computer-science-8525" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/computer-science-2020.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/computer-science-j277-from-2020/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/computer-science-gcse/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-computer-science-0478/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/computer-science-and-it/as-and-a-level/computer-science-7516-7517" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/computer-science-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/computer-science-h046-h446-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/computer-science-as-a-level/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/" }
+    ]
+  },
+  "Business": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/business/gcse/business-8132" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/business-2017.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/business-j204-from-2017/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/business-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/business-studies-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-business-studies-0450/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/business/as-and-a-level/business-7131-7132" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/business-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/business-h031-h431-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/business-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/business-studies-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-business-9609/" }
+    ]
+  },
+  "Economics": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/economics/gcse/economics-8136" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/economics-a-2017.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/economics-j205-from-2017/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/economics-gcse/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-economics-0455/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/economics/as-and-a-level/economics-7135-7136" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/economics-a-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/economics-h060-h460-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/economics-as-a-level/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-economics-9708/" }
+    ]
+  },
+  "Psychology": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/psychology/gcse/psychology-8182" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/psychology-2017.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/psychology-j203-from-2017/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/psychology-gcse/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-psychology-0266/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/psychology/as-and-a-level/psychology-7181-7182" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/psychology-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/psychology-h167-h567-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/psychology-as-a-level/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-psychology-9990/" }
+    ]
+  },
+  "Sociology": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/sociology/gcse/sociology-8192" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/sociology-gcse/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-sociology-0495/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/sociology/as-and-a-level/sociology-7191-7192" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/sociology-2015.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/sociology-h180-h580-from-2015/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/sociology-as-a-level/" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-sociology-9699/" }
+    ]
+  },
+  "French": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/languages/gcse/french-8658" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/french-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/french-j125-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/french-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/french-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-french-foreign-language-0520/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/languages/as-and-a-level/french-7652" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/french-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/french-h075-h475-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/french-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/french-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-french-9716/" }
+    ]
+  },
+  "Spanish": {
+    "GCSE": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/languages/gcse/spanish-8698" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-gcses/spanish-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/gcse/spanish-j725-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/spanish-gcse/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gcse/spanish-2017" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-spanish-foreign-language-0530/" }
+    ],
+    "A-Level": [
+      { "board": "AQA", "url": "https://www.aqa.org.uk/subjects/languages/as-and-a-level/spanish-7692" },
+      { "board": "Pearson Edexcel", "url": "https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/spanish-2016.html" },
+      { "board": "OCR", "url": "https://www.ocr.org.uk/qualifications/as-and-a-level/spanish-h170-h570-from-2016/" },
+      { "board": "WJEC/Eduqas", "url": "https://www.eduqas.co.uk/qualifications/spanish-as-a-level/" },
+      { "board": "CCEA", "url": "https://ccea.org.uk/qualifications/gce/spanish-2016" },
+      { "board": "CIE", "url": "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-spanish-9719/" }
+    ]
+  }
+}

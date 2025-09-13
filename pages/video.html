@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Yuli — Video Call</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a1a;
+      color: white;
+      overflow: hidden;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 8px;
+      background: #000;
+    }
+
+    .video-grid.two-participants {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .participant-video {
+      position: relative;
+      background: #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .participant-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .participant-info {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .audio-indicator {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      background: #10b981;
+      border-radius: 50%;
+      display: none;
+    }
+
+    .audio-indicator.speaking {
+      display: block;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 12px 20px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .control-btn {
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+      color: white;
+    }
+
+    .control-btn.mic {
+      background: #374151;
+    }
+
+    .control-btn.mic.muted {
+      background: #ef4444;
+    }
+
+    .control-btn.camera {
+      background: #374151;
+    }
+
+    .control-btn.camera.disabled {
+      background: #ef4444;
+    }
+
+    .control-btn.screen {
+      background: #374151;
+    }
+
+    .control-btn.screen.sharing {
+      background: #10b981;
+    }
+
+    .control-btn.leave {
+      background: #ef4444;
+    }
+
+    .control-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .connection-status {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .status-connecting {
+      color: #f59e0b;
+    }
+
+    .status-connected {
+      color: #10b981;
+    }
+
+    .status-disconnected {
+      color: #ef4444;
+    }
+
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #374151;
+      border-top: 4px solid #10b981;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid #ef4444;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+    }
+
+    .error h3 {
+      margin-bottom: 8px;
+      color: #ef4444;
+    }
+
+    .error button {
+      margin-top: 16px;
+      padding: 8px 16px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <div class="connection-status" id="connectionStatus">
+      <span class="status-connecting">Connecting...</span>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div>Joining video call...</div>
+    </div>
+
+    <div class="error" id="error" style="display: none;">
+      <h3>Connection Error</h3>
+      <p id="errorMessage">Failed to join the video call.</p>
+      <button onclick="window.close()">Close</button>
+    </div>
+
+    <div class="video-grid" id="videoGrid" style="display: none;">
+      <!-- Participant videos will be added here -->
+    </div>
+
+    <div class="controls" id="controls" style="display: none;">
+      <button class="control-btn mic" id="micBtn" title="Toggle Microphone">
+        🎤
+      </button>
+      <button class="control-btn camera" id="cameraBtn" title="Toggle Camera">
+        📹
+      </button>
+      <button class="control-btn screen" id="screenBtn" title="Share Screen">
+        🖥️
+      </button>
+      <button class="control-btn leave" id="leaveBtn" title="Leave Call">
+        📞
+      </button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/livekit-client@1.16.5/dist/livekit-client.umd.min.js"></script>
+  <script>
+    class VideoCall {
+      constructor() {
+        this.room = null;
+        this.localParticipant = null;
+        this.isMicMuted = false;
+        this.isCameraDisabled = false;
+        this.isScreenSharing = false;
+        
+        this.elements = {
+          loading: document.getElementById('loading'),
+          error: document.getElementById('error'),
+          errorMessage: document.getElementById('errorMessage'),
+          connectionStatus: document.getElementById('connectionStatus'),
+          videoGrid: document.getElementById('videoGrid'),
+          controls: document.getElementById('controls'),
+          micBtn: document.getElementById('micBtn'),
+          cameraBtn: document.getElementById('cameraBtn'),
+          screenBtn: document.getElementById('screenBtn'),
+          leaveBtn: document.getElementById('leaveBtn')
+        };
+
+        this.setupEventListeners();
+        this.init();
+      }
+
+      setupEventListeners() {
+        this.elements.micBtn.addEventListener('click', () => this.toggleMic());
+        this.elements.cameraBtn.addEventListener('click', () => this.toggleCamera());
+        this.elements.screenBtn.addEventListener('click', () => this.toggleScreenShare());
+        this.elements.leaveBtn.addEventListener('click', () => this.leaveCall());
+
+        // Handle window close
+        window.addEventListener('beforeunload', () => {
+          if (this.room) {
+            this.room.disconnect();
+          }
+        });
+      }
+
+      async init() {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const token = urlParams.get('token');
+          const url = urlParams.get('url');
+
+          if (!token || !url) {
+            // redirect back to profile with error flag
+            window.location.href = '/profile.html?videoError=missingParams';
+            return;
+          }
+
+          await this.connectToRoom(url, token);
+        } catch (error) {
+          this.showError(error.message);
+        }
+      }
+
+      async connectToRoom(url, token) {
+        this.room = new LiveKit.Room({
+          adaptiveStream: true,
+          dynacast: true,
+        });
+
+        this.room.on(LiveKit.RoomEvent.Connected, () => {
+          this.onConnected();
+        });
+
+        this.room.on(LiveKit.RoomEvent.ParticipantConnected, (participant) => {
+          this.onParticipantConnected(participant);
+        });
+
+        this.room.on(LiveKit.RoomEvent.ParticipantDisconnected, (participant) => {
+          this.onParticipantDisconnected(participant);
+        });
+
+        this.room.on(LiveKit.RoomEvent.TrackSubscribed, (track, publication, participant) => {
+          this.onTrackSubscribed(track, publication, participant);
+        });
+
+        this.room.on(LiveKit.RoomEvent.TrackUnsubscribed, (track, publication, participant) => {
+          this.onTrackUnsubscribed(track, publication, participant);
+        });
+
+        this.room.on(LiveKit.RoomEvent.Disconnected, () => {
+          this.onDisconnected();
+        });
+
+        await this.room.connect(url, token);
+      }
+
+      onConnected() {
+        this.elements.loading.style.display = 'none';
+        this.elements.videoGrid.style.display = 'grid';
+        this.elements.controls.style.display = 'flex';
+        
+        this.updateConnectionStatus('Connected', 'status-connected');
+        
+        this.localParticipant = this.room.localParticipant;
+        this.addParticipantVideo(this.localParticipant, true);
+
+        // Enable camera and microphone by default
+        this.room.localParticipant.enableCameraAndMicrophone();
+      }
+
+      onParticipantConnected(participant) {
+        this.addParticipantVideo(participant, false);
+        this.updateVideoGrid();
+      }
+
+      onParticipantDisconnected(participant) {
+        this.removeParticipantVideo(participant);
+        this.updateVideoGrid();
+      }
+
+      onTrackSubscribed(track, publication, participant) {
+        if (track.kind === 'video') {
+          const videoElement = this.getParticipantVideo(participant.identity);
+          if (videoElement) {
+            track.attach(videoElement);
+          }
+        }
+      }
+
+      onTrackUnsubscribed(track, publication, participant) {
+        if (track.kind === 'video') {
+          track.detach();
+        }
+      }
+
+      onDisconnected() {
+        this.updateConnectionStatus('Disconnected', 'status-disconnected');
+        setTimeout(() => {
+          window.close();
+        }, 2000);
+      }
+
+      addParticipantVideo(participant, isLocal) {
+        const videoContainer = document.createElement('div');
+        videoContainer.className = 'participant-video';
+        videoContainer.id = `participant-${participant.identity}`;
+
+        const video = document.createElement('video');
+        video.autoplay = true;
+        video.muted = isLocal; // Mute local video to prevent echo
+        video.playsInline = true;
+
+        const info = document.createElement('div');
+        info.className = 'participant-info';
+        info.textContent = isLocal ? 'You' : (participant.name || 'Participant');
+
+        const audioIndicator = document.createElement('div');
+        audioIndicator.className = 'audio-indicator';
+
+        videoContainer.appendChild(video);
+        videoContainer.appendChild(info);
+        videoContainer.appendChild(audioIndicator);
+
+        this.elements.videoGrid.appendChild(videoContainer);
+
+        // Attach existing tracks
+        participant.tracks.forEach((publication) => {
+          if (publication.track && publication.track.kind === 'video') {
+            publication.track.attach(video);
+          }
+        });
+      }
+
+      removeParticipantVideo(participant) {
+        const videoContainer = document.getElementById(`participant-${participant.identity}`);
+        if (videoContainer) {
+          videoContainer.remove();
+        }
+      }
+
+      getParticipantVideo(identity) {
+        const container = document.getElementById(`participant-${identity}`);
+        return container ? container.querySelector('video') : null;
+      }
+
+      updateVideoGrid() {
+        const participantCount = this.elements.videoGrid.children.length;
+        this.elements.videoGrid.className = participantCount === 2 ? 'video-grid two-participants' : 'video-grid';
+      }
+
+      updateConnectionStatus(text, className) {
+        this.elements.connectionStatus.innerHTML = `<span class="${className}">${text}</span>`;
+      }
+
+      async toggleMic() {
+        try {
+          if (this.isMicMuted) {
+            await this.room.localParticipant.unmute();
+            this.elements.micBtn.classList.remove('muted');
+            this.elements.micBtn.textContent = '🎤';
+          } else {
+            await this.room.localParticipant.mute();
+            this.elements.micBtn.classList.add('muted');
+            this.elements.micBtn.textContent = '🔇';
+          }
+          this.isMicMuted = !this.isMicMuted;
+        } catch (error) {
+          console.error('Failed to toggle microphone:', error);
+        }
+      }
+
+      async toggleCamera() {
+        try {
+          if (this.isCameraDisabled) {
+            await this.room.localParticipant.enableCameraAndMicrophone();
+            this.elements.cameraBtn.classList.remove('disabled');
+            this.elements.cameraBtn.textContent = '📹';
+          } else {
+            await this.room.localParticipant.setCameraEnabled(false);
+            this.elements.cameraBtn.classList.add('disabled');
+            this.elements.cameraBtn.textContent = '📷';
+          }
+          this.isCameraDisabled = !this.isCameraDisabled;
+        } catch (error) {
+          console.error('Failed to toggle camera:', error);
+        }
+      }
+
+      async toggleScreenShare() {
+        try {
+          if (this.isScreenSharing) {
+            await this.room.localParticipant.setScreenShareEnabled(false);
+            this.elements.screenBtn.classList.remove('sharing');
+            this.elements.screenBtn.textContent = '🖥️';
+          } else {
+            await this.room.localParticipant.setScreenShareEnabled(true);
+            this.elements.screenBtn.classList.add('sharing');
+            this.elements.screenBtn.textContent = '🛑';
+          }
+          this.isScreenSharing = !this.isScreenSharing;
+        } catch (error) {
+          console.error('Failed to toggle screen share:', error);
+        }
+      }
+
+      leaveCall() {
+        if (this.room) {
+          this.room.disconnect();
+        }
+        window.close();
+      }
+
+      showError(message) {
+        this.elements.loading.style.display = 'none';
+        this.elements.error.style.display = 'block';
+        this.elements.errorMessage.textContent = message;
+      }
+    }
+
+    // Initialize video call when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      new VideoCall();
+    });
+  </script>
+</body>
+</html>

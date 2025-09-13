@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms & Conditions — Yuli Tutoring</title>
+  <link rel="canonical" href="https://yuli.uk/legal/terms" />
+  <meta name="description" content="Terms and conditions for Yuli's tutoring services in the UK." />
+  <meta property="og:title" content="Terms & Conditions — Yuli Tutoring" />
+  <meta property="og:description" content="UK tutoring terms covering bookings, cancellations, fees, conduct, and liability." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+  <link rel="stylesheet" href="/site/assets/components.css" />
+  <link rel="stylesheet" href="/site/assets/neo.css" />
+  <style>
+    /* Professional Terms Page Styling - Matching Careers Design */
+    :root {
+      --yuli-primary: #4361EE;
+      --yuli-primary-dark: #3A56D6;
+      --yuli-accent: #e95d7b;
+      --yuli-ink: #1e293b;
+      --yuli-muted: #64748b;
+      --yuli-border: #e2e8f0;
+      --yuli-light: #f8fafc;
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,.05);
+      --shadow-elevated: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-strong: 0 12px 40px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--yuli-ink);
+      background: #fafbfc;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section - Matching Careers */
+    .terms-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      padding: clamp(32px, 4vw, 64px) 0;
+      position: relative;
+    }
+
+    .terms-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% -10%;
+      height: 320px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.02) 0%, rgba(233, 93, 123, 0.02) 100%);
+      border-radius: 24px;
+    }
+
+    .terms-hero-copy {
+      z-index: 2;
+    }
+
+    .breadcrumbs {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumbs a {
+      color: var(--yuli-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--yuli-primary);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--yuli-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .terms-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, var(--yuli-ink) 0%, var(--yuli-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--yuli-muted);
+      margin: 0 0 24px 0;
+      max-width: 50ch;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .meta-row a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .meta-row a:hover {
+      text-decoration: underline;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--yuli-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--yuli-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--yuli-primary);
+      border-color: var(--yuli-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--yuli-light);
+      border-color: var(--yuli-primary);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yuli-border);
+      background: white;
+      box-shadow: var(--shadow-subtle);
+      color: var(--yuli-ink);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .chip--emphasis {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .terms-hero-art {
+      justify-self: end;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 10px 28px rgba(17, 24, 39, 0.12));
+    }
+
+    .terms-hero-art img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Terms Content Section */
+    .terms-content {
+      padding: 64px 0;
+    }
+
+    .terms-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .terms-main {
+      min-width: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .toc h3 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--yuli-ink);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin: 0 0 8px 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--yuli-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      background: var(--yuli-light);
+      color: var(--yuli-primary);
+    }
+
+    /* Term Sections */
+    .term-section {
+      margin-bottom: 48px;
+    }
+
+    .term-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
+    }
+
+    .term-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--yuli-primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .term-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--yuli-ink);
+      margin: 0 0 16px 0;
+      line-height: 1.3;
+    }
+
+    .term-content p {
+      margin: 0 0 16px 0;
+      color: var(--yuli-ink);
+      line-height: 1.7;
+    }
+
+    .term-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .term-content a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .term-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Special styling for contact section - consistent with other sections */
+.contact-section .term-number {
+  background: var(--yuli-primary);
+}
+
+.contact-section .btn-primary {
+  background: var(--yuli-primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+}
+
+.contact-section .btn-primary:hover {
+  background: var(--yuli-primary-dark) !important;
+  color: white !important;
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+}
+
+    /* Responsive Design */
+    @media (max-width: 1100px) {
+      .terms-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .toc {
+        position: static;
+        order: -1;
+        background: var(--yuli-light);
+        border: none;
+        padding: 20px;
+      }
+
+      .toc h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--yuli-muted);
+      }
+
+      .toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .toc a {
+        padding: 6px 12px;
+        background: white;
+        border: 1px solid var(--yuli-border);
+        border-radius: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .terms-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .terms-hero-art {
+        order: -1;
+        justify-self: center;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .terms-hero {
+        padding: 32px 0;
+      }
+
+      .terms-hero-art {
+        display: none;
+      }
+
+      .terms-content {
+        padding: 32px 0;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .term-section {
+        margin-bottom: 32px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <main id="main">
+    <section class="terms">
+      <!-- Hero Section -->
+      <div class="terms-hero container">
+        <div class="terms-hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <a href="/">Home</a> › <a href="/support">Support</a> › <span aria-current="page">Terms and Conditions</span>
+          </nav>
+          <span class="eyebrow">Clear information</span>
+          <h1>Terms and Conditions</h1>
+          <div class="meta-row">
+            <span>Last updated: <strong>5 September 2025</strong></span>
+            <a href="#" aria-label="Download PDF">Download PDF</a>
+          </div>
+          <p class="lead">Clear and friendly terms for private tutoring services.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/contact">Contact us</a>
+            <a class="btn btn-ghost" href="#questions">Have questions?</a>
+          </div>
+          <div class="chips">
+            <span class="chip chip--emphasis">Online only</span>
+            <span class="chip">Per session pricing</span>
+            <span class="chip">24 hours notice</span>
+            <span class="chip">Safeguarding first</span>
+          </div>
+        </div>
+        <div class="terms-hero-art">
+          <img src="/assets/logos/undraw_terms.svg" alt="Terms and conditions illustration" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Terms Content -->
+      <div class="terms-content">
+        <div class="container">
+          <div class="terms-grid">
+            <div class="terms-main">
+              <!-- Section 1: Parties and Contact -->
+              <div class="term-section">
+                <article class="card" id="parties-contact">
+                  <div class="term-number">1</div>
+                  <h2 class="term-title">Parties and contact</h2>
+                  <div class="term-content">
+                    <p>Who you are dealing with and how to contact me.</p>
+                    <p><strong>Tutor:</strong> Lukas Jovaisa trading as Yuli</p>
+                    <p><strong>Jurisdiction:</strong> England and Wales</p>
+                    <p><strong>Contact:</strong> <a href="mailto:yuli.learning.uk@gmail.com">yuli.learning.uk@gmail.com</a></p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 2: Services and Delivery -->
+              <div class="term-section">
+                <article class="card" id="services-delivery">
+                  <div class="term-number">2</div>
+                  <h2 class="term-title">Services and delivery</h2>
+                  <div class="term-content">
+                    <p>I provide online private tutoring for GCSE and A-Level subjects.</p>
+                    <p>Sessions are delivered remotely using common video tools and shared resources. Platform and resources will be confirmed before your first session.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 3: Session Fees and Payment -->
+              <div class="term-section">
+                <article class="card" id="sessions-fees">
+                  <div class="term-number">3</div>
+                  <h2 class="term-title">Session fees and payment</h2>
+                  <div class="term-content">
+                    <p>Pricing is per session and will be confirmed in writing before you book.</p>
+                    <p>Sessions are priced individually. The current rate will always be confirmed in writing. Longer-term packages or discounts may be agreed on a case-by-case basis. Invoices are due on receipt unless we agree otherwise.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 4: Rescheduling and Cancellations -->
+              <div class="term-section">
+                <article class="card" id="rescheduling-cancellations">
+                  <div class="term-number">4</div>
+                  <h2 class="term-title">Rescheduling and cancellations</h2>
+                  <div class="term-content">
+                    <p>Give twenty-four hours' notice to avoid being charged.</p>
+                    <p>You can reschedule or cancel with at least 24 hours' notice to avoid being charged. If you cancel with less than 24 hours' notice or do not attend, the session may be charged in full. If I need to cancel, you may choose a refund or a credit. In exceptional circumstances I may use discretion to offer a credit.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 5: Student Conduct and Safeguarding -->
+              <div class="term-section">
+                <article class="card" id="conduct-safeguarding">
+                  <div class="term-number">5</div>
+                  <h2 class="term-title">Student conduct and safeguarding</h2>
+                  <div class="term-content">
+                    <p>Safety comes first and I may pause or refuse services if concerns arise.</p>
+                    <p>Students must behave respectfully and follow safety guidance. I may pause or refuse services where safeguarding concerns arise or where behaviour is inappropriate. A parent or guardian should be nearby for younger students during online sessions.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 6: Materials and Intellectual Property -->
+              <div class="term-section">
+                <article class="card" id="materials-ip">
+                  <div class="term-number">6</div>
+                  <h2 class="term-title">Materials and intellectual property</h2>
+                  <div class="term-content">
+                    <p>Materials are for personal study only unless we agree otherwise.</p>
+                    <p>Lesson materials are for personal study only. Unless we agree otherwise, I retain ownership of resources and grant you a personal, non-transferable licence to use them for your own learning.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 7: Liability -->
+              <div class="term-section">
+                <article class="card" id="liability">
+                  <div class="term-number">7</div>
+                  <h2 class="term-title">Liability</h2>
+                  <div class="term-content">
+                    <p>Total liability is limited to fees paid and I am not responsible for indirect loss.</p>
+                    <p>I will not be liable for any indirect or consequential loss. My total liability for any claim is limited to the fees you paid for sessions in the four weeks before the event giving rise to the claim. Nothing in these terms limits liability for death or personal injury caused by negligence or for fraud.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 8: Technical Issues -->
+              <div class="term-section">
+                <article class="card" id="technical-issues">
+                  <div class="term-number">8</div>
+                  <h2 class="term-title">Technical issues</h2>
+                  <div class="term-content">
+                    <p>If technical problems prevent a session from running, we'll reschedule at no extra cost.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 9: Data and Privacy -->
+              <div class="term-section">
+                <article class="card" id="data-privacy">
+                  <div class="term-number">9</div>
+                  <h2 class="term-title">Data and privacy</h2>
+                  <div class="term-content">
+                    <p>I only collect the minimum personal data needed to deliver tutoring and communicate with you. I don't record sessions unless we both agree in writing.</p>
+                    <p>See the <a href="/legal/privacy">Privacy Policy</a> for more details.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 10: Changes to Terms -->
+              <div class="term-section">
+                <article class="card" id="changes">
+                  <div class="term-number">10</div>
+                  <h2 class="term-title">Changes to these terms</h2>
+                  <div class="term-content">
+                    <p>I may update these terms from time to time. Material changes will be effective when posted on this page. The latest version will always be available here.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 11: Governing Law -->
+              <div class="term-section">
+                <article class="card" id="governing-law">
+                  <div class="term-number">11</div>
+                  <h2 class="term-title">Governing law</h2>
+                  <div class="term-content">
+                    <p>These terms are governed by the laws of England and Wales. Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 12: Questions -->
+              <div class="term-section">
+                <article class="card contact-section" id="questions">
+                  <div class="term-number">12</div>
+                  <h2 class="term-title">Questions</h2>
+                  <div class="term-content">
+                    <p>If you have any questions about these terms, please don't hesitate to get in touch.</p>
+                    <p>Email: <a href="mailto:yuli.learning.uk@gmail.com">yuli.learning.uk@gmail.com</a></p>
+                    <div style="margin-top: 20px;">
+                      <a class="btn btn-primary" href="/contact">Contact support</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc" aria-label="On this page">
+              <h3>On this page</h3>
+              <ul>
+                <li><a href="#parties-contact">Parties and contact</a></li>
+                <li><a href="#services-delivery">Services and delivery</a></li>
+                <li><a href="#sessions-fees">Session fees and payment</a></li>
+                <li><a href="#rescheduling-cancellations">Rescheduling and cancellations</a></li>
+                <li><a href="#conduct-safeguarding">Student conduct and safeguarding</a></li>
+                <li><a href="#materials-ip">Materials and intellectual property</a></li>
+                <li><a href="#liability">Liability</a></li>
+                <li><a href="#technical-issues">Technical issues</a></li>
+                <li><a href="#data-privacy">Data and privacy</a></li>
+                <li><a href="#changes">Changes to these terms</a></li>
+                <li><a href="#governing-law">Governing law</a></li>
+                <li><a href="#questions">Questions</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

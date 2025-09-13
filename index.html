@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="app-loading">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuli. | Expert GCSE & A-Level Tutoring</title>
+    <base href="/">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    <script src="lib/auth.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css?v=2">
+    <style>
+      /* Password toggle styles for auth modal */
+      .pw-wrap { position: relative; }
+      .pw-input { padding-right: 44px; }
+      .pw-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; color: #cbd4ff; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; }
+      .pw-toggle svg { pointer-events: none; }
+      .pw-toggle:focus { outline: 2px solid #4f7cff55; border-radius: 6px; }
+    </style>
+    <style id="footer-compact-overrides">
+      footer { padding: 84px 0 40px; }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 36px; margin: 0 auto 36px; align-items: start; }
+      .footer-brand { display: flex; flex-direction: column; }
+      .footer-brand h3 { margin: 0 0 10px; font-size: 1.6rem; }
+      .footer-contact { display: grid; gap: 6px; margin-top: 0; }
+      .footer-contact a { color: rgba(255,255,255,.78); text-decoration: none; font-size: .98rem; }
+      .footer-contact a:hover { color: #fff; text-decoration: underline; }
+      .footer-social { display: flex; gap: 14px; margin-top: 12px; }
+      .footer-social a { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; transition: all .2s ease; text-decoration: none; }
+      .footer-social a:hover { color: #fff; border-color: rgba(255,255,255,.36); transform: translateY(-1px); }
+      .footer-heading { margin-bottom: 12px; padding-bottom: 8px; font-size: 1.02rem; }
+      .footer-links li { margin-bottom: 10px; }
+      .footer-bottom { padding-top: 36px; gap: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+      .footer-bottom p { font-size: 0.92rem; }
+      @media (max-width: 900px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 22px; }
+      }
+      @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .footer-brand { text-align: left; }
+      }
+    </style>
+    <script>
+      // Ensure the loading class is present even if HTML class attribute is overridden
+      try{ document.documentElement.classList.add('app-loading'); }catch(_){ }
+    </script>
+  </head>
+<body>
+    <!-- Ethical Pricing Banner -->
+    <div class="ethical-banner">
+        <div class="container">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Discounted rates available for eligible students</span>
+            <a href="#pricing">Learn more</a>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Yuli<span>.</span></a>
+            <nav>
+                <a href="#subjects">Subjects</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="pages/tutor-dashboard.html" id="dashboard-link" style="display: none;">Dashboard</a>
+            </nav>
+            <div class="auth-actions">
+                <button id="profile-btn" class="profile-btn" style="display: none;" tabindex="0">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button id="login-btn" class="login-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign In</button>
+                <button id="register-btn" class="register-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign Up</button>
+                <button id="admin-link" class="admin-link" style="display: none;" onclick="window.location.href='admin.html'">
+                    <i class="fas fa-crown"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+    <script>
+      (function () {
+        // Ensure Auth is available
+        async function initHeaderAuthControls() {
+          try {
+            const dashboardLink = document.getElementById('dashboard-link');
+            const adminLink = document.getElementById('admin-link');
+            const profileBtn = document.getElementById('profile-btn');
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            
+            if (!dashboardLink || !profileBtn || !loginBtn || !registerBtn) return;
+
+            const ADMIN_EMAILS = ['lukas.yuli.uk@gmail.com', 'admin@yuli.com'];
+            
+            // Use modular Firebase
+            try {
+              const { auth } = await import('./lib/firebaseClient.js');
+              const { onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js');
+              const { getFirestore, doc, getDoc } = await import('https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js');
+              
+              const db = getFirestore();
+
+              // Do not reveal any auth buttons until auth state resolves
+
+              onAuthStateChanged(auth, async function (user) {
+              // Default hidden
+              dashboardLink.style.display = 'none';
+              if (adminLink) adminLink.style.display = 'none';
+              profileBtn.style.display = 'none';
+              
+              if (!user) {
+                // Show login/register buttons with smooth transition
+                loginBtn.style.display = '';
+                registerBtn.style.display = '';
+                setTimeout(() => {
+                  loginBtn.style.opacity = '1';
+                  registerBtn.style.opacity = '1';
+                }, 50);
+                // Reveal page now that state is known
+                try{ document.documentElement.classList.remove('app-loading'); }catch(_){ }
+                return;
+              }
+
+              try {
+                const docRef = doc(db, 'users', user.uid);
+                const snap = await getDoc(docRef);
+                const data = snap.exists() ? (snap.data() || {}) : {};
+                const role = (data.role || '').toLowerCase();
+                const isAdmin = !!data.isAdmin || role === 'admin' || (user.email && ADMIN_EMAILS.includes(user.email.toLowerCase()));
+                const isTutor = role === 'tutor';
+
+                // Hide login/register buttons with transition
+                loginBtn.style.opacity = '0';
+                registerBtn.style.opacity = '0';
+                
+                setTimeout(() => {
+                  loginBtn.style.display = 'none';
+                  registerBtn.style.display = 'none';
+                  
+                  // Show all authenticated UI elements simultaneously
+                  profileBtn.style.display = '';
+                  
+                  if (isTutor || isAdmin) {
+                    dashboardLink.style.display = '';
+                  }
+                  if (adminLink && isAdmin) {
+                    adminLink.style.display = '';
+                  }
+                }, 300);
+
+                // Reveal page after authenticated UI is placed
+                try{ document.documentElement.classList.remove('app-loading'); }catch(_){ }
+
+              } catch (e) {
+                // Fail closed: keep links hidden
+                console.warn('Auth header check failed', e);
+                try{ document.documentElement.classList.remove('app-loading'); }catch(_){ }
+              }
+            });
+            } catch (firebaseError) {
+              console.warn('Firebase auth not available, showing login buttons', firebaseError);
+              // Fallback: show login buttons if Firebase isn't initialized
+              loginBtn.style.display = '';
+              registerBtn.style.display = '';
+              requestAnimationFrame(()=>{
+                loginBtn.style.opacity = '1';
+                registerBtn.style.opacity = '1';
+              });
+              try{ document.documentElement.classList.remove('app-loading'); }catch(_){ }
+            }
+          } catch (e) {
+            console.warn('Header auth controls init failed', e);
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initHeaderAuthControls);
+        } else {
+          initHeaderAuthControls();
+        }
+        
+        // Add Profile button click handler
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log('Setting up profile button click handler');
+          const profileBtn = document.getElementById('profile-btn');
+          console.log('Profile button found:', !!profileBtn);
+          if (profileBtn) {
+            profileBtn.addEventListener('click', async function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Profile button clicked');
+              try {
+                const { go } = await import('./lib/nav.js');
+                console.log('Navigating to profile page');
+                go('/profile');
+              } catch (error) {
+                console.error('Failed to navigate to profile:', error);
+                // Fallback
+                window.location.href = 'profile.html';
+              }
+            });
+            console.log('Profile button click handler attached');
+          }
+        });
+
+        // Attach login/register button handlers and modal logic
+        document.addEventListener('DOMContentLoaded', function() {
+          const loginBtn = document.getElementById('login-btn');
+          const registerBtn = document.getElementById('register-btn');
+          const modal = document.getElementById('auth-modal');
+          const closeBtn = document.getElementById('auth-close');
+          const form = document.getElementById('auth-form');
+          const emailEl = document.getElementById('auth-email');
+          const passEl = document.getElementById('auth-pass');
+          const pass2El = document.getElementById('auth-pass2');
+          const togglePassBtn = document.getElementById('toggle-auth-pass');
+          const togglePass2Btn = document.getElementById('toggle-auth-pass2');
+          const rememberEl = document.getElementById('auth-remember');
+          const submitBtn = document.getElementById('auth-submit');
+          const msgEl = document.getElementById('auth-msg');
+          const googleBtn = document.getElementById('auth-google');
+          const forgotLink = document.getElementById('auth-forgot');
+          const titleEl = document.getElementById('auth-title');
+          const confirmWrap = document.getElementById('confirm-wrap');
+          const roleWrap = document.getElementById('role-wrap');
+          let isSignUp = false;
+
+          function setMode(signUp){
+            isSignUp = !!signUp;
+            titleEl.textContent = isSignUp ? 'Create your account' : 'Sign in';
+            submitBtn.textContent = isSignUp ? 'Create Account' : 'Sign In';
+            confirmWrap.style.display = isSignUp ? 'block' : 'none';
+            roleWrap.style.display = isSignUp ? 'block' : 'none';
+          }
+          function openModal(signUp){
+            setMode(!!signUp);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(()=> emailEl?.focus(), 50);
+          }
+          function closeModal(){
+            modal.style.display = 'none';
+            msgEl.textContent='';
+            document.body.style.overflow = '';
+          }
+          function setMsg(text, ok){ msgEl.className = ok ? 'success' : 'error'; msgEl.textContent = text || ''; }
+
+          function setEye(btn, showing){
+            if(!btn) return;
+            btn.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
+            btn.title = showing ? 'Hide password' : 'Show password';
+            btn.innerHTML = showing
+              ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.82 21.82 0 0 1 5.06-6.14M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.8 21.8 0 0 1-3.16 4.19"/><path d="M14.12 14.12A3 3 0 0 1 9.88 9.88"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+              : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>';
+          }
+
+          function bindPwToggle(btn, input){
+            if(!btn || !input) return;
+            btn.addEventListener('click', ()=>{
+              const isShowing = input.type === 'text';
+              input.type = isShowing ? 'password' : 'text';
+              setEye(btn, !isShowing);
+              try { input.focus(); } catch(_){ }
+            });
+          }
+
+          loginBtn && loginBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(false); });
+          registerBtn && registerBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(true); });
+          closeBtn && closeBtn.addEventListener('click', ()=> closeModal());
+          modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+          // Init password toggles
+          setEye(togglePassBtn, false);
+          setEye(togglePass2Btn, false);
+          bindPwToggle(togglePassBtn, passEl);
+          bindPwToggle(togglePass2Btn, pass2El);
+
+          // Sign-in submit using compat helper already loaded on this page
+          form && form.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+            setMsg('');
+            submitBtn.disabled = true;
+            try{
+              const email = emailEl.value.trim();
+              const password = passEl.value;
+              const remember = !!rememberEl.checked;
+              if(isSignUp){
+                if(pass2El && password !== pass2El.value){ throw new Error('Passwords do not match'); }
+                const selectedRole = (document.querySelector('input[name="auth-role"]:checked')?.value) || 'student';
+                // Optional: capture display name later from profile onboarding
+                await window.Auth.signUpEmailPassword({ email, password, role: selectedRole });
+                if (selectedRole === 'tutor') {
+                  // auth.js will sign out and redirect to /pages/pending-approval.html
+                  return; // Do not continue with dashboard redirect
+                }
+              } else {
+                await window.Auth.signInEmailPassword(email, password, remember);
+              }
+              setMsg('Signed in. Redirecting…', true);
+              const { replace } = await import('./lib/nav.js');
+              replace('/dashboard');
+              closeModal();
+            }catch(err){
+              const msg = (window.Auth && window.Auth.mapError) ? window.Auth.mapError(err) : 'Sign-in failed';
+              setMsg(msg, false);
+            }finally{
+              submitBtn.disabled = false;
+            }
+          });
+
+          googleBtn && googleBtn.addEventListener('click', async ()=>{
+            setMsg('');
+            googleBtn.disabled = true;
+            try{
+              await window.Auth.signInWithGooglePopup();
+              setMsg('Signed in with Google. Redirecting…', true);
+              const { replace } = await import('./lib/nav.js');
+              replace('/dashboard');
+              closeModal();
+            }catch(err){
+              const msg = (window.Auth && window.Auth.mapError) ? window.Auth.mapError(err) : 'Google sign-in failed';
+              setMsg(msg, false);
+            }finally{
+              googleBtn.disabled = false;
+            }
+          });
+
+          forgotLink && forgotLink.addEventListener('click', async ()=>{
+            const email = emailEl.value.trim();
+            if(!email){ return setMsg('Enter your email first.'); }
+            try{ await window.Auth.sendReset(email); setMsg('Reset link sent. Check your inbox.', true); }
+            catch(err){ setMsg('Could not send reset link.'); }
+          });
+        });
+      })();
+    </script>
+    
+    <!-- Profile modal functions are now handled by something.js -->
+    
+    <!-- Inline Auth Modal -->
+    <div id="auth-modal" class="auth-overlay" style="display:none;">
+      <div class="auth-card auth-card--minimal">
+        <button id="auth-close" class="auth-close" aria-label="Close">Ã—</button>
+        <div class="auth-header-integrated">
+          <div class="auth-brand-section">
+            <div class="auth-logo">Yuli<span class="logo-accent">.</span></div>
+            <h2 id="auth-title">Sign in to continue</h2>
+          </div>
+        </div>
+        <form id="auth-form">
+          <label class="muted" for="auth-email">Email</label>
+          <input id="auth-email" class="auth-input" type="email" autocomplete="email" required />
+          <label class="muted" for="auth-pass">Password</label>
+          <div class="pw-wrap">
+            <input id="auth-pass" class="auth-input pw-input" type="password" autocomplete="current-password" required />
+            <button id="toggle-auth-pass" type="button" class="pw-toggle" aria-label="Show password" title="Show password">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <div id="confirm-wrap" style="display:none">
+            <label class="muted" for="auth-pass2">Confirm password</label>
+            <div class="pw-wrap">
+              <input id="auth-pass2" class="auth-input pw-input" type="password" autocomplete="new-password" />
+              <button id="toggle-auth-pass2" type="button" class="pw-toggle" aria-label="Show password" title="Show password">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="role-wrap" class="auth-role" style="display:none;">
+            <div class="label">Continue as</div>
+            <div class="options">
+              <label>
+                <input type="radio" name="auth-role" value="student" checked /> Student/Parent
+              </label>
+              <label>
+                <input type="radio" name="auth-role" value="tutor" /> Tutor (admin approval required)
+              </label>
+            </div>
+          </div>
+          <div class="auth-row">
+            <label class="muted"><input id="auth-remember" type="checkbox" checked /> Keep me signed in</label>
+            <a id="auth-forgot" class="link">Forgot password?</a>
+          </div>
+          <button id="auth-submit" class="auth-btn" type="submit">Sign In</button>
+          <div id="auth-msg" class="error"></div>
+        </form>
+        <div class="auth-actions-modal">
+          <button id="auth-google" class="auth-btn google-btn" type="button">Continue with Google</button>
+        </div>
+      </div>
+    </div>
+        
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    <span class="hero-line">Nothing to fear,</span>
+                    <span class="hero-line">we're making it <em>clear</em>.</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Expert GCSE & A-Level tutoring that actually works — through understanding, not memorising
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#subjects" class="cta-button">
+                        <span>Explore Subjects</span>
+                    </a>
+                    <a href="#pricing" class="cta-button">
+                        <span>View Pricing</span>
+                    </a>
+                </div>
+                
+                <div class="hero-price">
+                    <span>Flexible pricing from &pound;12/hr</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-cue" onclick="scrollToAbout()">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Math symbols that span both hero and about sections -->
+    <div class="hero-bg-elements">
+        <div class="math-symbol">&int;</div>
+        <div class="math-symbol">&sum;</div>
+        <div class="math-symbol">&pi;</div>
+        <div class="math-symbol">&infin;</div>
+        <div class="math-symbol">&radic;</div>
+        <div class="math-symbol">&plusmn;</div>
+        <div class="math-symbol">&times;</div>
+        <div class="math-symbol">&divide;</div>
+        <div class="math-symbol">=</div>
+        <div class="math-symbol">&ne;</div>
+        <div class="math-symbol">&le;</div>
+        <div class="math-symbol">&ge;</div>
+        <div class="math-symbol">&asymp;</div>
+        <div class="math-symbol">&Delta;</div>
+        <div class="math-symbol">&nabla;</div>
+        <div class="math-symbol">&part;</div>
+        <div class="math-symbol">&theta;</div>
+        <div class="math-symbol">&alpha;</div>
+        <div class="math-symbol">&beta;</div>
+        <div class="math-symbol">&gamma;</div>
+        <div class="math-symbol">&delta;</div>
+        <div class="math-symbol">&lambda;</div>
+        <div class="math-symbol">&mu;</div>
+        <div class="math-symbol">&sigma;</div>
+        <div class="math-symbol">&tau;</div>
+        <div class="math-symbol">&phi;</div>
+        <div class="math-symbol">&psi;</div>
+        <div class="math-symbol">&omega;</div>
+        <div class="math-symbol">&Omega;</div>
+        <div class="math-symbol">&empty;</div>
+        <div class="math-symbol">&isin;</div>
+        <div class="math-symbol">&notin;</div>
+        <div class="math-symbol">&sub;</div>
+        <div class="math-symbol">&sup;</div>
+        <div class="math-symbol">&notin;</div>
+        <div class="math-symbol">&sub;</div>
+        <div class="math-symbol">&sup;</div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="subtitle">
+                        <h3 style="margin-bottom: 5px; text-align: left;">Lukas Jovaisa</h3>
+                        <span style="text-align: left;">Mathematics Student & Tutor</span>
+                    </div>
+                    <p style="text-align: left;">I'm a university student with 4 years of experience tutoring KS3 through A-Level students. I founded Yuli to make quality tutoring accessible during the cost-of-living crisis.</p>
+                    
+                    <div class="about-points">
+                        <div class="point">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Currently studying Mathematics</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>4 years tutoring experience</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-pound-sign"></i>
+                            <span>Flexible pricing from &pound;12/hr</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="photo-container">
+                        <div class="photo-inner">
+                            <a href="about.html" class="photo-link">
+                                <img src="assets/lukas-jovaisa.jpg" 
+                                     srcset="assets/lukas-jovaisa.jpg 1x" 
+                                     alt="Lukas Jovaisa - Professional Tutor" 
+                                     class="tutor-photo"
+                                     loading="eager"
+                                     decoding="sync">
+                                <div class="photo-icon">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll cue at bottom of about section -->
+            <div class="scroll-cue-about" onclick="scrollToSubjects()">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section - Layout Option 2: Horizontal Scroll with Categories -->
+    <section id="subjects" class="subjects layout-option-2">
+        <div class="container">
+            <div class="section-header-scroll">
+                <div class="header-content">
+                    <h2>Subjects I Teach</h2>
+                    <p class="section-subtitle">Explore subjects by category - swipe to see more</p>
+                </div>
+                <div class="level-selector">
+                    <button class="level-btn active" data-level="gcse">
+                        <span>GCSE</span>
+                        <div class="level-count">9</div>
+                    </button>
+                    <button class="level-btn" data-level="alevel">
+                        <span>A-Level</span>
+                        <div class="level-count">3</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- GCSE Subjects by Category -->
+            <div class="subjects-by-category" data-level="gcse">
+                <!-- Mathematics Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon maths">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Mathematics</h3>
+                            <p>Foundation to Advanced Mathematical Concepts</p>
+                        </div>
+                        <div class="category-count">2 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <!-- Featured GCSE Maths -->
+                            <div class="subject-card-scroll" data-subject="maths">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon maths">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>GCSE Mathematics</h4>
+                                    <p>Master mathematical concepts from foundation to higher tier</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">Foundation</span>
+                                        <span class="quick-tag">Higher</span>
+                                        <span class="quick-tag">All Boards</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'maths', 'GCSE Maths')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll" data-subject="further-maths">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon maths">
+                                        <i class="fas fa-square-root-alt"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>GCSE Further Maths</h4>
+                                    <p>Advanced mathematical concepts for high achievers</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">Complex Numbers</span>
+                                        <span class="quick-tag">Matrices</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'further-maths', 'GCSE Further Maths')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sciences Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon sciences">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Sciences</h3>
+                            <p>Biology, Chemistry, and Physics</p>
+                        </div>
+                        <div class="category-count">3 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <div class="subject-card-scroll" data-subject="biology">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon sciences">
+                                        <i class="fas fa-dna"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>GCSE Biology</h4>
+                                    <p>Explore living organisms and biological processes</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">Triple Science</span>
+                                        <span class="quick-tag">Separate Science</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'biology', 'GCSE Biology')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll" data-subject="chemistry">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon sciences">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>GCSE Chemistry</h4>
+                                    <p>Chemical reactions and molecular structures</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">Triple Science</span>
+                                        <span class="quick-tag">Separate Science</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'chemistry', 'GCSE Chemistry')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll" data-subject="physics">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon sciences">
+                                        <i class="fas fa-atom"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>GCSE Physics</h4>
+                                    <p>Forces, energy, and the fundamental principles</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">Triple Science</span>
+                                        <span class="quick-tag">Separate Science</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'physics', 'GCSE Physics')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages & Humanities Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon humanities">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Languages & Humanities</h3>
+                            <p>English Literature, Language, and History</p>
+                        </div>
+                        <div class="category-count">10 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <div class="subject-card-scroll" data-subject="english-lit">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities">
+                                        <i class="fas fa-book-open"></i>
+                                    </div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>English Literature</h4>
+                                    <p>Classic texts and critical analysis skills</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Tiers</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'english-lit', 'GCSE English Literature')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="subject-card-scroll" data-subject="english-lang">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities">
+                                        <i class="fas fa-pen-fancy"></i>
+                                    </div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>English Language</h4>
+                                    <p>Writing, reading, and communication skills</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Tiers</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="goToEnglishLanguage()">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="subject-card-scroll" data-subject="history">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>History</h4>
+                                    <p>Historical events and source analysis</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Topics</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'history', 'GCSE History')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <!-- Geography (Enabled) -->
+                            <div class="subject-card-scroll" data-subject="geography">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Geography</h4>
+                                    <p>Human and physical geography exploration</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Topics</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'geography', 'GCSE Geography')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <!-- Coming Soon: French -->
+                            <div class="subject-card-scroll coming-soon" data-subject="french">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities coming-soon-icon">
+                                        <i class="fas fa-flag"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>French</h4>
+                                    <p>Language skills and cultural understanding</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Skills</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'french', 'GCSE French')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Spanish -->
+                            <div class="subject-card-scroll coming-soon" data-subject="spanish">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities coming-soon-icon">
+                                        <i class="fas fa-globe-americas"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Spanish</h4>
+                                    <p>Language skills and cultural exploration</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Skills</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'spanish', 'GCSE Spanish')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: German -->
+                            <div class="subject-card-scroll coming-soon" data-subject="german">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities coming-soon-icon">
+                                        <i class="fas fa-flag"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>German</h4>
+                                    <p>Language proficiency and cultural understanding</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Skills</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'german', 'GCSE German')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Religious Studies -->
+                            <div class="subject-card-scroll coming-soon" data-subject="religious-studies">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities coming-soon-icon">
+                                        <i class="fas fa-pray"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Religious Studies</h4>
+                                    <p>Ethics, philosophy and world religions</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">All Themes</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'religious-studies', 'GCSE Religious Studies')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Art & Design -->
+                            <div class="subject-card-scroll coming-soon" data-subject="art">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon humanities coming-soon-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Art & Design</h4>
+                                    <p>Creative expression and visual communication</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Portfolio</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'art', 'GCSE Art & Design')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technology & Creative Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon creative">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Technology & Creative</h3>
+                            <p>Computer Science, Business, Economics, and Creative Subjects</p>
+                        </div>
+                        <div class="category-count">4 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <!-- Coming Soon: Computer Science -->
+                            <div class="subject-card-scroll coming-soon" data-subject="computer-science">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon creative coming-soon-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Computer Science</h4>
+                                    <p>Programming, algorithms, and computational thinking</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Programming</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'computer-science', 'GCSE Computer Science')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Business Studies -->
+                            <div class="subject-card-scroll coming-soon" data-subject="business">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon creative coming-soon-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Business Studies</h4>
+                                    <p>Enterprise, marketing, and business operations</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Real World</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'business', 'GCSE Business Studies')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Music -->
+                            <div class="subject-card-scroll coming-soon" data-subject="music">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon creative coming-soon-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Music</h4>
+                                    <p>Performance, composition, and music theory</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Creative</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'music', 'GCSE Music')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Coming Soon: Economics -->
+                            <div class="subject-card-scroll coming-soon" data-subject="economics">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon creative coming-soon-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>Economics</h4>
+                                    <p>Economic principles and business applications</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Real World</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'economics', 'GCSE Economics')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A-Level Subjects by Category -->
+            <div class="subjects-by-category" data-level="alevel" style="display: none;">
+                <!-- Mathematics Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon advanced">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Mathematics</h3>
+                            <p>Advanced Mathematical Concepts</p>
+                        </div>
+                        <div class="category-count">2 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <div class="subject-card-scroll alevel-card" data-subject="maths">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Mathematics</h4>
+                                    <p>Advanced mathematical concepts and proof techniques</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'maths', 'A-Level Maths')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-graduation-cap"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="further-maths">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-infinity"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Further Maths</h4>
+                                    <p>Advanced mathematical concepts beyond A-Level</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'further-maths', 'A-Level Further Maths')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sciences Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon advanced">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Sciences</h3>
+                            <p>Advanced Scientific Concepts & Laboratory Skills</p>
+                        </div>
+                        <div class="category-count">3 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+
+                            <div class="subject-card-scroll alevel-card" data-subject="biology">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced">
+                                        <i class="fas fa-dna"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Biology</h4>
+                                    <p>Advanced biological systems and processes</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'biology', 'A-Level Biology')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-graduation-cap"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll alevel-card" data-subject="chemistry">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Chemistry</h4>
+                                    <p>Complex chemical reactions and analysis</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'chemistry', 'A-Level Chemistry')">
+                                    <span>Explore</span>
+                                    <i class="fas fa-graduation-cap"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="physics">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-atom"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Physics</h4>
+                                    <p>Advanced physics concepts and applications</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'physics', 'A-Level Physics')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business & Social Sciences Category -->
+                <div class="category-section">
+                    <div class="category-header">
+                        <div class="category-icon advanced">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Business & Social Sciences</h3>
+                            <p>Economic Principles & Social Analysis</p>
+                        </div>
+                        <div class="category-count">5 subjects</div>
+                    </div>
+                    <div class="subjects-scroll">
+                        <div class="scroll-container">
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="economics">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Economics</h4>
+                                    <p>Economic theory and real-world applications</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'economics', 'A-Level Economics')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="business">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Business Studies</h4>
+                                    <p>Enterprise, marketing, and business operations</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Real World</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'business', 'A-Level Business Studies')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="psychology">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Psychology</h4>
+                                    <p>Human behaviour and mental processes</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'psychology', 'A-Level Psychology')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="sociology">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Sociology</h4>
+                                    <p>Society, culture, and social behavior analysis</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Critical Thinking</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'sociology', 'A-Level Sociology')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+
+                            <div class="subject-card-scroll coming-soon alevel-card" data-subject="computer-science">
+                                <div class="scroll-card-header">
+                                    <div class="scroll-icon advanced coming-soon-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="coming-soon-badge">Coming Soon</div>
+                                </div>
+                                <div class="scroll-content">
+                                    <h4>A-Level Computer Science</h4>
+                                    <p>Programming, algorithms, and computational thinking</p>
+                                    <div class="quick-features">
+                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag">Programming</span>
+                                    </div>
+                                </div>
+                                <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'computer-science', 'A-Level Computer Science')">
+                                    <span>Coming Soon</span>
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Modal -->
+    <div class="coming-soon-modal" id="coming-soon-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Coming Soon Subjects</h3>
+                        <button class="modal-close" id="modal-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal-description">Be the first to know when these subjects become available. Join the waitlist to get notified when they launch.</p>
+                        
+                        <!-- GCSE Section -->
+                        <div class="level-section">
+                            <h4 class="level-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                GCSE Subjects
+                            </h4>
+                            <div class="coming-soon-grid">
+                                <div class="coming-soon-card" data-level="gcse" data-subject="geography">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <h5>Geography</h5>
+                                    <p>Human and physical geography</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="religious-studies">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-pray"></i>
+                                    </div>
+                                    <h5>Religious Studies</h5>
+                                    <p>Religious beliefs and practices</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="computer-science">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <h5>Computer Science</h5>
+                                    <p>Programming and computational thinking</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="business-studies">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <h5>Business Studies</h5>
+                                    <p>Business operations and management</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="economics">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h5>Economics</h5>
+                                    <p>Economic principles and markets</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="music">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <h5>Music</h5>
+                                    <p>Musical theory and performance</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="gcse" data-subject="spanish">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-language"></i>
+                                    </div>
+                                    <h5>Spanish</h5>
+                                    <p>Spanish language and culture</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- A-Level Section -->
+                        <div class="level-section">
+                            <h4 class="level-title">
+                                <i class="fas fa-university"></i>
+                                A-Level Subjects
+                            </h4>
+                            <div class="coming-soon-grid">
+                                <div class="coming-soon-card" data-level="alevel" data-subject="english-literature">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-book-open"></i>
+                                    </div>
+                                    <h5>English Literature</h5>
+                                    <p>Advanced literary analysis and criticism</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="alevel" data-subject="physics">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-atom"></i>
+                                    </div>
+                                    <h5>Physics</h5>
+                                    <p>Advanced physics concepts and applications</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                                <div class="coming-soon-card" data-level="alevel" data-subject="history">
+                                    <div class="coming-soon-icon">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+                                    <h5>History</h5>
+                                    <p>Historical analysis and interpretation</p>
+                                    <button class="waitlist-btn">Join Waitlist</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Booking Modal -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <div class="subject-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <h3>Book a Session</h3>
+                <p>Schedule your maths tutoring session</p>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="booking-subject">Subject</label>
+                        <select id="booking-subject" required>
+                            <option value="">Select subject</option>
+                            <option value="gcse-maths">GCSE Maths</option>
+                            <option value="alevel-maths">A-Level Maths</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-type">Session Type</label>
+                        <select id="booking-type" required>
+                            <option value="">Select type</option>
+                            <option value="private">1:1 Private Session</option>
+                            <option value="group">Group Session</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-date">Preferred Date</label>
+                        <input type="date" id="booking-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-time">Preferred Time</label>
+                        <input type="time" id="booking-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-duration">Duration (hours)</label>
+                        <select id="booking-duration" required>
+                            <option value="">Select duration</option>
+                            <option value="1">1 hour</option>
+                            <option value="1.5">1.5 hours</option>
+                            <option value="2">2 hours</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-notes">Additional Notes (optional)</label>
+                        <textarea id="booking-notes" rows="3" placeholder="Any specific topics or concerns you'd like to focus on?"></textarea>
+                    </div>
+                    <div class="booking-pricing">
+                        <h4>Pricing</h4>
+                        <div class="price-display">
+                            <span class="price-label">Session Cost:</span>
+                            <span class="price-amount" id="booking-price">&pound;0</span>
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="cta-button">Request Booking</button>
+                        <button type="button" class="cta-button secondary close-booking-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div class="modal" id="dashboard-modal">
+        <div class="modal-content dashboard-content">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <div class="dashboard-header">
+                <h3><i class="fas fa-tachometer-alt"></i> Your Dashboard</h3>
+                <p id="dashboard-subtitle">Manage your sessions and progress</p>
+            </div>
+            <div class="dashboard-body">
+                <div class="dashboard-section">
+                    <h4>Upcoming Sessions</h4>
+                    <div class="sessions-list" id="upcoming-sessions">
+                        <div class="no-sessions">No upcoming sessions</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h4>Recent Progress Reports</h4>
+                    <div class="progress-reports" id="progress-reports">
+                        <div class="no-reports">No progress reports yet</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section" id="parent-section" style="display: none;">
+                    <h4>Children's Sessions</h4>
+                    <div class="children-sessions" id="children-sessions">
+                        <div class="no-children">No children linked</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section" id="tutor-section" style="display: none;">
+                    <h4>Pending Bookings</h4>
+                    <div class="pending-bookings" id="pending-bookings">
+                        <div class="no-bookings">No pending bookings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal (full shell expected by profile.js) -->
+    <div class="modal" id="profile-modal" style="display: none;">
+        <div id="profile-modal-overlay" class="modal-overlay" style="position:absolute; inset:0; background:transparent;"></div>
+        <div class="modal-content profile-content" style="position:relative;">
+            <button class="close-modal" id="profile-modal-close" aria-label="Close modal">&times;</button>
+            <div class="profile-body">
+                <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;">
+                    <label class="profile-picture-container" for="profile-picture-input" title="Edit photo" tabindex="0" aria-label="Edit photo" role="button" onclick="document.getElementById('profile-picture-input').click()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('profile-picture-input').click();}">
+                        <img id="profile-picture" class="profile-picture" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMTAwIiBmaWxsPSIjQzNDNEM2Ii8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjcwIiByPSIzMCIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNNTAgMTUwQzUwIDEyMC43OTEgNzIuOTEgMTAwIDEwMCAxMDBTMTUwIDEyMC43OTEgMTUwIDE1MEg1MFoiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+Cg==" alt="Profile picture" aria-label="Profile photo">
+                        <div class="profile-picture-overlay">
+                            <i class="fas fa-pen"></i>
+                            <span>Edit Photo</span>
+                        </div>
+                        <input type="file" id="profile-picture-input" accept="image/jpeg,image/png,image/webp" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+                    </label>
+                    <div style="flex:1; min-width:0;">
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+                            <h3 id="profile-displayName" style="margin:0; font-size:22px; font-weight:600;">&nbsp;</h3>
+                            <span id="role-pill" class="yl-chip">Student</span>
+                            <span id="email-badge" class="yl-chip yl-chip-success" style="display:none;">Verified</span>
+                        </div>
+                        <p id="profile-email" style="margin:0 0 2px 0; color:#64748b; font-size:14px;"></p>
+                        <small id="member-since" style="color:#94a3b8; font-size:13px;"></small>
+                    </div>
+                </div>
+
+                <!-- Provider chips -->
+                <div class="yl-provider-chips" id="provider-chips" style="margin-bottom:12px;"></div>
+                
+                <button id="resend-verification" class="yl-btn yl-btn-secondary" type="button" style="display:none; margin-bottom:16px;">
+                    <i class="fas fa-envelope"></i> Resend verification
+                </button>
+
+                <div class="yl-grid" style="display:grid; grid-template-columns:1fr; gap:16px; margin-top:16px;">
+                    <!-- About You -->
+                    <div class="yl-card">
+                        <div class="yl-section-head">
+                            <i class="fas fa-user yl-icon"></i>
+                            <div>
+                                <h3>About you</h3>
+                                <p class="yl-section-subtitle">Basic information</p>
+                            </div>
+                        </div>
+                        <div class="yl-form-group">
+                            <label for="displayName">Display name</label>
+                            <input id="displayName" class="yl-input" type="text" placeholder="Your name" disabled>
+                        </div>
+                        <div class="yl-form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" class="yl-input" rows="3" placeholder="Tell us about yourself" disabled></textarea>
+                            <small id="bio-help" class="yl-help"></small>
+                        </div>
+                        <div class="yl-form-group">
+                            <label>Role</label>
+                            <div id="role-selection" class="role-container">
+                                <label class="role-option">
+                                    <input type="radio" name="userRole" value="student" disabled>
+                                    <span class="role-label">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        Student
+                                    </span>
+                                </label>
+                                <label class="role-option">
+                                    <input type="radio" name="userRole" value="parent" disabled>
+                                    <span class="role-label">
+                                        <i class="fas fa-heart"></i>
+                                        Parent
+                                    </span>
+                                </label>
+                                <label class="role-option">
+                                    <input type="radio" name="userRole" value="tutor" disabled>
+                                    <span class="role-label">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        Tutor
+                                    </span>
+                                </label>
+                                <label class="role-option">
+                                    <input type="radio" name="userRole" value="admin" disabled>
+                                    <span class="role-label">
+                                        <i class="fas fa-user-shield"></i>
+                                        Admin
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="yl-form-group">
+                            <label for="timezone">Timezone</label>
+                            <select id="timezone" class="yl-input" disabled></select>
+                        </div>
+                        <div class="yl-form-group">
+                            <label>Languages</label>
+                            <div id="languages" class="languages-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="yl-card">
+                        <div class="yl-section-head">
+                            <i class="fas fa-bell yl-icon"></i>
+                            <div>
+                                <h3>Notifications</h3>
+                                <p class="yl-section-subtitle">Choose how you'd like to be notified</p>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-groups">
+                            <!-- Messages Section -->
+                            <div class="notification-category">
+                                <h4 class="notification-category-title">
+                                    <i class="fas fa-comments"></i>
+                                    Messages
+                                </h4>
+                                <div class="notification-options">
+                                    <label class="notification-switch">
+                                        <input id="notif-messages-inapp" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">In-app notifications</span>
+                                            <small class="switch-description">Get notified when you receive new messages</small>
+                                        </div>
+                                    </label>
+                                    <label class="notification-switch">
+                                        <input id="notif-messages-email" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">Email notifications</span>
+                                            <small class="switch-description">Receive message alerts via email</small>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Homework Section -->
+                            <div class="notification-category">
+                                <h4 class="notification-category-title">
+                                    <i class="fas fa-tasks"></i>
+                                    Homework & Assignments
+                                </h4>
+                                <div class="notification-options">
+                                    <label class="notification-switch">
+                                        <input id="notif-homework-inapp" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">In-app notifications</span>
+                                            <small class="switch-description">Get notified about homework updates</small>
+                                        </div>
+                                    </label>
+                                    <label class="notification-switch">
+                                        <input id="notif-homework-email" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">Email notifications</span>
+                                            <small class="switch-description">Receive homework reminders via email</small>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sessions Section -->
+                            <div class="notification-category">
+                                <h4 class="notification-category-title">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Sessions & Meetings
+                                </h4>
+                                <div class="notification-options">
+                                    <label class="notification-switch">
+                                        <input id="notif-sessions-inapp" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">In-app notifications</span>
+                                            <small class="switch-description">Get notified about upcoming sessions</small>
+                                        </div>
+                                    </label>
+                                    <label class="notification-switch">
+                                        <input id="notif-sessions-email" type="checkbox">
+                                        <span class="switch-slider"></span>
+                                        <div class="switch-content">
+                                            <span class="switch-label">Email notifications</span>
+                                            <small class="switch-description">Receive session reminders via email</small>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions" style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; gap:12px;">
+                        <button id="edit-profile-btn" class="yl-btn yl-btn-primary" type="button">
+                            <i class="fas fa-pen"></i> Edit Profile
+                        </button>
+                        <button id="save-profile-btn" class="yl-btn yl-btn-primary" type="button" style="display:none;" disabled>
+                            <i class="fas fa-check"></i> Save
+                        </button>
+                    </div>
+                    <button id="signout-btn" class="yl-btn yl-btn-secondary" type="button">
+                        <i class="fas fa-sign-out-alt"></i> Sign out
+                    </button>
+                </div>
+
+                <!-- ARIA Live Region for Status Announcements -->
+                <div id="profile-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+                <input id="avatar-input" type="file" accept="image/png,image/jpeg,image/webp" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Subject Details Modal -->
+    <div class="modal" id="subject-details-modal">
+        <div class="modal-content subject-details-content">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h3 id="subject-details-title">Book Tutoring Sessions</h3>
+                <p>Select your exam board and topics to book sessions</p>
+            </div>
+            <div class="modal-body">
+                <div class="booking-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h4>Choose Exam Board</h4>
+                        </div>
+                        <div class="exam-board-options" id="exam-board-options">
+                            <!-- Exam board options will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-step="2" style="display: none;">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h4>Select Topics</h4>
+                        </div>
+                        <div class="topics-selection" id="topics-selection">
+                            <!-- Topics will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-step="3" style="display: none;">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h4>Book Sessions</h4>
+                        </div>
+                        <div class="booking-summary" id="booking-summary">
+                            <!-- Booking summary will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-navigation">
+                    <button class="btn-secondary" id="back-btn" style="display: none;">Back</button>
+                    <button class="btn-primary" id="next-btn">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Pricing</h2>
+            <p class="section-subtitle">Flexible pricing for quality tutoring across all subjects</p>
+            <p class="discount-notice"><a href="#discounted-pricing" class="discount-link">View discounted rates if applicable &darr;</a></p>
+            
+            <div class="pricing-cards">
+                <div class="price-card highlighted">
+                    <div class="badge">Most Popular</div>
+                    <h3>GCSE Subjects</h3>
+                    <div class="price">
+                        <span class="amount">&pound;20</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>1:1 Private Sessions</li>
+                        <li>Maths, Sciences, English & More</li>
+                        <li>Foundation & Higher Tier</li>
+                        <li>Flexible Scheduling</li>
+                    </ul>
+                </div>
+                
+                <div class="price-card">
+                    <div class="badge">Advanced Level</div>
+                    <h3>A-Level Subjects</h3>
+                    <div class="price">
+                        <span class="amount">&pound;35</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>1:1 Private Sessions</li>
+                        <li>Maths, Sciences & More</li>
+                        <li>Exam Preparation</li>
+
+                    </ul>
+                </div>
+                
+                <div class="price-card">
+                    <div class="badge">Best Value</div>
+                    <h3>Group Sessions</h3>
+                    <div class="price">
+                        <span class="amount">&pound;10-15</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>Small Group Learning</li>
+                        <li>Peer Collaboration</li>
+                        <li>Reduced Cost</li>
+                        <li>Shared Resources</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Discounted Pricing Cards -->
+            <div id="discounted-pricing" class="pricing-subtitle">
+                <h3>Discounted Rates for Eligible Students</h3>
+                <p>We believe quality education should be accessible to everyone</p>
+            </div>
+            
+            <div class="pricing-cards discounted-cards">
+                <div class="price-card discounted">
+                    <div class="badge discount-badge">Discounted Rate</div>
+                    <h3>GCSE Subjects</h3>
+                    <div class="price">
+                        <span class="amount">&pound;12</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>1:1 Private Sessions</li>
+                        <li>Maths, Sciences, English & More</li>
+                        <li>Foundation & Higher Tier</li>
+                        <li>Flexible Scheduling</li>
+                    </ul>
+                </div>
+                
+                <div class="price-card discounted highlighted">
+                    <div class="badge discount-badge">Discounted Rate</div>
+                    <h3>A-Level Subjects</h3>
+                    <div class="price">
+                        <span class="amount">&pound;18</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>1:1 Private Sessions</li>
+                        <li>Maths, Sciences & More</li>
+                        <li>Exam Preparation</li>
+
+                    </ul>
+                </div>
+                
+                <div class="price-card discounted">
+                    <div class="badge discount-badge">Discounted Rate</div>
+                    <h3>Group Sessions</h3>
+                    <div class="price">
+                        <span class="amount">&pound;8-12</span>
+                        <span class="period">/hour</span>
+                    </div>
+                    <ul>
+                        <li>Small Group Learning</li>
+                        <li>Peer Collaboration</li>
+                        <li>Reduced Cost</li>
+                        <li>Shared Resources</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get Started</h2>
+            <p class="section-subtitle">Ready to improve your academic performance?</p>
+            
+            <div class="contact-options">
+                <div class="contact-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Book a Session</h3>
+                    <p>Schedule your first tutoring session</p>
+                    <button class="cta-button" onclick="openModal(bookingModal)">Book Now</button>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>Have questions? Send us a message</p>
+                    <a href="mailto:lukas@yuli-learning.com" class="cta-button">Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>Speak directly with Lukas</p>
+                    <a href="tel:+44123456789" class="cta-button">Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Yuli<span>.</span></h3>
+                    <div class="footer-contact">
+                        <a href="mailto:yuli.learning.uk@gmail.com" class="footer-email">yuli.learning.uk@gmail.com</a>
+                        <a href="tel:+447856210325" class="footer-phone">+447856210325</a>
+                    </div>
+                    <div class="footer-social" aria-label="Social media">
+                        <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/yuli.learning/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/about.html">About Yuli</a></li>
+                        <li><a href="/site/careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
+                        <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
+                        <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/contact.html">Contact Us</a></li>
+                        <li><a href="/site/faqs.html">FAQs</a></li>
+                        <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yuli. All rights reserved.</p>
+                <p>Designed and built with ❤️ for quality education</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="lib/config.js"></script>
+    <script src="lib/api.js"></script>
+    <!-- removed legacy something-clean.js to prevent duplicate modal/scroll locking -->
+    
+
+    <!-- Test Auth Modal Function -->
+    <script>
+      // Manual test function to open auth modal
+      function testAuthModal() {
+        console.log('Testing auth modal...');
+        const authModal = document.getElementById('auth-modal');
+        if (authModal) {
+          console.log('Auth modal found, adding active class');
+          authModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        } else {
+          console.error('Auth modal not found!');
+        }
+      }
+
+      // Close modal function
+      function closeAuthModal() {
+        console.log('Closing auth modal...');
+        const authModal = document.getElementById('auth-modal');
+        if (authModal) {
+          authModal.classList.remove('active');
+          document.body.style.overflow = '';
+          // Ensure it no longer intercepts clicks/scroll
+          authModal.style.display = 'none';
+          console.log('Auth modal closed');
+        } else {
+          console.error('Auth modal not found when trying to close');
+        }
+      }
+
+      // Make test functions globally available
+      window.testAuthModal = testAuthModal;
+      window.closeAuthModal = closeAuthModal;
+
+      // Backup handlers removed - using clean implementation in something-clean.js
+    </script>
+
+    <script>
+      function scrollToAbout() {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+          // Scroll to just before the white section begins
+          // Position to show Lukas's profile and make the scroll button visible
+          const scrollPosition = aboutSection.offsetTop - 20; // Position further down into white section
+          
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      function scrollToSubjects() {
+        const subjectsSection = document.getElementById('subjects');
+        if (subjectsSection) {
+          subjectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // Simple auth check helpers
+      function isUserLoggedIn() {
+        try {
+          if (window.Auth && window.Auth.auth && window.Auth.auth.currentUser) return true;
+          if (window.firebase && window.firebase.auth && window.firebase.auth().currentUser) return true;
+        } catch (_) {}
+        return false;
+      }
+
+      function setAuthMode(isSignUp) {
+        try {
+          const title = document.getElementById('auth-title');
+          if (!title) return;
+          title.textContent = isSignUp ? 'Create your account' : 'Sign in to continue';
+        } catch (_){ }
+      }
+
+      function openAuthModal(signUpMode = false) {
+        try {
+          const authModal = document.getElementById('auth-modal');
+          if (authModal) {
+            // Make it visible immediately, then activate (for CSS transitions)
+            authModal.style.display = 'flex';
+            requestAnimationFrame(() => authModal.classList.add('active'));
+            document.body.style.overflow = 'hidden';
+            // Focus first input for better UX
+            const firstField = authModal.querySelector('input, button, [href], select, textarea, [tabindex]:not([tabindex="-1"])');
+            try { firstField && firstField.focus(); } catch(_){ }
+            // Set mode-specific title
+            setAuthMode(!!signUpMode);
+          }
+        } catch (_) {}
+      }
+
+      function requireAuthOrModal(next) {
+        if (!isUserLoggedIn()) {
+          openAuthModal();
+          return;
+        }
+        next && next();
+      }
+
+      // Subject details function that routes to subject pages (auth required)
+      function showSubjectDetails(level, subjectSlug, subjectName) {
+        requireAuthOrModal(() => {
+          const subjectMap = {
+            'maths': 'mathematics',
+            'further-maths': 'further-maths',
+            'biology': 'biology',
+            'chemistry': 'chemistry',
+            'physics': 'physics',
+            'english-lit': 'english-literature',
+            'english-lang': 'english-language',
+            'history': 'history',
+            'geography': 'geography'
+          };
+          const pageSlug = subjectMap[subjectSlug] || subjectSlug;
+          const levelPrefix = (level === 'alevel') ? 'alevel' : 'gcse';
+          window.location.href = `pages/subjects/${levelPrefix}-${pageSlug}.html?theme=neo`;
+        });
+      }
+
+      // Level switching functionality for GCSE/A-Level subjects
+      document.addEventListener('DOMContentLoaded', function() {
+        const levelBtns = document.querySelectorAll('.level-btn');
+        const subjectSections = document.querySelectorAll('.subjects-by-category');
+        
+        levelBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const targetLevel = this.getAttribute('data-level');
+            
+            // Update button states
+            levelBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show/hide appropriate sections
+            subjectSections.forEach(section => {
+              const sectionLevel = section.getAttribute('data-level');
+              if (sectionLevel === targetLevel) {
+                section.style.display = 'block';
+              } else {
+                section.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
+    <script>
+      function goToEnglishLanguage(){
+        requireAuthOrModal(() => {
+          try {
+            var basePath = window.location.pathname.replace(/[^\/]*$/, '');
+            if (!basePath.endsWith('/')) basePath += '/';
+            window.location.href = basePath + 'pages/subjects/gcse-english-language.html';
+          } catch (e) {
+            window.location.href = 'pages/subjects/gcse-english-language.html';
+          }
+        });
+      }
+    </script>
+    <script>
+      // Modal event wiring for close interactions and keyboard support
+      document.addEventListener('DOMContentLoaded', function(){
+        const authModal = document.getElementById('auth-modal');
+        const authClose = document.getElementById('auth-close');
+        if (authClose) authClose.addEventListener('click', closeAuthModal);
+        if (authModal) {
+          authModal.addEventListener('click', function(e){ if (e.target === authModal) closeAuthModal(); });
+        }
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape' && authModal && authModal.classList.contains('active')) closeAuthModal();
+        });
+        // Optional header buttons if present
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        if (loginBtn) loginBtn.addEventListener('click', function(){ openAuthModal(false); });
+        if (registerBtn) registerBtn.addEventListener('click', function(){ openAuthModal(true); });
+      });
+    </script>
+  </body>
+</html>

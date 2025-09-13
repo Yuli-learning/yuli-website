@@ -1,0 +1,111 @@
+/* Components & Brand tokens for Yuli (light theme)
+   Matches homepage/subjects/pricing feel: cards, chips, buttons, accordions, CTA bars
+*/
+
+/* Brand tokens */
+:root{
+  --yuli-bg:#F5F7FF;
+  --yuli-surface:#FFFFFF;
+  --yuli-ink:#121826;
+  --yuli-muted:#6B7380;
+  --yuli-primary:#4361EE;
+  --yuli-primary-600:#3A56D6;
+  --yuli-accent:#FF4D8D;
+  --yuli-sky:#A6D8FF;
+  --yuli-success:#22C55E;
+  --yuli-warning:#F59E0B;
+  --yuli-border:#E6EAF5;
+
+  --radius-card:18px;
+  --radius-pill:999px;
+  --shadow-card:0 10px 30px rgba(17,24,39,.08);
+  --shadow-card-hover:0 16px 40px rgba(17,24,39,.12);
+  --duration:160ms; /* 120–180ms */
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+
+/* Page background and default text for light theme pages */
+.theme-light{background:var(--yuli-bg);color:var(--yuli-ink)}
+.theme-light .muted{color:var(--yuli-muted)}
+
+/* Container sizing aligns with main site */
+.container{max-width:1120px;padding:0 24px;margin:0 auto}
+
+/* Typography scale */
+.theme-light h1{font-weight:600;line-height:1.1;font-size:clamp(44px,5vw,56px)}
+.theme-light h2{font-weight:600;line-height:1.2;font-size:clamp(28px,3vw,32px);margin:12px 0 8px}
+.theme-light h3{font-weight:500;line-height:1.25;font-size:clamp(22px,2.2vw,24px);margin:8px 0 6px}
+.theme-light p, .theme-light li{font-size:clamp(16px,1.5vw,18px);line-height:1.6}
+.theme-light .caption{font-size:clamp(13px,1.2vw,14px);line-height:1.5;color:var(--yuli-muted)}
+
+/* Hero halo background */
+.theme-light .hero{position:relative;padding:48px 0 24px}
+.theme-light .hero .halo{position:absolute;inset:auto 0 -10% 0;height:360px;pointer-events:none;z-index:-1;
+  background:radial-gradient(1200px 400px at 50% -50%, rgba(67,97,238,.12), rgba(255,77,141,.10) 25%, rgba(255,255,255,0) 60%);
+  filter:saturate(1.05)
+}
+
+/* Cards */
+.card{background:var(--yuli-surface);border:1px solid var(--yuli-border);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:24px}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card-hover);transition:transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease)}
+
+/* Section heading underline accent */
+.section-heading{position:relative;display:inline-block;padding-bottom:6px}
+.section-heading .rule{position:absolute;left:0;bottom:0;height:2px;width:56px;background:var(--yuli-accent);border-radius:2px}
+
+/* CTA row */
+.cta-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:24px 0;padding:20px 24px;border:1px solid var(--yuli-border);border-radius:var(--radius-card);box-shadow:var(--shadow-card);
+  background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(245,247,255,0.9));}
+.cta-row .text{font-weight:600}
+@media (max-width:800px){.cta-row{flex-direction:column;align-items:flex-start}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:10px 16px;font-weight:600;text-decoration:none;border:1px solid transparent;background:var(--yuli-primary);color:#fff;box-shadow:0 1px 0 rgba(17,24,39,.04)}
+.btn:hover{background:var(--yuli-primary-600);transform:translateY(-1px);transition:all var(--duration) var(--ease)}
+.btn:focus{outline:2px solid var(--yuli-primary);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--yuli-ink);border-color:var(--yuli-border)}
+
+/* Chips / badges */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:var(--radius-pill);border:1px solid var(--yuli-border);background:rgba(67,97,238,.06);color:var(--yuli-ink);font-weight:600}
+.chip:hover{transform:scale(1.02);transition:transform var(--duration) var(--ease)}
+
+/* Inputs */
+input, textarea, select{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--yuli-border);background:#fff;color:var(--yuli-ink)}
+label.required::after{content:" *";color:var(--yuli-primary)}
+.hint{color:var(--yuli-muted);font-size:.9rem}
+
+/* Links with animated underline */
+a{color:var(--yuli-primary);text-decoration:underline;text-underline-offset:6px}
+a:hover{text-underline-offset:3px;transition:text-underline-offset var(--duration) var(--ease)}
+
+/* Grid helpers */
+.grid{display:grid;gap:24px}
+.grid-2{grid-template-columns:1fr 1fr}
+@media (max-width:980px){.grid-2{grid-template-columns:1fr}}
+
+/* Accordions (details/summary) */
+details{border:1px solid var(--yuli-border);border-radius:16px;background:#fff;box-shadow:var(--shadow-card);padding:0;overflow:hidden}
+summary{list-style:none;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600}
+summary::-webkit-details-marker{display:none}
+details > div, details > p, details > ul{padding:0 18px 16px 18px}
+/* Chevron */
+summary::after{content:"›";margin-left:auto;transform:rotate(90deg);transition:transform var(--duration) var(--ease)}
+details[open] summary::after{transform:rotate(-90deg)}
+/* Open tint + left bar */
+details[open]{background:rgba(67,97,238,0.06)}
+details[open]::before{content:"";display:block;position:absolute;height:100%;width:3px;background:var(--yuli-accent)}
+details{position:relative}
+
+/* Tables */
+.table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--yuli-border);border-radius:14px;overflow:hidden;background:#fff}
+.table thead th{background:#f2f5ff;color:var(--yuli-ink);font-weight:700}
+.table th,.table td{padding:12px 14px;border-bottom:1px solid var(--yuli-border)}
+.table tbody tr:nth-child(even){background:#fafbff}
+.table tbody tr:last-child td{border-bottom:none}
+
+/* Focus */
+:where(a,button,input,textarea,select,summary):focus{outline:2px solid var(--yuli-primary);outline-offset:2px}
+
+/* Smooth scroll */
+html{scroll-behavior:smooth}

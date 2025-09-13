@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuli | Live Session</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .session-layout { display:grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+    .session-video { background:#000; border-radius:12px; height: 50vh; color:#fff; display:grid; place-items:center; }
+    .session-tools { display:grid; gap:12px; }
+    .panel { background:#fff; border:1px solid #e6e8eb; border-radius:12px; padding:12px; }
+    .whiteboard { background:#fff; border:1px solid #e6e8eb; border-radius:12px; height: 300px; }
+    .toolbar { display:flex; gap:8px; margin-bottom:8px; }
+    @media (max-width: 900px) { .session-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="nav-left">
+      <a href="/" class="logo">Yuli<span>.</span></a>
+      <span>Live Session</span>
+    </div>
+    <div class="nav-right">
+      <button id="end-session" class="btn primary">End Session</button>
+    </div>
+  </div>
+  <main class="container narrow" style="margin-top:16px;">
+    <div id="session-meta" class="card" style="margin-bottom:12px;"></div>
+    <div class="session-layout">
+      <div>
+        <div class="session-video" id="video-area">Video area (connect to your in-house WebRTC backend)</div>
+        <div class="panel">
+          <div class="toolbar">
+            <button class="btn" id="share-screen"><i class="fas fa-desktop"></i> Share Screen</button>
+            <button class="btn" id="toggle-audio"><i class="fas fa-microphone"></i> Audio</button>
+            <button class="btn" id="toggle-video"><i class="fas fa-video"></i> Video</button>
+          </div>
+          <div id="participants" class="row" style="flex-wrap:wrap;"></div>
+        </div>
+      </div>
+      <div class="session-tools">
+        <div class="panel">
+          <h3>Whiteboard</h3>
+          <div class="toolbar">
+            <button class="btn" data-tool="pen">Pen</button>
+            <button class="btn" data-tool="eraser">Eraser</button>
+            <button class="btn" id="export-board">Export</button>
+          </div>
+          <canvas id="whiteboard" class="whiteboard"></canvas>
+        </div>
+        <div class="panel">
+          <h3>Chat</h3>
+          <div id="chat-thread" style="height:200px; overflow:auto; border:1px solid #e5e7eb; border-radius:10px; padding:8px; margin-bottom:8px;"></div>
+          <div class="row">
+            <input id="chat-input" placeholder="Type a message..." style="flex:1; padding:8px; border:1px solid #e5e7eb; border-radius:8px;" />
+            <button id="chat-send" class="btn primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/lib/config.js"></script>
+  <script src="/lib/api.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('id');
+    const meta = document.getElementById('session-meta');
+    meta.innerHTML = '<div class="skeleton" style="height:20px"></div>';
+
+    async function loadSession() {
+      try {
+        const s = await API.sessions.details(sessionId);
+        if (!s || !s.id) {
+          meta.innerHTML = '<div class="empty-state"><p>Session not found.</p><button class="btn" onclick="history.back()">Back</button></div>';
+          return;
+        }
+        meta.innerHTML = `<div class="row" style="justify-content:space-between; align-items:center;">
+          <div>
+            <div><strong>${s.title || 'Session'}</strong></div>
+            <div class="muted">${new Date(s.start).toLocaleString()}</div>
+          </div>
+          <div class="row">
+            <button class="btn" onclick="window.open('/pages/tutor-dashboard.html','_self')">Back to Dashboard</button>
+          </div>
+        </div>`;
+
+        // TODO: Connect to your in-house signalling/WebRTC and chat backend here.
+        // Ensure all logs/messages are saved server-side; do not fabricate any client values.
+      } catch (e) {
+        meta.innerHTML = `<div class="card">Failed to load session: ${e.message}</div>`;
+      }
+    }
+
+    document.getElementById('end-session').addEventListener('click', async () => {
+      const notes = prompt('Add session notes (optional)');
+      try {
+        await API.sessions.end(sessionId, { notes });
+        alert('Session ended.');
+        location.href = '/pages/tutor-dashboard.html'; // Updated to new dashboard
+      } catch (e) { alert('Failed to end session: ' + e.message); }
+    });
+
+    // Minimal local whiteboard with export; integrate with backend for multi-user sync
+    const canvas = document.getElementById('whiteboard');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; }
+    window.addEventListener('resize', resize); resize();
+    let drawing = false; let last = null; let tool = 'pen';
+    canvas.addEventListener('mousedown', e => { drawing = true; last = [e.offsetX, e.offsetY]; });
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mouseleave', () => drawing = false);
+    canvas.addEventListener('mousemove', e => {
+      if (!drawing) return;
+      ctx.lineWidth = tool === 'eraser' ? 14 : 2;
+      ctx.globalCompositeOperation = tool === 'eraser' ? 'destination-out' : 'source-over';
+      ctx.beginPath(); ctx.moveTo(last[0], last[1]); ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke();
+      last = [e.offsetX, e.offsetY];
+    });
+    document.querySelectorAll('[data-tool]').forEach(b => b.addEventListener('click', () => tool = b.dataset.tool));
+    document.getElementById('export-board').addEventListener('click', () => {
+      const url = canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = url; a.download = `whiteboard-${Date.now()}.png`; a.click();
+    });
+
+    loadSession();
+  </script>
+</body>
+</html>
+
+

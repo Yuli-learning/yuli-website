@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Backfill Profiles (Admin)</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    h1 { margin: 0 0 10px; }
+    .muted { color: #6b7280; font-size: 14px; }
+    button { padding: 10px 16px; border-radius: 10px; border: 0; cursor: pointer; font-weight: 600; }
+    .primary { background: #2563eb; color: white; }
+    .danger { background: #ef4444; color: white; }
+    .ghost { background: #f3f4f6; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    .stat { background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:10px; text-align:center; }
+    .ok { color: #16a34a; }
+    .warn { color: #ca8a04; }
+    .err { color: #dc2626; }
+    .log { white-space: pre-wrap; background: #0b1020; color: #e5e7eb; padding: 12px; border-radius: 10px; height: 220px; overflow:auto; margin-top: 12px; font-size: 12px; }
+    .banner { background: #fff7ed; border: 1px dashed #fb923c; color: #7c2d12; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Backfill Profiles</h1>
+    <p class="muted">Copies non-sensitive display info from <code>/users</code> → <code>/profiles</code> once. Keep this page private.</p>
+
+    <div id="signedOut" class="hidden">
+      <p class="banner">Sign in is required to run this tool.</p>
+      <button id="btnGoogle" class="primary">Sign in with Google</button>
+    </div>
+
+    <div id="signedIn" class="hidden">
+      <div class="banner">
+        After you run this once, <strong>revert your Firestore rules</strong> if you loosened them for the backfill.
+      </div>
+      <div class="row">
+        <button id="btnRun" class="primary">Run Backfill</button>
+        <button id="btnCancel" class="ghost">Cancel</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div>Total</div><div id="statTotal" class="ok">0</div></div>
+        <div class="stat"><div>Processed</div><div id="statProcessed">0</div></div>
+        <div class="stat"><div>Created</div><div id="statCreated">0</div></div>
+        <div class="stat"><div>Updated</div><div id="statUpdated">0</div></div>
+        <div class="stat"><div>Errors</div><div id="statErrors" class="err">0</div></div>
+      </div>
+      <div id="result" class="muted" style="margin-top:8px;"></div>
+      <div id="log" class="log"></div>
+    </div>
+  </div>
+
+  <!-- Import our existing Firebase init module (Windsurf: adjust this path to match the project) -->
+  <script type="module">
+    // --- Imports (Windsurf: ensure these imports resolve using our existing firebase client module) ---
+    import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { collection, getDocs, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // Use the app’s existing Firebase client (exports { auth, db })
+    import { auth, db } from "../lib/firebaseClient.js";
+
+    // --- UI wiring ---
+    const $ = (id) => document.getElementById(id);
+    const elOut = $("signedOut");
+    const elIn = $("signedIn");
+    const btnGoogle = $("btnGoogle");
+    const btnRun = $("btnRun");
+    const btnCancel = $("btnCancel");
+    const elTotal = $("statTotal");
+    const elProcessed = $("statProcessed");
+    const elCreated = $("statCreated");
+    const elUpdated = $("statUpdated");
+    const elErrors = $("statErrors");
+    const elLog = $("log");
+    const elResult = $("result");
+
+    let abort = false;
+
+    const log = (m) => { elLog.textContent += m + "\n"; elLog.scrollTop = elLog.scrollHeight; };
+
+    onAuthStateChanged(auth, (user) => {
+      const ALLOWED = ["lukas.yuli.uk@gmail.com"]; // strict admin allowlist
+      if (user && ALLOWED.includes(String(user.email || "").toLowerCase())) {
+        // Allowed: show tool UI
+        elOut.classList.add("hidden");
+        elIn.classList.remove("hidden");
+        return;
+      }
+      if (user && !ALLOWED.includes(String(user.email || "").toLowerCase())) {
+        // Not allowed: render minimal 404-style page and prevent any Firestore actions
+        document.body.innerHTML = `<div style="max-width:720px;margin:60px auto;font-family:system-ui,Arial,sans-serif;color:#374151">
+          <h1 style="margin:0 0 8px;font-size:24px;">404 — Not Found</h1>
+          <p style="margin:0 0 16px;color:#6b7280;">This page is not available.</p>
+        </div>`;
+        return;
+      }
+      // Signed out
+      elIn.classList.add("hidden");
+      elOut.classList.remove("hidden");
+    });
+
+    btnGoogle.addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, new GoogleAuthProvider());
+      } catch (e) {
+        alert("Sign-in failed: " + e.message);
+      }
+    });
+
+    btnCancel.addEventListener("click", () => { abort = true; log("Cancelled by user."); btnRun.disabled = false; });
+
+    btnRun.addEventListener("click", async () => {
+      abort = false;
+      btnRun.disabled = true;
+      elResult.textContent = "";
+      elLog.textContent = "";
+      let processed = 0, created = 0, updated = 0, errors = 0;
+
+      try {
+        log("Fetching users…");
+        const snap = await getDocs(collection(db, "users"));
+        elTotal.textContent = snap.size;
+
+        for (const docu of snap.docs) {
+          if (abort) break;
+          const uid = docu.id;
+          const u = docu.data() || {};
+
+          const displayName =
+            (typeof u.displayName === "string" && u.displayName.trim()) ? u.displayName :
+            (typeof u.email === "string" && u.email.includes("@")) ? u.email.split("@")[0] : "User";
+
+          const data = {
+            displayName,
+            photoURL: typeof u.photoURL === "string" ? u.photoURL : null,
+            email: typeof u.email === "string" ? u.email : null,
+            updatedAt: serverTimestamp(),
+          };
+
+          // set createdAt only when missing
+          // we just merge; if profile didn't exist, it's created; if existed, it updates.
+          try {
+            // optimistic: write with createdAt; if it already had it, merge keeps existing value.
+            await setDoc(doc(db, "profiles", uid), { createdAt: serverTimestamp(), ...data }, { merge: true });
+            updated++; // count as updated; we’ll treat new ones as created below based on simple heuristic
+            log(`Upserted /profiles/${uid}`);
+          } catch (err) {
+            errors++; log(`ERROR /profiles/${uid}: ${err.message}`);
+          } finally {
+            processed++;
+            elProcessed.textContent = processed;
+            elUpdated.textContent = updated;
+            elErrors.textContent = errors;
+          }
+        }
+
+        elResult.innerHTML = `<span class="ok">Backfill complete — revert Firestore rules now.</span>`;
+      } catch (err) {
+        log("FAILED: " + err.message);
+        elResult.innerHTML = `<span class="err">Backfill failed: ${err.message}</span>`;
+      } finally {
+        btnRun.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

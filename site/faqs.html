@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQs — Yuli Tutoring</title>
+  <link rel="canonical" href="https://yuli.uk/faqs" />
+  <meta name="description" content="Answers to common questions about tutoring sessions, pricing, rescheduling, and safeguarding." />
+  <meta property="og:title" content="FAQs — Yuli Tutoring" />
+  <meta property="og:description" content="Find answers about sessions, pricing, tools, and policies." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+  <link rel="stylesheet" href="/site/assets/components.css" />
+  <link rel="stylesheet" href="/site/assets/neo.css" />
+  <style>
+    /* Professional FAQs Page Styling - Matching Design System */
+    :root {
+      --yuli-primary: #4361EE;
+      --yuli-primary-dark: #3A56D6;
+      --yuli-accent: #e95d7b;
+      --yuli-ink: #1e293b;
+      --yuli-muted: #64748b;
+      --yuli-border: #e2e8f0;
+      --yuli-light: #f8fafc;
+      --yuli-success: #10b981;
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,.05);
+      --shadow-elevated: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-strong: 0 12px 40px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--yuli-ink);
+      background: #fafbfc;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .faqs-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      padding: clamp(32px, 4vw, 64px) 0;
+      position: relative;
+    }
+
+    .faqs-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% -10%;
+      height: 320px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.02) 0%, rgba(233, 93, 123, 0.02) 100%);
+      border-radius: 24px;
+    }
+
+    .faqs-hero-copy {
+      z-index: 2;
+    }
+
+    .breadcrumbs {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumbs a {
+      color: var(--yuli-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--yuli-primary);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--yuli-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .faqs-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, var(--yuli-ink) 0%, var(--yuli-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--yuli-muted);
+      margin: 0 0 24px 0;
+      max-width: 50ch;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yuli-border);
+      background: white;
+      box-shadow: var(--shadow-subtle);
+      color: var(--yuli-ink);
+      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .chip:hover {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+      transform: translateY(-1px);
+    }
+
+    .chip--emphasis {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .faqs-hero-art {
+      justify-self: end;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 10px 28px rgba(17, 24, 39, 0.12));
+    }
+
+    .faqs-hero-art img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* FAQs Content */
+    .faqs-content {
+      padding: 64px 0;
+    }
+
+    .faqs-main {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Search Box */
+    .search-box {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 24px;
+    }
+
+    .search-box label {
+      display: block;
+      font-weight: 600;
+      color: var(--yuli-ink);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--yuli-border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: #fafbfc;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--yuli-primary);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--yuli-muted);
+      margin-top: 6px;
+    }
+
+    /* Category Chips */
+    .category-chips {
+      margin-bottom: 32px;
+    }
+
+    /* FAQ Items */
+    .faq-item {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .faq-item:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-1px);
+    }
+
+    .faq-item[open] {
+      border-color: var(--yuli-primary);
+      box-shadow: 0 4px 20px rgba(67, 97, 238, 0.1);
+    }
+
+    .faq-item summary {
+      padding: 20px 24px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--yuli-ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      position: relative;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+  content: "+";
+  width: 24px;
+  height: 24px;
+  background: var(--yuli-light);
+  border: 1px solid var(--yuli-border);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--yuli-primary);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+  font-family: monospace;
+}
+
+    .faq-item[open] summary::after {
+      content: "−";
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+      transform: rotate(180deg);
+    }
+
+    .faq-item summary:hover::after {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .faq-content {
+      padding: 0 24px 24px 24px;
+      color: var(--yuli-ink);
+      line-height: 1.7;
+      border-top: 1px solid var(--yuli-border);
+      margin-top: -1px;
+    }
+
+    .faq-content p {
+      margin: 16px 0 0 0;
+    }
+
+    .faq-content a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .faq-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* CTA Section */
+    .faq-cta {
+      background: linear-gradient(135deg, var(--yuli-light) 0%, rgba(67, 97, 238, 0.05) 100%);
+      border: 2px solid rgba(67, 97, 238, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .faq-cta h3 {
+      margin: 0 0 16px 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--yuli-ink);
+    }
+
+    .faq-cta p {
+      margin: 0 0 24px 0;
+      color: var(--yuli-muted);
+      font-size: 16px;
+    }
+
+    .faq-cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--yuli-primary) !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--yuli-primary-dark) !important;
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent !important;
+      color: var(--yuli-primary) !important;
+      border-color: var(--yuli-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--yuli-light) !important;
+      border-color: var(--yuli-primary);
+    }
+
+    /* Filter functionality */
+    .faq-item.hidden {
+      display: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 980px) {
+      .faqs-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .faqs-hero-art {
+        order: -1;
+        justify-self: center;
+        max-width: 280px;
+      }
+
+      .faq-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        min-width: 200px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .faqs-hero {
+        padding: 32px 0;
+      }
+
+      .faqs-hero-art {
+        display: none;
+      }
+
+      .faqs-content {
+        padding: 32px 0;
+      }
+
+      .search-box,
+      .faq-cta {
+        padding: 20px;
+      }
+
+      .faq-item summary {
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+
+      .faq-content {
+        padding: 0 20px 20px 20px;
+      }
+
+      .chips {
+        gap: 6px;
+      }
+
+      .chip {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+    }
+
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <!--#include virtual="/site/partials/header.html" -->
+  <main id="main">
+    <section class="faqs">
+      <!-- Hero Section -->
+      <div class="faqs-hero container">
+        <div class="faqs-hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <a href="/">Home</a> › <span aria-current="page">FAQs</span>
+          </nav>
+          <span class="eyebrow">Support centre</span>
+          <h1>Frequently Asked Questions</h1>
+          <p class="lead">Plain-English answers to help you get started with tutoring.</p>
+          
+          <div class="chips">
+            <span class="chip chip--emphasis">Quick answers</span>
+            <span class="chip">All topics covered</span>
+            <span class="chip">Updated regularly</span>
+          </div>
+        </div>
+        <div class="faqs-hero-art">
+          <img src="/assets/logos/faqs.svg" alt="FAQ illustration" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- FAQs Content -->
+      <div class="faqs-content">
+        <div class="container">
+          <div class="faqs-main">
+            <!-- Search Box -->
+            <div class="search-box">
+              <label for="faq-search">Search FAQs</label>
+              <input id="faq-search" type="search" placeholder="Type to filter questions..." aria-describedby="faq-hint" />
+              <div id="faq-hint" class="hint">Search matches question and answer text. No data is sent anywhere.</div>
+            </div>
+
+            <!-- Category Chips -->
+            <div class="category-chips">
+              <div class="chips">
+                <span class="chip" data-category="all">All</span>
+                <span class="chip" data-category="sessions">Sessions</span>
+                <span class="chip" data-category="pricing">Pricing</span>
+                <span class="chip" data-category="exams">Exams</span>
+                <span class="chip" data-category="tools">Tools</span>
+                <span class="chip" data-category="safeguarding">Safeguarding</span>
+              </div>
+            </div>
+
+            <!-- FAQ Items -->
+            <details class="faq-item" data-categories="sessions,subjects">
+              <summary>Which subjects and levels do you teach?</summary>
+              <div class="faq-content">
+                <p>I specialise in GCSE and A-Level Mathematics across all major UK exam boards (AQA, Edexcel, OCR). I also support resits, adult learners returning to education, and students preparing for university entrance.</p>
+                <p>Whether you're struggling with basic concepts or aiming for top grades, I tailor sessions to your specific needs and exam board requirements.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>How long is a typical tutoring session?</summary>
+              <div class="faq-content">
+                <p>Most sessions are 60 minutes, which provides enough time to cover concepts thoroughly without causing fatigue. For intensive exam preparation or complex topics, 90-minute sessions are available.</p>
+                <p>We can adjust session length based on your concentration span and learning preferences.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="pricing">
+              <summary>How much does tutoring cost?</summary>
+              <div class="faq-content">
+                <p>Pricing depends on the level (GCSE vs A-Level) and frequency of sessions. I offer competitive rates with discounts for regular bookings.</p>
+                <p>Please see the <a href="/site/pricing.html">pricing page</a> for current rates, or <a href="/site/contact.html">contact me</a> for a personalised quote based on your specific needs.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>Can I reschedule or cancel a session?</summary>
+              <div class="faq-content">
+                <p>Yes, absolutely. I understand that life happens and schedules change. Please provide at least 24 hours' notice to avoid charges, as outlined in the <a href="/site/legal/terms.html">Terms & Conditions</a>.</p>
+                <p>I'll always try to accommodate urgent changes when possible, and we can reschedule to a time that works better for you.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="tools,sessions">
+              <summary>What tools and platforms do you use for online sessions?</summary>
+              <div class="faq-content">
+                <p>I use professional video conferencing platforms like Zoom or Google Meet, combined with interactive online whiteboards for real-time problem solving.</p>
+                <p>All materials and resources are shared digitally, and I can record sessions for your review if requested. You'll receive access links and any technical setup help before your first session.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>Do you set homework between sessions?</summary>
+              <div class="faq-content">
+                <p>Yes, I provide targeted practice questions and exercises to reinforce what we've covered. These are usually short, focused tasks rather than lengthy assignments.</p>
+                <p>I review your homework at the start of each session and provide detailed feedback to track your progress and identify areas for improvement.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="exams">
+              <summary>When should we start exam preparation?</summary>
+              <div class="faq-content">
+                <p>Ideally, 3-6 months before your exams allows time to cover all topics systematically and build confidence. However, I also offer intensive revision programmes for students who need to start closer to exam dates.</p>
+                <p>The earlier we start, the more time we have to identify and address weak areas, practice exam techniques, and build your confidence.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="exams">
+              <summary>Do you help with exam technique and past papers?</summary>
+              <div class="faq-content">
+                <p>Absolutely. A large part of exam success is knowing how to approach different question types and manage your time effectively. We'll work through past papers, practice exam-style questions, and develop strategies specific to your exam board.</p>
+                <p>I provide detailed feedback on your answers and help you understand exactly what examiners are looking for.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="safeguarding">
+              <summary>How do you keep students safe during online sessions?</summary>
+              <div class="faq-content">
+                <p>Safety is my top priority. I'm enhanced DBS-checked and follow robust safeguarding practices aligned with Keeping Children Safe in Education guidance.</p>
+                <p>Online sessions use secure platforms with waiting rooms, and I recommend parents/guardians stay nearby for younger students. See our full <a href="/site/about/safeguarding.html">Safeguarding Policy</a> for complete details.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>What happens if I miss a session?</summary>
+              <div class="faq-content">
+                <p>If you miss a session without 24 hours' notice, the session may be charged as outlined in our terms. However, I understand emergencies happen and will work with you to find a solution.</p>
+                <p>For planned absences, we can easily reschedule to a more convenient time.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>Can parents sit in on sessions?</summary>
+              <div class="faq-content">
+                <p>Yes, parents are welcome to observe sessions, especially for younger students. This can help you understand your child's progress and support their learning at home.</p>
+                <p>For older students, I usually recommend allowing them some independence, but we can discuss what works best for your family.</p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-categories="sessions">
+              <summary>Do you offer group tutoring sessions?</summary>
+              <div class="faq-content">
+                <p>Currently, I focus on one-to-one tutoring to provide the most personalised support. This allows me to tailor each session specifically to your learning style and pace.</p>
+                <p>If you're interested in group sessions with friends or siblings, please <a href="/site/contact.html">get in touch</a> to discuss options.</p>
+              </div>
+            </details>
+
+            <!-- CTA Section -->
+            <div class="faq-cta">
+              <h3>Still have questions?</h3>
+              <p>Can't find what you're looking for? I'm here to help with any questions about tutoring, pricing, or getting started.</p>
+              <div class="faq-cta-buttons">
+                <a class="btn btn-primary" href="/site/contact.html">Contact me</a>
+                <a class="btn btn-ghost" href="/site/legal/refunds.html">Refund Policy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--#include virtual="/site/partials/footer.html" -->
+
+  <!-- FAQ Search and Filter Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('faq-search');
+      const categoryChips = document.querySelectorAll('[data-category]');
+      const faqItems = document.querySelectorAll('.faq-item');
+      let activeCategory = 'all';
+
+      // Search functionality
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        filterFAQs(searchTerm, activeCategory);
+      });
+
+      // Category filter functionality
+      categoryChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          // Update active category
+          categoryChips.forEach(c => c.classList.remove('chip--emphasis'));
+          this.classList.add('chip--emphasis');
+          activeCategory = this.dataset.category;
+          
+          // Filter FAQs
+          const searchTerm = searchInput.value.toLowerCase();
+          filterFAQs(searchTerm, activeCategory);
+        });
+      });
+
+      function filterFAQs(searchTerm, category) {
+        faqItems.forEach(item => {
+          const summary = item.querySelector('summary').textContent.toLowerCase();
+          const content = item.querySelector('.faq-content').textContent.toLowerCase();
+          const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+          
+          const matchesSearch = !searchTerm || summary.includes(searchTerm) || content.includes(searchTerm);
+          const matchesCategory = category === 'all' || categories.includes(category);
+          
+          if (matchesSearch && matchesCategory) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      }
+
+      // Set initial state
+      if (categoryChips.length > 0) {
+        categoryChips[0].classList.add('chip--emphasis');
+      }
+    });
+  </script>
+</body>
+</html>

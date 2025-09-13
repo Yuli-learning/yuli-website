@@ -1,0 +1,792 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <title>Yuli – Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --brand-primary: #4361EE;   /* Yuli Blue */
+      --brand-secondary: #4361EE; /* Yuli Blue */
+      --text-strong: #0F172A;     /* Slate 900 */
+      --text-muted: #475569;      /* Slate 600 */
+      --text-soft: #64748B;       /* Slate 500 */
+      --surface: #FFFFFF;
+      --surface-soft: #F8FAFC;    /* light panel bg */
+      --border: #E2E8F0;          /* Slate 200 */
+      --success: #16A34A;         /* for approved badge */
+      --pending: #6B7280;         /* neutral for pending */
+      --danger: #EF4444;          /* for reject/delete */
+    }
+
+    body { 
+      font-family: ui-sans-serif, system-ui, Arial; 
+      margin: 0; 
+      background: var(--surface-soft);
+    }
+    
+    /* Header styles matching site navigation */
+    header { 
+      background: var(--surface); 
+      padding: 15px 0; 
+      border-bottom: 1px solid var(--border); 
+      margin-bottom: 24px; 
+    }
+    .container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 0 20px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .logo { 
+  font-size: 24px; 
+  font-weight: 700; 
+  color: #4361EE; 
+  text-decoration: none;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+    .logo span { 
+      color: #FF69B4; 
+    }
+    
+    /* Top navigation bar */
+    .top-nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .back-btn { 
+      color: var(--text-soft); 
+      text-decoration: none; 
+      padding: 8px 16px; 
+      border-radius: 8px; 
+      transition: background 0.2s;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .back-btn:hover { 
+      background: var(--border); 
+    }
+    
+    .sign-out-btn {
+      background: var(--danger);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .sign-out-btn:hover {
+      background: #DC2626;
+    }
+    
+    /* Main content layout */
+    .admin-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Hero card matching Profile header card */
+    .admin-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(15,23,42,.06);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    
+    .admin-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+    }
+    
+    .admin-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+    }
+    
+    .admin-info h1 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+    
+    .admin-info .subtitle {
+      color: var(--text-soft);
+      font-size: 16px;
+      margin: 0;
+    }
+    
+    .admin-meta {
+      text-align: right;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+    
+    .admin-meta .chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    
+    /* Stats row - mini cards */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .stat-mini-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(15,23,42,.04);
+    }
+    
+    .stat-mini-card:hover {
+      box-shadow: 0 8px 24px rgba(15,23,42,.12);
+      transform: translateY(-2px);
+    }
+    
+    .stat-icon {
+      font-size: 32px;
+      color: var(--brand-primary);
+      margin-bottom: 12px;
+    }
+    
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-strong);
+      margin: 0 0 8px 0;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Section cards */
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(15,23,42,.06);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-strong);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .section-title i {
+      color: var(--brand-primary);
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .tab-btn {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    
+    .tab-btn.active {
+      color: var(--brand-primary);
+      border-bottom-color: var(--brand-primary);
+    }
+    
+    .tab-btn:hover:not(.active) {
+      color: var(--text-strong);
+    }
+    
+    /* Filters and search */
+    .filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .filter-btn.active {
+      background: var(--brand-primary);
+      color: white;
+      border-color: var(--brand-primary);
+    }
+    
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+    }
+    
+    /* Lists and items */
+    .item-list {
+      display: grid;
+      gap: 16px;
+    }
+    
+    .list-item {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s;
+    }
+    
+    .list-item:hover {
+      border-color: var(--brand-primary);
+      box-shadow: 0 4px 12px rgba(79,70,229,.1);
+    }
+    
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    
+    .item-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-strong);
+    }
+    
+    .item-info p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    .item-meta {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+    
+    .item-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    /* Buttons */
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: var(--brand-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #4338CA;
+    }
+    
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    
+    .btn-success:hover {
+      background: #15803D;
+    }
+    
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #DC2626;
+    }
+    
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--border);
+      color: var(--text-strong);
+    }
+    
+    /* Status badges */
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status-badge.pending {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    
+    .status-badge.approved {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .status-badge.rejected {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    
+    /* Assignment controls */
+    .assignment-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+      padding: 20px;
+      background: var(--surface-soft);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .assignment-controls label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: var(--text-strong);
+      font-size: 14px;
+    }
+    
+    .assignment-controls select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      background: var(--surface);
+    }
+    
+    /* Empty states */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+    }
+    
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: var(--text-soft);
+      opacity: 0.5;
+    }
+    
+    .empty-state p {
+      margin: 0;
+      font-size: 16px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .admin-left {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .admin-meta {
+        text-align: center;
+      }
+      
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .assignment-controls {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      
+      .item-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .item-actions {
+        justify-content: flex-start;
+      }
+    }
+    /* Notification tabs */
+    .notification-tabs {
+      margin-bottom: 16px !important;
+      display: flex !important;
+      gap: 8px !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding-bottom: 8px !important;
+    }
+
+    .notification-tabs .tab-btn {
+      padding: 8px 16px !important;
+      background: var(--surface-soft) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-muted) !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      transition: all 0.2s ease !important;
+      border-bottom: none !important;
+    }
+
+    .notification-tabs .tab-btn.active {
+      background: var(--brand-primary) !important;
+      color: white !important;
+      border-color: var(--brand-primary) !important;
+    }
+
+    .notification-tabs .tab-btn:hover:not(.active) {
+      background: var(--border) !important;
+      color: var(--text-strong) !important;
+    }
+
+    /* Notification item states */
+    .notification-read {
+      opacity: 0.7 !important;
+      background: var(--surface) !important;
+    }
+
+    .notification-read:hover {
+      opacity: 1 !important;
+      border-color: var(--text-soft) !important;
+    }
+
+    /* Enhanced status badges */
+    .status-badge.read {
+      background: #E5E7EB !important;
+      color: #6B7280 !important;
+    }
+
+    .status-badge.unread {
+      background: #FEF3C7 !important;
+      color: #92400E !important;
+      animation: subtle-pulse 2s infinite !important;
+    }
+
+    .status-badge.past {
+      background: #F3F4F6 !important;
+      color: #9CA3AF !important;
+    }
+
+    @keyframes subtle-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Better spacing for notification actions */
+    .notification-read .item-actions {
+      gap: 6px !important;
+    }
+
+    .notification-read .item-actions .btn {
+      padding: 6px 12px !important;
+      font-size: 13px !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Site Header -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo">Yuli<span>.</span></a>
+      <div></div>
+    </div>
+  </header>
+
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <div class="nav-container">
+      <a id="backHome" class="btn btn-ghost" href="./index.html" style="position:relative; z-index:9999; pointer-events:auto;">← Back to Home</a>
+      <button class="sign-out-btn" id="signOutBtn">
+        <i class="fas fa-sign-out-alt"></i> Sign out
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="admin-content">
+    <!-- Hero Card -->
+    <div class="admin-card">
+      <div class="admin-header">
+        <div class="admin-left">
+          <div class="admin-avatar">
+            <i class="fas fa-crown"></i>
+          </div>
+          <div class="admin-info">
+            <h1>Admin Dashboard</h1>
+            <p class="subtitle">Manage tutors, students, assignments & billing</p>
+          </div>
+        </div>
+        <div class="admin-meta">
+          <div class="chip">Standard rates apply</div>
+          <div class="chip">All features enabled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row" id="statsRow">
+      <!-- Stats will be populated by JavaScript -->
+    </div>
+
+<!-- New Booking Notifications -->
+<div class="section-card">
+  <div class="section-header">
+    <h2 class="section-title">
+      <i class="fas fa-bell"></i>
+      New Booking Notifications
+    </h2>
+  </div>
+  <div class="item-list" id="bookingNotifications">
+    <!-- Notifications will appear here -->
+    <div class="empty-state">
+      <i class="fas fa-bell"></i>
+      <p>No new bookings yet</p>
+    </div>
+  </div>
+</div>
+
+<!-- Discount Applications -->
+<div class="section-card">
+  <div class="section-header">
+    <h2 class="section-title">
+      <i class="fas fa-percentage"></i>
+      Discount Applications
+    </h2>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterDiscountApps('pending')">Pending</button>
+    <button class="filter-btn" onclick="filterDiscountApps('approved')">Approved</button>
+    <button class="filter-btn" onclick="filterDiscountApps('rejected')">Rejected</button>
+    <button class="filter-btn" onclick="filterDiscountApps('all')">All</button>
+    <input type="text" class="search-input" placeholder="Search by name or email..." onkeyup="searchDiscountApps(this.value)">
+  </div>
+  <div class="item-list" id="discountApplications">
+    <div class="empty-state">
+      <i class="fas fa-percentage"></i>
+      <p>No discount applications yet</p>
+    </div>
+  </div>
+</div>
+
+    <!-- Pending Tutor Applications -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-user-graduate"></i>
+          Pending Tutor Applications
+        </h2>
+      </div>
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterTutors('all')">All</button>
+        <button class="filter-btn" onclick="filterTutors('pending')">Pending</button>
+        <button class="filter-btn" onclick="filterTutors('approved')">Approved</button>
+        <button class="filter-btn" onclick="filterTutors('rejected')">Rejected</button>
+        <input type="text" class="search-input" placeholder="Search tutors..." onkeyup="searchTutors(this.value)">
+      </div>
+      <div class="item-list" id="tutorApplications">
+        <!-- Tutor applications will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- People Management -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-users"></i>
+          People Management
+        </h2>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('tutors')">Tutors</button>
+        <button class="tab-btn" onclick="switchTab('students')">Students</button>
+      </div>
+      <div class="filters">
+        <input type="text" class="search-input" placeholder="Search people..." onkeyup="searchPeople(this.value)">
+      </div>
+      <div class="item-list" id="peopleList">
+        <!-- People list will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Student-Tutor Assignments -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-link"></i>
+          Student-Tutor Assignments
+        </h2>
+      </div>
+      <div class="assignment-controls">
+        <div>
+          <label>Select Student</label>
+          <select id="studentSelect">
+            <option value="">Choose student...</option>
+          </select>
+        </div>
+        <div>
+          <label>Select Tutor</label>
+          <select id="tutorSelect">
+            <option value="">Choose tutor...</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="assignStudentToTutor()">
+          <i class="fas fa-plus"></i> Assign
+        </button>
+      </div>
+      <div class="item-list" id="assignmentsList">
+        <!-- Assignments will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-chart-bar"></i>
+          Analytics
+        </h2>
+      </div>
+      <div class="empty-state">
+        <i class="fas fa-chart-line"></i>
+        <p>Analytics dashboard coming soon</p>
+      </div>
+    </div>
+
+    <!-- Payments -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-credit-card"></i>
+          Payments
+        </h2>
+      </div>
+      <div class="empty-state">
+        <i class="fas fa-money-bill-wave"></i>
+        <p>Payment management coming soon</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="./lib/authBoot.js"></script>
+  <script type="module" src="admin-functional.js"></script>
+</body>
+</html>

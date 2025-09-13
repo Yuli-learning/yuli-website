@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safeguarding — Yuli Tutoring</title>
+  <link rel="canonical" href="https://yuli.uk/about/safeguarding" />
+  <meta name="description" content="Safeguarding commitments for online tutoring, including DBS and training." />
+  <meta property="og:title" content="Safeguarding — Yuli Tutoring" />
+  <meta property="og:description" content="Commitment to student safety and safeguarding practices." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/site/assets/styles.css" />
+  <link rel="stylesheet" href="/site/assets/components.css" />
+  <link rel="stylesheet" href="/site/assets/neo.css" />
+  <style>
+    /* Professional Safeguarding Page Styling - Matching Terms Design */
+    :root {
+      --yuli-primary: #4361EE;
+      --yuli-primary-dark: #3A56D6;
+      --yuli-accent: #e95d7b;
+      --yuli-ink: #1e293b;
+      --yuli-muted: #64748b;
+      --yuli-border: #e2e8f0;
+      --yuli-light: #f8fafc;
+      --yuli-warning: #f59e0b;
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,.05);
+      --shadow-elevated: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-strong: 0 12px 40px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--yuli-ink);
+      background: #fafbfc;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section - Matching Terms */
+    .safeguarding-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      padding: clamp(32px, 4vw, 64px) 0;
+      position: relative;
+    }
+
+    .safeguarding-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% -10%;
+      height: 320px;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.02) 0%, rgba(67, 97, 238, 0.02) 100%);
+      border-radius: 24px;
+    }
+
+    .safeguarding-hero-copy {
+      z-index: 2;
+    }
+
+    .breadcrumbs {
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumbs a {
+      color: var(--yuli-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--yuli-primary);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--yuli-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .safeguarding-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, var(--yuli-ink) 0%, var(--yuli-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--yuli-muted);
+      margin: 0 0 24px 0;
+      max-width: 50ch;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--yuli-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .meta-row a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .meta-row a:hover {
+      text-decoration: underline;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--yuli-primary) !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--yuli-primary-dark) !important;
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--yuli-primary);
+      border-color: var(--yuli-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--yuli-light);
+      border-color: var(--yuli-primary);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yuli-border);
+      background: white;
+      box-shadow: var(--shadow-subtle);
+      color: var(--yuli-ink);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .chip--emphasis {
+      background: var(--yuli-primary);
+      color: white;
+      border-color: var(--yuli-primary);
+    }
+
+    .chip--warning {
+  background: var(--yuli-primary);
+  color: white;
+  border-color: var(--yuli-primary);
+}
+
+    .safeguarding-hero-art {
+      justify-self: end;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 10px 28px rgba(17, 24, 39, 0.12));
+    }
+
+    .safeguarding-hero-art img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Safeguarding Content Section */
+    .safeguarding-content {
+      padding: 64px 0;
+    }
+
+    .safeguarding-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .safeguarding-main {
+      min-width: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .toc h3 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--yuli-ink);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin: 0 0 8px 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--yuli-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      background: var(--yuli-light);
+      color: var(--yuli-primary);
+    }
+
+    /* Safeguarding Sections */
+    .safeguarding-section {
+      margin-bottom: 48px;
+    }
+
+    .safeguarding-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--yuli-border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
+    }
+
+    .safeguarding-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--yuli-primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .safeguarding-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--yuli-ink);
+      margin: 0 0 16px 0;
+      line-height: 1.3;
+    }
+
+    .safeguarding-content-text p {
+      margin: 0 0 16px 0;
+      color: var(--yuli-ink);
+      line-height: 1.7;
+    }
+
+    .safeguarding-content-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .safeguarding-content-text a {
+      color: var(--yuli-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .safeguarding-content-text a:hover {
+      text-decoration: underline;
+    }
+
+    .safeguarding-content-text ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .safeguarding-content-text li {
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    /* Emergency Contact Box */
+    .emergency-box {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.1) 100%);
+      border: 2px solid rgba(239, 68, 68, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .emergency-title {
+      color: #dc2626;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .emergency-icon {
+      width: 24px;
+      height: 24px;
+      background: #dc2626;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .emergency-content {
+      color: #7f1d1d;
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Certification Box */
+    .certification-box {
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.1) 100%);
+      border: 2px solid rgba(67, 97, 238, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .certification-title {
+      color: var(--yuli-primary);
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .certification-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--yuli-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .certification-content {
+      color: #1e3a8a;
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1100px) {
+      .safeguarding-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .toc {
+        position: static;
+        order: -1;
+        background: var(--yuli-light);
+        border: none;
+        padding: 20px;
+      }
+
+      .toc h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--yuli-muted);
+      }
+
+      .toc ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .toc a {
+        padding: 6px 12px;
+        background: white;
+        border: 1px solid var(--yuli-border);
+        border-radius: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .safeguarding-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .safeguarding-hero-art {
+        order: -1;
+        justify-self: center;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .safeguarding-hero {
+        padding: 32px 0;
+      }
+
+      .safeguarding-hero-art {
+        display: none;
+      }
+
+      .safeguarding-content {
+        padding: 32px 0;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .safeguarding-section {
+        margin-bottom: 32px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <!--#include virtual="/site/partials/header.html" -->
+  <main id="main">
+    <section class="safeguarding">
+      <!-- Hero Section -->
+      <div class="safeguarding-hero container">
+        <div class="safeguarding-hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <a href="/">Home</a> › <a href="/about.html">About</a> › <span aria-current="page">Safeguarding</span>
+          </nav>
+          <span class="eyebrow">Safety first</span>
+          <h1>Safeguarding</h1>
+          <div class="meta-row">
+            <span>Last updated: <strong>5 September 2025</strong></span>
+            <span>Review cycle: <strong>Annual</strong></span>
+          </div>
+          <p class="lead">Our commitment to keeping students safe during online tutoring sessions.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/site/contact.html">Report a concern</a>
+            <a class="btn btn-ghost" href="#emergency">Emergency contacts</a>
+          </div>
+          <div class="chips">
+            <span class="chip chip--emphasis">DBS checked</span>
+            <span class="chip">Trained annually</span>
+            <span class="chip">Always vigilant</span>
+            <span class="chip">KCSIE aligned</span>
+          </div>
+        </div>
+        <div class="safeguarding-hero-art">
+          <img src="/assets/logos/safeguard.svg" alt="Safeguarding illustration" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Safeguarding Content -->
+      <div class="safeguarding-content">
+        <div class="container">
+          <div class="safeguarding-grid">
+            <div class="safeguarding-main">
+              <!-- Section 1: Our Commitment -->
+              <div class="safeguarding-section">
+                <article class="card" id="commitment">
+                  <div class="safeguarding-number">1</div>
+                  <h2 class="safeguarding-title">Our commitment</h2>
+                  <div class="safeguarding-content-text">
+                    <p>The safety and wellbeing of all students is our absolute priority. I am committed to creating and maintaining a safe learning environment for all students, both online and in any future in-person tutoring.</p>
+                    <p>This policy follows guidance aligned with <strong>Keeping Children Safe in Education (KCSIE)</strong> and reflects best practices for private tutoring services.</p>
+                    
+                    <div class="certification-box">
+                      <h3 class="certification-title">
+                        <span class="certification-icon">✓</span>
+                        Certified and Verified
+                      </h3>
+                      <p class="certification-content">
+                        I hold an enhanced DBS check and complete annual safeguarding training to ensure I'm equipped to recognise and respond to any concerns appropriately.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 2: DBS and Training -->
+              <div class="safeguarding-section">
+                <article class="card" id="credentials">
+                  <div class="safeguarding-number">2</div>
+                  <h2 class="safeguarding-title">DBS and training</h2>
+                  <div class="safeguarding-content-text">
+                    <p>I maintain current and appropriate safeguarding credentials:</p>
+                    <ul>
+                      <li><strong>Enhanced DBS check:</strong> Current and renewed as required</li>
+                      <li><strong>Safeguarding training:</strong> Completed annually through recognised providers</li>
+                      <li><strong>Online safety training:</strong> Specific training for digital tutoring environments</li>
+                      <li><strong>Professional development:</strong> Regular updates on safeguarding best practices</li>
+                    </ul>
+                    <p>All certifications are available for review upon request from parents or guardians.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 3: Online Safety Measures -->
+              <div class="safeguarding-section">
+                <article class="card" id="online-safety">
+                  <div class="safeguarding-number">3</div>
+                  <h2 class="safeguarding-title">Online lesson safety</h2>
+                  <div class="safeguarding-content-text">
+                    <p>All online tutoring sessions include specific safety measures:</p>
+                    <ul>
+                      <li><strong>Secure platforms:</strong> Using reputable video conferencing with waiting rooms</li>
+                      <li><strong>Controlled access:</strong> Only invited participants are admitted to sessions</li>
+                      <li><strong>Parental awareness:</strong> Parents/guardians should be nearby during sessions for younger students</li>
+                      <li><strong>No unexpected recording:</strong> Sessions are never recorded without explicit written consent</li>
+                      <li><strong>Appropriate communication:</strong> All communication remains professional and within tutoring scope</li>
+                      <li><strong>Clear boundaries:</strong> Sessions focus strictly on educational content</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 4: Recognising Concerns -->
+              <div class="safeguarding-section">
+                <article class="card" id="recognising-concerns">
+                  <div class="safeguarding-number">4</div>
+                  <h2 class="safeguarding-title">Recognising concerns</h2>
+                  <div class="safeguarding-content-text">
+                    <p>I am trained to recognise potential indicators of:</p>
+                    <ul>
+                      <li>Physical, emotional, or sexual abuse</li>
+                      <li>Neglect or inadequate care</li>
+                      <li>Bullying (including cyberbullying)</li>
+                      <li>Mental health concerns</li>
+                      <li>Radicalisation or extremism</li>
+                      <li>Online safety risks</li>
+                    </ul>
+                    <p>If any concerns arise, I will take appropriate action in line with safeguarding procedures, prioritising the student's wellbeing.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 5: Responding to Concerns -->
+              <div class="safeguarding-section">
+                <article class="card" id="responding">
+                  <div class="safeguarding-number">5</div>
+                  <h2 class="safeguarding-title">Responding to concerns</h2>
+                  <div class="safeguarding-content-text">
+                    <p>If a safeguarding concern arises, I will:</p>
+                    <ul>
+                      <li><strong>Listen:</strong> Take any disclosure seriously and supportively</li>
+                      <li><strong>Record:</strong> Document concerns accurately and securely</li>
+                      <li><strong>Report:</strong> Contact appropriate authorities when required</li>
+                      <li><strong>Support:</strong> Continue to provide appropriate support to the student</li>
+                      <li><strong>Review:</strong> Assess whether tutoring should continue and under what conditions</li>
+                    </ul>
+                    <p>I may pause or discontinue services if safeguarding concerns cannot be adequately addressed.</p>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Section 6: Contact and Emergency -->
+              <div class="safeguarding-section">
+                <article class="card" id="emergency">
+                  <div class="safeguarding-number">6</div>
+                  <h2 class="safeguarding-title">Reporting and emergency contacts</h2>
+                  <div class="safeguarding-content-text">
+                    <p>If you have any safeguarding concerns about tutoring sessions or need to report an issue:</p>
+                    
+                    <div style="margin: 24px 0;">
+                      <p><strong>Non-emergency concerns:</strong></p>
+                      <p>Email: <a href="mailto:yuli.learning.uk@gmail.com">yuli.learning.uk@gmail.com</a></p>
+                      <p>All concerns will be treated confidentially and responded to promptly.</p>
+                    </div>
+
+                    <div class="emergency-box">
+                      <h3 class="emergency-title">
+                        <span class="emergency-icon">!</span>
+                        Emergency Situations
+                      </h3>
+                      <p class="emergency-content">
+                        <strong>If a child is in immediate danger, call 999 immediately.</strong><br>
+                        For non-emergency child protection concerns, contact your local authority's children's services or the NSPCC helpline: 0808 800 5000.
+                      </p>
+                    </div>
+
+                    <p>I am committed to working with parents, guardians, and relevant authorities to ensure all students receive the support and protection they need.</p>
+                    
+                    <div style="margin-top: 24px;">
+                      <a class="btn btn-primary" href="/site/contact.html">Contact us about safeguarding</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc" aria-label="On this page">
+              <h3>On this page</h3>
+              <ul>
+                <li><a href="#commitment">Our commitment</a></li>
+                <li><a href="#credentials">DBS and training</a></li>
+                <li><a href="#online-safety">Online lesson safety</a></li>
+                <li><a href="#recognising-concerns">Recognising concerns</a></li>
+                <li><a href="#responding">Responding to concerns</a></li>
+                <li><a href="#emergency">Emergency contacts</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--#include virtual="/site/partials/footer.html" -->
+</body>
+</html>

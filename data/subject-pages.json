@@ -1,0 +1,80 @@
+{
+  "gcse": {
+    "mathematics": {
+      "title": "GCSE Mathematics, made clear.",
+      "tone": "We turn ‘I kind of get it’ into clean working the examiner loves.",
+      "cover": [
+        "Number & Proportion — fractions, indices, standard form, ratio",
+        "Algebra — equations, quadratics, factorising, graphs",
+        "Geometry — angles, circles, transformations, trigonometry",
+        "Probability & Statistics — combined events, cumulative frequency"
+      ],
+      "image": "/assets/logos/math-illustration.svg",
+      "icon": "calculator"
+    },
+    "further-maths": {
+      "title": "GCSE Further Maths, made clear.",
+      "tone": "Stretch topics taught calmly, with patterns not panic.",
+      "cover": [
+        "Algebra & Functions — inequalities, series, proof ideas",
+        "Calculus intro — differentiation, basic integration, optimisation",
+        "Matrices & Vectors — transformations, 2×2 matrices, vector proofs",
+        "Advanced geometry — loci, circle theorems extensions"
+      ],
+      "image": "/assets/logos/math-illustration.svg",
+      "icon": "square-root-alt"
+    },
+    "biology": {
+      "title": "GCSE Biology, made clear.",
+      "tone": "Diagram-first teaching and mark-scheme language.",
+      "cover": [
+        "Cells & Microscopy — organelles, transport, microscopy skills",
+        "Organisation — enzymes, digestion, circulatory system",
+        "Infection & Response — pathogens, immunity, vaccinations",
+        "Bioenergetics — photosynthesis, respiration",
+        "Ecology — cycles, sampling, required practicals"
+      ],
+      "image": "/assets/logos/biology-illustration.svg",
+      "icon": "dna"
+    },
+    "chemistry": {
+      "title": "GCSE Chemistry, made clear.",
+      "tone": "From ‘why’ at particle level to ‘how’ in calculations.",
+      "cover": [
+        "Atomic structure & Periodic table — isotopes, trends",
+        "Bonding — ionic, covalent, metallic, properties",
+        "Quantitative — moles, equations, titrations",
+        "Chemical changes — reactivity, electrolysis",
+        "Energy & Rates — exo/endo, rate factors, catalysts"
+      ],
+      "image": "/assets/logos/chemistry-illustration.svg",
+      "icon": "flask"
+    },
+    "physics": {
+      "title": "GCSE Physics, made clear.",
+      "tone": "Clear diagrams, units that make sense, and timing drills.",
+      "cover": [
+        "Energy — stores, transfers, efficiency",
+        "Electricity — circuits, resistance, IV characteristics",
+        "Forces & Motion — graphs, Newton’s laws, momentum",
+        "Waves — EM spectrum, required practicals",
+        "Space & Particle (if board includes)"
+      ],
+      "image": "/assets/logos/physics-illustration.svg",
+      "icon": "atom"
+    },
+    "geography": {
+      "title": "GCSE Geography, made clear.",
+      "tone": "Case studies, maps and data to build your answers.",
+      "cover": [
+        "Urbanisation — causes, effects, regeneration",
+        "Natural Hazards — causes, effects, responses",
+        "Ecosystems — tropical rainforests, deserts, cold environments",
+        "Resource Management — water, energy, food",
+        "Coastal Environments — processes, landforms, management"
+      ],
+      "image": "/assets/logos/geography-illustration.svg",
+      "icon": "globe"
+    }
+  }
+}

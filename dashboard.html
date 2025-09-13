@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="app-loading">
+  <head>
+    <meta charset="utf-8" />
+    <title>Yuli – Dashboard</title>
+    <base href="/">
+    <script>
+      try{ document.documentElement.classList.add('app-loading'); }catch(_){ }
+    </script>
+  </head>
+  <body>
+    <div id="app">Routing to your dashboard…</div>
+    <script type="module">
+      import { auth, db } from './lib/firebaseClient.js';
+      import { replace } from './lib/nav.js';
+      import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
+      import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js';
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          // Keep hidden and navigate immediately
+          return replace('/signin');
+        }
+        try {
+          const snap = await getDoc(doc(db, 'users', user.uid));
+          const data = snap.exists() ? (snap.data() || {}) : {};
+          const role = (data.role || '').toLowerCase();
+          const isAdmin = !!data.isAdmin || role === 'admin';
+
+          if (isAdmin) return replace('/admin');
+          if (role === 'tutor') return replace('/dashboard-tutor');
+          return replace('/');
+        } catch (e) {
+          // Fail safe to home page
+          try{ document.documentElement.classList.remove('app-loading'); }catch(_){ }
+          return replace('/');
+        }
+      });
+    </script>
+    <script>
+      // Fallback reveal in case redirects fail or take long
+      setTimeout(()=>{ try{ document.documentElement.classList.remove('app-loading'); }catch(_){ } }, 2000);
+    </script>
+  </body>
+</html>

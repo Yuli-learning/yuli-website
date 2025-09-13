@@ -1,0 +1,85 @@
+/* === /site/assets/neo.css (add after base CSS) ======================= */
+:root{
+  /* Brand */
+  --bg:#0b1220;                 /* deep navy for hero/headers if needed */
+  --surface:#ffffff;            /* card base */
+  --surface-2:#f6f7fb;         /* page background */
+  --text:#0b0f19;
+  --muted:#6b7280;
+  --primary:#3a66ff;           /* main brand */
+  --primary-2:#60a5fa;         /* light gradient edge */
+  --accent:#ef2d56;            /* thin underline accent */
+  --ok:#10b981;
+  --warn:#f59e0b;
+  --danger:#ef4444;
+
+  /* Elevation */
+  --radius-lg:18px;
+  --radius-sm:12px;
+  --ring:0 0 0 3px color-mix(in oklab, var(--primary) 25%, transparent);
+  --shadow-1:0 10px 30px rgba(2,12,27,.06), 0 2px 6px rgba(2,12,27,.05);
+  --shadow-2:0 18px 60px rgba(2,12,27,.10), 0 4px 14px rgba(2,12,27,.08);
+
+  /* Type scale (fluid) */
+  --h1:clamp(40px, 5vw, 56px);
+  --h2:clamp(28px, 3.2vw, 36px);
+  --h3:clamp(20px, 2.2vw, 24px);
+  --lead:clamp(16px, 1.6vw, 18px);
+}
+
+/* Page canvas */
+body{background:var(--surface-2);color:var(--text);font-synthesis-weight:none;text-rendering:optimizeLegibility}
+
+/* Container */
+.container{max-width:1120px;margin-inline:auto;padding-inline:clamp(16px, 3vw, 28px)}
+
+/* Section header with “Apple-y” restraint */
+.section{padding:clamp(44px, 7vw, 84px) 0;position:relative}
+.section--hero{
+  background:
+    radial-gradient(1200px 400px at 20% -10%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%),
+    radial-gradient(1000px 360px at 80% -6%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%);
+}
+.eyebrow{display:inline-block;margin-bottom:8px;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+.section h1{font-size:var(--h1);line-height:1.05;letter-spacing:-0.02em}
+.section h2{font-size:var(--h2);line-height:1.08;letter-spacing:-0.01em}
+.lead{font-size:var(--lead);color:var(--muted);max-width:70ch}
+
+/* Underline accent for h2 blocks */
+.h-underline{position:relative;display:inline-block;padding-bottom:2px}
+.h-underline:after{content:"";position:absolute;left:0;bottom:-6px;width:56px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--primary))}
+
+/* Card system */
+.card{background:var(--surface);border:1px solid rgba(2,12,27,.06);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);padding:clamp(20px, 3vw, 28px)}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);transition:.25s ease}
+
+/* Pills / chips */
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{padding:.45rem .7rem;border-radius:999px;font-weight:600;font-size:13px;background:color-mix(in oklab, var(--primary) 8%, #eaf0ff);border:1px solid color-mix(in oklab, var(--primary) 14%, transparent)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.1rem;border-radius:12px;background:linear-gradient(180deg, color-mix(in oklab, var(--primary) 8%, #fff), #fff);border:1px solid color-mix(in oklab, var(--primary) 18%, #e5e7eb);box-shadow:0 6px 16px rgba(58,102,255,.16);font-weight:700}
+.btn:focus-visible{outline:none;box-shadow:var(--ring)}
+
+/* FAQ accordion */
+.faq{border-radius:12px;border:1px solid #e6e7ee;background:#fff}
+.faq + .faq{margin-top:10px}
+.faq__q{cursor:pointer;padding:18px 20px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.faq__a{padding:0 20px 18px;color:var(--muted);display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.faq[open] .faq__a{grid-template-rows:1fr}
+.faq__a > div{overflow:hidden}
+/* Chevron enhancement */
+.faq__q::after{content:"›";transform:rotate(90deg);font-size:22px;color:var(--muted);transition:.25s ease}
+.faq[open] .faq__q::after{transform:rotate(270deg);color:var(--primary)}
+
+/* CTA strip with soft glow */
+.cta{position:relative;overflow:hidden;border-radius:var(--radius-lg);background:#0e1730;color:#fff;padding:28px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-2)}
+.cta:before{content:"";position:absolute;inset:-40%;background:
+  radial-gradient(500px 180px at 10% 10%, color-mix(in oklab, #fff 10%, var(--primary)), transparent 60%),
+  radial-gradient(400px 180px at 90% 90%, color-mix(in oklab, #fff 6%, var(--accent)), transparent 60%);
+  filter:blur(30px);opacity:.55}
+.cta strong{font-size:20px;letter-spacing:.1px}
+
+/* Accessibility */
+a{color:var(--primary)}
+:focus-visible{outline:none;box-shadow:var(--ring);border-radius:10px}

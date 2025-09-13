@@ -1,0 +1,24 @@
+/* Legal pages shared layout and progress rail */
+
+/* Two-column layout for legal pages */
+.layout-legal{display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media (max-width:980px){.layout-legal{grid-template-columns:1fr}}
+
+/* TOC sidebar with ghost progress rail */
+.toc{position:sticky;top:88px;align-self:start;padding:12px;border:1px solid var(--yuli-border);border-radius:18px;background:#fff;min-height:200px;box-shadow:0 8px 24px rgba(17,24,39,.06)}
+.toc a{display:block;color:var(--yuli-muted);text-decoration:none;padding:8px 10px;border-radius:10px;font-weight:600}
+.toc a[aria-current="true"], .toc a:hover{color:var(--yuli-ink);background:rgba(67,97,238,0.06)}
+
+/* Progress rail track and fill using CSS variables */
+.toc{--progress:0%}
+.toc::before{content:"";position:absolute;left:6px;top:12px;bottom:12px;width:4px;border-radius:999px;background:rgba(67,97,238,0.12)}
+.toc::after{content:"";position:absolute;left:6px;top:12px;width:4px;border-radius:999px;background:linear-gradient(180deg, #4361EE, #FF4D8D);height:var(--progress);}
+
+/* Headings inside card with accent underline */
+.layout-legal .card h2{position:relative;padding-bottom:8px;margin-top:16px}
+.layout-legal .card h2::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:56px;background:var(--yuli-accent);border-radius:2px}
+
+/* Zebra tables (cookies) */
+.table{border:1px solid var(--yuli-border);border-radius:14px;overflow:hidden}
+.table thead th{background:#f2f5ff}
+.table tbody tr:nth-child(even){background:#fafbff}

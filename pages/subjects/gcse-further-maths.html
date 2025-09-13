@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE Further Mathematics | Expert Tutoring | Yuli</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <style>
+        /* Disable smooth scroll on this page to avoid long-frame jank on large DOM */
+        html { scroll-behavior: auto !important; }
+        :root {
+            --yuli-primary: #4361EE;
+            --yuli-navy: #1e293b;
+            --yuli-dark-blue: #334155;
+            --yuli-light-blue: #e0f2fe;
+            --yuli-accent-blue: #0ea5e9;
+            --text-dark: #1f2937;
+            --text-muted: #64748b;
+            --text-light: #ffffff;
+            --bg-navy: #0f172a;
+            --bg-blue-tint: #f1f8ff;
+            --card-bg: #ffffff;
+            --border-blue: #bfdbfe;
+            --shadow-soft: 0 4px 6px -1px rgba(30, 41, 59, 0.1), 0 2px 4px -1px rgba(30, 41, 59, 0.06);
+            --shadow-medium: 0 10px 15px -3px rgba(30, 41, 59, 0.1), 0 4px 6px -2px rgba(30, 41, 59, 0.05);
+            --shadow-blue: 0 10px 25px -5px rgba(67,97,238,0.2);
+        }
+
+        /* Wavy divider at bottom of hero */
+        .hero-divider {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 80px;
+            z-index: 2;
+        }
+        .hero-divider svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-blue-tint);
+        }
+
+        .back-button {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            color: var(--yuli-primary);
+            background: var(--yuli-light-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-navy) 0%, var(--yuli-navy) 50%, var(--yuli-dark-blue) 100%);
+            color: var(--text-light);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(67, 97, 238, 0.15) 3px, transparent 3px),
+                radial-gradient(circle at 75% 25%, rgba(67, 97, 238, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 25% 75%, rgba(67, 97, 238, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(67, 97, 238, 0.15) 3px, transparent 3px),
+                radial-gradient(circle at 50% 50%, rgba(67, 97, 238, 0.08) 1px, transparent 1px);
+            background-size: 100px 100px, 80px 80px, 80px 80px, 100px 100px, 60px 60px;
+            opacity: 0.35;
+        }
+        /* Minimal math wallpaper handled by SVG outline icons below */
+
+        /* Gentle floating drift for maths icons */
+        @keyframes drift {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            50% { transform: translateY(-3px) translateX(1px) rotate(0.25deg); }
+            100% { transform: translateY(1px) translateX(-1px) rotate(-0.25deg); }
+        }
+
+        /* Soft fade to pair with drift */
+        @keyframes fadeSoft {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.08; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Removed near-title illustration to keep background cohesive */
+
+        /* Background hero icons */
+        .hero-icon {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.12; /* unified brightness */
+            pointer-events: none;
+            /* Disable continuous drifting animation to reduce paint/compose cost near top */
+            animation: none !important;
+            /* Performance: hide decorative hero SVGs to avoid extra layers/compositing near top */
+            display: none !important;
+        }
+        
+        
+        .hero-icon.dragging {
+            opacity: 0.4;
+            z-index: 1000;
+            animation: none;
+        }
+        
+        
+        
+        .hero-icon svg { display: block; }
+        /* Defensive reset to guarantee no boxes behind SVGs */
+        .hero-icon,
+        .hero-icon svg {
+            background: transparent !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            -webkit-mask-image: none !important;
+                    mask-image: none !important;
+        }
+        .hero-icon svg {
+            overflow: visible; /* avoid any internal clipping artifacts */
+            mix-blend-mode: normal; /* consistent brightness regardless of background */
+        }
+        /* Ensure all shapes are pure line-art */
+        .hero-icon svg *,
+        .hero-icon svg path,
+        .hero-icon svg rect,
+        .hero-icon svg line,
+        .hero-icon svg polyline,
+        .hero-icon svg polygon,
+        .hero-icon svg circle,
+        .hero-icon svg ellipse {
+            fill: none !important;
+        }
+        /* Premium line rendering + uniform stroke weight */
+        .hero-icon svg [stroke] {
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.2 !important; /* enforce consistent perceived brightness */
+        }
+        
+        /* Override any inline stroke-width variations */
+        .hero-icon svg * {
+            stroke-width: 1.2 !important;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        /* Subtext under CTA button in hero */
+        .cta-subtext {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .cta-button {
+            background: var(--yuli-primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-blue);
+            transition: all 0.3s ease;
+            border: 2px solid var(--yuli-primary);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(67,97,238,0.35), 0 0 0 4px rgba(67,97,238,0.15);
+            background: linear-gradient(135deg, var(--yuli-primary) 0%, var(--yuli-accent-blue) 100%);
+            border-color: var(--yuli-accent-blue);
+            color: white;
+            animation: glowPulse 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 10px 24px rgba(67,97,238,0.28), 0 0 0 2px rgba(67,97,238,0.10); }
+            100% { box-shadow: 0 16px 40px rgba(67,97,238,0.42), 0 0 0 6px rgba(67,97,238,0.18); }
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+            background: var(--bg-blue-tint);
+            position: relative; /* enable scoped decorative layer */
+        }
+
+        /* Decorative maths symbols only within the light blue main section */
+        .main-content::before {
+            content: none; /* disable decorative maths layer */
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.08; /* subtle */
+            /* 20 symbols (medium size), evenly and pseudo-randomly placed */
+            background-repeat: no-repeat;
+            background-image:
+              /* plus */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='50' y1='18' x2='50' y2='82'/><line x1='18' y1='50' x2='82' y2='50'/></g></svg>"),
+              /* pi */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 100 100'><path d='M15 30 H85 M40 30 V80 M65 30 C75 30 85 40 85 55 C85 70 75 80 60 80' fill='none' stroke='%231e293b' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* sigma */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 100 100'><path d='M75 15 H30 L60 50 L30 85 H75' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* root */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 120 80'><path d='M10 50 L25 70 L45 20 H110' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* infinity */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 140 80'><path d='M30 40 C30 20, 60 20, 70 40 C80 60, 110 60, 110 40 C110 20, 80 20, 70 40 C60 60, 30 60, 30 40 Z' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* theta */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><circle cx='50' cy='50' r='22'/><line x1='50' y1='34' x2='50' y2='66'/></g></svg>"),
+              /* integral */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 120 100'><path d='M60 10 C32 10, 32 50, 60 50 C88 50, 88 90, 60 90' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* division */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='20' y1='50' x2='80' y2='50'/><circle cx='50' cy='30' r='4' /><circle cx='50' cy='70' r='4' /></g></svg>"),
+              /* not equal */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 140 60'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='20' y1='24' x2='120' y2='24'/><line x1='20' y1='36' x2='120' y2='36'/><line x1='30' y1='46' x2='110' y2='14'/></g></svg>"),
+              /* angle */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 120 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='20' y1='80' x2='80' y2='80'/><line x1='20' y1='80' x2='20' y2='30'/><path d='M32 78 A18 18 0 0 1 38 62'/></g></svg>"),
+              /* parallel */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 80 120'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='30' y1='20' x2='30' y2='100'/><line x1='50' y1='20' x2='50' y2='100'/></g></svg>"),
+              /* modulus V */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='54' height='54' viewBox='0 0 160 100'><path d='M20 80 L80 30 L140 80' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* minus */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><line x1='20' y1='50' x2='80' y2='50' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'/></svg>"),
+              /* multiply */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='30' y1='30' x2='70' y2='70'/><line x1='70' y1='30' x2='30' y2='70'/></g></svg>"),
+              /* equals */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round'><line x1='20' y1='40' x2='80' y2='40'/><line x1='20' y1='60' x2='80' y2='60'/></g></svg>"),
+              /* less-than */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 100 100'><polyline points='65,25 35,50 65,75' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* greater-than */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 100 100'><polyline points='35,25 65,50 35,75' fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>"),
+              /* less-or-equal */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'><polyline points='70,25 40,50 70,75'/><line x1='30' y1='82' x2='80' y2='82'/></g></svg>"),
+              /* greater-or-equal */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><g fill='none' stroke='%231e293b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'><polyline points='30,25 60,50 30,75'/><line x1='20' y1='82' x2='70' y2='82'/></g></svg>"),
+              /* triangle */ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 100 100'><polygon points='50,22 20,78 80,78' fill='none' stroke='%231e293b' stroke-width='6' stroke-linejoin='round' stroke-linecap='round'/></svg>");
+            background-size: 44px 44px, 48px 48px, 48px 48px, 50px 50px, 50px 50px, 44px 44px, 44px 44px, 46px 46px, 50px 50px, 42px 42px, 48px 48px, 48px 48px, 44px 44px, 44px 44px, 44px 44px, 42px 42px, 42px 42px, 44px 44px, 44px 44px, 44px 44px;
+            /* Position symbols only in side margins and gaps, avoiding content areas */
+            background-position:
+              /* Left side margin */ 3% 18%, 5% 42%, 2% 65%, 4% 88%,
+              /* Right side margin */ 95% 15%, 97% 38%, 93% 62%, 96% 85%,
+              /* Top/bottom gaps */ 18% 5%, 82% 8%, 15% 95%, 85% 92%;
+              /* Extra, carefully spaced */ 6% 28%, 6% 76%, 94% 28%, 94% 76%, 30% 6%, 70% 6%, 30% 94%, 70% 94%;
+        }
+        
+        /* Ensure content sits above the decorative layer */
+        .main-content > * { position: relative; z-index: 1; }
+
+        /* Reduce density/visibility on small screens */
+        @media (max-width: 768px) {
+            .main-content::before { opacity: 0.05; background-size: 36px 36px, 40px 40px, 40px 40px, 42px 42px, 42px 42px, 36px 36px, 36px 36px, 38px 38px, 40px 40px, 34px 34px, 38px 38px, 38px 38px, 36px 36px, 36px 36px, 36px 36px, 34px 34px, 34px 34px, 36px 36px, 36px 36px, 36px 36px; }
+        }
+
+        .section {
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            /* Neutralize alternating band: keep spacing consistent but no extra background strip */
+            background: transparent;
+            padding: 60px 0;
+            margin: 0 0 80px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Exam Boards Section */
+        .exam-boards-container {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .exam-boards-logos {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap; /* wrap into rows */
+            max-width: 1100px;
+            margin-inline: auto;
+        }
+
+        .exam-board-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            min-width: 170px;
+            padding: 14px 16px;
+            background: #ffffff;
+            border: 1.5px solid var(--border-blue);
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .exam-board-logo:hover { background: linear-gradient(135deg, #ffffff 0%, var(--yuli-light-blue) 100%); box-shadow: var(--shadow-medium); outline: none; border-color: var(--yuli-primary); }
+        .exam-board-logo:focus { outline: none; }
+        .exam-board-logo::before,
+        .exam-board-logo::after { content: none !important; }
+
+        .exam-board-logo img {
+            height: 64px; /* consistent image band inside cards */
+            width: auto;
+            object-fit: contain;
+            display: block;
+            background: none;
+            box-shadow: none;
+            border-radius: 0;
+            /* Stylised, non-official: force monochrome silhouette */
+            filter: grayscale(1) contrast(1.05) brightness(0) opacity(0.92);
+            transition: transform 200ms ease, opacity 200ms ease;
+        }
+
+        /* Hover: subtle lift on the image itself */
+        .exam-board-logo:hover img {
+            transform: translateY(-1px) scale(1.04);
+            opacity: 1;
+        }
+
+        .exam-board-label {
+            margin-top: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--yuli-navy);
+            letter-spacing: 0.1px;
+        }
+
+        /* Typographic glyph (for OCR without the star) */
+        .exam-board-glyph {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--yuli-navy);
+        }
+
+        /* Subtle per-logo tuning for visual parity */
+        .exam-board-logo[data-board="AQA"] img { height: 60px; }
+        .exam-board-logo[data-board="Edexcel"] img { height: 66px; }
+        .exam-board-logo[data-board="WJEC"] img { height: 62px; }
+        .exam-board-logo[data-board="CCEA"] img { height: 58px; object-fit: contain; }
+
+        /* Temporary fallback: disable shadow for CCEA on hover, keep a tiny lift */
+        .exam-board-logo--ccea:hover img {
+            filter: none; /* restore full colour, no drop-shadow */
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .exam-boards-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-top: 2rem;
+            font-weight: 400;
+        }
+
+        .exam-boards-note {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Branded banner line */
+        .we-teach-banner {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+            border: 2px solid var(--border-blue);
+            color: var(--yuli-dark-blue);
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .exam-boards-logos { gap: 0.75rem; padding: 0 0.5rem; }
+            .exam-board-logo { min-width: calc(50% - 0.75rem); }
+            .exam-board-label { font-size: 0.88rem; }
+        }
+
+        /* Exam Boards Grid */
+        .exam-boards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .exam-board-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 140px;
+            gap: 0.25rem;
+        }
+
+        .exam-board-card {
+            border: 2px solid var(--border-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-board-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: var(--yuli-primary);
+            transition: left 0.3s ease;
+        }
+
+        .exam-board-card:hover {
+            background: var(--yuli-light-blue);
+            border-color: var(--yuli-primary);
+            color: var(--yuli-navy);
+            box-shadow: var(--shadow-blue);
+        }
+
+        .exam-board-card:hover::before {
+            left: 0;
+        }
+
+        .exam-board-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0.25rem 0 0.35rem;
+        }
+
+        .exam-board-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            border-left: 4px solid var(--yuli-primary);
+            background: linear-gradient(135deg, white 0%, var(--yuli-light-blue) 100%);
+        }
+
+        .topic-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--yuli-navy);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topic-card h3 i {
+            color: var(--yuli-primary);
+            font-size: 1.25rem;
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .topic-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topic-list li:last-child {
+            border-bottom: none;
+        }
+
+        .topic-list li::before {
+            content: '✓';
+            color: var(--yuli-primary);
+            font-weight: 600;
+        }
+
+        /* Methodology Steps */
+        .methodology-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--yuli-primary) 0%, var(--yuli-accent-blue) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-blue);
+            border: 3px solid white;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            text-align: center;
+            padding: 2rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .resource-card {
+            border: 2px solid var(--border-blue);
+            background: linear-gradient(135deg, white 0%, var(--yuli-light-blue) 100%);
+        }
+
+        .resource-card:hover {
+            background: var(--yuli-navy);
+            color: white;
+            border-color: var(--yuli-navy);
+            box-shadow: var(--shadow-blue);
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            color: var(--yuli-primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-icon {
+            color: var(--yuli-accent-blue);
+            transform: scale(1.1);
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+            background: linear-gradient(135deg, var(--yuli-navy) 0%, var(--yuli-primary) 100%);
+            color: white;
+            border: 3px solid var(--yuli-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-subtitle {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Outcomes under price */
+        .price-outcomes {
+            display: grid;
+            gap: 0.5rem;
+            margin: -0.5rem 0 1.75rem;
+            text-align: left;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+        .price-outcomes .outcome {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .price-outcomes .outcome i {
+            color: #34D399; /* emerald */
+        }
+
+        /* Tutor Section */
+        .tutor-profile {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tutor-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: linear-gradient(135deg, white 0%, var(--yuli-light-blue) 100%);
+            border: 2px solid var(--yuli-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--yuli-primary), var(--yuli-accent-blue));
+        }
+
+        .tutor-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--yuli-primary) 0%, var(--yuli-accent-blue) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-blue);
+            border: 4px solid white;
+        }
+
+        .tutor-info h3 {
+            color: var(--yuli-navy);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .tutor-bio {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tutor-credentials {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--yuli-navy);
+            font-weight: 500;
+        }
+
+        .credential i {
+            color: var(--yuli-primary);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .tutor-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tutor-credentials {
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-blue);
+        }
+
+        .faq-question:hover {
+            background: var(--yuli-light-blue);
+            color: var(--yuli-navy);
+        }
+
+        .faq-item.active {
+            border-color: var(--yuli-primary);
+            box-shadow: var(--shadow-blue);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .main-content {
+                padding: 40px 0;
+            }
+
+            .section {
+                margin-bottom: 60px;
+            }
+        }
+        
+        /* How We Teach — Loop Ring */
+        #how-we-teach {
+            position: relative;
+            background: transparent; /* calm, no panel */
+            padding: clamp(48px, 5vw, 80px) 0; /* +16–20px breathing room */
+        }
+        /* Slightly increased breathing room and constrained width */
+        .section.hwt { margin-bottom: 64px; }
+        .hwt-container {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            align-items: center;
+            gap: clamp(16px, 3vw, 32px);
+            max-width: 1200px;
+            margin-inline: auto;
+            padding-inline: 24px;
+        }
+        .hwt-header { text-align: center; max-width: 800px; margin: -8px auto 2.5rem; }
+        .hwt-ring-col { grid-column: span 7; display: flex; justify-content: center; }
+        .hwt-copy-col { grid-column: span 5; }
+
+        /* Match global section-title styling for consistency */
+        .hwt-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+        .hwt-sub { font-size: 1rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+
+        .hwt-steps { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 10px; 
+        }
+        .hwt-step {
+            appearance: none; background: transparent; border: 0; padding: 10px 2px; text-align: left; cursor: pointer; color: var(--text-dark);
+            border-radius: 10px; /* for custom focus ring shape */
+        }
+        .hwt-step:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(67,97,238,0.35); background: rgba(67,97,238,0.05); }
+        .hwt-step-title { font-size: clamp(18px, 2vw, 20px); font-weight: 600; margin-bottom: 4px; }
+        .hwt-step-desc { font-size: 0.95rem; color: var(--text-muted); }
+
+        .hwt-cta { text-align: left; margin-top: 14px; }
+        .hwt-cta a { color: var(--yuli-primary); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 200ms ease, border-color 200ms ease; }
+        .hwt-cta a:hover { color: var(--yuli-accent-blue); border-color: var(--yuli-accent-blue); }
+
+        /* Ring sizing */
+        .hwt-ring {
+            width: clamp(280px, 25vw, 320px);
+            height: clamp(280px, 25vw, 320px);
+        }
+        .hwt-ring [data-base] { stroke: rgba(2, 6, 23, 0.08); }
+        .hwt-ring .hwt-arc { stroke-linecap: round; stroke-width: 12; opacity: 0.35; transition: opacity 200ms ease, stroke-width 200ms ease, filter 200ms ease; }
+        .hwt-ring .hwt-arc.is-active { opacity: 1; stroke-width: 14; filter: drop-shadow(0 4px 14px rgba(67,97,238,0.25)); }
+        .hwt-ring .hwt-arc.is-dim { opacity: 0.25; }
+        .hwt-ring .hwt-chip { transition: transform 200ms ease, filter 200ms ease, transform 200ms ease; cursor: pointer; }
+        .hwt-ring .hwt-chip circle { fill: rgba(255,255,255,0.65); stroke: rgba(67,97,238,0.35); }
+        .hwt-ring .hwt-chip.is-active { transform: scale(1.06) translateY(-1px); filter: drop-shadow(0 6px 20px rgba(67,97,238,0.25)); }
+        .hwt-ring .hwt-chip:focus-visible circle { outline: none; stroke: rgba(67,97,238,0.65); stroke-width: 2.5; }
+
+        /* Optional one-time sweep on load (no reduced motion) */
+        @keyframes hwtSweepA { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+        @keyframes hwtSweepB { from { stroke-dashoffset: 125; } to { stroke-dashoffset: 25; } }
+        @keyframes hwtSweepC { from { stroke-dashoffset: 150; } to { stroke-dashoffset: 50; } }
+        @keyframes hwtSweepD { from { stroke-dashoffset: 175; } to { stroke-dashoffset: 75; } }
+        .hwt-sweep #arc-1 { animation: hwtSweepA 700ms ease forwards; }
+        .hwt-sweep #arc-2 { animation: hwtSweepB 750ms ease forwards; }
+        .hwt-sweep #arc-3 { animation: hwtSweepC 800ms ease forwards; }
+        .hwt-sweep #arc-4 { animation: hwtSweepD 850ms ease forwards; }
+
+        /* Tablet: ring above, steps below in two columns */
+        @media (max-width: 1099px) {
+            .hwt-ring-col { grid-column: 1 / -1; order: 2; }
+            .hwt-copy-col { grid-column: 1 / -1; order: 1; text-align: center; }
+            .hwt-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); text-align: left; justify-items: center; }
+            .hwt-step { width: 100%; max-width: 440px; }
+            .hwt-cta { text-align: center; }
+        }
+
+        /* Mobile: stack steps one column, center */
+        @media (max-width: 768px) {
+            .hwt-steps { grid-template-columns: 1fr; }
+            .hwt-copy-col { text-align: center; }
+            .hwt-cta { text-align: center; }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hwt-ring .hwt-arc, .hwt-ring .hwt-chip, .hwt-step, .hwt-cta a { transition: none !important; }
+            .cta-button:hover { animation: none !important; }
+        }
+        
+        /* Scoped animation layers for How We Teach */
+        /* Decorative math symbols behind content (limited, subdued) */
+        #how-we-teach .plane-anim { position: absolute; top: 0; left: 50%; width: 100vw; height: 100%; margin-left: -50vw; pointer-events: none; z-index: 0; overflow: visible; display: none !important; }
+        #how-we-teach .hwt-container { position: relative; z-index: 1; }
+        #how-we-teach .plane-anim .clouds { position: absolute; top: 0; left: 50%; width: 100vw; height: 100%; margin-left: -50vw; overflow: visible; }
+        /* Limit to two elements, tone down, and remove animation */
+        #how-we-teach .plane-anim .clouds svg { opacity: .3; filter: blur(1px); animation: none !important; }
+        #how-we-teach .plane-anim .clouds svg:nth-child(n+3) { display: none; }
+        /* Plane positioned inside the right column where the ring used to be */
+        #how-we-teach .hwt-ring-col { position: relative; }
+        #how-we-teach .plane-side { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; pointer-events: none; }
+        #how-we-teach .plane-side .plane-container { width: clamp(180px, 28vw, 260px); }
+        #how-we-teach .plane-side .plane { width: 100%; height: 70px; opacity: 0.95; filter: drop-shadow(0 8px 18px rgba(2,6,23,.18)); }
+        /* Lower cloud band so the plane intersects it */
+        #how-we-teach .plane-anim .cloud { position: absolute; top: 20%; right: -120px; width: 280px; opacity: 0.5; }
+        /* Hide the right-side foreground cloud */
+        #how-we-teach .plane-anim .cloud.front { display: none !important; }
+
+        /* Illustration: scale down slightly and nudge right */
+        #how-we-teach .hwt-illustration { display: flex; align-items: center; justify-content: center; padding: 16px 0; transform: scale(.88) translateX(14px); transform-origin: center; position: relative; }
+        /* Very soft radial fade behind illustration */
+        #how-we-teach .hwt-ring-col::before { content: ''; position: absolute; inset: 0; margin: auto; width: min(520px, 80%); height: min(520px, 80%); background: radial-gradient(circle, rgba(0,0,0,.03), transparent 60%); filter: blur(4px); z-index: 0; }
+        #how-we-teach .hwt-ring-col { position: relative; }
+        #how-we-teach .hwt-illustration img, 
+        #how-we-teach .hwt-illustration svg { width: clamp(220px, 32vw, 420px); height: auto; color: #0f172a; }
+        #how-we-teach .hwt-illustration .line * { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        #how-we-teach .hwt-illustration .line .bold { stroke-width: 3; }
+        #how-we-teach .hwt-illustration .accent { stroke: #3b82f6; fill: none; opacity: 0.9; }
+
+        /* How We Teach — card visual refinements (scoped) */
+        #how-we-teach .hwt-copy-col { max-width: 580px; margin-inline: auto; }
+        #how-we-teach .hwt-journey { display: grid; gap: 16px; counter-reset: step; }
+        #how-we-teach .hwt-node {
+          position: relative;
+          display: flex; align-items: flex-start; gap: 12px;
+          background: #ffffff;
+          border: 1px solid rgba(17,24,39,0.08);
+          border-radius: 15px;
+          padding: 16px 20px; /* t/b 16–18, l/r 18–20 */
+          box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+        }
+        /* Body text sizing/color inside cards */
+        #how-we-teach .hwt-node p { font-size: 16px; line-height: 1.6; color: var(--text, #111827); margin: 0; }
+        #how-we-teach .hwt-node h3 { margin: 0 0 6px; font-weight: 600; color: inherit; }
+
+        /* Icon coin (left inside card) */
+        #how-we-teach .hwt-badge {
+          width: 32px; height: 32px; flex: 0 0 32px; border-radius: 999px;
+          background: #eef4ff; /* very light brand tint */
+          box-shadow: inset 0 0 0 1px rgba(17,24,39,0.06);
+          display: inline-flex; align-items: center; justify-content: center;
+          margin-top: 2px; margin-left: 6px; /* ensure no overlap with number badge */
+        }
+        #how-we-teach .hwt-badge svg { width: 18px; height: 18px; stroke: #4361EE; }
+
+        /* Disable tiny corner numbers — we now show the main number in the badge coin */
+        #how-we-teach .hwt-node::before { content: none !important; display: none !important; }
+        /* Numeric badge coin styles */
+        #how-we-teach .hwt-badge { 
+          width: 40px; height: 40px; border-radius: 999px; 
+          background: #EEF3FF; color: var(--yuli-primary, #4361EE); 
+          display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.06); box-shadow: none; 
+          font-weight: 800; font-size: 16px; line-height: 1; 
+        }
+        #how-we-teach .hwt-badge-num { display: inline-block; font: inherit; color: inherit; }
+
+        /* Responsive: ensure cards don’t overflow container and spacing remains */
+        @media (max-width: 1024px) {
+          #how-we-teach .hwt-copy-col { max-width: 100%; }
+          #how-we-teach .hwt-journey { gap: 16px; }
+        }
+        /* How We Teach: floating math icons — icons-only adjustments */
+        /* Desktop ≥1200px: ~30% reduction and 12–16px nudge toward figure */
+        @media (min-width: 1200px){
+          #how-we-teach .plane-anim .clouds{ transform: scale(.70); transform-origin: center right; }
+          /* Nudge cluster inward without changing relative pattern */
+          #how-we-teach .plane-anim .cloud{ right: -104px; }
+          #how-we-teach .plane-anim .cloud.small{ right: -44px; }
+          #how-we-teach .plane-anim .cloud.massive{ right: -149px; }
+        }
+        /* Tablet 768–1199px: ~40% reduction, keep tighter cluster; avoid overflow */
+        @media (min-width: 768px) and (max-width: 1199px){
+          #how-we-teach .plane-anim .clouds{ transform: scale(.60); transform-origin: center right; }
+          #how-we-teach .plane-anim .cloud{ right: -104px; }
+          #how-we-teach .plane-anim .cloud.small{ right: -44px; }
+          /* Hide least important if crowding occurs */
+          #how-we-teach .plane-anim .cloud.massive{ display: none !important; }
+        }
+        @media (max-width: 900px) {
+          #how-we-teach .hwt-illustration img, 
+          #how-we-teach .hwt-illustration svg { width: clamp(200px, 60vw, 520px); }
+        }
+        #how-we-teach .plane-anim .cloud.distant { z-index: -1; opacity: 0.35; }
+        #how-we-teach .plane-anim .cloud.small { width: 160px; top: 36%; right: -80px; opacity: 0.45; }
+        #how-we-teach .plane-anim .cloud.massive { width: 520px; top: 8%; right: -220px; opacity: 0.3; }
+
+        /* Foreground clouds only over the right column to create a pass-through effect */
+        /* Disabled: remove cloud visuals entirely */
+        #how-we-teach .plane-anim { display: none !important; }
+        #how-we-teach .clouds-fore { position: absolute; inset: 0; pointer-events: none; z-index: 4; overflow: visible; display: none !important; }
+        #how-we-teach .clouds-fore .cloud { position: absolute; opacity: 0.55; animation: cloud-drift 12.5s linear infinite; }
+        #how-we-teach .clouds-fore .cloud.small { width: 150px; top: 18%; right: 4%; }
+        #how-we-teach .clouds-fore .cloud.big { width: 240px; top: 32%; right: -6%; opacity: 0.5; animation-duration: 14s; }
+
+        /* Journey (zig-zag) layout */
+        .hwt .hwt-container { grid-template-columns: 1.1fr 0.9fr; grid-template-areas: 'copy ring'; }
+        .hwt .hwt-copy-col { grid-area: copy; }
+        .hwt .hwt-ring-col { grid-area: ring; }
+
+        #how-we-teach .hwt-journey { position: relative; display: grid; grid-auto-rows: auto; gap: 8px; margin-top: 10px; }
+        #how-we-teach .hwt-node { position: relative; background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 10px 12px; box-shadow: 0 6px 20px rgba(20,30,60,.06); display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; transition: box-shadow .2s ease, transform .2s ease, background .2s ease, border-color .2s ease; }
+        #how-we-teach .hwt-node:hover { box-shadow: 0 12px 32px rgba(2,6,23,.12); transform: translateY(-1px); background: rgba(255,255,255,0.66); border-color: rgba(255,255,255,0.5); }
+        #how-we-teach .hwt-node:hover .hwt-badge svg { filter: drop-shadow(0 4px 10px rgba(67,97,238,0.35)); }
+        #how-we-teach .hwt-node.left { justify-self: start; max-width: 560px; }
+        #how-we-teach .hwt-node.right { justify-self: end; max-width: 560px; }
+
+        #how-we-teach .hwt-badge { width: 40px; height: 40px; border-radius: 999px; background: #EEF3FF; color: var(--yuli-primary, #4361EE); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.06); box-shadow: none; }
+        #how-we-teach .hwt-badge svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+        #how-we-teach .hwt-node h3 { margin: 0 0 6px; font-size: 16px; line-height: 1.35; color: #0f172a; font-weight: 700; }
+        #how-we-teach .hwt-node h3 .step { color: #4361EE; font-weight: 800; margin-right: 6px; }
+        #how-we-teach .hwt-node p { margin: 0; color: #475569; font-size: 14.5px; line-height: 1.6; }
+
+        /* Decorative connectors (desktop) — removed for calm feel */
+        @media (min-width: 981px) {
+          /* intentionally empty */
+        }
+
+        /* Mobile vertical stack with central dotted spine */
+        @media (max-width: 980px) {
+          #how-we-teach .hwt-journey { gap: 12px; }
+          #how-we-teach .hwt-journey::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 0; border-left: 2px dotted rgba(15,23,42,.2); }
+          #how-we-teach .hwt-node { padding-left: 18px; }
+          #how-we-teach .hwt-node.left, #how-we-teach .hwt-node.right { justify-self: stretch; }
+        }
+
+        /* Disable dotted connector graphics (desktop + mobile) */
+        #how-we-teach .hwt-journey::before,
+        #how-we-teach .hwt-node::after {
+          content: none !important;
+          display: none !important;
+          border: 0 !important;
+          background: none !important;
+        }
+        #how-we-teach.hwt-in-view .hwt-node::after { animation: none !important; }
+
+        /* CTA block under grid */
+        #how-we-teach .hwt-cta { margin-top: 16px; display: grid; gap: 6px; }
+        #how-we-teach .hwt-cta .cta-button { display: inline-flex; align-items: center; justify-content: center; padding: 12px 16px; border-radius: 12px; background: #4361EE; color: #fff; font-weight: 800; text-decoration: none; border: 1px solid rgba(67,97,238,.2); box-shadow: 0 10px 24px rgba(67,97,238,.22); }
+        #how-we-teach .hwt-cta .cta-button:hover { 
+          background: linear-gradient(135deg, var(--yuli-primary) 0%, var(--yuli-accent-blue) 100%);
+          border-color: var(--yuli-accent-blue);
+        }
+        #how-we-teach .hwt-cta small { color: #64748b; }
+
+        /* Section dividers */
+        .section-divider { width: 100%; overflow: hidden; line-height: 0; }
+        .section-divider svg { display: block; width: 100%; height: auto; }
+        .section-divider.blue-diagonal svg { filter: drop-shadow(0 6px 16px rgba(67,97,238,.10)); }
+
+        /* Testimonials strip */
+        .testimonials-strip { padding: 40px 0 20px; position: relative; }
+        .testimonials-strip .section-title { margin-bottom: 16px; text-align: center; font-size: 2rem; font-weight: 700; }
+        .testimonials-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 1fr); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scroll-behavior: smooth; }
+        .testimonial-card { scroll-snap-align: start; background: #fff; border: 1px solid #e6edf5; border-radius: 16px; padding: 18px; box-shadow: 0 8px 24px rgba(2,6,23,.06); min-height: 150px; display: grid; gap: 10px; }
+        .testimonial-quote { color: #0f172a; font-size: 1rem; line-height: 1.6; font-weight: 500; }
+        .testimonial-meta { display: flex; align-items: center; justify-content: space-between; color: #475569; font-size: 0.95rem; }
+        .stars { color: #f59e0b; letter-spacing: 1px; font-size: 0.95rem; }
+        /* testimonials background motif */
+        .testimonials-math-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.06; display: none; }
+        .testimonials-strip .inner { position: relative; z-index: 1; }
+        /* Carousel controls */
+        .t-carousel-controls { display: none; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+        .t-carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: 1px solid #e6edf5; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 6px 16px rgba(2,6,23,.1); cursor: pointer; pointer-events: auto; }
+        .t-carousel-prev { left: 8px; }
+        .t-carousel-next { right: 8px; }
+        @media (min-width: 992px) {
+          .testimonials-math-bg { display: block; }
+          .t-carousel-controls { display: block; }
+        }
+        @media (max-width: 768px) {
+          .testimonials-row { grid-auto-flow: row; grid-auto-columns: unset; grid-template-columns: 1fr; overflow: visible; }
+        }
+
+        /* Micro-animations */
+        .reveal { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        #how-we-teach .hwt-node.reveal.is-visible .hwt-badge svg { animation: icon-pop 600ms cubic-bezier(.2,.8,.2,1) both; }
+        #how-we-teach.hwt-in-view .hwt-node::after { animation: connector-pulse 2200ms ease 1; }
+        @keyframes icon-pop { 0% { transform: scale(.95); opacity: .8; } 60% { transform: scale(1.04); opacity: 1; } 100% { transform: scale(1); } }
+        @keyframes connector-pulse { 0% { opacity: .3; } 40% { opacity: .6; } 100% { opacity: .35; } }
+
+        /* Animations */
+        @keyframes plane-bob { from { transform: translateY(0); } to { transform: translateY(14px); } }
+        @keyframes plane-soar {
+          0% { transform: rotate(0deg); }
+          40% { transform: rotate(8deg); }
+          60% { transform: rotate(-5deg); }
+          100% { transform: rotate(0deg); }
+        }
+        @keyframes cloud-drift {
+          0% { transform: translateX(0); opacity: 0; }
+          10% { opacity: .7; }
+          90% { opacity: 0; }
+          100% { opacity: 0; transform: translateX(-150vw); }
+        }
+        /* On small screens, hide the side plane overlay to keep layout clean */
+        @media (max-width: 768px) {
+          #how-we-teach .plane-side { display: none; }
+        }
+        #how-we-teach .plane-side .plane-container { animation: plane-bob 2.2s linear alternate infinite; }
+        #how-we-teach .plane-side .plane { animation: plane-soar 4.5s ease-in-out infinite; }
+        #how-we-teach .plane-anim .cloud { animation: cloud-drift 11s linear infinite; }
+        #how-we-teach .plane-anim .cloud.slow { animation-duration: 12.5s; }
+        #how-we-teach .plane-anim .cloud.slowest { animation-duration: 14.5s; }
+        #how-we-teach .plane-anim .cloud.super-slow { animation-duration: 19s; }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          #how-we-teach .plane-side .plane-container,
+          #how-we-teach .plane-side .plane,
+          #how-we-teach .plane-anim .cloud { animation: none !important; }
+        }
+    </style>
+    <style id="footer-compact-overrides">
+      footer { padding: 84px 0 40px; }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 36px; margin: 0 auto 36px; align-items: start; }
+      .footer-brand { display: flex; flex-direction: column; }
+      .footer-brand h3 { margin: 0 0 10px; font-size: 1.6rem; }
+      .footer-contact { display: grid; gap: 6px; margin-top: 0; }
+      .footer-contact a { color: rgba(255,255,255,.78); text-decoration: none; font-size: .98rem; }
+      .footer-contact a:hover { color: #fff; text-decoration: underline; }
+      .footer-social { display: flex; gap: 14px; margin-top: 12px; }
+      .footer-social a { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; transition: all .2s ease; text-decoration: none; }
+      .footer-social a:hover { color: #fff; border-color: rgba(255,255,255,.36); transform: translateY(-1px); }
+      .footer-heading { margin-bottom: 12px; padding-bottom: 8px; font-size: 1.02rem; }
+      .footer-links li { margin-bottom: 10px; }
+      .footer-bottom { padding-top: 36px; gap: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+      .footer-bottom p { font-size: 0.92rem; }
+      @media (max-width: 900px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 22px; }
+      }
+      @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .footer-brand { text-align: left; }
+      }
+    </style>
+</head>
+<body>
+    <!-- Ethical Pricing Banner -->
+    <div class="ethical-banner">
+        <div class="container">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Discounted rates available for eligible students</span>
+            <a href="#pricing">Learn more</a>
+        </div>
+    </div>
+    
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Yuli<span>.</span></a>
+            <a href="/" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <!-- Faint hero background icons -->
+        <div class="hero-icon" aria-hidden="true" style="top: 5%; left: 2%; width: 45px;">
+            <!-- Calculator -->
+            <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <rect x="2" y="2" width="96" height="136" rx="12" stroke="#ffffff" stroke-width="1.2"/>
+                <rect x="14" y="12" width="72" height="22" rx="4" stroke="#ffffff" stroke-width="1.2"/>
+                <g stroke="#ffffff" stroke-width="1">
+                    <rect x="14" y="44" width="14" height="14" rx="2"/>
+                    <rect x="32" y="44" width="14" height="14" rx="2"/>
+                    <rect x="50" y="44" width="14" height="14" rx="2"/>
+                    <rect x="68" y="44" width="14" height="14" rx="2"/>
+                    <rect x="14" y="62" width="14" height="14" rx="2"/>
+                    <rect x="32" y="62" width="14" height="14" rx="2"/>
+                    <rect x="50" y="62" width="14" height="14" rx="2"/>
+                    <rect x="68" y="62" width="14" height="14" rx="2"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="hero-icon" aria-hidden="true" style="top: 8%; left: 30%; width: 45px; animation-duration: 26s;">
+            <!-- Ruler -->
+            <svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <!-- Outer rectangle removed for clean line-art without box -->
+                <g stroke="#ffffff" stroke-width="1.2">
+                    <line x1="20" y1="2" x2="20" y2="18"/>
+                    <line x1="40" y1="2" x2="40" y2="26"/>
+                    <line x1="60" y1="2" x2="60" y2="18"/>
+                    <line x1="80" y1="2" x2="80" y2="26"/>
+                    <line x1="100" y1="2" x2="100" y2="18"/>
+                    <line x1="120" y1="2" x2="120" y2="26"/>
+                    <line x1="140" y1="2" x2="140" y2="18"/>
+                    <line x1="160" y1="2" x2="160" y2="26"/>
+                    <line x1="180" y1="2" x2="180" y2="18"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="hero-icon" aria-hidden="true" style="top: 12%; left: 55%; width: 45px; animation-duration: 24s;">
+            <!-- Triangle -->
+            <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 100 L110 100 L10 10 Z" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M10 100 L60 55" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 4"/>
+            </svg>
+        </div>
+
+        <div class="hero-icon" aria-hidden="true" style="top: 6%; left: 80%; width: 45px; animation-duration: 28s;">
+            <!-- Sigma -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M75 15 H30 L60 50 L30 85 H75" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+            </svg>
+        </div>
+
+        <div class="hero-icon" aria-hidden="true" style="top: 18%; left: 15%; width: 45px; animation-duration: 25s;">
+            <!-- Graph -->
+            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 90 H130" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M10 90 V10" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M10 70 C40 30, 80 110, 130 20" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        
+        
+        <!-- Additional subtle maths/stationery icons (line-art only) -->
+        
+
+        
+
+        
+
+        
+
+        <div class="hero-icon" aria-hidden="true" style="top: 25%; left: 5%; width: 45px; animation-duration: 22s;">
+            <!-- Percentage -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="80" x2="80" y2="20" stroke="#ffffff" stroke-width="1.2"/>
+                <circle cx="32" cy="32" r="8" stroke="#ffffff" stroke-width="1.2"/>
+                <circle cx="68" cy="68" r="8" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Protractor (subtle, central-left free space) -->
+        <div class="hero-icon" aria-hidden="true" style="top: 32%; left: 25%; width: 45px; animation-duration: 26s;">
+            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 100 H190" stroke="#ffffff" stroke-width="1.1"/>
+                <path d="M10 100 A90 90 0 0 1 190 100" stroke="#ffffff" stroke-width="1.1"/>
+                <g stroke="#ffffff" stroke-width="0.9">
+                    <line x1="50" y1="100" x2="50" y2="94"/>
+                    <line x1="90" y1="100" x2="90" y2="90"/>
+                    <line x1="130" y1="100" x2="130" y2="94"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Pi (π) - top center, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 28%; left: 50%; width: 45px; animation-duration: 22s;">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M15 30 H85 M40 30 V80 M65 30 C75 30 85 40 85 55 C85 70 75 80 60 80" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Compass - bottom center-left, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 75%; left: 50%; width: 45px; animation-duration: 27s;">
+            <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <circle cx="60" cy="22" r="7" stroke="#ffffff" stroke-width="1.1"/>
+                <line x1="60" y1="29" x2="40" y2="120" stroke="#ffffff" stroke-width="1.1"/>
+                <line x1="60" y1="29" x2="86" y2="118" stroke="#ffffff" stroke-width="1.1"/>
+                <path d="M44 110 L36 124" stroke="#ffffff" stroke-width="1.1"/>
+                <path d="M82 110 L92 124" stroke="#ffffff" stroke-width="1.1"/>
+            </svg>
+        </div>
+
+        <!-- Square root (√) - mid-right, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 22%; left: 88%; width: 45px; animation-duration: 23s;">
+            <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 50 L25 70 L45 20 H110" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Equation y = x^2 - far right lower, large thin -->
+        <div class="hero-icon" aria-hidden="true" style="top: 45%; left: 3%; width: 45px; animation-duration: 28s;">
+            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 40 Q18 20 24 40 T38 40" stroke="#ffffff" stroke-width="1"/>
+                <line x1="46" y1="40" x2="62" y2="40" stroke="#ffffff" stroke-width="1"/>
+                <path d="M76 40 Q88 20 100 40 T124 40" stroke="#ffffff" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <!-- Integral (∫) - left lower-mid, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 48%; left: 35%; width: 45px; animation-duration: 23s;">
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M60 10 C32 10, 32 50, 60 50 C88 50, 88 90, 60 90" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Theta (θ) - right mid-lower, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 52%; left: 60%; width: 45px; animation-duration: 25s;">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <circle cx="50" cy="50" r="18" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="50" y1="34" x2="50" y2="66" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Right-angle marker - center-right, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 42%; left: 82%; width: 45px; animation-duration: 24s;">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M20 80 V40 H60" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Division (÷) - right lower-mid, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 58%; left: 18%; width: 45px; animation-duration: 27s;">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="50" x2="80" y2="50" stroke="#ffffff" stroke-width="1.2"/>
+                <circle cx="50" cy="32" r="4" stroke="#ffffff" stroke-width="1.2"/>
+                <circle cx="50" cy="68" r="4" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Absolute value |x| - upper-right, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 65%; left: 8%; width: 45px; animation-duration: 22s;">
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M20 20 V80" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M100 20 V80" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M46 44 L74 72" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M74 44 L46 72" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Vector arrow - lower-left center, large thin -->
+        <div class="hero-icon" aria-hidden="true" style="top: 68%; left: 40%; width: 45px; animation-duration: 28s;">
+            <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="10" y1="40" x2="90" y2="40" stroke="#ffffff" stroke-width="1.2"/>
+                <polyline points="90,40 78,34 78,46" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Matrix 2x2 - mid-center-left, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 72%; left: 65%; width: 45px; animation-duration: 24s;">
+            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M30 20 V80" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M110 20 V80" stroke="#ffffff" stroke-width="1.2"/>
+                <rect x="40" y="30" width="20" height="16" rx="2" stroke="#ffffff" stroke-width="1.1"/>
+                <rect x="80" y="30" width="20" height="16" rx="2" stroke="#ffffff" stroke-width="1.1"/>
+                <rect x="40" y="56" width="20" height="16" rx="2" stroke="#ffffff" stroke-width="1.1"/>
+                <rect x="80" y="56" width="20" height="16" rx="2" stroke="#ffffff" stroke-width="1.1"/>
+            </svg>
+        </div>
+
+        <!-- Sine wave - lower-right band, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 62%; left: 85%; width: 45px; animation-duration: 26s;">
+            <svg viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M10 40 C30 10, 50 10, 70 40 C90 70, 110 70, 130 40" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Inequality a ≤ b - upper-mid-right, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 78%; left: 25%; width: 45px; animation-duration: 23s;">
+            <svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M20 30 H40" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M120 30 H140" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M60 20 L100 30 L60 40" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="60" y1="44" x2="100" y2="44" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Infinity ∞ - mid-right band, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 85%; left: 10%; width: 45px; animation-duration: 25s;">
+            <svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M30 40 C30 20, 60 20, 70 40 C80 60, 110 60, 110 40 C110 20, 80 20, 70 40 C60 60, 30 60, 30 40 Z" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Product Π with implied bounds - upper-right band, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 82%; left: 75%; width: 45px; animation-duration: 24s;">
+            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M30 80 V20 H100 V28 H42 V80" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="30" y1="16" x2="60" y2="16" stroke="#ffffff" stroke-width="1"/>
+                <line x1="70" y1="86" x2="100" y2="86" stroke="#ffffff" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <!-- Angle arc marker - upper-mid-left, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 34%; left: 10%; width: 70px; animation-duration: 23s;">
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="80" x2="80" y2="80" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="20" y1="80" x2="20" y2="30" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M32 78 A18 18 0 0 1 38 62" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Complex plane mini (Argand) - lower-right, medium -->
+        <div class="hero-icon" aria-hidden="true" style="bottom: 14%; left: 86%; width: 90px; animation-duration: 26s;">
+            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="80" x2="120" y2="80" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="40" y1="95" x2="40" y2="20" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="40" y1="80" x2="96" y2="40" stroke="#ffffff" stroke-width="1.2"/>
+                <polyline points="96,40 88,42 92,48" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Curly braces { } - lower-left band, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 70%; left: 18%; width: 80px; animation-duration: 25s;">
+            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M40 20 C32 24, 32 36, 40 40 C48 44, 48 56, 40 60 C32 64, 32 76, 40 80" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M100 20 C108 24, 108 36, 100 40 C92 44, 92 56, 100 60 C108 64, 108 76, 100 80" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Congruence ≡ - upper-right band, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 12%; left: 74%; width: 70px; animation-duration: 22s;">
+            <svg viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="20" x2="120" y2="20" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="20" y1="30" x2="120" y2="30" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="20" y1="40" x2="120" y2="40" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Not equal (≠) - upper band center-left, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 6%; left: 32%; width: 70px; animation-duration: 22s;">
+            <svg viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="24" x2="120" y2="24" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="20" y1="36" x2="120" y2="36" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="30" y1="46" x2="110" y2="14" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Intersection (∩) - lower band mid-right, small-medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 80%; left: 56%; width: 70px; animation-duration: 24s;">
+            <svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M30 50 C30 30, 110 30, 110 50" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Parallel lines (∥) - mid-right, small -->
+        <div class="hero-icon" aria-hidden="true" style="top: 46%; right: 8%; width: 50px; animation-duration: 23s;">
+            <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="30" y1="20" x2="30" y2="100" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="50" y1="20" x2="50" y2="100" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <!-- Coordinate point with guides - bottom center-left, medium -->
+        <div class="hero-icon" aria-hidden="true" style="bottom: 8%; left: 38%; width: 80px; animation-duration: 26s;">
+            <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="20" y1="80" x2="140" y2="80" stroke="#ffffff" stroke-width="1.2"/>
+                <line x1="40" y1="92" x2="40" y2="20" stroke="#ffffff" stroke-width="1.2"/>
+                <circle cx="100" cy="44" r="4" stroke="#ffffff" stroke-width="1.2"/>
+                <path d="M100 44 H40" stroke="#ffffff" stroke-width="1.2" stroke-dasharray="4 4"/>
+                <path d="M100 44 V80" stroke="#ffffff" stroke-width="1.2" stroke-dasharray="4 4"/>
+            </svg>
+        </div>
+
+        <!-- V-shaped modulus graph - mid-lower center-right, medium -->
+        <div class="hero-icon" aria-hidden="true" style="top: 66%; left: 58%; width: 80px; animation-duration: 25s;">
+            <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M20 80 L80 30 L140 80" stroke="#ffffff" stroke-width="1.2"/>
+            </svg>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1>GCSE Further Mathematics</h1>
+                <p class="tagline">Clarity, confidence, and exam results that last.</p>
+                <a href="/booking/booking-gcse-further-maths.html" class="cta-button">
+                    <i class="fas fa-calendar-check"></i>
+                    Book a Diagnostic Lesson
+                </a>
+                <div class="cta-subtext">From £20/hr · All UK exam boards covered</div>
+            </div>
+        </div>
+        <div class="scroll-cue" onclick="scrollToContent()">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+        
+        <!-- Wavy divider -->
+        <div class="hero-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0,64 C240,96 480,0 720,32 C960,64 1200,96 1440,48 L1440,120 L0,120 Z" style="fill: var(--bg-blue-tint);" fill-opacity="1"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="content" class="main-content">
+        <div class="container">
+            <!-- Exam Boards Section -->
+            <section class="section exam-boards-container" aria-labelledby="exam-boards-title">
+                <h2 id="exam-boards-title" class="section-title">Exam Boards We Teach</h2>
+
+                <div class="exam-boards-logos" role="list" aria-describedby="exam-boards-note">
+                    <div class="exam-board-logo" role="listitem" data-board="OCR" title="OCR" aria-label="OCR">
+                        <span class="exam-board-glyph">OCR</span>
+                    </div>
+                    <div class="exam-board-logo" role="listitem" data-board="Edexcel" title="Edexcel" aria-label="Edexcel">
+                        <span class="exam-board-glyph">Edexcel</span>
+                    </div>
+                    <div class="exam-board-logo" role="listitem" data-board="AQA" title="AQA" aria-label="AQA">
+                        <span class="exam-board-glyph">AQA</span>
+                    </div>
+                    <div class="exam-board-logo" role="listitem" data-board="WJEC" title="WJEC / Eduqas" aria-label="WJEC / Eduqas">
+                        <span class="exam-board-glyph">WJEC / Eduqas</span>
+                    </div>
+                    <div class="exam-board-logo exam-board-logo--ccea" role="listitem" data-board="CCEA" title="CCEA" aria-label="CCEA">
+                        <span class="exam-board-glyph">CCEA</span>
+                    </div>
+                </div>
+
+                <p id="exam-boards-note" class="exam-boards-note">Yuli is not affiliated with or endorsed by AQA, Edexcel, OCR, WJEC/Eduqas, or CCEA.</p>
+            </section>
+
+            
+
+            
+
+            
+
+            <!-- How We Teach (Loop Journey) -->
+            <!-- Scoped styles for How We Teach enhancements -->
+            <style>
+              /* Token mapping (scoped to How We Teach) */
+              .hwt {
+                --brand: var(--yuli-primary);
+                /* 30% tint of brand to white; falls back to accent if unsupported */
+                --brand-weak: color-mix(in srgb, var(--yuli-primary) 30%, white);
+                --ink: var(--text-dark);
+                --muted-ink: var(--text-muted);
+                --surface: var(--card-bg, #ffffff);
+                --border: var(--border-light, #e5e7eb);
+              }
+              /* Container and layout */
+              .hwt { position: relative; padding: 48px 0 64px; }
+              .hwt .hwt-container { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: 'copy ring'; gap: 2.5rem; align-items: center; }
+              .hwt .hwt-ring-col { grid-area: ring; position: relative; display: flex; justify-content: center; align-items: center; margin: 0; }
+              /* Subtle vignette behind ring using brand-weak */
+              .hwt .hwt-ring-col::before { content: ''; position: absolute; inset: 0; margin: auto; width: min(480px, 70%); height: min(480px, 70%); background: radial-gradient(circle, color-mix(in srgb, var(--brand-weak) 8%, transparent), transparent 60%); filter: blur(10px); opacity: .35; pointer-events: none; }
+              .hwt .hwt-copy-col { grid-area: copy; max-width: 640px; width: 100%; margin: 0; text-align: left; }
+
+              /* Title and sub */
+              /* Inherit global .section-title typography for consistency */
+              #how-we-teach .hwt-title { line-height: 1.2; margin: 0 0 .5rem; }
+              .hwt .hwt-sub { font-size: .98rem; color: var(--muted-ink); margin: 0 0 1.1rem; font-weight: 400; }
+
+              /* Ring */
+              .hwt .hwt-ring { width: min(100%, 400px); height: auto; filter: drop-shadow(0 6px 18px rgba(15, 23, 42, .08));
+                               transform-origin: 50% 50%; }
+              @media (prefers-reduced-motion: no-preference) {
+                /* Precision interaction only */
+                .hwt .hwt-arc.is-active { animation: hwt-pulse 220ms ease-out; }
+                /* Flow runs briefly on change, then idles (handled via JS by toggling .is-flowing) */
+                .hwt .hwt-flow.is-flowing { animation: hwt-flow 800ms linear; }
+              }
+              @keyframes hwt-pulse { 0% { filter: brightness(1); } 60% { filter: brightness(1.12); } 100% { filter: brightness(1); } }
+              @keyframes hwt-flow { to { stroke-dashoffset: -100; } }
+
+              /* Base circle */
+              .hwt [data-base] { stroke: var(--border); stroke-dasharray: 2 6; stroke-linecap: round; }
+
+              /* Arcs */
+              .hwt .hwt-arc { transition: filter .3s ease, opacity .3s ease; opacity: .65; stroke-width: 12px; }
+              .hwt .hwt-arc.is-active { opacity: 1; stroke-width: 14px; filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--brand) 25%, transparent)); }
+              .hwt .hwt-depth { stroke: color-mix(in srgb, var(--brand) 18%, transparent); }
+
+              /* Flow overlay (data particles) */
+              .hwt .hwt-flow { opacity: 0; stroke-linecap: round; stroke-dasharray: 2 10; stroke-width: 6px; transition: opacity .2s ease; }
+              .hwt .hwt-flow.is-active { opacity: .9; }
+              .hwt .hwt-arc.is-dim { opacity: .35; }
+
+              /* Chips (numbers/icons around ring) */
+              .hwt .hwt-chip { cursor: pointer; transition: transform .2s ease, filter .2s ease; }
+              .hwt .hwt-chip circle { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+              .hwt .hwt-chip text { font-weight: 600; fill: var(--brand); }
+              .hwt .hwt-chip.is-active circle { stroke: transparent; box-shadow: 0 4px 10px rgba(2, 132, 199, .2); }
+
+              /* Steps as premium timeline cards (tokenized) */
+              .hwt .hwt-steps { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: .5rem; width: 100%; }
+              .hwt .hwt-step { text-align: left; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 12px 14px; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease; outline: none; position: relative; min-height: 56px; }
+              .hwt .hwt-step::before { content: ''; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px; border-radius: 6px 0 0 6px; background: var(--brand); opacity: .85; }
+              .hwt .hwt-step:hover, .hwt .hwt-step:focus-visible { border-color: var(--brand-weak); box-shadow: 0 6px 18px color-mix(in srgb, var(--brand) 14%, transparent); transform: translateY(-1px); }
+              .hwt .hwt-step.is-active { border-color: var(--brand); box-shadow: 0 8px 20px color-mix(in srgb, var(--brand) 18%, transparent); }
+              .hwt .hwt-step.is-active::before { width: 4px; opacity: 1; }
+              .hwt .hwt-step-head { display: flex; align-items: center; gap: .5rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+              .hwt .hwt-step .hwt-step-icon { width: 28px; height: 28px; border-radius: 6px; display: grid; place-items: center; background: var(--surface); color: var(--brand); font-size: .95rem; box-shadow: inset 0 0 0 1px var(--border); }
+              .hwt .hwt-step .hwt-step-title { font-weight: 600; font-size: 1rem; line-height: 1.2; color: var(--ink); letter-spacing: -0.01em; }
+              .hwt .hwt-step .hwt-step-tag { font-weight: 500; font-size: .78rem; color: var(--brand); letter-spacing: 0.02em; text-transform: uppercase; margin-top: 2px; }
+              .hwt .hwt-step .hwt-step-desc { font-size: .88rem; color: var(--muted-ink); line-height: 1.5; margin-top: 2px; font-weight: 400; }
+
+              /* CTA */
+              .hwt .hwt-cta { margin-top: 1rem; display: flex; justify-content: flex-start; }
+              .hwt .hwt-cta-link { display: inline-block; padding: .8rem 1.15rem; border-radius: 12px; text-decoration: none; font-weight: 700; letter-spacing: .1px; }
+              .hwt .hwt-cta-link.cta-button { background: linear-gradient(90deg, var(--brand), var(--brand-weak)); color: #fff; border: none; box-shadow: 0 10px 26px color-mix(in srgb, var(--brand) 30%, transparent); }
+              .hwt .hwt-cta-link.cta-button:hover, .hwt .hwt-cta-link.cta-button:focus-visible { transform: translateY(-1px) scale(1.015); box-shadow: 0 14px 36px color-mix(in srgb, var(--brand) 40%, transparent); }
+
+              /* Reveal on scroll */
+              .reveal { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+              .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+              /* Responsive */
+              /* Page-wide: solid black titles, consistent thickness */
+              .section-title { color: #0f172a; font-weight: 600; opacity: 1; }
+
+              @media (max-width: 980px) {
+                .hwt { padding: 56px 0 64px; }
+                .hwt .hwt-container { grid-template-columns: 1fr; grid-template-areas: 'copy' 'ring'; gap: 1.5rem; }
+                .hwt .hwt-copy-col { text-align: left; }
+                .hwt .hwt-cta { justify-content: flex-start; }
+                .hwt .hwt-ring { width: min(100%, 360px); }
+                #how-we-teach .hwt-illustration { width: clamp(220px, 62vw, 520px); }
+              }
+              /* Tablet/mobile: stack cards first, hide symbols */
+              @media (max-width: 992px) {
+                #how-we-teach .plane-anim { display: none !important; }
+                .hwt .hwt-container { grid-template-columns: 1fr; grid-template-areas: 'copy' 'ring'; }
+              }
+            </style>
+            <section id="how-we-teach" class="section hwt" aria-labelledby="hwt-title" data-active="1" tabindex="0">
+                <div class="hwt-header">
+                    <h2 id="hwt-title" class="hwt-title section-title">How We Teach</h2>
+                    <p class="hwt-sub">A personalised approach that builds confidence, true understanding, and results that last.</p>
+                </div>
+                <!-- Decorative cloud background (full width) -->
+                <div class="plane-anim" aria-hidden="true">
+                  <div class="clouds">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762 331" class="cloud big front slowest"><path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762 331" class="cloud distant smaller slow"><path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762 331" class="cloud small slow"><path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762 331" class="cloud distant super-slow massive"><path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"/></svg>
+                  </div>
+                </div>
+                <div class="hwt-container">
+                    <div class="hwt-ring-col" aria-hidden="true">
+                      <div class="hwt-illustration">
+                        <img src="../../assets/logos/reading%20book%20man.svg" alt="Student reading illustration" decoding="async" loading="lazy" style="width:400px; height:auto; display:block; margin-top:60px;" />
+                      </div>
+                    </div>
+                    <div class="hwt-copy-col">
+                        <div class="hwt-journey" role="list" aria-label="Teaching journey timeline">
+                          <article class="hwt-node left reveal" role="listitem" data-step="1">
+                            <div class="hwt-badge" aria-hidden="true">
+                              <span class="hwt-badge-num">1</span>
+                            </div>
+                            <div>
+                              <h3><span class="step">1. Diagnostic first</span></h3>
+                              <p>I begin with the goals parents and students bring to me, whether it is passing an exam, improving confidence, or filling gaps. Everything I do is adapted to the student’s needs.</p>
+                            </div>
+                          </article>
+                          <article class="hwt-node right reveal" role="listitem" data-step="2">
+                            <div class="hwt-badge" aria-hidden="true">
+                              <span class="hwt-badge-num">2</span>
+                            </div>
+                            <div>
+                              <h3><span class="step">2. Guided teaching</span></h3>
+                              <p>When I notice missing knowledge, I go back and rebuild the foundations until the student truly understands. No skipping and no rushing, just clarity.</p>
+                            </div>
+                          </article>
+                          <article class="hwt-node left reveal" role="listitem" data-step="3">
+                            <div class="hwt-badge" aria-hidden="true">
+                              <span class="hwt-badge-num">3</span>
+                            </div>
+                            <div>
+                              <h3><span class="step">3. Targeted retrieval</span></h3>
+                              <p>Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Maths becomes relevant, understandable, and easier to remember.</p>
+                            </div>
+                          </article>
+                          <article class="hwt-node right reveal" role="listitem" data-step="4">
+                            <div class="hwt-badge" aria-hidden="true">
+                              <span class="hwt-badge-num">4</span>
+                            </div>
+                            <div>
+                              <h3><span class="step">4. Perform under pressure</span></h3>
+                              <p>I know what it feels like to be worried about being judged. My students never have to feel embarrassed about not knowing something. With patience, practice, and strategy, I help them build exam confidence and real understanding that lasts.</p>
+                            </div>
+                          </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            
+
+            
+
+            <!-- Corporate Testimonials (Swiper) -->
+            <section class="section corp-testimonials" aria-labelledby="corp-testimonials-title">
+                <h2 id="corp-testimonials-title" class="section-title">What Students Say</h2>
+
+                <div class="swiper" aria-roledescription="carousel" aria-label="Student testimonials">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="corp-testimonial">
+                        <div class="corp-logo" aria-hidden="true">
+                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
+                        </div>
+                        <blockquote class="corp-quote">“Yuli helped my son jump two grades in just a term. Clear teaching and a structured plan made all the difference.”</blockquote>
+                        <div class="corp-meta">Alex E • Student</div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="corp-testimonial">
+                        <div class="corp-logo" aria-hidden="true">
+                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
+                        </div>
+                        <blockquote class="corp-quote">“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”</blockquote>
+                        <div class="corp-meta">Ahmed M • Student</div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="corp-testimonial">
+                        <div class="corp-logo" aria-hidden="true">
+                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
+                        </div>
+                        <blockquote class="corp-quote">“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”</blockquote>
+                        <div class="corp-meta">Ethan Y • Student</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                  <div class="swiper-button-prev" aria-label="Previous slide"></div>
+                  <div class="swiper-button-next" aria-label="Next slide"></div>
+                </div>
+
+                <!-- Student-centred benefit cards (service-focused) -->
+                <div class="student-benefits">
+                  <div class="benefit-card">
+                    <div class="benefit-title"><span class="benefit-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M7 3h6l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+                        <path d="M13 3v6h6"/>
+                      </svg>
+                    </span>Customised exam papers</div>
+                    <div class="benefit-note">
+                      Practice papers tailored to your exam board and current gaps, with mark schemes and worked solutions.
+                    </div>
+                  </div>
+
+                  <div class="benefit-card">
+                    <div class="benefit-title"><span class="benefit-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8l-4 3V7a2 2 0 0 1 2-2z"/>
+                        <path d="M8 10h8M8 14h5"/>
+                      </svg>
+                    </span>Parent feedback every lesson</div>
+                    <div class="benefit-note">
+                      A short summary after each session—what we covered, next steps, and anything to watch before the next lesson.
+                    </div>
+                  </div>
+
+                  <div class="benefit-card">
+                    <div class="benefit-title"><span class="benefit-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M3 17l6-6 4 4 8-8"/>
+                        <path d="M14 7h7v7"/>
+                      </svg>
+                    </span>Progress tracker & next steps</div>
+                    <div class="benefit-note">
+                      Clear milestones from the diagnostic plan, weekly targets, and visible progress over time.
+                    </div>
+                  </div>
+                </div>
+            </section>
+
+            <!-- Scoped styles for corporate testimonials -->
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@500;700&display=swap');
+
+              .corp-testimonials { position: relative; background: transparent; padding-top: 56px; padding-bottom: 64px; border: 0; border-radius: 0; box-shadow: none; }
+              .corp-testimonials::before,
+              .corp-testimonials::after { content: none !important; display: none !important; background: transparent !important; border: 0 !important; box-shadow: none !important; }
+              .corp-testimonials .inner { position: relative; z-index: 1; }
+              .corp-testimonials .section-title { font-family: 'Manrope', sans-serif; letter-spacing: -0.02em; }
+
+              /* Swiper layout */
+              .corp-testimonials .swiper { width: 100%; margin-top: 18px; }
+              .corp-testimonials .swiper-slide { display: grid; place-items: center; }
+
+              .corp-testimonial { max-width: 900px; width: 100%; background: #ffffff; border: 1px solid #e6eef9; border-radius: 16px; padding: 28px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06); display: grid; grid-template-columns: 112px 1fr; gap: 22px; align-items: center; }
+              .corp-logo { width: 96px; height: 96px; border-radius: 12px; display: grid; place-items: center; background: #f1f6ff; box-shadow: inset 0 0 0 1px #e1ecff; }
+              .corp-logo img { max-width: 74px; max-height: 48px; object-fit: contain; filter: saturate(0.75) contrast(1.05); }
+              .corp-quote { margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 1.125rem; line-height: 1.65; color: #0f172a; }
+              .corp-meta { margin-top: 8px; font-size: 0.95rem; color: #475569; font-weight: 600; }
+
+              .corp-testimonials .swiper-button-prev,
+              .corp-testimonials .swiper-button-next { color: #0f172a; --swiper-navigation-size: 24px; }
+              .corp-testimonials .swiper { position: relative; }
+              .corp-testimonials .swiper-button-prev,
+              .corp-testimonials .swiper-button-next { z-index: 5; pointer-events: auto; width: 44px; height: 44px; border-radius: 999px; background: rgba(255,255,255,0.8); box-shadow: 0 6px 16px rgba(15,23,42,0.12); }
+              .corp-testimonials .swiper-button-prev:after,
+              .corp-testimonials .swiper-button-next:after { font-size: 16px; color: #0f172a; }
+              .corp-testimonials .swiper-button-prev { left: 12px; }
+              .corp-testimonials .swiper-button-next { right: 12px; }
+              .corp-testimonials .swiper-pagination-bullet { background: #0f172a; opacity: 0.4; }
+              .corp-testimonials .swiper-pagination-bullet-active { background: #0f172a; opacity: 1; }
+
+              /* Company details row */
+              .company-details--row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+              .company-detail { background: #ffffff; border: 1px solid #e6eef9; border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; box-shadow: 0 6px 16px rgba(15,23,42,0.05); }
+              .company-detail strong { font-family: 'Manrope', sans-serif; font-size: 1.15rem; color: #0f172a; }
+              .company-detail span { font-size: 0.92rem; color: #475569; }
+
+              /* Coffee button */
+              .coffee-row { display: flex; justify-content: center; margin-top: 20px; }
+              .coffee-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: linear-gradient(90deg, #ffb703, #ff7b00); color: #1f2937; font-weight: 700; text-decoration: none; box-shadow: 0 10px 22px rgba(255, 123, 0, 0.25); border: 1px solid rgba(255, 123, 0, 0.6); }
+              .coffee-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(255,123,0,0.35); }
+
+              @media (max-width: 768px) {
+                .corp-testimonial { grid-template-columns: 1fr; text-align: left; gap: 12px; }
+                .corp-logo { width: 72px; height: 72px; }
+                .corp-logo img { max-width: 56px; max-height: 36px; }
+                .company-details--row { grid-template-columns: 1fr; }
+              }
+              
+              /* Student benefits row (replaces stat tiles) */
+              .student-benefits{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+                margin-top: 24px;
+              }
+
+              .benefit-card{
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 12px 30px rgba(20,30,60,.06);
+                padding: 22px 20px;
+              }
+
+              .benefit-title{
+                font-weight: 700;
+                color: #1d2739;
+                font-size: 18px;
+                line-height: 1.3;
+                margin-bottom: 6px;
+              }
+
+              .benefit-note{
+                color: #6b7380;
+                font-size: 15px;
+                line-height: 1.5;
+              }
+
+              /* Responsive: stack on small screens */
+              @media (max-width: 980px){
+                .student-benefits{
+                  grid-template-columns: 1fr;
+                }
+              }
+
+              /* Micro-polish overrides */
+              /* Tighten card spacing slightly for multi-line notes */
+              .benefit-title{ margin-bottom: 8px; }
+              .benefit-note{ line-height: 1.55; }
+
+              /* Subtle hover for premium feel */
+              .benefit-card{ transition: transform .18s ease, box-shadow .18s ease; }
+              .benefit-card:hover{
+                transform: translateY(-2px);
+                box-shadow: 0 16px 36px rgba(20,30,60,.10);
+              }
+
+              /* Icons for benefit titles */
+              .corp-testimonials .benefit-title{
+                display: inline-flex;
+                align-items: center;
+                gap: 10px; /* 8–12px comfortable */
+              }
+              .corp-testimonials .benefit-title .benefit-icon{
+                display: inline-flex;
+                width: 22px; height: 22px;
+                /* Use site brand primary (fallback to --brand, then hex) */
+                color: var(--brand-primary, var(--brand, #6366f1));
+                flex: 0 0 auto;
+                transition: color .15s ease, filter .15s ease;
+              }
+              .corp-testimonials .benefit-title .benefit-icon svg{ display:block }
+              /* Subtle lighten on card hover (~6–8%) */
+              .corp-testimonials .benefit-card:hover .benefit-title .benefit-icon{ filter: brightness(1.08); }
+              /* Keep titles to one line on desktop only */
+              @media (min-width: 980px){
+                .corp-testimonials .benefit-title{ white-space: nowrap; }
+              }
+            </style>
+
+            <!-- FAQ Section -->
+            <section class="section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What exam boards do you cover?
+                            <i class="fas fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We cover all major GCSE Further Mathematics exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Do you teach both Foundation and Higher tier?
+                            <span class="faq-icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, we teach both Foundation and Higher tier GCSE Further Mathematics. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do online sessions work?
+                            <span class="faq-icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sessions are currently run on Microsoft Teams. I share my screen and use digital tools to explain topics clearly, step by step, while students work through problems with me in real time.</p>
+                            <p>We are also developing our own interactive online whiteboard, which is in beta testing. Once ready, it will make lessons even more engaging and give students an easy way to practice and save their work in one place.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I get discounts on sessions?
+                            <span class="faq-icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! We offer discounted rates for students who qualify based on household income. We believe quality education should be accessible to all students regardless of financial circumstances.</p>
+                        </div>
+                    </div>
+                    <!-- Added FAQs -->
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How much do GCSE Further Mathematics sessions cost?
+                            <i class="fas fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>GCSE Further Mathematics sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Do you provide homework or practice after lessons?
+                            <i class="fas fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. I often set short, focused practice tasks after lessons. These help students reinforce what we covered and prepare for the next session.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Smoothly scroll from hero to main content
+        function scrollToContent() {
+            const content = document.getElementById('content');
+            if (content) {
+                const scrollPosition = content.offsetTop - 20;
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+
+            // Exam board cards click handlers
+            const examBoardCards = document.querySelectorAll('.exam-board-card');
+            examBoardCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const board = this.dataset.board;
+                    // Here you could redirect to specific resources or show more info
+                    console.log(`Clicked on ${board} exam board`);
+                });
+            });
+
+            // Smooth scrolling for CTA buttons
+            const ctaButtons = document.querySelectorAll('a[href^="#"]');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // How We Teach interactions (state machine: is-active/is-dim)
+            const hwt = document.querySelector('#how-we-teach.hwt');
+            if (hwt) {
+                const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const arcs = Array.from(hwt.querySelectorAll('.hwt-arc'));
+                const chips = Array.from(hwt.querySelectorAll('.hwt-chip'));
+                const steps = Array.from(hwt.querySelectorAll('.hwt-step'));
+
+                let activeStep = 1;
+                let flowTimeoutId = null;
+
+                const updateAria = (n) => {
+                    steps.forEach((el, idx) => el.setAttribute('aria-selected', String(idx + 1 === n)));
+                };
+
+                const setActive = (n) => {
+                    if (!n || n === activeStep) { activeStep = n || activeStep; updateAria(activeStep); return; }
+                    activeStep = n;
+                    // steps
+                    steps.forEach((el) => {
+                        const s = parseInt(el.getAttribute('data-step') || '0', 10);
+                        el.classList.toggle('is-active', s === n);
+                        el.setAttribute('aria-selected', String(s === n));
+                    });
+                    // chips
+                    chips.forEach((el) => {
+                        const s = parseInt(el.getAttribute('data-step') || '0', 10);
+                        el.classList.toggle('is-active', s === n);
+                    });
+                    // arcs
+                    arcs.forEach((el) => {
+                        const s = parseInt(el.getAttribute('data-step') || '0', 10);
+                        const isActive = s === n;
+                        el.classList.toggle('is-active', isActive);
+                        el.classList.toggle('is-dim', !isActive);
+                    });
+                    // flows (data particles)
+                    const flows = hwt.querySelectorAll('.hwt-flow');
+                    flows.forEach((el) => {
+                        const s = parseInt(el.getAttribute('data-step') || '0', 10);
+                        el.classList.toggle('is-active', s === n);
+                        if (!reduceMotion) el.classList.remove('is-flowing');
+                    });
+                    if (!reduceMotion) {
+                        const activeFlow = hwt.querySelector(`.hwt-flow[data-step="${n}"]`);
+                        if (activeFlow) {
+                            // restart animation
+                            void activeFlow.offsetWidth;
+                            activeFlow.classList.add('is-flowing');
+                            if (flowTimeoutId) window.clearTimeout(flowTimeoutId);
+                            flowTimeoutId = window.setTimeout(() => {
+                                activeFlow.classList.remove('is-flowing');
+                            }, 820);
+                        }
+                    }
+                };
+
+                // Init
+                const initStep = parseInt((hwt.getAttribute('data-active') || '1'), 10) || 1;
+                activeStep = initStep;
+                setActive(initStep);
+
+                // Events: steps (hover/focus/click/keys)
+                steps.forEach((btn) => {
+                    const s = parseInt(btn.getAttribute('data-step') || '0', 10);
+                    btn.addEventListener('mouseenter', () => setActive(s));
+                    btn.addEventListener('focusin', () => setActive(s));
+                    btn.addEventListener('click', (e) => { e.preventDefault(); setActive(s); });
+                    btn.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(s); }
+                    });
+                });
+
+                // Events: chips (hover/focus/click/keys)
+                chips.forEach((chip) => {
+                    const s = parseInt(chip.getAttribute('data-step') || '0', 10);
+                    chip.addEventListener('mouseenter', () => setActive(s));
+                    chip.addEventListener('focusin', () => setActive(s));
+                    chip.addEventListener('click', (e) => { e.preventDefault(); setActive(s); });
+                    chip.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(s); }
+                    });
+                });
+
+                // Optional sweep on load
+                if (!reduceMotion) {
+                    hwt.classList.add('hwt-sweep');
+                    window.setTimeout(() => hwt.classList.remove('hwt-sweep'), 900);
+                }
+
+                // Keyboard navigation on whole section
+                hwt.addEventListener('keydown', (e) => {
+                    const k = e.key;
+                    if (k === 'ArrowRight' || k === 'ArrowDown' || k === 'ArrowLeft' || k === 'ArrowUp') {
+                        e.preventDefault();
+                        let next = activeStep;
+                        if (k === 'ArrowRight' || k === 'ArrowDown') {
+                            next = (activeStep % 4) + 1; // 1->2->3->4->1
+                        } else if (k === 'ArrowLeft' || k === 'ArrowUp') {
+                            next = activeStep === 1 ? 4 : activeStep - 1; // 1<-2<-3<-4
+                        }
+                        setActive(next);
+                    }
+                });
+
+                // Reveal on scroll for journey nodes
+                const revealEls = Array.from(hwt.querySelectorAll('.reveal'));
+                if (revealEls.length) {
+                    if (reduceMotion) {
+                        revealEls.forEach((el) => el.classList.add('is-visible'));
+                    } else if ('IntersectionObserver' in window) {
+                        const io = new IntersectionObserver((entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('is-visible');
+                                    io.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.15 });
+                        revealEls.forEach((el) => io.observe(el));
+                    }
+                }
+
+                // Toggle class when How We Teach enters viewport (for connector pulse)
+                if ('IntersectionObserver' in window) {
+                    const hwtIo = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            hwt.classList.toggle('hwt-in-view', entry.isIntersecting);
+                        });
+                    }, { threshold: 0.2 });
+                    hwtIo.observe(hwt);
+                }
+
+                // Reveal testimonials on scroll
+                const testimonials = document.querySelectorAll('.testimonials-strip .reveal');
+                if (testimonials.length) {
+                    if (reduceMotion) {
+                        testimonials.forEach((el) => el.classList.add('is-visible'));
+                    } else if ('IntersectionObserver' in window) {
+                        const testimonialsIo = new IntersectionObserver((entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('is-visible');
+                                    testimonialsIo.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.15 });
+                        testimonials.forEach((el) => testimonialsIo.observe(el));
+                    }
+                }
+
+                // Desktop-only auto-scroll for testimonials row, pauses on interaction
+                const testimonialsRow = document.querySelector('.testimonials-row');
+                const isDesktop = window.matchMedia && window.matchMedia('(min-width: 992px)').matches;
+                if (testimonialsRow && isDesktop && !reduceMotion) {
+                    let autoScrollId = 0;
+                    let paused = false;
+                    const step = () => {
+                        if (paused) return;
+                        const maxScroll = testimonialsRow.scrollWidth - testimonialsRow.clientWidth;
+                        if (maxScroll <= 0) return; // nothing to scroll
+                        const atEnd = Math.ceil(testimonialsRow.scrollLeft) >= maxScroll;
+                        testimonialsRow.scrollTo({ left: atEnd ? 0 : testimonialsRow.scrollLeft + 1.2, behavior: 'auto' });
+                    };
+                    const start = () => { if (!autoScrollId) autoScrollId = window.setInterval(step, 16); };
+                    const stop = () => { if (autoScrollId) { window.clearInterval(autoScrollId); autoScrollId = 0; } };
+                    const pause = () => { paused = true; };
+                    const resume = () => { paused = false; };
+                    testimonialsRow.addEventListener('mouseenter', () => { pause(); });
+                    testimonialsRow.addEventListener('mouseleave', () => { resume(); });
+                    testimonialsRow.addEventListener('pointerdown', () => { pause(); });
+                    testimonialsRow.addEventListener('focusin', () => { pause(); });
+                    testimonialsRow.addEventListener('wheel', () => { pause(); });
+                    start();
+                }
+
+                // Carousel prev/next controls
+                const prevBtn = document.querySelector('.t-carousel-prev');
+                const nextBtn = document.querySelector('.t-carousel-next');
+                if (testimonialsRow && (prevBtn || nextBtn)) {
+                    const firstCard = testimonialsRow.querySelector('.testimonial-card');
+                    const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 320;
+                    const gap = 12; // matches CSS gap
+                    const scrollByAmount = Math.ceil(cardWidth + gap);
+                    const go = (dir) => {
+                        // Trigger pause in auto-scroll logic by simulating wheel interaction
+                        testimonialsRow.dispatchEvent(new Event('wheel'));
+                        testimonialsRow.scrollBy({ left: dir * scrollByAmount, behavior: 'smooth' });
+                    };
+                    prevBtn && prevBtn.addEventListener('click', () => go(-1));
+                    nextBtn && nextBtn.addEventListener('click', () => go(1));
+                }
+            }
+        });
+    </script>
+
+    <script>
+        let editMode = false;
+        let draggedElement = null;
+        let resizeElement = null;
+        let startX, startY, startWidth, startHeight;
+        let initialMouseX, initialMouseY;
+
+        function toggleEditMode() {
+            editMode = !editMode;
+            document.body.classList.toggle('edit-mode', editMode);
+            const button = document.querySelector('.edit-toggle');
+            button.textContent = editMode ? '💾 Save Layout' : '📝 Edit Icons';
+            
+            if (!editMode) {
+                saveLayout();
+            }
+        }
+
+        function saveLayout() {
+            const icons = document.querySelectorAll('.hero-icon');
+            const layout = [];
+            icons.forEach((icon, index) => {
+                const style = icon.style;
+                layout.push({
+                    index: index,
+                    top: style.top,
+                    left: style.left,
+                    right: style.right,
+                    bottom: style.bottom,
+                    width: style.width
+                });
+            });
+            localStorage.setItem('mathIconLayout', JSON.stringify(layout));
+            console.log('Layout saved!');
+        }
+
+        function loadLayout() {
+            const savedLayout = localStorage.getItem('mathIconLayout');
+            if (savedLayout) {
+                const layout = JSON.parse(savedLayout);
+                const icons = document.querySelectorAll('.hero-icon');
+                layout.forEach((item, index) => {
+                    if (icons[index]) {
+                        const icon = icons[index];
+                        icon.style.top = item.top || '';
+                        icon.style.left = item.left || '';
+                        icon.style.right = item.right || '';
+                        icon.style.bottom = item.bottom || '';
+                        icon.style.width = item.width || '';
+                    }
+                });
+            }
+        }
+
+        // Drag functionality
+        document.addEventListener('mousedown', function(e) {
+            if (!editMode) return;
+            
+            const heroIcon = e.target.closest('.hero-icon');
+            const resizeHandle = e.target.closest('.resize-handle');
+            
+            if (resizeHandle && heroIcon) {
+                // Start resize
+                resizeElement = heroIcon;
+                startWidth = parseInt(window.getComputedStyle(heroIcon).width);
+                startHeight = parseInt(window.getComputedStyle(heroIcon).height);
+                initialMouseX = e.clientX;
+                initialMouseY = e.clientY;
+                e.preventDefault();
+            } else if (heroIcon) {
+                // Start drag
+                draggedElement = heroIcon;
+                heroIcon.classList.add('dragging');
+                
+                const rect = heroIcon.getBoundingClientRect();
+                const heroRect = document.querySelector('.hero').getBoundingClientRect();
+                
+                startX = e.clientX - rect.left;
+                startY = e.clientY - rect.top;
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (draggedElement) {
+                const heroRect = document.querySelector('.hero').getBoundingClientRect();
+                const newLeft = ((e.clientX - startX - heroRect.left) / heroRect.width) * 100;
+                const newTop = ((e.clientY - startY - heroRect.top) / heroRect.height) * 100;
+                
+                // Constrain to hero bounds
+                const constrainedLeft = Math.max(0, Math.min(95, newLeft));
+                const constrainedTop = Math.max(0, Math.min(95, newTop));
+                
+                draggedElement.style.left = constrainedLeft + '%';
+                draggedElement.style.top = constrainedTop + '%';
+                draggedElement.style.right = '';
+                draggedElement.style.bottom = '';
+            }
+            
+            if (resizeElement) {
+                const deltaX = e.clientX - initialMouseX;
+                const deltaY = e.clientY - initialMouseY;
+                const newWidth = Math.max(20, startWidth + deltaX);
+                
+                resizeElement.style.width = newWidth + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function(e) {
+            if (draggedElement) {
+                draggedElement.classList.remove('dragging');
+                draggedElement = null;
+            }
+            if (resizeElement) {
+                resizeElement = null;
+            }
+        });
+
+        // Load saved layout on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLayout();
+        });
+
+        // Prevent context menu on icons in edit mode
+        document.addEventListener('contextmenu', function(e) {
+            if (editMode && e.target.closest('.hero-icon')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Yuli<span>.</span></h3>
+                    <div class="footer-contact">
+                        <a href="mailto:yuli.learning.uk@gmail.com" class="footer-email">yuli.learning.uk@gmail.com</a>
+                        <a href="tel:+447856210325" class="footer-phone">+447856210325</a>
+                    </div>
+                    <div class="footer-social" aria-label="Social media">
+                        <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/yuli.learning/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="http://127.0.0.1:5503/about.html">About Yuli</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/legal/terms">Terms & Conditions</a></li>
+                        <li><a href="/legal/privacy">Privacy Policy</a></li>
+                        <li><a href="/legal/cookies">Cookie Policy</a></li>
+                        <li><a href="/about/safeguarding">Safeguarding</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/resources/faqs">FAQs</a></li>
+                        <li><a href="/legal/refunds">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yuli. All rights reserved.</p>
+                <p>Designed and built with ❤️ for quality education</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      // Initialize after window load so deferred scripts (jQuery, Swiper) are ready
+      window.addEventListener('load', function() {
+        if (typeof Swiper === 'undefined') return;
+        var swiper = new Swiper('.corp-testimonials .swiper', {
+          slidesPerView: 1,
+          spaceBetween: 24,
+          loop: true,
+          autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+          pagination: { el: '.corp-testimonials .swiper-pagination', clickable: true },
+          navigation: { nextEl: '.corp-testimonials .swiper-button-next', prevEl: '.corp-testimonials .swiper-button-prev' },
+          keyboard: { enabled: true },
+          a11y: { enabled: true }
+        });
+
+        var el = document.querySelector('.corp-testimonials .swiper');
+        if (el && swiper && swiper.autoplay) {
+          el.addEventListener('mouseenter', function() { swiper.autoplay.stop(); });
+          el.addEventListener('focusin', function() { swiper.autoplay.stop(); });
+          el.addEventListener('mouseleave', function() { swiper.autoplay.start(); });
+          el.addEventListener('focusout', function() { swiper.autoplay.start(); });
+        }
+
+        // Ensure nav buttons always navigate
+        var prevBtn = document.querySelector('.corp-testimonials .swiper-button-prev');
+        var nextBtn = document.querySelector('.corp-testimonials .swiper-button-next');
+        if (prevBtn) prevBtn.addEventListener('click', function(e){ e.preventDefault(); swiper.slidePrev(); });
+        if (nextBtn) nextBtn.addEventListener('click', function(e){ e.preventDefault(); swiper.slideNext(); });
+
+        // If jQuery is present, also bind jQuery handlers (optional)
+        if (window.jQuery) {
+          var $ = window.jQuery;
+          var $swiperEl = $('.corp-testimonials .swiper');
+          $swiperEl.on('mouseenter focusin', function() { if (swiper && swiper.autoplay) swiper.autoplay.stop(); });
+          $swiperEl.on('mouseleave focusout', function() { if (swiper && swiper.autoplay) swiper.autoplay.start(); });
+        }
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+/* Subject Page Styles - mobile first */
+:root { --ink:#0f172a; --muted:#64748b; --card:#ffffff; --bg:#f8fafc; --line:#e2e8f0; --brand:#6366f1; --brand-600:#5855eb; --accent:#e8edff; }
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.7}
+
+.header{background:#fff;border-bottom:1px solid #eef2f7}
+.header .container{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.logo{font-weight:700;color:#4361EE;text-decoration:none;font-size:24px;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.logo span{color:#ff69b4}
+.back-link{color:#6b7280;text-decoration:none;font-size:14px;border-radius:8px;padding:6px 10px;margin-left:auto;display:inline-flex;align-items:center;gap:8px}
+.back-link:hover{background:#f3f4f6}
+/* Tidy arrow alignment */
+.back-link i{color:#6b7280;font-size:14px;line-height:1;position:relative;top:1px}
+
+.page{max-width:1100px;margin:0 auto;padding:20px}
+.breadcrumb{display:flex;align-items:center;gap:8px;color:#475569;font-size:14px;margin:8px 0 12px}
+
+.hero{display:grid;grid-template-columns:1fr;gap:20px}
+.hero-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.hero h1{font-size:34px;line-height:1.25;margin:4px 0 10px}
+.hero p.sub{color:var(--muted);margin:0 0 14px;font-size:16px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.badge{background:#f5f7ff;color:#3843d0;border:1px solid #e6eaff;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;color:#334155;border-radius:999px;padding:6px 10px;font-weight:600;font-size:12px}
+.chip.is-selected{background:var(--brand);border-color:var(--brand);color:#fff}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.select{padding:10px 12px;border:1px solid #d1d5db;border-radius:10px;background:#fff;font-size:14px}
+
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;flex-direction:column}
+.cta-row .btn{width:100%}
+.btn{appearance:none;border:none;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-600)}
+.btn-ghost{background:#eef2f6;color:#0f172a}
+
+.tone{margin-top:12px;color:#334155;font-size:14px}
+
+.section{margin-top:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.section h2{font-size:20px;margin:0 0 12px}
+.list{display:grid;gap:8px;padding-left:18px}
+.list li{margin-left:4px}
+.row4{display:grid;grid-template-columns:1fr;gap:10px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.step i{color:#64748b;margin-top:2px}
+
+.resources{display:flex;gap:8px;flex-wrap:wrap}
+.res-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#0f172a;text-decoration:none;font-weight:600}
+.res-btn:hover{background:#f8fafc}
+
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+.tutor{display:flex;align-items:center;gap:12px}
+.tutor img{width:44px;height:44px;border-radius:999px;object-fit:cover}
+.tutor small{color:#64748b}
+
+/* Sticky booking card (desktop) */
+.layout{display:grid;grid-template-columns:1fr;gap:16px}
+.sticky-card{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;box-shadow:0 -6px 18px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sticky-card .price{font-weight:800;font-size:16px}
+.sticky-card .muted{color:#64748b;font-weight:600;font-size:12px}
+.sticky-meta{color:#64748b;font-size:12px;margin-top:2px}
+.sticky-card .actions{display:flex;gap:8px}
+.sticky-card .btn{padding:10px 14px}
+.sticky-card .actions .btn-ghost{display:none}
+
+/* Desktop */
+@media(min-width:960px){
+  .hero{grid-template-columns:7fr 5fr}
+  .row4{grid-template-columns:repeat(4,1fr)}
+  .grid{grid-template-columns:2fr 1fr}
+  .layout{grid-template-columns:2fr 1fr}
+  .sticky-card{position:sticky;bottom:auto;top:24px;border:1px solid var(--line);border-radius:16px;padding:16px}
+  .sticky-card .actions .btn-ghost{display:inline-flex}
+  .cta-row{flex-direction:row}
+  .cta-row .btn{width:auto}
+  .cta-row .btn{padding:12px 18px}
+}
+
+.fade-in{animation:fade .3s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============================ */
+/* Gradient Minimal (opt-in)    */
+/* Activate via body[data-theme="neo"] */
+/* ============================ */
+[data-theme="neo"]{
+  --bg: #f6f8ff;
+  --card: #ffffffcc; /* translucent feel for glass */
+  --line: #e6e9f5;
+  --brand: #6c63ff;
+  --brand-600:#5a53f0;
+}
+
+[data-theme="neo"] .page{max-width:1200px}
+[data-theme="neo"] .page{padding-left:24px;padding-right:24px}
+[data-theme="neo"] .page-rail{display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
+@media(min-width:1100px){
+  [data-theme="neo"] .page-rail{grid-template-columns:1fr 320px}
+}
+[data-theme="neo"] .right-rail{position:relative}
+[data-theme="neo"] .content-rail{display:grid;gap:24px}
+[data-theme="neo"] .section{margin-top:56px}
+
+/* Hero gradient wash */
+[data-theme="neo"] .hero{position:relative;display:grid}
+[data-theme="neo"] .hero{grid-template-columns:7fr 5fr;gap:24px}
+@media(max-width:959px){[data-theme="neo"] .hero{grid-template-columns:1fr}}
+[data-theme="neo"] .hero:before{
+  content:"";position:absolute;inset:-20px -20px auto -20px;height:220px;z-index:-1;
+  background: radial-gradient(1200px 240px at 20% 40%, rgba(108,99,255,.18), transparent 55%),
+              radial-gradient(800px 200px at 60% -10%, rgba(147,197,253,.18), transparent 60%);
+  filter: blur(8px);
+}
+
+/* Hero left card prominence */
+[data-theme="neo"] .hero-card:first-child{padding:22px 22px 18px;border-radius:22px}
+[data-theme="neo"] .hero h1{font-size:44px;line-height:1.15;margin-top:2px}
+[data-theme="neo"] .hero p.sub{font-size:17px;color:#495266}
+[data-theme="neo"] .controls{margin-top:14px}
+[data-theme="neo"] .select{padding:12px 14px;border-radius:12px}
+[data-theme="neo"] .chip{padding:8px 12px;font-weight:700}
+[data-theme="neo"] .cta-row{margin-top:16px}
+[data-theme="neo"] .cta-row .btn{font-size:15px}
+
+/* Controls: pill selects and chips like screenshot */
+[data-theme="neo"] .select{border:1px solid rgba(120,130,200,.35);background:#fff;box-shadow:0 1px 0 rgba(36,42,99,.04) inset}
+[data-theme="neo"] #type-one{padding:8px 12px;border:1px solid rgba(120,130,200,.25);background:#f1f3ff;color:#3b3bb3;border-radius:8px;display:inline-flex;align-items:center;justify-content:center}
+[data-theme="neo"] #type-group{background:#eef1ff;color:#343dc2;border-radius:8px}
+[data-theme="neo"] #type-group:hover{background:#e7ebff}
+[data-theme="neo"] .chip{border:1px solid rgba(120,130,200,.25)}
+[data-theme="neo"] .chips{align-items:center}
+[data-theme="neo"] .session-type{border-radius:8px !important}
+[data-theme="neo"] .board-pill{border-radius:8px !important}
+
+/* Breadcrumb + header polish */
+[data-theme="neo"] .breadcrumb{background:transparent;color:#5b6478;padding:4px 0}
+[data-theme="neo"] .header{backdrop-filter:saturate(120%) blur(6px);-webkit-backdrop-filter:saturate(120%) blur(6px)}
+[data-theme="neo"] .back-link:hover{background:rgba(99,102,241,.08)}
+
+/* Glass cards */
+[data-theme="neo"] .hero-card,
+[data-theme="neo"] .card{
+  background: var(--card);
+  backdrop-filter: saturate(120%) blur(6px);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  border: 1px solid rgba(120,130,200,.25);
+  box-shadow: 0 8px 30px rgba(36,42,99,.08), 0 2px 10px rgba(36,42,99,.04);
+  border-radius:20px;
+}
+
+/* Typographic lift */
+[data-theme="neo"] .hero h1{letter-spacing:-0.01em}
+[data-theme="neo"] .section h2{font-size:22px}
+
+/* Section rhythm */
+[data-theme="neo"] .section{margin-top:26px}
+[data-theme="neo"] .tone{font-size:13.5px;color:#5c6780}
+
+/* Chips/buttons */
+[data-theme="neo"] .chip{border-color:transparent;background:#f1f3ff;color:#3b3bb3}
+[data-theme="neo"] .chip.is-selected{background:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(108,99,255,.24)}
+[data-theme="neo"] .btn-primary{position:relative;background:var(--brand)}
+[data-theme="neo"] .btn-primary:after{content:"";position:absolute;inset:-6px;border-radius:14px;background:radial-gradient(400px 80px at 20% 20%, rgba(108,99,255,.28), transparent 60%);z-index:-1;transition:opacity .2s ease;opacity:.7}
+[data-theme="neo"] .btn-primary:hover:after{opacity:1}
+[data-theme="neo"] .btn-primary{box-shadow:0 10px 22px rgba(90,83,240,.24), 0 3px 8px rgba(90,83,240,.18)}
+[data-theme="neo"] .btn-ghost{background:#f1f4fb}
+[data-theme="neo"] .cta-row .btn{padding:14px 18px;border-radius:12px}
+
+/* Sticky dock glass */
+[data-theme="neo"] .sticky-card{background:#ffffffcc;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(120,130,200,.3)}
+[data-theme="neo"] .sticky-card .price{font-size:18px}
+[data-theme="neo"] .sticky-card .muted{font-size:12.5px}
+[data-theme="neo"] .sticky-meta{font-size:12.5px}
+@media(min-width:960px){
+  [data-theme="neo"] .sticky-card .actions{flex-direction:column;align-items:flex-end;gap:10px}
+  [data-theme="neo"] .sticky-card .actions .btn{width:160px}
+}
+@media(min-width:1100px){
+  [data-theme="neo"] .hero .sticky-card{position:sticky;top:24px;border:1px solid rgba(120,130,200,.3);border-radius:16px;padding:16px}
+}
+
+/* Lesson preview */
+[data-theme="neo"] .lesson-preview{display:flex;flex-direction:column;align-items:flex-start}
+[data-theme="neo"] .lesson-preview .lesson-img{width:100%;height:auto;border-radius:16px;border:1px solid rgba(120,130,200,.25);box-shadow:0 10px 30px rgba(36,42,99,.10)}
+
+/* Topic atlas */
+[data-theme="neo"] .atlas h2{margin:0 0 12px}
+[data-theme="neo"] .atlas-grid{position:relative;display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:700px){[data-theme="neo"] .atlas-grid{grid-template-columns:repeat(2,1fr)}}
+[data-theme="neo"] .atlas-card{background:var(--card);border:1px solid rgba(120,130,200,.25);border-radius:16px;padding:14px;box-shadow:0 6px 20px rgba(36,42,99,.08)}
+[data-theme="neo"] .atlas-card h3{margin:0 0 6px;font-size:16px}
+[data-theme="neo"] .atlas-card p{margin:0;color:#5a647b;font-size:14px}
+[data-theme="neo"] .atlas-lines{position:absolute;inset:0;pointer-events:none}
+
+/* Vertical timeline */
+/* Horizontal steps */
+[data-theme="neo"] .h-steps .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:900px){[data-theme="neo"] .h-steps .steps{grid-template-columns:repeat(4,1fr)}}
+[data-theme="neo"] .h-steps .steps li{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid rgba(120,130,200,.25);border-radius:16px;padding:14px}
+[data-theme="neo"] .h-steps .steps .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:#eef1fb;color:#4b51d8;font-weight:600}
+[data-theme="neo"] .h-steps .steps .t{line-height:1.55}
+
+/* Trust strip */
+[data-theme="neo"] .trust-chips{display:flex;flex-wrap:wrap;gap:10px}
+[data-theme="neo"] .trust-chip{background:#f3f6ff;border:1px solid rgba(120,130,200,.35);color:#3e4664;border-radius:999px;padding:8px 12px;font-size:14px}
+[data-theme="neo"] .testimonial{margin-top:12px;color:#4a5266;font-style:italic}
+
+/* Meta chips under hero subline */
+[data-theme="neo"] .meta-chips{display:flex;flex-wrap:wrap;gap:8px 12px;margin:8px 0 6px}
+[data-theme="neo"] .meta-chip{background:#f3f6ff;border:1px solid rgba(120,130,200,.3);border-radius:999px;padding:6px 10px;font-size:13px;color:#48506a}
+
+/* Step tiles */
+[data-theme="neo"] .row4{gap:14px}
+[data-theme="neo"] .step{background:#fff;border:1px solid rgba(120,130,200,.22);border-radius:14px;padding:14px 14px;box-shadow:0 2px 10px rgba(36,42,99,.05);transition:transform .2s ease, box-shadow .2s ease}
+[data-theme="neo"] .step:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(36,42,99,.10)}
+[data-theme="neo"] .step i{color:#6366f1}
+[data-theme="neo"] .step strong{font-size:15px}
+[data-theme="neo"] .step small{color:#58647e}
+
+/* Resources tiles */
+[data-theme="neo"] .resources{gap:12px}
+[data-theme="neo"] .res-btn{border-radius:14px;border-color:rgba(120,130,200,.22);background:#ffffffcc;backdrop-filter:saturate(120%) blur(4px);padding:12px 14px}
+[data-theme="neo"] .res-btn:hover{background:#fff}
+[data-theme="neo"] .res-btn i{color:#5a63ff}
+
+/* Lists in What we cover */
+[data-theme="neo"] .list{row-gap:10px}
+[data-theme="neo"] .list li{margin-left:2px}
+
+/* Tiles hover */
+[data-theme="neo"] .card:hover{transform:translateY(-2px);transition:transform .2s ease, box-shadow .2s ease;box-shadow:0 12px 36px rgba(36,42,99,.10), 0 4px 14px rgba(36,42,99,.06)}
+[data-theme="neo"] .res-btn:hover{transform:translateY(-1px);transition:transform .2s ease}
+
+/* Focus states */
+[data-theme="neo"] .btn:focus,[data-theme="neo"] .chip:focus,[data-theme="neo"] .select:focus,[data-theme="neo"] a:focus{outline:2px solid rgba(99,102,241,.6);outline-offset:2px}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  [data-theme="neo"] .card,[data-theme="neo"] .res-btn,[data-theme="neo"] .btn-primary:after{transition:none}
+}
+
+/* ===== Testimonials container transparency (GCSE Maths page) ===== */
+/* Force section wrappers to be transparent and decoration-free, but leave cards intact */
+.corp-testimonials,
+.students-testimonials,
+.student-testimonials,
+.testimonial-section,
+.creative-testimonial--slider .testimonial-inner {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+.corp-testimonials::before,
+.corp-testimonials::after,
+.students-testimonials::before,
+.students-testimonials::after,
+.testimonial-section::before,
+.testimonial-section::after {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+/* Hide any decorative backgrounds within the testimonial section */
+.corp-testimonials .testimonials-math-bg,
+.corp-testimonials .section-divider { display: none !important; }
+
+/* Maintain card styling explicitly (safety) */
+.corp-testimonial { background: #fff; }

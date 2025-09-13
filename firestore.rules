@@ -1,0 +1,183 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+    
+    function isAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow create: if isSignedIn() && request.auth.uid == uid;
+      allow update: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+    }
+
+    // Public-but-safe display profiles. Readable by any signed-in user.
+    match /profiles/{uid} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn() && (request.auth.uid == uid || isAdmin())
+        && request.resource.data.displayName is string
+        && (request.resource.data.photoURL == null || request.resource.data.photoURL is string)
+        && (request.resource.data.email == null || request.resource.data.email is string)
+        && (!('bio' in request.resource.data) || request.resource.data.bio == null || request.resource.data.bio is string)
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow delete: if isAdmin();
+    }
+
+    match /tutorApplications/{doc} {
+      allow read, write, delete: if isAdmin();
+      allow create: if isSignedIn();
+    }
+
+    match /assignments/{id} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Sessions/bookings
+    match /sessions/{sessionId} {
+      allow read, write: if isAdmin();
+      allow read, write: if isSignedIn() && 
+                            (request.auth.uid == resource.data.studentId || 
+                             request.auth.uid == resource.data.tutorId);
+    }
+    
+    // Messages
+    match /messages/{messageId} {
+      allow read, write: if isAdmin();
+      allow read: if isSignedIn() && 
+                     request.auth.uid == resource.data.tutorId;
+    }
+    
+    // Payments
+    match /payments/{paymentId} {
+      allow read, write: if isAdmin();
+      allow read: if isSignedIn() && 
+                     request.auth.uid == resource.data.userId;
+    }
+    
+    // Enhanced Tutor Dashboard Collections
+    match /sessions/{id} {
+      allow read, write: if isSignedIn() && 
+                            (request.auth.uid == resource.data.tutorId || 
+                             request.auth.uid == resource.data.studentId);
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.tutorId;
+    }
+    
+    match /homework/{id} {
+      allow read, write: if isSignedIn() && 
+                            (request.auth.uid == resource.data.tutorId || 
+                             request.auth.uid == resource.data.studentId);
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.tutorId;
+    }
+    
+    // Tutor-Student Assignment Model
+    match /tutors/{tutorId}/students/{studentId} {
+      allow read, write: if isSignedIn() && request.auth.uid == tutorId;
+      allow read: if isSignedIn() && request.auth.uid == studentId;
+      allow create: if isAdmin(); // Only admins can assign students
+    }
+    
+    // Legacy students collection (keeping for compatibility)
+    match /students/{id} {
+      allow read, write: if isSignedIn() && request.auth.uid == resource.data.tutorId;
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.tutorId;
+    }
+    
+    match /resources/{id} {
+      allow read, write: if isSignedIn() && request.auth.uid == resource.data.tutorId;
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.tutorId;
+    }
+    
+    match /message_threads/{id} {
+      allow read: if isSignedIn() &&
+        (request.auth.uid == resource.data.tutorId || request.auth.uid == resource.data.studentId);
+      allow write: if isSignedIn() &&
+        (request.auth.uid == request.resource.data.tutorId || request.auth.uid == request.resource.data.studentId);
+        
+      match /messages/{messageId} {
+        allow read, write: if isSignedIn() &&
+          (request.auth.uid == get(/databases/$(database)/documents/message_threads/$(id)).data.tutorId ||
+           request.auth.uid == get(/databases/$(database)/documents/message_threads/$(id)).data.studentId);
+      }
+    }
+    
+    match /notifications/{id} {
+      allow read, write: if isSignedIn() && request.auth.uid == resource.data.tutorId;
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.tutorId;
+    }
+    
+    match /payouts/{id} {
+      allow read: if isSignedIn() && request.auth.uid == resource.data.tutorId;
+      allow write: if isAdmin();
+    }
+    
+    // Tutor stats - read-only for tutors, write-only for Cloud Functions
+    match /tutor_stats/{tutorId} {
+      allow read: if isSignedIn() && request.auth.uid == tutorId;
+      allow write: if false; // Only Cloud Functions can write
+    }
+    
+    // Conversations and nested messages
+    match /conversations/{cid} {
+      // Allow GET if the doc doesn't exist yet (so code can check), otherwise only members/admin can read.
+      allow get: if isAdmin()
+        || !exists(/databases/$(db)/documents/conversations/$(cid))
+        || (isSignedIn() && (request.auth.uid in resource.data.members));
+
+      // For queries (list), each returned doc must still pass the member/admin check.
+      allow list: if isAdmin() || (isSignedIn() && (request.auth.uid in resource.data.members));
+      
+      // Create constraints
+      allow create: if isSignedIn()
+        && request.auth.uid in request.resource.data.members
+        && request.resource.data.members is list
+        && request.resource.data.members.size() > 0
+        && request.resource.data.members.size() <= 20
+        && request.resource.data.type is string
+        && (!('lastMessage' in request.resource.data) || request.resource.data.lastMessage is string);
+
+      // Only allow updating lastMessage, updatedAt, and optional name/photoUrl by members
+      allow update: if (isAdmin() || (isSignedIn() && request.auth.uid in resource.data.members))
+        && request.resource.data.keys().hasOnly(['members','type','createdAt','updatedAt','lastMessage','name','photoUrl'])
+        && request.resource.data.members == resource.data.members
+        && request.resource.data.type == resource.data.type
+        && request.resource.data.createdAt == resource.data.createdAt
+        && (!('lastMessage' in request.resource.data) || request.resource.data.lastMessage is string)
+        && (!('name' in request.resource.data) || request.resource.data.name is string)
+        && (!('photoUrl' in request.resource.data) || request.resource.data.photoUrl is string);
+
+      allow delete: if false;
+
+      // Nested messages
+      match /messages/{mid} {
+        function parentHasMember() {
+          return isSignedIn() && (request.auth.uid in get(/databases/$(db)/documents/conversations/$(cid)).data.members);
+        }
+
+        allow read: if isAdmin() || parentHasMember();
+        allow create: if parentHasMember()
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 4000
+          && request.resource.data.createdAt is timestamp;
+        // Allow sender to soft-delete (update limited fields) or hard-delete their own message
+        allow update: if parentHasMember()
+          && request.auth.uid == resource.data.senderId
+          // Only allow modifying text and adding deleted markers; keep identity/timestamps unchanged
+          && request.resource.data.keys().hasOnly(['senderId','createdAt','text','deletedAt','deletedBy'])
+          && request.resource.data.senderId == resource.data.senderId
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.text is string;
+
+        allow delete: if parentHasMember() && request.auth.uid == resource.data.senderId;
+      }
+    }
+  }
+}

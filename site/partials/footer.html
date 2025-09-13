@@ -1,0 +1,215 @@
+<!-- Shared Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container section">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="/"><span>Yuli</span><span class="brand-dot">.</span></a>
+        <p class="muted" style="margin-top:8px">yuli.learning.uk@gmail.com<br/>+447856210325</p>
+        <div style="display:flex;gap:12px;margin-top:10px" aria-label="Social links">
+          <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" aria-label="LinkedIn" rel="noopener" target="_blank">LinkedIn</a>
+          <a href="https://www.instagram.com/yuli.learning/" aria-label="Instagram" rel="noopener" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <nav aria-label="Footer Company">
+        <h3><a href="/about.html">Company</a></h3>
+        <ul class="list-plain">
+          <li><a href="/about.html">About Yuli</a></li>
+          <li><a href="/site/careers.html">Careers</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Footer Legal">
+        <h3><a href="/site/legal/index.html">Legal</a></h3>
+        <ul class="list-plain">
+          <li><a href="/site/legal/terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
+          <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
+          <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Footer Support">
+        <h3><a href="/site/faqs.html">Support</a></h3>
+        <ul class="list-plain">
+          <li><a href="/site/contact.html">Contact Us</a></li>
+          <li><a href="/site/faqs.html">FAQs</a></li>
+          <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div>© 2024 Yuli. All rights reserved.</div>
+      <div>Designed and built with ❤️ for quality education.</div>
+    </div>
+  </div>
+</footer>
+<!-- Cookie banner -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+  <div class="cookie-inner">
+    <p style="margin:0 0 10px">We use essential cookies to make our site work. With your permission, we’ll also use analytics cookies to understand how you use the site and improve it. You can change your choice at any time.</p>
+    <div class="cookie-actions">
+      <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="cookie-analytics"> Allow analytics</label>
+      <button class="cookie-accept" id="cookie-accept">Accept selected</button>
+      <button class="cookie-reject" id="cookie-reject">Reject non-essential</button>
+    </div>
+    <p class="muted" style="margin:8px 0 0">Read our <a href="/site/legal/cookies.html">Cookie Policy</a> and <a href="/site/legal/privacy.html">Privacy Policy</a>.</p>
+  </div>
+</div>
+<!-- Shared Scripts: nav toggle + consent manager + analytics loader (only after consent) -->
+<script>
+(function(){
+  const $ = (s, d=document)=>d.querySelector(s);
+  // Nav toggle
+  const toggle=$('.menu-toggle'), menu=$('#site-menu');
+  if(toggle&&menu){
+    toggle.addEventListener('click',()=>{
+      const open=menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+  // Active nav link
+  try{
+    const here = location.pathname.replace(/\/index\.html?$/, '/');
+    document.querySelectorAll('#site-menu a').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(!href) return;
+      const path = href.replace(/^https?:\/\/[^/]+/,'');
+      if(path!=="/" && here.startsWith(path)){
+        a.setAttribute('aria-current','page');
+      } else if(path==="/" && (here==="/"||here==="/site/")){
+        a.setAttribute('aria-current','page');
+      }
+    });
+  }catch(e){/* noop */}
+  // Sticky header shadow on scroll
+  try{
+    const header=document.querySelector('.site-header');
+    if(header){
+      const onScroll=()=>{ header.classList.toggle('is-scrolled', window.scrollY>4); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, {passive:true});
+    }
+  }catch(e){}
+  // FAQ: client-side search filter
+  try{
+    const input=document.getElementById('faq-search');
+    if(input){
+      const details=[...document.querySelectorAll('main details')];
+      const norm=s=>s.toLowerCase().trim();
+      input.addEventListener('input',()=>{
+        const q=norm(input.value);
+        details.forEach(d=>{
+          const t=(d.querySelector('summary')?.textContent||'')+ ' ' + (d.textContent||'');
+          const hit=norm(t).includes(q);
+          d.style.display = hit? 'block':'none';
+        });
+      });
+    }
+  }catch(e){}
+  // Legal pages: build TOC and highlight active heading
+  try{
+    const toc=document.querySelector('.toc');
+    const main=document.querySelector('main');
+    if(toc && main){
+      const hs=[...main.querySelectorAll('h2')];
+      toc.innerHTML='';
+      hs.forEach((h,i)=>{
+        if(!h.id){ h.id = 'section-' + (i+1); }
+        const a=document.createElement('a');
+        a.href = '#' + h.id; a.textContent = (i+1)+'. ' + h.textContent;
+        toc.appendChild(a);
+      });
+      const opts={rootMargin:'-40% 0px -50% 0px', threshold:[0,1]};
+      const io=new IntersectionObserver((entries)=>{
+        let currentId=null;
+        entries.forEach(en=>{ if(en.isIntersecting) currentId=en.target.id; });
+        if(currentId){
+          toc.querySelectorAll('a').forEach(a=>a.setAttribute('aria-current', String(a.getAttribute('href')==='#'+currentId)));
+        }
+      }, opts);
+      hs.forEach(h=>io.observe(h));
+
+      // Progress rail: update --progress based on scroll position
+      const updateProgress=()=>{
+        try{
+          const rect=main.getBoundingClientRect();
+          const start=window.scrollY + rect.top; // top of main in document coords
+          const end=start + main.scrollHeight - window.innerHeight; // when bottom reaches viewport
+          let pct=(window.scrollY - start)/(end - start);
+          pct = Math.max(0, Math.min(1, pct || 0));
+          const track = Math.max(0, toc.clientHeight - 24); // account for top/bottom inset in CSS
+          const hPx = Math.round(track * pct);
+          toc.style.setProperty('--progress', hPx + 'px');
+        }catch(e){}
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, {passive:true});
+      window.addEventListener('resize', updateProgress);
+    }
+  }catch(e){}
+  // Cookie consent
+  const banner=$('#cookie-banner');
+  const accept=$('#cookie-accept');
+  const reject=$('#cookie-reject');
+  const analyticsBox=$('#cookie-analytics');
+  const KEY='yuli.consent.v1';
+  function hide(){if(banner) banner.style.display='none'}
+  function show(){if(banner) banner.style.display='block'}
+  function loadAnalytics(){
+    if(window.__analyticsLoaded) return; // idempotent
+    const id='GA_MEASUREMENT_ID'; // replace with real ID
+    if(!id||id==='GA_MEASUREMENT_ID') return;
+    const s=document.createElement('script');
+    s.async=true; s.src=`https://www.googletagmanager.com/gtag/js?id=${id}`; document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=gtag;
+    gtag('js', new Date()); gtag('config', id, {anonymize_ip:true});
+    window.__analyticsLoaded=true;
+  }
+  try{
+    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(saved){
+      if(saved.analytics===true) loadAnalytics();
+      hide();
+    }else{
+      show();
+    }
+    accept&&accept.addEventListener('click',()=>{
+      const v={essential:true, analytics: !!(analyticsBox&&analyticsBox.checked)};
+      localStorage.setItem(KEY, JSON.stringify(v));
+      if(v.analytics) loadAnalytics();
+      hide();
+    });
+    reject&&reject.addEventListener('click',()=>{
+      localStorage.setItem(KEY, JSON.stringify({essential:true, analytics:false}));
+      hide();
+    });
+  }catch(e){console&&console.warn('Consent error', e)}
+})();
+</script>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Yuli",
+  "url":"https://yuli.uk/",
+  "email":"yuli.learning.uk@gmail.com",
+  "logo":"https://yuli.uk/assets/logo.png",
+  "sameAs":["https://www.linkedin.com/company/yuli-uk/?viewAsMember=true","https://www.instagram.com/yuli.learning/"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Yuli Tutoring",
+  "url":"https://yuli.uk/",
+  "email":"yuli.learning.uk@gmail.com",
+  "telephone":"+447856210325",
+  "priceRange":"££",
+  "areaServed":"GB",
+  "address":{
+    "@type":"PostalAddress",
+    "addressCountry":"GB"
+  }
+}
+</script>

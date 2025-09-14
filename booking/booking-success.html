@@ -209,60 +209,113 @@
     <script type="module">
         import { auth } from "./lib/firebaseClient.js";
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+        import { getFirestore, doc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
         import { replace } from "./lib/nav.js";
-
+    
         const db = getFirestore();
         const successContent = document.getElementById('success-content');
-
+    
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 replace("/signin");
                 return;
             }
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const bookingId = urlParams.get('bookingId');
-
-            if (!bookingId) {
-                showError("No booking ID found");
-                return;
-            }
-
+    
             try {
-                const bookingRef = doc(db, "bookings", bookingId);
-                const bookingSnap = await getDoc(bookingRef);
-
-                if (!bookingSnap.exists()) {
-                    showError("Booking not found");
+                // Get booking data from localStorage (stored during booking process)
+                const pendingBookingData = localStorage.getItem('pendingBooking');
+                
+                if (!pendingBookingData) {
+                    showError("No booking data found");
                     return;
                 }
+    
+                const booking = JSON.parse(pendingBookingData);
+                
+                // Create proper start timestamp
+                const [hours, minutes] = booking.time.split(':');
+                const startDateTime = new Date(booking.date);
+                startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+                
+                // Create end time (start + duration)
+                const endDateTime = new Date(startDateTime);
+                endDateTime.setMinutes(endDateTime.getMinutes() + booking.duration);
+    
+                // Create booking document in Firestore
+                const bookingDoc = {
+                    userId: booking.userId,
+                    userEmail: booking.userEmail,
+                    contactEmail: booking.contactEmail,
+                    contactPhone: booking.contactPhone,
+                    contactMethod: booking.contactMethod,
+                    subject: booking.subject,
+                    level: booking.level,
+                    examBoard: booking.examBoard,
+                    currentGrade: booking.currentGrade,
+                    targetGrade: booking.targetGrade,
+                    specificAreas: booking.specificAreas,
+                    start: startDateTime,
+                    end: endDateTime,
+                    duration: booking.duration,
+                    sessionType: booking.sessionType,
+                    price: booking.price,
+                    hasDiscount: booking.hasDiscount,
+                    notes: booking.notes,
+                    status: 'confirmed',
+                    createdAt: serverTimestamp()
+                };
+    
+                // Save booking to Firestore
+                const bookingRef = await addDoc(collection(db, 'bookings'), bookingDoc);
 
-                const booking = bookingSnap.data();
+                // CREATE PAYMENT RECORD - ADD THIS NEW SECTION
+await addDoc(collection(db, 'payments'), {
+  userId: booking.userId,
+  bookingId: bookingRef.id,
+  amount: booking.price * 100, // Convert to pence for Stripe format
+  currency: 'gbp',
+  status: 'succeeded',
+  description: `${booking.subject} tutoring session`,
+  createdAt: serverTimestamp()
+});
 
-                if (booking.userId !== user.uid) {
-                    showError("Booking not found");
-                    return;
-                }
-
-                renderBookingSuccess(booking);
-
+    
+                // Create admin notification
+                await addDoc(collection(db, 'adminNotifications'), {
+                    type: 'new_booking',
+                    title: 'New Booking Received',
+                    message: `New ${booking.subject} booking for ${startDateTime.toLocaleDateString('en-GB')} at ${booking.time}`,
+                    bookingId: bookingRef.id,
+                    createdAt: serverTimestamp(),
+                    read: false
+                });
+    
+                // Clear the pending booking data
+                localStorage.removeItem('pendingBooking');
+    
+                // Show success page with booking details
+                renderBookingSuccess({
+                    ...booking,
+                    start: startDateTime,
+                    end: endDateTime
+                });
+    
             } catch (error) {
-                console.error("Failed to load booking:", error);
-                showError("Failed to load booking details");
+                console.error("Failed to create booking:", error);
+                showError("Failed to process booking");
             }
         });
-
+    
         function renderBookingSuccess(booking) {
-            const startTime = booking.start.toDate();
-            const endTime = booking.end.toDate();
-
+            const startTime = new Date(booking.start);
+            const endTime = new Date(booking.end);
+    
             successContent.innerHTML = `
                 <div class="success-icon">
                     <i class="fas fa-check"></i>
                 </div>
                 
-                <h1 class="success-title">Booking Confirmed! 🎉</h1>
+                <h1 class="success-title">Booking Confirmed!</h1>
                 <p class="success-subtitle">
                     Your tutoring session has been successfully booked and payment processed.
                 </p>
@@ -270,7 +323,11 @@
                 <div class="booking-details">
                     <div class="detail-row">
                         <span class="detail-label">Subject</span>
-                        <span class="detail-value">${booking.subject} ${booking.level}</span>
+                        <span class="detail-value">${booking.subject}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Exam Board</span>
+                        <span class="detail-value">${booking.examBoard}</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Date</span>
@@ -290,7 +347,11 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Duration</span>
-                        <span class="detail-value">1 hour</span>
+                        <span class="detail-value">${booking.duration === 60 ? '1 Hour' : '90 Minutes'}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Session Type</span>
+                        <span class="detail-value">${booking.sessionType === 'individual' ? 'Individual' : 'Group'}</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Amount Paid</span>
@@ -313,14 +374,14 @@
                         <i class="fas fa-user"></i>
                         View Dashboard
                     </a>
-                    <a href="/booking.html" class="btn btn-secondary">
+                    <a href="/booking/booking-gcse-mathematics.html" class="btn btn-secondary">
                         <i class="fas fa-plus"></i>
                         Book Another Session
                     </a>
                 </div>
             `;
         }
-
+    
         function showError(message) {
             successContent.innerHTML = `
                 <div class="success-icon" style="background: #fef2f2;">

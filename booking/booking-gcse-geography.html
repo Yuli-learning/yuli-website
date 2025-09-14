@@ -495,7 +495,7 @@
                 </div>
                 <div class="session-type-option" data-type="group" style="flex: 1; padding: 1.25rem 1rem; border: 2px solid var(--border-light); border-radius: 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: center; min-height: 80px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">Group Session</div>
-                  <div style="font-size: 0.9rem; color: var(--text-muted);">2-4 students (£12/hour each)</div>
+                  <div style="font-size: 0.9rem; color: var(--text-muted);">2-4 students (£10/hour each)</div>
                 </div> 
               </div>
             </div>
@@ -632,7 +632,7 @@ let discountedRates = {
   alevel: { individual: 18, group: 12 }
 };
 let standardRates = {
-  gcse: { individual: 20, group: 12 },
+  gcse: { individual: 20, group: 10 },
   alevel: { individual: 35, group: 20 }
 };
 
@@ -651,14 +651,48 @@ async function checkUserDiscountStatus() {
       userDiscountStatus = userData.discountStatus;
       
       if (userDiscountStatus === 'approved') {
-  updatePricingDisplay();
-} else {
-  showDiscountInfo();
-}
+        updatePricingDisplay();
+        // Show discount applied message
+        showDiscountAppliedMessage();
+      } else {
+        showDiscountInfo();
+      }
     }
   } catch (error) {
     console.error('Error checking discount status:', error);
   }
+}
+
+// Show discount applied message for approved users
+function showDiscountAppliedMessage() {
+  const bookingCard = document.querySelector('.booking-card');
+  if (!bookingCard) return;
+  
+  const infoDiv = document.createElement('div');
+  infoDiv.className = 'discount-applied-info';
+  infoDiv.innerHTML = `
+    <div style="
+      background: #ecfdf5;
+      border: 1px solid #16a34a;
+      color: #065f46;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    ">
+      <i class="fas fa-check-circle" style="color: #16a34a;"></i>
+      <div style="flex: 1;">
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">Discount Applied</div>
+        <div style="font-size: 0.9rem;">
+          Your financial support discount has been approved and applied to these rates.
+        </div>
+      </div>
+    </div>
+  `;
+  
+  bookingCard.insertBefore(infoDiv, bookingCard.firstChild);
 }
 
 // Update pricing to show discounts subtly
@@ -711,7 +745,7 @@ function showDiscountInfo() {
 function updateDurationPrices() {
   const subject = bookingData.subject.toLowerCase();
   const isGCSE = subject.includes('gcse');
-  const rates = isGCSE ? discountedRates.gcse : discountedRates.alevel;
+  const rates = userDiscountStatus === 'approved' ? discountedRates.gcse : standardRates.gcse;
   
   // Update individual session prices
   const duration60 = document.querySelector('[data-duration="60"]');
@@ -722,11 +756,21 @@ function updateDurationPrices() {
     const price90 = Math.round(price60 * 1.5);
     
     duration60.dataset.price = price60;
-    duration60.querySelector('.duration-price').innerHTML = `<span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em;">£${standardRates.gcse.individual}</span> £${price60}`;
+    
+    if (userDiscountStatus === 'approved') {
+      duration60.querySelector('.duration-price').innerHTML = `<div style="text-align: center;"><span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em; display: block;">£${standardRates.gcse.individual}</span><span style="color: #065f46; font-weight: 600;">£${price60}</span></div>`;
+    } else {
+      duration60.querySelector('.duration-price').textContent = `£${price60}`;
+    }
     
     if (duration90) {
       duration90.dataset.price = price90;
-      duration90.querySelector('.duration-price').innerHTML = `<span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em;">£${Math.round(standardRates.gcse.individual * 1.5)}</span> £${price90}`;
+      
+      if (userDiscountStatus === 'approved') {
+        duration90.querySelector('.duration-price').innerHTML = `<div style="text-align: center;"><span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em; display: block;">£${Math.round(standardRates.gcse.individual * 1.5)}</span><span style="color: #065f46; font-weight: 600;">£${price90}</span></div>`;
+      } else {
+        duration90.querySelector('.duration-price').textContent = `£${price90}`;
+      }
     }
   }
 }
@@ -1152,6 +1196,7 @@ if (!isGroup) {
     }
 
     // Submit booking with Firebase
+// Submit booking with Firebase
 document.getElementById('submitBooking')?.addEventListener('click', async function(){
   const submitBtn = this;
   
@@ -1166,9 +1211,15 @@ document.getElementById('submitBooking')?.addEventListener('click', async functi
     return;
   }
   
+  // Check if user is authenticated
+  if (!firebase.auth().currentUser) {
+    alert('Please sign in to complete your booking.');
+    return;
+  }
+  
   // Show loading state
   submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving your booking...';
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
   
   try {
     // Add Firestore
@@ -1177,61 +1228,99 @@ document.getElementById('submitBooking')?.addEventListener('click', async functi
     document.head.appendChild(script);
     
     script.onload = async function() {
-      const db = firebase.firestore();
-
-// Create proper start timestamp
-const [hours, minutes] = bookingData.time.split(':');
-const startDateTime = new Date(bookingData.date);
-startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-
-// Create booking document
-const bookingDoc = {
-  userId: firebase.auth().currentUser.uid,
-  userEmail: email,
-  contactEmail: email,
-  contactPhone: phone || '',
-  contactMethod: bookingData.contactMethod,
-  subject: bookingData.subject,
-  level: 'GCSE',
-  examBoard: bookingData.examBoard,
-  currentGrade: bookingData.currentGrade,
-  targetGrade: bookingData.targetGrade,
-  specificAreas: specificAreas || '',
-  start: firebase.firestore.Timestamp.fromDate(startDateTime),
-  duration: bookingData.duration,
-  price: bookingData.price,
-  notes: notes || '',
-  status: 'confirmed',
-  createdAt: firebase.firestore.FieldValue.serverTimestamp()
-};
-      
-      // Save booking
-      const bookingRef = await db.collection('bookings').add(bookingDoc);
-      
-      // Create admin notification
-      await db.collection('adminNotifications').add({
-        type: 'new_booking',
-        title: 'New Booking Received',
-        message: `New ${bookingDoc.subject} booking for ${bookingDoc.date} at ${bookingDoc.time}`,
-        bookingId: bookingRef.id,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        read: false
-      });
-      
-      // Success
-      submitBtn.innerHTML = '<i class="fas fa-check"></i> Booking Confirmed!';
-      submitBtn.style.background = '#16a34a';
-      
-      setTimeout(() => {
-        alert(`Booking confirmed! You'll receive confirmation details at ${email}.`);
-      }, 1000);
+      try {
+        const db = firebase.firestore();
+        
+        // Check user's discount status
+        const userDoc = await db.collection('users').doc(firebase.auth().currentUser.uid).get();
+        const userData = userDoc.data();
+        const hasApprovedDiscount = userData && userData.discountStatus === 'approved';
+        
+        // Store booking data in localStorage for after payment
+        const bookingDataForStorage = {
+          userId: firebase.auth().currentUser.uid,
+          userEmail: email,
+          contactEmail: email,
+          contactPhone: phone || '',
+          contactMethod: bookingData.contactMethod,
+          subject: bookingData.subject,
+          level: 'GCSE',
+          examBoard: bookingData.examBoard,
+          currentGrade: bookingData.currentGrade,
+          targetGrade: bookingData.targetGrade,
+          specificAreas: specificAreas || '',
+          date: bookingData.date.toISOString(),
+          time: bookingData.time,
+          duration: bookingData.duration,
+          sessionType: bookingData.sessionType,
+          price: bookingData.price,
+          hasDiscount: hasApprovedDiscount,
+          notes: notes || ''
+        };
+        
+        localStorage.setItem('pendingBooking', JSON.stringify(bookingDataForStorage));
+        
+        // Determine Stripe payment link
+        let stripeUrl = '';
+        
+        if (bookingData.sessionType === 'individual') {
+          if (hasApprovedDiscount) {
+            // Discounted individual rates
+            if (bookingData.duration === 60) {
+              stripeUrl = 'https://buy.stripe.com/aFa5kEcWC0CF7Ju0X46EU02';
+            } else if (bookingData.duration === 90) {
+              stripeUrl = 'https://buy.stripe.com/5kQfZi8Gm0CFe7ScFM6EU0a';
+            }
+          } else {
+            // Standard individual rates
+            if (bookingData.duration === 60) {
+              stripeUrl = 'https://buy.stripe.com/5kQ5kE4q62KNe7S7ls6EU00';
+            } else if (bookingData.duration === 90) {
+              stripeUrl = 'https://buy.stripe.com/3cI5kEe0G3OR1l6cFM6EU08';
+            }
+          }
+        } else if (bookingData.sessionType === 'group') {
+          if (hasApprovedDiscount) {
+            // Discounted group rate (1 hour only)
+            stripeUrl = 'https://buy.stripe.com/8x2cN64q6fxz9RC7ls6EU05';
+          } else {
+            // Standard group rate (1 hour only)
+            stripeUrl = 'https://buy.stripe.com/aFa14o1dUcln1l6fRY6EU04';
+          }
+        }
+        
+        if (!stripeUrl) {
+          throw new Error('Unable to determine payment link');
+        }
+        
+        // Set success and cancel URLs
+        const currentUrl = window.location.origin;
+        const successUrl = `${currentUrl}/booking-success.html`;
+        const cancelUrl = `${currentUrl}/booking/booking-gcse-geography.html`;
+        
+        const urlWithParams = `${stripeUrl}?success_url=${encodeURIComponent(successUrl)}&cancel_url=${encodeURIComponent(cancelUrl)}`;
+        
+        // Redirect to Stripe
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Redirecting to Payment...';
+        submitBtn.style.background = '#16a34a';
+        
+        setTimeout(() => {
+          window.location.href = urlWithParams;
+        }, 1000);
+        
+      } catch (innerError) {
+        console.error('Inner booking error:', innerError);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Confirm Booking';
+        alert('Sorry, there was an error processing your booking. Please try again.');
+      }
     };
     
   } catch (error) {
     console.error('Booking error:', error);
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Confirm Booking';
-    alert('Sorry, there was an error. Please try again.');
+    alert('Sorry, there was an error processing your booking. Please try again.');
   }
 });
   </script>

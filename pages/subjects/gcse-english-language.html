@@ -215,18 +215,11 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(67,97,238,0.35), 0 0 0 4px rgba(67,97,238,0.15);
-            background: linear-gradient(135deg, var(--yuli-primary) 0%, var(--yuli-accent-blue) 100%);
-            border-color: var(--yuli-accent-blue);
-            color: white;
-            animation: glowPulse 1.2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glowPulse {
-            0% { box-shadow: 0 10px 24px rgba(67,97,238,0.28), 0 0 0 2px rgba(67,97,238,0.10); }
-            100% { box-shadow: 0 16px 40px rgba(67,97,238,0.42), 0 0 0 6px rgba(67,97,238,0.18); }
-        }
+    transform: translateY(-1px);
+    background: #2d4bb5;
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
 
         /* Main Content */
         .main-content {
@@ -1491,7 +1484,7 @@
                 <p class="tagline">Clarity, confidence, and exam results that last.</p>
                 <a href="/booking/booking-gcse-english-language.html" class="cta-button">
                     <i class="fas fa-calendar-check"></i>
-                    Book a Diagnostic Lesson
+                    Book a Lesson
                 </a>
                 <div class="cta-subtext">From £20/hr · All UK exam boards covered</div>
             </div>
@@ -1711,39 +1704,39 @@
                 <h2 id="corp-testimonials-title" class="section-title">What Students Say</h2>
 
                 <div class="swiper" aria-roledescription="carousel" aria-label="Student testimonials">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div class="corp-testimonial">
-                        <div class="corp-logo" aria-hidden="true">
-                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="corp-testimonial">
+                          <div class="corp-logo" aria-hidden="true">
+                              <img src="../../assets/logos/afifa.jpg" alt="Afifa profile" loading="lazy" />
+                          </div>
+                          <blockquote class="corp-quote">“Yuli helped my son jump two grades in just a term. Clear teaching and a structured plan made all the difference.”</blockquote>
+                          <div class="corp-meta">Afifa A • Student</div>
                         </div>
-                        <blockquote class="corp-quote">“Yuli helped my son jump two grades in just a term. Clear teaching and a structured plan made all the difference.”</blockquote>
-                        <div class="corp-meta">Alex E • Student</div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="corp-testimonial">
+                          <div class="corp-logo" aria-hidden="true">
+                              <img src="../../assets/logos/robin.jpg" alt="Robin profile" loading="lazy" />
+                          </div>
+                          <blockquote class="corp-quote">“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”</blockquote>
+                          <div class="corp-meta">Robin • Student</div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="corp-testimonial">
+                          <div class="corp-logo" aria-hidden="true">
+                              <img src="../../assets/logos/ethan.jpg" alt="Ethan Y profile" loading="lazy" />
+                          </div>
+                          <blockquote class="corp-quote">“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”</blockquote>
+                          <div class="corp-meta">Ethan Y • Student</div>
+                        </div>
                       </div>
                     </div>
-                    <div class="swiper-slide">
-                      <div class="corp-testimonial">
-                        <div class="corp-logo" aria-hidden="true">
-                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
-                        </div>
-                        <blockquote class="corp-quote">“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”</blockquote>
-                        <div class="corp-meta">Ahmed M • Student</div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="corp-testimonial">
-                        <div class="corp-logo" aria-hidden="true">
-                          <img src="../../assets/logos/no%20user%20profile.png" alt="Profile placeholder" loading="lazy" />
-                        </div>
-                        <blockquote class="corp-quote">“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”</blockquote>
-                        <div class="corp-meta">Ethan Y • Student</div>
-                      </div>
-                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev" aria-label="Previous slide"></div>
+                    <div class="swiper-button-next" aria-label="Next slide"></div>
                   </div>
-                  <div class="swiper-pagination"></div>
-                  <div class="swiper-button-prev" aria-label="Previous slide"></div>
-                  <div class="swiper-button-next" aria-label="Next slide"></div>
-                </div>
 
                 <!-- Student-centred benefit cards (service-focused) -->
                 <div class="student-benefits">
@@ -1800,8 +1793,24 @@
               .corp-testimonials .swiper-slide { display: grid; place-items: center; }
 
               .corp-testimonial { max-width: 900px; width: 100%; background: #ffffff; border: 1px solid #e6eef9; border-radius: 16px; padding: 28px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06); display: grid; grid-template-columns: 112px 1fr; gap: 22px; align-items: center; }
-              .corp-logo { width: 96px; height: 96px; border-radius: 12px; display: grid; place-items: center; background: #f1f6ff; box-shadow: inset 0 0 0 1px #e1ecff; }
-              .corp-logo img { max-width: 74px; max-height: 48px; object-fit: contain; filter: saturate(0.75) contrast(1.05); }
+              .corp-logo { 
+    width: 96px; 
+    height: 96px; 
+    border-radius: 12px; 
+    display: grid; 
+    place-items: center; 
+    background: #f1f6ff; 
+    box-shadow: inset 0 0 0 1px #e1ecff; 
+    overflow: hidden;
+}
+              .corp-logo img { 
+    width: 96px; 
+    height: 96px; 
+    object-fit: cover; 
+    object-position: center;
+    border-radius: 12px;
+    filter: saturate(0.75) contrast(1.05); 
+}
               .corp-quote { margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 1.125rem; line-height: 1.65; color: #0f172a; }
               .corp-meta { margin-top: 8px; font-size: 0.95rem; color: #475569; font-weight: 600; }
 

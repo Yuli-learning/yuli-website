@@ -520,6 +520,39 @@
         height: 80px;
       }
     }
+
+/* Add scrolling to dashboard card content */
+.card-content {
+  min-height: 120px;
+  max-height: 300px; /* Limit height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 4px; /* Space for scrollbar */
+}
+
+/* Custom scrollbar styling */
+.card-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-content::-webkit-scrollbar-track {
+  background: var(--surface-soft);
+  border-radius: 3px;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-soft);
+}
+
+/* Ensure list items don't get cut off during scroll */
+.list-item:last-child {
+  margin-bottom: 8px;
+}
+
   </style>
 </head>
 <body>

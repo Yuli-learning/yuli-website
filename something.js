@@ -1538,9 +1538,17 @@
                 imageUrl = user.photoURL;
                 if (profileImg) profileImg.src = imageUrl;
             } else if (!imageUrl) {
-                const defaultUrl = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMTAwIiBmaWxsPSIjQzNDNEM2Ii8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjcwIiByPSIzMCIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNNTAgMTUwQzUwIDEyMC43OTEgNzIuOTEgMTAwIDEwMCAxMDBTMTUwIDEyMC43OTEgMTUwIDE1MEg1MFoiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+Cg==";
+                const defaultUrl = "./assets/logos/ethan.jpg";
+                console.log('Setting default profile picture URL:', defaultUrl);
                 imageUrl = defaultUrl;
-                if (profileImg) profileImg.src = defaultUrl;
+                if (profileImg) {
+                    console.log('Setting profileImg.src to:', defaultUrl);
+                    profileImg.onerror = function() {
+                        console.error('Failed to load profile image:', defaultUrl);
+                        console.error('Error details:', this.src);
+                    };
+                    profileImg.src = defaultUrl;
+                }
             }
         }
         

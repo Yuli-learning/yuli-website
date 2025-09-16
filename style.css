@@ -907,14 +907,21 @@
   .hero-line {
       display: block;
       overflow: hidden;
+      color: white; /* Ensure main text is white */
       /* Removed complex animations for performance */
       opacity: 1;
   }
   
+  .hero .highlight {
+      font-style: normal;
+      color: #7dd3fc; /* Light blue for understanding */
+      font-weight: 500;
+  }
+  
   .hero h1 em {
       font-style: normal;
-      color: #7dd3fc;
-      font-weight: 500;
+      color: white; /* White for memorising */
+      font-weight: 400;
   }
   
   .hero-subtitle {

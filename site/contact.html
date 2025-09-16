@@ -499,7 +499,8 @@
             <!-- Contact Form -->
             <div class="card">
               <h2 class="section-heading">Send a message</h2>
-              <form method="post" action="/api/contact" novalidate>
+              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/contact-success" novalidate>
+                <input type="hidden" name="form-name" value="contact" />
                 <div class="form-row form-row-2">
                   <div>
                     <label class="required" for="name">Name</label>
@@ -545,10 +546,9 @@
                 </div>
 
                 <!-- Honeypot field -->
-                <div style="display:none">
-                  <label for="company">Company</label>
-                  <input id="company" name="company" autocomplete="off" tabindex="-1" />
-                </div>
+                <p style="display: none;">
+     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+   </p>
 
                 <div class="form-row">
                   <label>

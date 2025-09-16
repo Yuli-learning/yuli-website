@@ -104,7 +104,7 @@ async function setupPaymentsListener(user) {
     const paymentsRef = collection(db, "payments");
     const paymentsQuery = query(
         paymentsRef,
-        where("studentId", "==", user.uid),
+        where("userId", "==", user.uid),
         orderBy("createdAt", "desc"),
         limit(5)
     );
@@ -129,7 +129,7 @@ async function setupBookingsListener(user) {
     const now = new Date();
     const bookingsQuery = query(
         bookingsRef,
-        where("studentId", "==", user.uid),
+        where("userId", "==", user.uid),
         where("scheduledDate", ">=", now),
         orderBy("scheduledDate", "asc"),
         limit(5)

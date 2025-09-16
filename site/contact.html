@@ -13,6 +13,26 @@
   <link rel="stylesheet" href="/site/assets/components.css" />
   <link rel="stylesheet" href="/site/assets/neo.css" />
   <style>
+
+/* Error styling for checkbox validation */
+.consent-error {
+    border: 2px solid var(--yuli-accent) !important;
+    background-color: rgba(233, 93, 123, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+.error-message {
+    color: var(--yuli-accent);
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 8px;
+    display: none;
+    padding: 8px;
+    background-color: rgba(233, 93, 123, 0.1);
+    border-radius: 4px;
+    border-left: 3px solid var(--yuli-accent);
+}
+
     /* Professional Contact Page Styling - Matching Design System */
     :root {
       --yuli-primary: #4361EE;
@@ -500,10 +520,7 @@
             <div class="card">
               <h2 class="section-heading">Send a message</h2>
               <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/contact-success" novalidate>
-<<<<<<< HEAD
-=======
-                <input type="hidden" name="form-name" value="contact" />
->>>>>>> 8fbdc0ca0b486f1c637e8769a55acfe887503733
+                <input type="hidden" name="bot-field" />
                 <div class="form-row form-row-2">
                   <div>
                     <label class="required" for="name">Name</label>
@@ -549,9 +566,10 @@
                 </div>
 
                 <!-- Honeypot field -->
-                <p style="display: none;">
-     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-   </p>
+                <div style="display:none">
+                  <label for="company">Company</label>
+                  <input id="company" name="company" autocomplete="off" tabindex="-1" />
+                </div>
 
                 <div class="form-row">
                   <label>
@@ -604,5 +622,109 @@
     </section>
   </main>
   <!--#include virtual="/site/partials/footer.html" -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form[name="contact"]');
+        const consentCheckbox = document.querySelector('input[name="consent"]');
+        
+        // Create custom popup
+        function showCustomPopup(message, isSuccess = false) {
+            // Create popup elements
+            const overlay = document.createElement('div');
+            const popup = document.createElement('div');
+            const messageText = document.createElement('p');
+            const closeButton = document.createElement('button');
+            
+            // Style the overlay
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            `;
+            
+            // Style the popup
+            popup.style.cssText = `
+                background: white;
+                border-radius: 16px;
+                padding: 32px;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                border: ${isSuccess ? '3px solid #10b981' : '3px solid #e95d7b'};
+            `;
+            
+            // Style the message
+            messageText.style.cssText = `
+                margin: 0 0 24px 0;
+                color: #1e293b;
+                font-size: 16px;
+                line-height: 1.5;
+            `;
+            messageText.textContent = message;
+            
+            // Style the close button
+            closeButton.style.cssText = `
+                background: ${isSuccess ? '#10b981' : '#e95d7b'};
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 24px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            `;
+            closeButton.textContent = 'OK';
+            
+            // Add hover effect
+            closeButton.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+            });
+            
+            closeButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+            
+            // Close popup function
+            function closePopup() {
+                document.body.removeChild(overlay);
+            }
+            
+            // Close on button click or overlay click
+            closeButton.addEventListener('click', closePopup);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closePopup();
+            });
+            
+            // Assemble and show popup
+            popup.appendChild(messageText);
+            popup.appendChild(closeButton);
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+        }
+        
+        form.addEventListener('submit', function(e) {
+            if (!consentCheckbox.checked) {
+                e.preventDefault();
+                showCustomPopup('You must agree to the Privacy Policy before submitting the form.', false);
+                consentCheckbox.focus();
+                return false;
+            }
+            
+            // If validation passes, let the form submit normally to Netlify
+            // No e.preventDefault() here - form will submit to Netlify and redirect
+        });
+    });
+    </script>
 </body>
 </html>

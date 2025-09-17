@@ -10139,38 +10139,30 @@
     }
   }
 
-/* iPad fix for Lukas image - prevents thin appearance */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape),
-       (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+/* iPad fix - most reliable version */
+@media screen and (min-width: 768px) and (max-width: 1024px),
+       screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   
-  .about-image {
-    max-width: 450px !important;
-    min-height: 500px !important;
-    overflow: visible !important;
+  body .about .about-content .about-image .photo-container {
+    aspect-ratio: unset !important;
+    width: 320px !important;
+    height: 420px !important;
+    max-width: 320px !important;
+    max-height: 420px !important;
+    min-height: 420px !important;
   }
   
-  .photo-container {
-    aspect-ratio: auto !important;
-    min-height: 450px !important;
-    max-height: none !important;
-    height: auto !important;
+  body .about .about-content .about-image .photo-container .photo-inner {
+    aspect-ratio: unset !important;
     width: 100% !important;
-    max-width: 400px !important;
+    height: 100% !important;
   }
   
-  .photo-inner {
-    aspect-ratio: auto !important;
-    height: 450px !important;
+  body .about .about-content .about-image .photo-container .tutor-photo {
+    aspect-ratio: unset !important;
     width: 100% !important;
-    max-width: 400px !important;
-  }
-  
-  .tutor-photo {
-    aspect-ratio: auto !important;
-    height: 450px !important;
-    width: 100% !important;
+    height: 100% !important;
     max-height: none !important;
     object-fit: cover !important;
-    object-position: center 30% !important;
   }
 }

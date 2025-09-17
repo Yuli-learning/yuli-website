@@ -1878,7 +1878,7 @@
                     <i class="fas fa-calendar-check"></i>
                     <h3>Book a Session</h3>
                     <p>Schedule your first tutoring session</p>
-                    <button class="cta-button" onclick="openModal(bookingModal)">Book Now</button>
+                    <button class="cta-button" onclick="handleBookingClick()">Book Now</button>
                 </div>
                 
                 <div class="contact-card">
@@ -2134,5 +2134,93 @@
         if (registerBtn) registerBtn.addEventListener('click', function(){ openAuthModal(true); });
       });
     </script>
+
+    <!-- Booking Guide Popup -->
+<div id="booking-guide-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeBookingGuide()">&times;</button>
+        <div class="modal-body">
+            <div class="guide-steps">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Level</h4>
+                        <p>Switch between GCSE and A-Level using the tabs above the subjects</p>
+                        <div class="level-selector-demo">
+                            <button class="level-btn-demo active">
+                                <span>GCSE</span>
+                                <div class="level-count">9</div>
+                            </button>
+                            <button class="level-btn-demo">
+                                <span>A-Level</span>
+                                <div class="level-count">3</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Pick Your Subject</h4>
+                        <p>Browse through the subjects and click "Explore" on any subject that interests you</p>
+                        <div class="guide-button-demo">
+                            <button class="demo-btn">Explore <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Book Your Session</h4>
+                        <p>Follow the booking process to schedule your first tutoring session</p>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-footer">
+                <button class="cta-button" onclick="closeBookingGuide()">Got it, let's start!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function handleBookingClick() {
+    const subjectsSection = document.getElementById('subjects');
+    if (subjectsSection) {
+        subjectsSection.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(function() {
+            showBookingGuide();
+        }, 800);
+    }
+}
+
+function showBookingGuide() {
+    const modal = document.getElementById('booking-guide-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeBookingGuide() {
+    const modal = document.getElementById('booking-guide-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+document.getElementById('booking-guide-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeBookingGuide();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeBookingGuide();
+    }
+});
+</script>
   </body>
 </html>

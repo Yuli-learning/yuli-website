@@ -10115,3 +10115,24 @@
   .subjects-by-category[data-level="alevel"] .subject-card-scroll .scroll-icon i {
       color: white !important;
   }
+/* iPad nuclear fix for Lukas image */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .tutor-photo {
+      aspect-ratio: auto !important;
+      height: 400px !important;
+      width: 300px !important;
+      max-height: none !important;
+      min-height: auto !important;
+      object-fit: cover !important;
+      transform: none !important;
+    }
+    
+    .photo-container,
+    .photo-inner {
+      aspect-ratio: auto !important;
+      height: 400px !important;
+      width: 300px !important;
+      max-height: none !important;
+      min-height: auto !important;
+    }
+  }

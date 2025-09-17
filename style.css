@@ -9382,8 +9382,8 @@
   /* Mobile stack stays the same via existing @media rules */
   
   /* === Performance overrides: reduce scroll-to-top jank === */
-  /* Disable global smooth scroll (can cause long-frame jank on large pages) */
-  html { scroll-behavior: auto !important; }
+/* Enable smooth scroll for navigation */
+html { scroll-behavior: smooth !important; }
   
   /* Avoid animating 'top' on sticky header; keep a simple shadow transition */
   header { transition: box-shadow 0.2s ease !important; will-change: box-shadow; }

@@ -1147,10 +1147,17 @@ if (!isGroup) {
           cell.classList.add('today');
         }
 
-        const isPast = dateObj < today;
+        const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+const isPast = dateObj < tomorrow;
         if (isPast){
           cell.classList.add('disabled');
+          cell.style.opacity = '0.3';
+          cell.style.cursor = 'not-allowed';
+          cell.title = 'Bookings must be made at least 1 day in advance';
         } else {
+          cell.style.cursor = 'pointer';
+          cell.title = 'Click to select this date';
           cell.addEventListener('click', () => {
             document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
             cell.classList.add('selected');

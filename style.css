@@ -10362,3 +10362,43 @@ html { scroll-behavior: smooth !important; }
 }
     }
 }
+
+/* Make all testimonial cards exactly the same height */
+.corp-testimonials .swiper-slide {
+  height: auto;
+}
+.corp-testimonial {
+  height: 220px; /* Fixed height for all cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px; /* Add consistent padding */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Prevent text overflow */
+.corp-testimonial .corp-quote {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.corp-testimonial .corp-meta {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin: 0;
+  line-height: 1.2; /* Tighter line height for names */
+}
+
+/* Fix pagination positioning */
+.corp-testimonials .swiper {
+  padding-bottom: 50px;
+}
+
+.corp-testimonials .swiper-pagination {
+  bottom: 15px !important;
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+}

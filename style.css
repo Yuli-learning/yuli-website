@@ -10335,5 +10335,30 @@ html { scroll-behavior: smooth !important; }
         width: 30px;
         height: 30px;
         font-size: 14px;
+
+        /* Fix Swiper pagination positioning */
+.corp-testimonials .swiper {
+  padding-bottom: 50px; /* Add consistent space for pagination */
+}
+
+.corp-testimonials .swiper-pagination {
+  bottom: 15px !important; /* Force consistent bottom position */
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+  text-align: center;
+}
+
+/* Ensure all testimonial cards have consistent minimum height */
+.corp-testimonial {
+  min-height: 200px; /* Adjust this value as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.corp-quote {
+  flex: 1; /* Allow quote to expand and fill space */
+}
     }
 }

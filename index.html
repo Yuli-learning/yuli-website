@@ -2249,5 +2249,51 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
     <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>68d02c2d0f482854b717add8,68d02b3c2f2c944ce27d507f</script>
-  </body>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenu.classList.add('active');
+      mobileMenuBtn.classList.add('active');
+      document.body.classList.add('mobile-menu-open');
+    });
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('active');
+    mobileMenuBtn.classList.remove('active');
+    document.body.classList.remove('mobile-menu-open');
+  }
+
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMenu);
+  }
+
+  if (mobileMenu) {
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu) {
+        closeMenu();
+      }
+    });
+  }
+
+  mobileMenuLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+});
+</script>
+</body>
 </html>

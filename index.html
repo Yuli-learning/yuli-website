@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="profile.css?v=2">
     <style>
       /* Password toggle styles for auth modal */
@@ -66,25 +65,14 @@
     <!-- Header -->
     <header>
     <div class="container">
-        <!-- NEW: Hamburger Menu Button -->
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <!-- KEEP: Logo (same as before) -->
         <a href="/" class="logo">Yuli<span>.</span></a>
-
-        <a href="/" class="logo">Yuli<span>.</span></a>
-<nav class="desktop-nav">
-    <a href="#subjects">Subjects</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-</nav>
-        
-        <!-- KEEP: Auth Actions (same as before) -->
+        <nav>
+            <a href="#subjects">Subjects</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="pages/tutor-dashboard.html" id="dashboard-link" style="display: none;">Dashboard</a>
+        </nav>
         <div class="auth-actions">
             <button id="profile-btn" class="profile-btn" style="display: none;" tabindex="0">
                 <i class="fas fa-user"></i> Profile
@@ -2249,51 +2237,5 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
     <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>68d02c2d0f482854b717add8,68d02b3c2f2c944ce27d507f</script>
-  <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuClose = document.getElementById('mobile-menu-close');
-  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
-
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileMenu.classList.add('active');
-      mobileMenuBtn.classList.add('active');
-      document.body.classList.add('mobile-menu-open');
-    });
-  }
-
-  function closeMenu() {
-    mobileMenu.classList.remove('active');
-    mobileMenuBtn.classList.remove('active');
-    document.body.classList.remove('mobile-menu-open');
-  }
-
-  if (mobileMenuClose) {
-    mobileMenuClose.addEventListener('click', closeMenu);
-  }
-
-  if (mobileMenu) {
-    mobileMenu.addEventListener('click', function(e) {
-      if (e.target === mobileMenu) {
-        closeMenu();
-      }
-    });
-  }
-
-  mobileMenuLinks.forEach(function(link) {
-    link.addEventListener('click', function() {
-      closeMenu();
-    });
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-      closeMenu();
-    }
-  });
-});
-</script>
 </body>
 </html>

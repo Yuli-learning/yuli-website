@@ -1,0 +1,184 @@
+/* Simple Mobile Fixes - Only fixes the broken parts */
+@media (max-width: 767px) {
+  
+  /* Fix cramped header */
+  header .container {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .logo {
+    font-size: 20px !important;
+    order: 1;
+  }
+  
+  nav {
+    order: 3;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  nav a {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+  
+  .auth-actions {
+    order: 2;
+    gap: 6px;
+  }
+  
+  .auth-actions button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  /* Fix hero title being cut off */
+  .hero h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    padding: 0 15px;
+  }
+  
+  .hero-line {
+    white-space: normal !important;
+  }
+  
+  /* Fix hero subtitle */
+  .hero-subtitle {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+  
+  /* Stack hero buttons */
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .hero-buttons .cta-button {
+    min-width: 200px;
+  }
+  
+  /* Fix about section stacking */
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .about-text {
+    text-align: center;
+  }
+  
+  .about-text .subtitle {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .about-text .subtitle h3 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .about-text .subtitle span {
+    text-align: center;
+  }
+  
+  .about-text p {
+    text-align: center;
+  }
+  
+  .about-points {
+    align-items: center;
+  }
+  
+  .point {
+    justify-content: center;
+  }
+  
+  .about-image {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  /* Fix subjects section */
+  .layout-option-2 .section-header-scroll {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .layout-option-2 .header-content h2 {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  
+  .layout-option-2 .section-subtitle {
+    text-align: center;
+  }
+  
+  .level-selector {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .level-btn {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+  
+  /* Fix category headers on mobile */
+  .category-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .category-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+  }
+  
+  /* Make scroll cards smaller */
+  .subject-card-scroll {
+    min-width: 250px;
+    max-width: 250px;
+  }
+  
+  /* Fix pricing cards */
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .price-card {
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  /* Fix contact cards */
+  .contact-options {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Fix footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+}

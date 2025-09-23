@@ -65,27 +65,44 @@
     
     <!-- Header -->
     <header>
-        <div class="container">
-            <a href="/" class="logo">Yuli<span>.</span></a>
-            <nav>
-                <a href="#subjects">Subjects</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <a href="pages/tutor-dashboard.html" id="dashboard-link" style="display: none;">Dashboard</a>
-            </nav>
-            <div class="auth-actions">
-                <button id="profile-btn" class="profile-btn" style="display: none;" tabindex="0">
-                    <i class="fas fa-user"></i> Profile
-                </button>
-                <button id="login-btn" class="login-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign In</button>
-                <button id="register-btn" class="register-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign Up</button>
-                <button id="admin-link" class="admin-link" style="display: none;" onclick="window.location.href='admin.html'">
-                    <i class="fas fa-crown"></i> Admin
-                </button>
-            </div>
+    <div class="container">
+        <!-- NEW: Hamburger Menu Button -->
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- KEEP: Logo (same as before) -->
+        <a href="/" class="logo">Yuli<span>.</span></a>
+        
+        <!-- KEEP: Auth Actions (same as before) -->
+        <div class="auth-actions">
+            <button id="profile-btn" class="profile-btn" style="display: none;" tabindex="0">
+                <i class="fas fa-user"></i> Profile
+            </button>
+            <button id="login-btn" class="login-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign In</button>
+            <button id="register-btn" class="register-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign Up</button>
+            <button id="admin-link" class="admin-link" style="display: none;" onclick="window.location.href='admin.html'">
+                <i class="fas fa-crown"></i> Admin
+            </button>
         </div>
-    </header>
+    </div>
+</header>
+    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-content">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">Yuli<span>.</span></div>
+            <button class="mobile-menu-close" id="mobile-menu-close">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#subjects"><i class="fas fa-graduation-cap"></i>Subjects</a></li>
+            <li><a href="#pricing"><i class="fas fa-pound-sign"></i>Pricing</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i>About</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i>Contact</a></li>
+        </ul>
+    </div>
+</div>
     <script>
       (function () {
         // Ensure Auth is available

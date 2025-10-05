@@ -482,19 +482,27 @@ html, body {
 /* Fix auth modal header on mobile */
 #auth-modal .auth-header-integrated {
     margin: -22px -22px 32px -22px !important;
-    padding: 50px 24px 24px !important;
+    padding: 45px 24px 24px !important;
     position: relative !important;
+    border-radius: 12px 12px 0 0 !important;
 }
 
 #auth-modal .auth-close {
     position: absolute !important;
-    top: 10px !important;
-    right: 10px !important;
-    color: #94a3b8 !important;
-    background: transparent !important;
+    top: 8px !important;
+    right: 8px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
     border: none !important;
-    font-size: 24px !important;
+    font-size: 20px !important;
     z-index: 20 !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+}
+
+#auth-modal .auth-close:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
 #auth-modal .auth-brand-section {

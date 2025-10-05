@@ -416,7 +416,7 @@ html, body {
     pointer-events: auto !important;
 }
 
-/* Fix modal card */
+/* Fix modal card - NO padding on the card itself */
 #auth-modal .auth-card.auth-card--minimal {
     width: 95% !important;
     max-width: 400px !important;
@@ -429,19 +429,20 @@ html, body {
     padding: 0 !important;
 }
 
-/* Extend dark header background fully */
+/* Extend dark header background FULLY - negative margins removed */
 #auth-modal .auth-header-integrated {
     margin: 0 !important;
-    padding: 50px 24px 24px !important;
+    padding: 55px 20px 24px !important;
     border-radius: 12px 12px 0 0 !important;
     position: relative !important;
+    width: 100% !important;
 }
 
-/* Position X button in top right corner */
+/* Position X button INSIDE the dark header area */
 #auth-modal .auth-header-integrated .auth-close {
     position: absolute !important;
-    top: 12px !important;
-    right: 12px !important;
+    top: 10px !important;
+    right: 10px !important;
     width: 40px !important;
     height: 40px !important;
     display: flex !important;
@@ -449,8 +450,8 @@ html, body {
     justify-content: center !important;
     z-index: 20 !important;
     touch-action: manipulation !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
     border: none !important;
     border-radius: 8px !important;
     font-size: 20px !important;
@@ -458,7 +459,7 @@ html, body {
 }
 
 #auth-modal .auth-header-integrated .auth-close:active {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
 }
 
 /* Center the auth content */
@@ -476,9 +477,9 @@ html, body {
     margin: 0 auto !important;
 }
 
-/* Add padding to form section */
+/* Add padding to form section below header */
 #auth-modal form {
-    padding: 0 22px 22px !important;
+    padding: 0 20px 20px !important;
 }
 
 /* Prevent zoom on input focus (iOS) */

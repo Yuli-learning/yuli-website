@@ -101,6 +101,8 @@ html, body {
         gap: 8px !important;
         margin: 0 !important;
         width: auto !important;
+        z-index: 100 !important;
+        pointer-events: auto !important;
     }
     
     .login-btn,
@@ -109,6 +111,10 @@ html, body {
         padding: 8px 16px !important;
         font-size: 13px !important;
         white-space: nowrap !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        cursor: pointer !important;
     }
     
     /* Navigation - hidden until clicked */
@@ -125,6 +131,7 @@ html, body {
         width: 100% !important;
         display: block !important;
         flex-direction: column !important;
+        z-index: 99 !important;
     }
     
     nav.active {
@@ -382,6 +389,73 @@ html, body {
         justify-content: center !important;
         margin: 0 auto !important;
     }
+    
+    /* ===== SIGN IN/SIGN UP MODAL FIXES ===== */
+    
+    /* Fix modal overlay - highest priority */
+    #auth-modal.auth-overlay {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 99999 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 10px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    #auth-modal.auth-overlay.active {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Fix modal card */
+    #auth-modal .auth-card.auth-card--minimal {
+        width: 95% !important;
+        max-width: 400px !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin: auto !important;
+        transform: scale(1) !important;
+        position: relative !important;
+    }
+    
+    /* Make close button bigger/easier to tap */
+    #auth-modal .auth-close {
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        top: 15px !important;
+        right: 15px !important;
+        z-index: 10 !important;
+        touch-action: manipulation !important;
+    }
+    
+    /* Prevent zoom on input focus (iOS) */
+    #auth-modal input,
+    #auth-modal select,
+    #auth-modal textarea {
+        font-size: 16px !important;
+        -webkit-appearance: none !important;
+    }
+    
+    /* Prevent body scroll when modal is open */
+    body.modal-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 
 /* Extra Small Phones */
@@ -402,103 +476,5 @@ html, body {
     
     .header-content h2 {
         font-size: 1.6rem !important;
-    }
-}
-
-/* Add this to mobile-fix.css - ONLY modal fixes for mobile */
-
-@media (max-width: 768px) {
-    
-    /* FIX 1: Ensure auth modal displays properly on mobile */
-    .auth-overlay {
-        display: none !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        z-index: 99999 !important; /* Higher than everything */
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 20px !important;
-    }
-    
-    .auth-overlay.active {
-        display: flex !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-    
-    /* FIX 2: Make auth modal card mobile-friendly */
-    .auth-card.auth-card--minimal {
-        width: 95% !important;
-        max-width: 420px !important;
-        max-height: 85vh !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        transform: scale(1) !important;
-        margin: 0 auto !important;
-    }
-    
-    /* FIX 3: Ensure auth buttons are always clickable */
-    .auth-actions {
-        display: flex !important;
-        gap: 8px !important;
-        z-index: 100 !important;
-        pointer-events: auto !important;
-    }
-    
-    .login-btn,
-    .register-btn,
-    .profile-btn {
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
-    }
-    
-    /* FIX 4: Prevent body scroll when modal is open */
-    body.modal-open {
-        overflow: hidden !important;
-        position: fixed !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    /* FIX 5: Make close button easily tappable */
-    .auth-close {
-        position: absolute !important;
-        top: 15px !important;
-        right: 15px !important;
-        width: 44px !important;
-        height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        z-index: 10 !important;
-        touch-action: manipulation !important;
-    }
-    
-    /* FIX 6: Ensure modal content is scrollable */
-    .auth-card.auth-card--minimal form {
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    
-    /* FIX 7: Make input fields mobile-friendly */
-    .auth-card.auth-card--minimal input,
-    .auth-card.auth-card--minimal select {
-        font-size: 16px !important; /* Prevents zoom on iOS */
-        -webkit-appearance: none !important;
-    }
-    
-    /* FIX 8: Ensure hamburger menu doesn't interfere */
-    .mobile-menu-toggle {
-        z-index: 99 !important; /* Lower than modal */
-    }
-    
-    nav.active {
-        z-index: 98 !important; /* Lower than modal */
     }
 }

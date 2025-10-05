@@ -2224,5 +2224,25 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
     <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>68d02c2d0f482854b717add8,68d02b3c2f2c944ce27d507f</script>
+    <script>
+  window.addEventListener("load", function () {
+    // Wait a moment to let BotPenguin load
+    setTimeout(() => {
+      if (window.BotPenguin && typeof window.BotPenguin.closeChat === "function") {
+        // Make sure the chat stays closed initially
+        window.BotPenguin.closeChat();
+      }
+
+      // Prevent reopening after closing
+      const observer = new MutationObserver(() => {
+        const iframe = document.querySelector("iframe[src*='botpenguin']");
+        if (iframe && iframe.style.display === "block") {
+          iframe.style.display = "none"; // force hidden until manually opened
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }, 2000);
+  });
+</script>
 </body>
 </html>

@@ -391,71 +391,110 @@ html, body {
     }
     
     /* ===== SIGN IN/SIGN UP MODAL FIXES ===== */
-    
-    /* Fix modal overlay - highest priority */
-    #auth-modal.auth-overlay {
-        display: none !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        z-index: 99999 !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 10px !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    
-    #auth-modal.auth-overlay.active {
-        display: flex !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-    
-    /* Fix modal card */
-    #auth-modal .auth-card.auth-card--minimal {
-        width: 95% !important;
-        max-width: 400px !important;
-        max-height: 90vh !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        margin: auto !important;
-        transform: scale(1) !important;
-        position: relative !important;
-    }
-    
-    /* Make close button bigger/easier to tap */
-    #auth-modal .auth-close {
-        width: 44px !important;
-        height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        top: 15px !important;
-        right: 15px !important;
-        z-index: 10 !important;
-        touch-action: manipulation !important;
-    }
-    
-    /* Prevent zoom on input focus (iOS) */
-    #auth-modal input,
-    #auth-modal select,
-    #auth-modal textarea {
-        font-size: 16px !important;
-        -webkit-appearance: none !important;
-    }
-    
-    /* Prevent body scroll when modal is open */
-    body.modal-open {
-        overflow: hidden !important;
-        position: fixed !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
+
+/* Fix modal overlay - highest priority */
+#auth-modal.auth-overlay {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+#auth-modal.auth-overlay.active {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Fix modal card */
+#auth-modal .auth-card.auth-card--minimal {
+    width: 95% !important;
+    max-width: 400px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin: auto !important;
+    transform: scale(1) !important;
+    position: relative !important;
+    padding: 0 !important;
+}
+
+/* Extend dark header background fully */
+#auth-modal .auth-header-integrated {
+    margin: 0 !important;
+    padding: 50px 24px 24px !important;
+    border-radius: 12px 12px 0 0 !important;
+    position: relative !important;
+}
+
+/* Position X button in top right corner */
+#auth-modal .auth-header-integrated .auth-close {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 20 !important;
+    touch-action: manipulation !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 20px !important;
+    padding: 0 !important;
+}
+
+#auth-modal .auth-header-integrated .auth-close:active {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Center the auth content */
+#auth-modal .auth-brand-section {
+    text-align: center !important;
+}
+
+#auth-modal .auth-logo {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+#auth-modal #auth-title {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+/* Add padding to form section */
+#auth-modal form {
+    padding: 0 22px 22px !important;
+}
+
+/* Prevent zoom on input focus (iOS) */
+#auth-modal input,
+#auth-modal select,
+#auth-modal textarea {
+    font-size: 16px !important;
+    -webkit-appearance: none !important;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* Extra Small Phones */

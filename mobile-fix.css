@@ -478,3 +478,35 @@ html, body {
         font-size: 1.6rem !important;
     }
 }
+
+/* Fix auth modal header on mobile */
+#auth-modal .auth-header-integrated {
+    margin: -22px -22px 32px -22px !important;
+    padding: 50px 24px 24px !important;
+    position: relative !important;
+}
+
+#auth-modal .auth-close {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    color: #94a3b8 !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 24px !important;
+    z-index: 20 !important;
+}
+
+#auth-modal .auth-brand-section {
+    text-align: center !important;
+}
+
+#auth-modal .auth-logo {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+#auth-modal #auth-title {
+    text-align: center !important;
+    margin: 0 auto !important;
+}

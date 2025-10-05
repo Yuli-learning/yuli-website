@@ -35,62 +35,121 @@ html, body {
         padding-right: 20px !important;
     }
     
-    /* ===== HEADER FIXES ===== */
+    /* HIDE the ethical discount banner on mobile */
+    .ethical-banner {
+        display: none !important;
+    }
+    
+    /* Move header back to top since banner is hidden */
     header {
+        top: 0 !important;
         padding: 10px 0 !important;
     }
     
+    /* HAMBURGER MENU HEADER */
     header .container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 15px !important;
+        display: grid !important;
+        grid-template-columns: 50px 1fr auto !important;
+        grid-template-rows: auto auto !important;
+        gap: 0 !important;
         align-items: center !important;
-        padding: 10px 20px !important;
+        padding: 15px 20px !important;
+        min-height: auto !important;
     }
     
-    .logo {
-        font-size: 24px !important;
-        margin-bottom: 0;
-    }
-    
-    /* Stack navigation vertically */
-    nav {
-        position: static !important;
-        transform: none !important;
-        width: 100% !important;
+    /* Hamburger button */
+    .mobile-menu-toggle {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important;
-        text-align: center;
+        gap: 5px !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        z-index: 100 !important;
     }
     
-    nav a {
+    .mobile-menu-toggle span {
         display: block !important;
-        padding: 10px !important;
-        white-space: normal !important;
-        font-size: 15px !important;
+        width: 25px !important;
+        height: 3px !important;
+        background: #1f2937 !important;
+        border-radius: 2px !important;
+        transition: 0.3s !important;
     }
     
-    /* Center auth buttons */
+    /* Logo centered */
+    .logo {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        font-size: 24px !important;
+        width: auto !important;
+        display: inline-block !important;
+    }
+    
+    /* Auth buttons - ALWAYS visible */
     .auth-actions {
-        width: 100% !important;
-        margin-left: 0 !important;
+        grid-column: 3 !important;
+        grid-row: 1 !important;
         display: flex !important;
-        justify-content: center !important;
-        gap: 10px !important;
+        gap: 8px !important;
+        margin: 0 !important;
+        width: auto !important;
     }
     
     .login-btn,
     .register-btn,
     .profile-btn {
-        padding: 10px 20px !important;
-        font-size: 14px !important;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Navigation - hidden until clicked */
+    nav {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease !important;
+        background: #f8f9fa !important;
+        border-radius: 8px !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        display: block !important;
+        flex-direction: column !important;
+    }
+    
+    nav.active {
+        max-height: 400px !important;
+        margin-top: 15px !important;
+        padding: 10px 0 !important;
+    }
+    
+    nav a {
+        display: block !important;
+        padding: 12px 20px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        text-align: left !important;
+        white-space: normal !important;
+        font-size: 15px !important;
+    }
+    
+    nav a:last-child {
+        border-bottom: none !important;
     }
     
     /* ===== HERO SECTION ===== */
     .hero {
         min-height: 70vh !important;
-        padding: 40px 0 !important;
+        padding: 60px 0 40px 0 !important;
     }
     
     .hero h1 {
@@ -125,6 +184,12 @@ html, body {
         margin: 0 auto !important;
     }
     
+    /* Hide scroll cues on mobile */
+    .scroll-cue,
+    .scroll-cue-about {
+        display: none !important;
+    }
+    
     /* Reduce math symbols size */
     .math-symbol {
         font-size: 1.8rem !important;
@@ -135,10 +200,16 @@ html, body {
     .about-content {
         grid-template-columns: 1fr !important;
         gap: 30px !important;
+        padding: 40px 0 80px 0 !important;
+    }
+    
+    .about {
+        background: transparent !important;
     }
     
     .about-text {
         text-align: center !important;
+        margin-bottom: 30px !important;
     }
     
     .about-text .subtitle,
@@ -160,25 +231,64 @@ html, body {
         justify-content: center !important;
     }
     
+    /* FIX LUKAS PHOTO - Make it visible */
     .about-image {
-        max-width: 280px !important;
-        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        height: auto !important;
+        margin: 30px auto !important;
+        padding: 0 !important;
     }
     
     .photo-container {
-        max-width: 100% !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        height: 420px !important;
+        margin: 0 auto !important;
+        padding: 12px !important;
+        border-radius: 12px !important;
+        aspect-ratio: auto !important;
+    }
+    
+    .photo-inner {
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+        border-radius: 8px !important;
+    }
+    
+    .tutor-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center 30% !important;
+        display: block !important;
+        aspect-ratio: auto !important;
     }
     
     /* ===== SUBJECTS SECTION ===== */
+    .subjects h2,
+    .pricing h2,
+    .contact h2,
+    section h2 {
+        text-align: center !important;
+    }
+    
     .layout-option-2 .section-header-scroll {
         flex-direction: column !important;
         gap: 20px !important;
         align-items: center !important;
     }
     
+    .layout-option-2 .header-content {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
     .layout-option-2 .header-content h2 {
         font-size: 1.8rem !important;
         text-align: center !important;
+        margin: 0 auto !important;
     }
     
     .layout-option-2 .section-subtitle {
@@ -206,6 +316,10 @@ html, body {
         width: 50px !important;
         height: 50px !important;
         margin: 0 auto !important;
+    }
+    
+    .category-info h3 {
+        text-align: center !important;
     }
     
     .subject-card-scroll {
@@ -245,73 +359,6 @@ html, body {
         transform: translateX(-50%) !important;
     }
     
-    .footer-brand,
-    .footer-section {
-        text-align: center !important;
-    }
-    
-    .footer-social {
-        justify-content: center !important;
-    }
-}
-
-/* Extra Small Phones */
-@media (max-width: 375px) {
-    .hero h1 {
-        font-size: 1.75rem !important;
-    }
-    
-    .subject-card-scroll {
-        min-width: 220px !important;
-        max-width: 220px !important;
-    }
-}
-
-/* ===== ADDITIONAL MOBILE FIXES ===== */
-
-@media (max-width: 768px) {
-    
-    /* FIX: Center "Mathematics" and other section headings */
-    .subjects h2,
-    .pricing h2,
-    .contact h2,
-    section h2 {
-        text-align: center !important;
-    }
-    
-    .category-info h3 {
-        text-align: center !important;
-    }
-    
-    /* FIX: Make Lukas photo visible and properly sized */
-    .about-image {
-        max-width: 100% !important;
-        height: auto !important;
-        margin: 0 auto !important;
-        padding: 0 20px !important;
-    }
-    
-    .photo-container {
-        max-width: 300px !important;
-        height: auto !important;
-        aspect-ratio: 3/4 !important;
-        margin: 0 auto !important;
-    }
-    
-    .photo-inner {
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    .tutor-photo {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        object-position: center 30% !important;
-        aspect-ratio: 3/4 !important;
-    }
-    
-    /* FIX: Center "Yuli." in footer */
     .footer-brand {
         text-align: center !important;
     }
@@ -321,33 +368,6 @@ html, body {
         margin: 0 auto !important;
     }
     
-    /* FIX: Improve header spacing and centering */
-    header .container {
-        padding: 15px 20px !important;
-        min-height: auto !important;
-    }
-    
-    .logo {
-        text-align: center !important;
-        width: 100% !important;
-        display: block !important;
-    }
-    
-    /* FIX: Add spacing between "Lukas Jovaisa" section and rest */
-    .about-text {
-        margin-bottom: 30px !important;
-    }
-    
-    /* FIX: Make about section more visible */
-    .about {
-        background: transparent !important;
-    }
-    
-    .about-content {
-        padding: 40px 0 80px 0 !important;
-    }
-    
-    /* FIX: Center all footer sections */
     .footer-section,
     .footer-links {
         text-align: center !important;
@@ -362,115 +382,25 @@ html, body {
         justify-content: center !important;
         margin: 0 auto !important;
     }
-    
-    /* FIX: Improve "Subjects I Teach" section header */
-    .layout-option-2 .header-content {
-        width: 100% !important;
-        text-align: center !important;
-    }
-    
-    .layout-option-2 .header-content h2 {
-        text-align: center !important;
-        margin: 0 auto !important;
-    }
 }
 
-/* Extra emphasis for very small screens */
+/* Extra Small Phones */
 @media (max-width: 375px) {
+    .hero h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    .subject-card-scroll {
+        min-width: 220px !important;
+        max-width: 220px !important;
+    }
+    
     .photo-container {
         max-width: 260px !important;
+        height: 360px !important;
     }
     
     .header-content h2 {
         font-size: 1.6rem !important;
-    }
-}
-
-/* ===== FIX PURPLE BANNER & SCROLL OVERLAP ===== */
-
-@media (max-width: 768px) {
-    
-    /* HIDE the ethical discount banner on mobile */
-    .ethical-banner {
-        display: none !important;
-    }
-    
-    /* Move header back to top since banner is hidden */
-    header {
-        top: 0 !important;
-    }
-    
-    /* FIX: Move scroll cue higher so it doesn't overlap pricing text */
-    .scroll-cue {
-        bottom: 8rem !important;
-    }
-    
-    /* Alternative: Hide scroll cue on mobile entirely if still problematic */
-    .scroll-cue,
-    .scroll-cue-about {
-        display: none !important;
-    }
-    
-    /* FIX: Better header with hamburger-style menu */
-    header {
-        padding: 12px 0 !important;
-        background: white !important;
-    }
-    
-    header .container {
-        padding: 12px 20px !important;
-        gap: 12px !important;
-    }
-    
-    /* Logo on its own line, centered */
-    .logo {
-        order: 1;
-        width: 100% !important;
-        text-align: center !important;
-        font-size: 28px !important;
-        padding-bottom: 8px !important;
-        border-bottom: 1px solid #f3f4f6 !important;
-    }
-    
-    /* Navigation - cleaner stacked list */
-    nav {
-        order: 3;
-        width: 100% !important;
-        background: #f8f9fa !important;
-        border-radius: 8px !important;
-        padding: 10px !important;
-    }
-    
-    nav a {
-        padding: 12px !important;
-        border-bottom: 1px solid #e5e7eb !important;
-        font-size: 16px !important;
-    }
-    
-    nav a:last-child {
-        border-bottom: none !important;
-    }
-    
-    /* Auth buttons - side by side */
-    .auth-actions {
-        order: 2;
-        width: 100% !important;
-        display: flex !important;
-        gap: 10px !important;
-        margin-top: 8px !important;
-    }
-    
-    .login-btn,
-    .register-btn,
-    .profile-btn,
-    .admin-link {
-        flex: 1 !important;
-        text-align: center !important;
-        padding: 10px 16px !important;
-    }
-    
-    /* FIX: Give hero more breathing room since banner is gone */
-    .hero {
-        padding-top: 60px !important;
     }
 }

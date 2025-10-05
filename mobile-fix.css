@@ -266,3 +266,122 @@ html, body {
         max-width: 220px !important;
     }
 }
+
+/* ===== ADDITIONAL MOBILE FIXES ===== */
+
+@media (max-width: 768px) {
+    
+    /* FIX: Center "Mathematics" and other section headings */
+    .subjects h2,
+    .pricing h2,
+    .contact h2,
+    section h2 {
+        text-align: center !important;
+    }
+    
+    .category-info h3 {
+        text-align: center !important;
+    }
+    
+    /* FIX: Make Lukas photo visible and properly sized */
+    .about-image {
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+    }
+    
+    .photo-container {
+        max-width: 300px !important;
+        height: auto !important;
+        aspect-ratio: 3/4 !important;
+        margin: 0 auto !important;
+    }
+    
+    .photo-inner {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    .tutor-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center 30% !important;
+        aspect-ratio: 3/4 !important;
+    }
+    
+    /* FIX: Center "Yuli." in footer */
+    .footer-brand {
+        text-align: center !important;
+    }
+    
+    .footer-brand h3 {
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+    
+    /* FIX: Improve header spacing and centering */
+    header .container {
+        padding: 15px 20px !important;
+        min-height: auto !important;
+    }
+    
+    .logo {
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+    }
+    
+    /* FIX: Add spacing between "Lukas Jovaisa" section and rest */
+    .about-text {
+        margin-bottom: 30px !important;
+    }
+    
+    /* FIX: Make about section more visible */
+    .about {
+        background: transparent !important;
+    }
+    
+    .about-content {
+        padding: 40px 0 80px 0 !important;
+    }
+    
+    /* FIX: Center all footer sections */
+    .footer-section,
+    .footer-links {
+        text-align: center !important;
+    }
+    
+    .footer-contact {
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+    
+    .footer-social {
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+    
+    /* FIX: Improve "Subjects I Teach" section header */
+    .layout-option-2 .header-content {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .layout-option-2 .header-content h2 {
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Extra emphasis for very small screens */
+@media (max-width: 375px) {
+    .photo-container {
+        max-width: 260px !important;
+    }
+    
+    .header-content h2 {
+        font-size: 1.6rem !important;
+    }
+}

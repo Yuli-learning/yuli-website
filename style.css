@@ -10403,3 +10403,36 @@ html { scroll-behavior: smooth !important; }
   transform: translateX(-50%) !important;
   width: auto !important;
 }
+
+/* Mobile Navigation Fix */
+@media (max-width: 768px) {
+    header .container {
+        flex-wrap: wrap;
+    }
+    
+    nav {
+        position: static;
+        transform: none;
+        width: 100%;
+        order: 3;
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .auth-actions {
+        order: 2;
+    }
+}
+
+/* Fix hero text wrapping on mobile */
+@media (max-width: 768px) {
+    .hero h1 {
+        white-space: normal !important;
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+    
+    .hero-line {
+        white-space: normal !important;
+    }
+}

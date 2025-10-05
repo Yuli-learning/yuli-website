@@ -385,3 +385,92 @@ html, body {
         font-size: 1.6rem !important;
     }
 }
+
+/* ===== FIX PURPLE BANNER & SCROLL OVERLAP ===== */
+
+@media (max-width: 768px) {
+    
+    /* HIDE the ethical discount banner on mobile */
+    .ethical-banner {
+        display: none !important;
+    }
+    
+    /* Move header back to top since banner is hidden */
+    header {
+        top: 0 !important;
+    }
+    
+    /* FIX: Move scroll cue higher so it doesn't overlap pricing text */
+    .scroll-cue {
+        bottom: 8rem !important;
+    }
+    
+    /* Alternative: Hide scroll cue on mobile entirely if still problematic */
+    .scroll-cue,
+    .scroll-cue-about {
+        display: none !important;
+    }
+    
+    /* FIX: Better header with hamburger-style menu */
+    header {
+        padding: 12px 0 !important;
+        background: white !important;
+    }
+    
+    header .container {
+        padding: 12px 20px !important;
+        gap: 12px !important;
+    }
+    
+    /* Logo on its own line, centered */
+    .logo {
+        order: 1;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 28px !important;
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid #f3f4f6 !important;
+    }
+    
+    /* Navigation - cleaner stacked list */
+    nav {
+        order: 3;
+        width: 100% !important;
+        background: #f8f9fa !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
+    }
+    
+    nav a {
+        padding: 12px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        font-size: 16px !important;
+    }
+    
+    nav a:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Auth buttons - side by side */
+    .auth-actions {
+        order: 2;
+        width: 100% !important;
+        display: flex !important;
+        gap: 10px !important;
+        margin-top: 8px !important;
+    }
+    
+    .login-btn,
+    .register-btn,
+    .profile-btn,
+    .admin-link {
+        flex: 1 !important;
+        text-align: center !important;
+        padding: 10px 16px !important;
+    }
+    
+    /* FIX: Give hero more breathing room since banner is gone */
+    .hero {
+        padding-top: 60px !important;
+    }
+}

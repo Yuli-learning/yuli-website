@@ -429,13 +429,13 @@ html, body {
     padding: 0 !important;
 }
 
-/* Extend dark header background FULLY - negative margins removed */
+/* Extend dark header background FULLY across the card */
 #auth-modal .auth-header-integrated {
-    margin: 0 !important;
+    margin: -22px -22px 32px -22px !important;
     padding: 55px 20px 24px !important;
     border-radius: 12px 12px 0 0 !important;
     position: relative !important;
-    width: 100% !important;
+    width: calc(100% + 44px) !important;
 }
 
 /* Position X button INSIDE the dark header area */

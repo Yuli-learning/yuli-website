@@ -522,9 +522,10 @@ body.modal-open {
 /* Fix auth modal header on mobile */
 #auth-modal .auth-header-integrated {
     margin: -22px -22px 32px -22px !important;
-    padding: 45px 24px 24px !important;
+    padding: 55px 20px 24px !important;
     position: relative !important;
     border-radius: 12px 12px 0 0 !important;
+    width: calc(100% + 44px) !important;
 }
 
 #auth-modal .auth-close {

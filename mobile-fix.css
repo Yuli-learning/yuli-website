@@ -433,20 +433,12 @@ html, body {
 
 /* Extend dark header background FULLY across the card */
 #auth-modal .auth-header-integrated {
-    margin: 0 !important;
+    margin: -22px -22px 32px -22px !important;
     padding: 55px 20px 24px !important;
     border-radius: 12px 12px 0 0 !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
+    position: relative !important;
+    width: calc(100% + 44px) !important;
     box-sizing: border-box !important;
-}
-
-/* Add spacing below header for content */
-#auth-modal .auth-card.auth-card--minimal > *:not(.auth-header-integrated) {
-    margin-top: 130px !important;
 }
 
 /* Position X button INSIDE the dark header area */
@@ -528,13 +520,4 @@ body.modal-open {
     .header-content h2 {
         font-size: 1.6rem !important;
     }
-}
-
-/* Fix auth modal header on mobile */
-#auth-modal .auth-header-integrated {
-    margin: -22px -22px 32px -22px !important;
-    padding: 55px 20px 24px !important;
-    position: relative !important;
-    border-radius: 12px 12px 0 0 !important;
-    width: calc(100% + 44px) !important;
 }

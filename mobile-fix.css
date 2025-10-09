@@ -538,35 +538,3 @@ body.modal-open {
     border-radius: 12px 12px 0 0 !important;
     width: calc(100% + 44px) !important;
 }
-
-#auth-modal .auth-close {
-    position: absolute !important;
-    top: 8px !important;
-    right: 8px !important;
-    color: rgba(255, 255, 255, 0.7) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: none !important;
-    font-size: 20px !important;
-    z-index: 20 !important;
-    border-radius: 8px !important;
-    padding: 8px !important;
-}
-
-#auth-modal .auth-close:hover {
-    color: #fff !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-}
-
-#auth-modal .auth-brand-section {
-    text-align: center !important;
-}
-
-#auth-modal .auth-logo {
-    text-align: center !important;
-    margin: 0 auto !important;
-}
-
-#auth-modal #auth-title {
-    text-align: center !important;
-    margin: 0 auto !important;
-}

@@ -427,11 +427,15 @@ html, body {
     transform: scale(1) !important;
     position: relative !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 /* Extend dark header background FULLY across the card */
 #auth-modal .auth-header-integrated {
-    margin: -22px -22px 32px -22px !important;
+    margin-left: -22px !important;
+    margin-right: -22px !important;
+    margin-top: -22px !important;
+    margin-bottom: 32px !important;
     padding: 55px 20px 24px !important;
     border-radius: 12px 12px 0 0 !important;
     position: relative !important;

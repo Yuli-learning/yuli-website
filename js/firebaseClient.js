@@ -17,6 +17,7 @@ const firebaseConfig = {
   storageBucket: "yuli-tutoring-platform.appspot.com",
   messagingSenderId: "1070288563693",
   appId: "1:1070288563693:web:eaffd3f0a599ef48198be4"
+  measurementId: "G-BR22TST1VW"
 };
 
 export const app = initializeApp(firebaseConfig);

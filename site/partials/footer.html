@@ -45,7 +45,7 @@
 <!-- Cookie banner -->
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
   <div class="cookie-inner">
-    <p style="margin:0 0 10px">We use essential cookies to make our site work. With your permission, we’ll also use analytics cookies to understand how you use the site and improve it. You can change your choice at any time.</p>
+    <p style="margin:0 0 10px">We use essential cookies to make our site work. With your permission, we'll also use analytics cookies to understand how you use the site and improve it. You can change your choice at any time.</p>
     <div class="cookie-actions">
       <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="cookie-analytics"> Allow analytics</label>
       <button class="cookie-accept" id="cookie-accept">Accept selected</button>
@@ -54,7 +54,7 @@
     <p class="muted" style="margin:8px 0 0">Read our <a href="/site/legal/cookies.html">Cookie Policy</a> and <a href="/site/legal/privacy.html">Privacy Policy</a>.</p>
   </div>
 </div>
-<!-- Shared Scripts: nav toggle + consent manager + analytics loader (only after consent) -->
+<!-- Shared Scripts: nav toggle + consent manager -->
 <script>
 (function(){
   const $ = (s, d=document)=>d.querySelector(s);
@@ -154,20 +154,14 @@
   const KEY='yuli.consent.v1';
   function hide(){if(banner) banner.style.display='none'}
   function show(){if(banner) banner.style.display='block'}
-  function loadAnalytics(){
-    if(window.__analyticsLoaded) return; // idempotent
-    const id='GA_MEASUREMENT_ID'; // replace with real ID
-    if(!id||id==='GA_MEASUREMENT_ID') return;
-    const s=document.createElement('script');
-    s.async=true; s.src=`https://www.googletagmanager.com/gtag/js?id=${id}`; document.head.appendChild(s);
-    window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=gtag;
-    gtag('js', new Date()); gtag('config', id, {anonymize_ip:true});
-    window.__analyticsLoaded=true;
-  }
+  
+  // Analytics is now handled by Firebase Analytics in firebaseClient.js
+  // No separate Google Analytics loader needed here
+  
   try{
     const saved=JSON.parse(localStorage.getItem(KEY)||'null');
     if(saved){
-      if(saved.analytics===true) loadAnalytics();
+      // Analytics consent is stored but loading is handled by firebaseClient.js
       hide();
     }else{
       show();
@@ -175,7 +169,7 @@
     accept&&accept.addEventListener('click',()=>{
       const v={essential:true, analytics: !!(analyticsBox&&analyticsBox.checked)};
       localStorage.setItem(KEY, JSON.stringify(v));
-      if(v.analytics) loadAnalytics();
+      // Firebase Analytics is already initialized in firebaseClient.js
       hide();
     });
     reject&&reject.addEventListener('click',()=>{

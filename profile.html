@@ -6,6 +6,137 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+
+    /* Modal styles for booking guide */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-body {
+    padding: 40px 30px 30px;
+}
+
+.guide-steps {
+    margin-bottom: 30px;
+}
+
+.guide-step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: var(--brand-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 8px 0;
+    color: var(--text-strong);
+}
+
+.step-content p {
+    margin: 0 0 12px 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.level-selector-demo {
+    display: flex;
+    gap: 8px;
+}
+
+.level-btn-demo {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.level-btn-demo.active {
+    background: var(--brand-primary);
+    color: white;
+    border-color: var(--brand-primary);
+}
+
+.level-count {
+    background: rgba(255,255,255,0.2);
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.demo-btn {
+    padding: 8px 16px;
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cta-button {
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+}
     :root {
       --brand-primary: #4361EE;   /* Yuli Blue */
       --brand-secondary: #2F46D6; /* Darker Blue for hover/gradients */
@@ -860,5 +991,100 @@
       go('/');
     });
   </script>
+
+  <!-- Booking Guide Popup -->
+<div id="booking-guide-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeBookingGuide()">&times;</button>
+        <div class="modal-body">
+            <div class="guide-steps">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Level</h4>
+                        <p>Switch between GCSE and A-Level using the tabs above the subjects</p>
+                        <div class="level-selector-demo">
+                            <button class="level-btn-demo active">
+                                <span>GCSE</span>
+                                <div class="level-count">9</div>
+                            </button>
+                            <button class="level-btn-demo">
+                                <span>A-Level</span>
+                                <div class="level-count">3</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Pick Your Subject</h4>
+                        <p>Browse through the subjects and click "Explore" on any subject that interests you</p>
+                        <div class="guide-button-demo">
+                            <button class="demo-btn">Explore <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Book Your Session</h4>
+                        <p>Follow the booking process to schedule your first tutoring session</p>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-footer">
+                <button class="cta-button" onclick="closeBookingGuide()">Got it, let's start!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function handleBookingFromProfile() {
+    // Navigate to home page and show booking guide
+    window.location.href = '/#subjects';
+    setTimeout(function() {
+        if (window.showBookingGuide) {
+            window.showBookingGuide();
+        }
+    }, 1000);
+}
+
+function showBookingGuide() {
+    const modal = document.getElementById('booking-guide-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeBookingGuide() {
+    const modal = document.getElementById('booking-guide-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Modal event handlers
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('booking-guide-modal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookingGuide();
+            }
+        });
+    }
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeBookingGuide();
+        }
+    });
+});
+</script>
+
 </body>
 </html>

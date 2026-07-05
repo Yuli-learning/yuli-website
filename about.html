@@ -3,574 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Lukas | Yuli. Tutoring</title>
+    <title>About Yuli | Yuli. Tutoring</title>
+    <meta name="description" content="Yuli is a founder-led tutoring company for GCSE and A-Level students, built on understanding rather than memorising.">
     <base href="/">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-    --dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    --accent: #4361ee;
-}
+        /* ==========================================================
+           About page — page-specific styles only. Light, editorial,
+           reuses the homepage's fonts/blue accent/button + container
+           classes so it reads as the same brand, without repeating
+           the homepage's dark hero treatment.
+           ========================================================== */
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 36px;
-    margin: 0 auto 36px;
-    align-items: start;
-}
+        .about-page { background: #f7f9ff; }
+        .about-page a { text-decoration: none; }
 
-.footer-contact {
-    display: grid;
-    gap: 6px;
-    margin-top: 0;
-}
-
-.footer-contact a {
-    color: rgba(255,255,255,.78);
-    text-decoration: none;
-    font-size: .98rem;
-}
-
-.footer-contact a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.footer-social {
-    display: flex;
-    gap: 14px;
-    margin-top: 12px;
-}
-
-.logo-accent {
-    color: #FF69B4;
-}
-
-.footer-social a {
-    width: 34px;
-    height: 34px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,.86);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 50%;
-    transition: all .2s ease;
-    text-decoration: none;
-}
-
-.footer-social a:hover {
-    color: #fff;
-    border-color: rgba(255,255,255,.36);
-    transform: translateY(-1px);
-}
-
-.footer-heading {
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    font-size: 1.02rem;
-    color: #ffffff;
-    font-weight: 600;
-    position: relative;
-}
-
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: #FF69B4;
-}
-
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: #FF69B4;
-}
-
-.logo-accent {
-    color: #FF69B4 !important;
-}
-
-@media (min-width: 1600px) {
-    .footer-grid {
-        max-width: 1400px;
-    }
-}
-
-footer {
-    padding: 84px 0 40px;
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-brand h3 {
-    margin: 0 0 10px;
-    font-size: 1.6rem;
-}
-
-.footer-links li {
-    margin-bottom: 10px;
-}
-
-.footer-bottom {
-    padding-top: 36px;
-    gap: 10px;
-    border-top: 1px solid rgba(255,255,255,.1);
-}
-
-.footer-bottom p {
-    font-size: 0.92rem;
-}
-
-.hero-divider {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 80px;
-    z-index: 2;
-}
-
-.hero-divider svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-        /* Professional Founder Page */
-        .about-page {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fafafa 0%, #f1f8ff 100%);
-            color: #1a1a1a;
+        .ap-nav-cta {
+            display: flex;
+            gap: 12px;
+            margin-left: auto;
+            align-items: center;
         }
-        
-        .container {
-            max-width: 900px;
+
+        .ap-section {
+            padding: clamp(56px, 7vw, 90px) 0;
+        }
+
+        .ap-tint { background: #f7f9ff; }
+
+        .ap-narrow {
+            max-width: 700px;
             margin: 0 auto;
-            padding: 0 40px;
+            text-align: center;
         }
-        
-        /* Refined Back Button */
-        .back-button {
-    position: fixed !important;
-    top: 70px;
-    left: 30px;
-    background: #4361ee;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    z-index: 9999 !important;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-}
-        
-        .back-button:hover {
-    background: #4361ee;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-        
-        /* Executive Hero Section */
-        .hero-section {
-    padding: 140px 0 100px;
-    text-align: center;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #ffffff;
-    position: relative;
-    overflow: hidden;
-}
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(67, 97, 238, 0.15) 3px, transparent 3px),
-        radial-gradient(circle at 75% 25%, rgba(67, 97, 238, 0.1) 2px, transparent 2px),
-        radial-gradient(circle at 25% 75%, rgba(67, 97, 238, 0.1) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(67, 97, 238, 0.15) 3px, transparent 3px);
-    background-size: 100px 100px, 80px 80px, 80px 80px, 100px 100px;
-    opacity: 0.35;
-}
-        
-.hero-content {
-    position: relative;
-    z-index: 2;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease 0.2s forwards;
-}
-        
-        .hero-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: 70% 25%;
-            margin: 0 auto 40px;
+        .ap-eyebrow {
             display: block;
-            box-shadow: 0 8px 32px rgba(67, 97, 238, 0.15);
-            border: 6px solid white;
-        }
-        
-        .hero-title {
-            font-size: 3.2rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            font-family: 'Montserrat', sans-serif;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 400;
-            margin-bottom: 24px;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .founder-title {
-            display: inline-block;
-            background: #4361ee;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
+            color: var(--primary);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: clamp(0.875rem, 0.8rem + 0.2vw, 0.9375rem);
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 8px;
+            margin-bottom: 14px;
         }
-        
-        /* Premium Story Section */
-        .story-section {
-            padding: 80px 0;
-            background: #f1f8ff;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-        
-        .story-section h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 50px;
+
+        .ap-section h1,
+        .ap-section h2 {
             font-family: 'Montserrat', sans-serif;
-            color: #1a1a1a;
-            position: relative;
-            padding-bottom: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.25;
+            margin-bottom: 18px;
+            text-align: center;
         }
-        
-        .story-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: #4361ee;
+
+        .ap-section h1 {
+            font-size: clamp(2rem, 1.6rem + 2vw, 2.75rem);
         }
-        
-        .story-section p {
+
+        .ap-section h2 {
+            font-size: clamp(1.5rem, 1.25rem + 1.3vw, 2rem);
+        }
+
+        .ap-section p {
+            font-size: clamp(1rem, 0.95rem + 0.15vw, 1.08rem);
+            line-height: 1.75;
+            color: #4b5563;
+        }
+
+        .ap-section p + p { margin-top: 16px; }
+
+        /* ---- Intro ---- */
+        .ap-intro { text-align: center; padding-top: clamp(70px, 9vw, 100px); }
+        .ap-intro .ap-eyebrow { text-align: center; }
+
+        /* ---- Our Approach cards ---- */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .approach-card {
+            background: #f7f9ff;
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            border-radius: 14px;
+            padding: 28px 24px;
+        }
+
+        .approach-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 24px;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-            max-width: 100%;
-        }
-        
-        .story-section p:first-of-type {
-            font-size: 1.2rem;
-            color: #1a1a1a;
-            font-weight: 500;
-        }
-        
-        .story-section em {
-            color: #4361ee;
-            font-weight: 600;
-        }
-        
-        /* Elegant Pull Quote */
-        .pull-quote {
-            background: #f1f8ff;
-            border-left: 4px solid #4361ee;
-            padding: 40px 50px;
-            margin: 60px 0;
-            border-radius: 0 8px 8px 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-        
-        .pull-quote p {
-            font-size: 1.4rem;
-            font-weight: 500;
-            line-height: 1.6;
-            font-style: italic;
-            color: #2d3748;
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .pull-quote-icon {
-            color: #4361ee;
-            font-size: 1.5rem;
             margin-bottom: 16px;
-            opacity: 0.7;
         }
-        
-        
-        
-        /* Clean Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .approach-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 8px;
         }
-        
-        /* Professional Responsive Design */
+
+        .approach-card p {
+            font-size: 0.96rem;
+            line-height: 1.65;
+            color: #4b5563;
+        }
+
+        /* ---- Meet the Founder ---- */
+        .founder-row {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .founder-photo {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+            flex-shrink: 0;
+        }
+
+        .founder-copy { flex: 1; min-width: 0; }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            
-            .hero-title {
-                font-size: 2.4rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .hero-photo {
-                width: 160px;
-                height: 160px;
-            }
-            
-            .story-section, .contact-section {
-                padding: 60px 0;
-            }
-            
-.story-section {
-    padding: 80px 0 0 0; /* Remove bottom padding */
-    background: #f1f8ff;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease 0.4s forwards;
-}
-
-            .story-section h2, .contact-section h2 {
-                font-size: 2rem;
-            }
-            
-            .pull-quote {
-                padding: 30px 25px;
-                margin: 40px 0;
-            }
-            
-            .pull-quote p {
-                font-size: 1.2rem;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 12px;
-            }
-            
-            .back-button {
-                top: 20px;
-                left: 20px;
-                padding: 10px 16px;
-                font-size: 0.85rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-section {
-                padding: 100px 0 60px;
-            }
-            
-            .story-section, .contact-section {
-                padding: 50px 0;
-            }
-            
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .story-section p {
-                font-size: 1rem;
-            }
+            .founder-row { flex-direction: column; text-align: center; }
+            .founder-copy { text-align: left; }
         }
 
-        html .back-button {
-    position: fixed !important;
-    top: 70px !important;
-    left: 30px !important;
-    z-index: 99999 !important;
-    transform: none !important;
-    animation: none !important;
-    will-change: auto !important;
-}
+        /* ---- Final CTA ---- */
+        .ap-cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+        }
 
-.back-button[href="index.html"] {
-    position: fixed !important;
-    top: 70px !important;
-    left: 30px !important;
-    z-index: 999999 !important;
-    transform: translate3d(0, 0, 0) !important;
-    backface-visibility: hidden !important;
-    perspective: 1000px !important;
-    animation: none !important;
-    transition: none !important;
-}
-</style>
+        .ap-cta-buttons .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* ---- Footer overrides (matches homepage's compact footer) ---- */
+        footer { padding: 84px 0 40px; }
+        .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 36px; margin: 0 auto 36px; align-items: start; }
+        .footer-brand { display: flex; flex-direction: column; }
+        .footer-brand h3 { margin: 0 0 10px; font-size: 1.6rem; }
+        .footer-contact { display: grid; gap: 6px; margin-top: 0; }
+        .footer-contact a { color: rgba(255,255,255,.78); text-decoration: none; font-size: .98rem; }
+        .footer-contact a:hover { color: #fff; text-decoration: underline; }
+        .footer-social { display: flex; gap: 14px; margin-top: 12px; }
+        .footer-social a { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; transition: all .2s ease; text-decoration: none; }
+        .footer-social a:hover { color: #fff; border-color: rgba(255,255,255,.36); transform: translateY(-1px); }
+        .footer-heading { margin-bottom: 12px; padding-bottom: 8px; font-size: 1.02rem; color: #ffffff; font-weight: 600; position: relative; }
+        .footer-heading::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: #FF69B4; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-bottom { padding-top: 36px; gap: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+        .footer-bottom p { font-size: 0.92rem; }
+        .logo-accent { color: #FF69B4 !important; }
+
+        @media (min-width: 1600px) {
+            .footer-grid { max-width: 1400px; }
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 22px; }
+        }
+
+        @media (max-width: 768px) {
+            .ap-nav-cta .cta-button span { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-brand { text-align: left; }
+        }
+    </style>
 </head>
-<body>
+<body class="about-page">
 
-    <a href="index.html" class="back-button">
-        <i class="fas fa-arrow-left"></i>
-        Back to Home
-    </a>
-    
-    <div class="about-page">
-        <!-- Executive Hero Section -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-content">
-                    <img src="assets/IMG_7336 (1).jpg" alt="Lukas Jovaisa teaching at University of Edinburgh" class="hero-photo">
-                    <h1 class="hero-title">Hi, I'm Lukas</h1>
-                    <p class="hero-subtitle">Curious learner. Dedicated tutor. Education realist.</p>
-                    <div class="founder-title">Founder, Yuli</div>
-                </div>
+    <!-- Header (same nav language as the homepage) -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Yuli<span>.</span></a>
+            <nav>
+                <a href="/index.html#subjects">Subjects</a>
+                <a href="/index.html#pricing">Pricing</a>
+                <a href="/about.html">About</a>
+                <a href="/index.html#contact">Contact</a>
+            </nav>
+            <div class="ap-nav-cta">
+                <a href="/index.html#pricing" class="cta-button small"><span>View</span> Pricing</a>
             </div>
+        </div>
+    </header>
 
-    <!-- Wavy divider -->
-    <div class="hero-divider" aria-hidden="true">
-        <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,64 C240,96 480,0 720,32 C960,64 1200,96 1440,48 L1440,120 L0,120 Z" style="fill: #f1f8ff;" fill-opacity="1"/>
-        </svg>
-    </div>
-</section>
-        
-        <!-- My Story Section -->
-        <section class="story-section">
-            <div class="container">
-                <h2>My Story</h2>
-<p><strong>My name's Lukas Jovaisa and I'm currently studying Mathematics at university, but my journey here hasn't been a straight line. I started with a foundation year in Chemical Engineering, moved to Electrical Engineering, and eventually realised that pure maths is what I've always been passionate about. It just took a few detours to realise it.</strong></p>
-
-<p>I've been tutoring for over 4 years now, and honestly, it started really naturally. I was just helping out my friends, explaining things the way I understood them. Then they'd thank me, their faces would light up, and I realised… I might actually be good at this. And more than that, I enjoyed it.</p>
-
-<p>Over time, that grew into something serious. I've taught all kinds of students: disabled, neurodivergent, older, younger. One thing has always stayed true. You have to adapt to how they learn. That's why I don't stick to just one style or method. I watch, I listen, and I figure out what clicks for them.</p>
-
-<p>My philosophy? Understanding over memorisation. Always. That idea came from something unexpected. My love for languages. I've always been into language learning, and one platform in particular, Language Transfer, completely changed how I saw teaching. They teach through logic and connection, not repetition, and it's all free. That model inspired me. I want to build something just like that, eventually. A tutoring platform that runs purely off donations so that no student has to pay. That's the dream.</p>
-
-<p>Right now, I'm tutoring all subjects, not just maths. I originally did A-levels in Maths, Biology, and Chemistry, but I've taught plenty of other subjects just by learning them myself. Because I'm curious. I think everyone should be. Knowledge is power. Eat or be eaten.</p>
-
-<p>I've taught across every major exam board: AQA, Edexcel, OCR, you name it. And while the exam boards differ, the problems are the same. Students are taught to pass, not to understand. That's why I go outside the spec when needed. We link things to real-life examples, we build connections, and then we go back to the exam again and again, so they don't just know what the examiner wants, they actually understand why.</p>
-
-<p>A lot of my proudest moments don't come from test scores. They come from trust. Like when students message me directly to mark their papers, even outside of lessons, because they know I get it. Because they know I care.</p>
-
-<p>One of my students once messaged me this:</p>
-<p><em>"Honestly you are the only tutor that actually teaches from understanding and actually engages with us wanting to help us."</em></p>
-
-<p>That message came after they got almost all 9s in their GCSEs. I won't lie, I nearly teared up. But that message meant more than the grades. It reminded me what this work is really about: helping students unlock ambition, confidence, and genuine curiosity.</p>
-
-<p>Because here's what I believe. It is our job as tutors to figure out what makes each student curious. What drives them. What they enjoy. That's where their power is, and once we know how they think and what they care about, we can connect the subject to them. That's when they start to care. That's when things click.</p>
-
-<p>That drive, that spark, is what makes us human. It's how we got this far. Without curiosity, we wouldn't be here at all.</p>
-
-<p>And it's not just about teaching. It's about empathy. You get what you give. When students feel seen, heard, and supported, they rise. That's why I teach. Not to just pass exams, but to help people believe in themselves, and to show them that they can understand the world around them in ways that actually make sense.</p>
-
-<p>I tutor while I study because this is what I believe in. I want every student, no matter where they come from, to feel what it's like to get it. To feel ownership of knowledge.</p>
-
-<p>And to say, with confidence:</p>
-<p><strong><em>"Wait, I can actually do this."</em></strong></p>
+    <main>
+        <!-- Intro: what Yuli is and why it exists -->
+        <section class="ap-section ap-intro">
+            <div class="container ap-narrow">
+                <span class="ap-eyebrow">About Yuli</span>
+                <h1>Understanding first, always</h1>
+                <p>Yuli is a tutoring company for GCSE and A-Level students, covering subjects from Mathematics to English Literature, from KS3 through to A-Level, against every major UK exam board.</p>
+                <p>It was made around one belief: students remember what they understand, not what they memorise. Most tutoring optimises for the next test, drilling answers until they stick. That rarely lasts, once the wording changes or the topic moves on, memorised answers fall apart. Understanding doesn't. Every Yuli lesson is built around making a topic actually make sense, not just recallable for a few weeks.</p>
             </div>
         </section>
-        
-        <!-- Professional Pull Quote Section -->
-        <section class="pull-quote">
+
+        <!-- Our Approach -->
+        <section class="ap-section ap-tint">
             <div class="container">
-                <i class="fas fa-quote-left pull-quote-icon"></i>
-                <p>&ldquo;Honestly you are the only tutor that actually teaches from understanding and actually engages with us wanting to help us.&rdquo;</p>
+                <div class="ap-narrow">
+                    <span class="ap-eyebrow">Our Approach</span>
+                    <h2>How every lesson works</h2>
+                    <p>The method stays consistent, even though every student is different.</p>
+                </div>
+                <div class="approach-grid">
+                    <div class="approach-card">
+                        <div class="approach-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Clear explanations</h3>
+                        <p>Every topic is broken down to its underlying logic first, rather than handed over as a shortcut to memorise.</p>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon"><i class="fas fa-sliders-h"></i></div>
+                        <h3>Adapted to the student</h3>
+                        <p>No fixed script. Lessons adapt to how each student thinks and learns, not the other way round.</p>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Real understanding, real confidence</h3>
+                        <p>Ideas are connected to real examples so they genuinely make sense, building confidence that holds up under pressure.</p>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h3>Applied in exams</h3>
+                        <p>Understanding is tested against real past-paper questions, so it holds up on exam day, not just in conversation.</p>
+                    </div>
+                </div>
             </div>
         </section>
-        
-        <!-- Footer -->
-        <footer>
+
+        <!-- Meet the Founder -->
+        <section class="ap-section">
             <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <h3>Yuli<span class="logo-accent">.</span></h3>
-                        <div class="footer-contact">
-                            <a href="mailto:yuli.learning.uk@gmail.com" class="footer-email">yuli.learning.uk@gmail.com</a>
-                            <a href="tel:+447856210325" class="footer-phone">+447856210325</a>
-                        </div>
-                        <div class="footer-social" aria-label="Social media">
-                            <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://www.instagram.com/yuli.learning/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
-                        <ul class="footer-links">
-                            <li><a href="/about.html">About Yuli</a></li>
-                            <li><a href="/site/careers.html">Careers</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
-                        <ul class="footer-links">
-                            <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
-                            <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
-                            <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
-                            <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
-                        <ul class="footer-links">
-                            <li><a href="/site/contact.html">Contact Us</a></li>
-                            <li><a href="/site/faqs.html">FAQs</a></li>
-                            <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
-                        </ul>
-                    </div>
+                <div class="ap-narrow">
+                    <span class="ap-eyebrow">Meet the Founder</span>
+                    <h2>Lukas Jovaisa</h2>
                 </div>
-        
-                <div class="footer-bottom">
-                    <p>&copy; 2024 Yuli. All rights reserved.</p>
-                    <p>Designed and built with ❤️ for quality education</p>
+                <div class="founder-row">
+                    <img src="assets/IMG_7336 (1).jpg" alt="Lukas Jovaisa, founder of Yuli" class="founder-photo" loading="lazy">
+                    <div class="founder-copy">
+                        <p>Yuli was founded by Lukas Jovaisa, who's currently studying Mathematics at university. He's been tutoring for 5+ years, working with students from KS3 through to A Level, and started Yuli because he kept seeing the same gap: students taught to pass exams, not to understand them.</p>
+                        <p>His approach comes from a simple belief, first found in language learning: understanding beats memorising, every time. He adapts to how each student thinks rather than sticking to one method, and goes outside the exam spec whenever it helps something click.</p>
+                        <p>He still tutors while he studies, because he wants every student to reach the same moment: <em>&ldquo;wait, I can actually do this.&rdquo;</em></p>
+                    </div>
                 </div>
             </div>
-        </footer>
-       
+        </section>
+
+        <!-- Where Yuli Is Going -->
+        <section class="ap-section ap-tint">
+            <div class="container ap-narrow">
+                <span class="ap-eyebrow">Where Yuli Is Going</span>
+                <h2>Growing without losing what makes it work</h2>
+                <p>Yuli is still young, and growing carefully matters more than growing fast. The plan is to bring in more tutors who share the same belief, that understanding lasts and memorising doesn't, so more students can learn this way without losing the personal attention that makes it work.</p>
+                <p>Longer term, Lukas would like Yuli to move closer to the free, logic-first teaching he first found in resources like Language Transfer: making genuine understanding a little more accessible, not just for those who can pay for it.</p>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="ap-section">
+            <div class="container ap-narrow">
+                <h2>Ready to get started?</h2>
+                <p>Explore the subjects Yuli covers, see pricing, or get in touch with any questions.</p>
+                <div class="ap-cta-buttons">
+                    <a href="/index.html#subjects" class="cta-button"><span class="cta-text-nudge">Explore Subjects</span></a>
+                    <a href="/index.html#pricing" class="cta-button secondary">View Pricing</a>
+                    <a href="/index.html#contact" class="cta-button secondary">Contact Yuli</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Yuli<span class="logo-accent">.</span></h3>
+                    <div class="footer-contact">
+                        <a href="mailto:yuli.learning.uk@gmail.com" class="footer-email">yuli.learning.uk@gmail.com</a>
+                        <a href="tel:+447856210325" class="footer-phone">+447856210325</a>
+                    </div>
+                    <div class="footer-social" aria-label="Social media">
+                        <a href="https://www.linkedin.com/company/yuli-uk/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/yuli.learning/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/about.html">About Yuli</a></li>
+                        <li><a href="/site/careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/legal/terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
+                        <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+                    <ul class="footer-links">
+                        <li><a href="/site/contact.html">Contact Us</a></li>
+                        <li><a href="/site/faqs.html">FAQs</a></li>
+                        <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yuli. All rights reserved.</p>
+                <p>Designed and built with &hearts; for quality education</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
-</html> 
+</html>

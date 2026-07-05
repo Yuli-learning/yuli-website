@@ -1006,7 +1006,7 @@
   
   .about-content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 80px;
       align-items: center;
       padding: 120px 0 180px 0; /* Extended bottom padding for more grey area */
@@ -1022,9 +1022,9 @@
       padding-bottom: 0;
       margin-top: 0;
       min-height: 100%;
-      gap: 2rem;
+      gap: 1.25rem;
   }
-  
+
   .about-text .subtitle {
       color: rgba(255, 255, 255, 0.7);
       margin-bottom: 0;
@@ -1034,21 +1034,21 @@
       flex-direction: column;
       align-items: flex-start;
   }
-  
+
   .about-text .subtitle h3 {
-      font-size: 3rem;
+      font-size: clamp(2.5rem, 2rem + 3vw, 3.25rem);
       color: #7dd3fc;
       margin-bottom: 5px;
       text-align: left;
       margin-top: 0;
   }
-  
+
   .about-text .subtitle span {
       margin-bottom: 10px;
       text-align: left;
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   }
-  
+
   .about-text p {
       margin-bottom: 0;
       line-height: 1.8;
@@ -1056,7 +1056,16 @@
       text-align: left;
       font-size: 1.4rem;
   }
-  
+
+  .founder-intro {
+      max-width: 46rem;
+      width: calc(100% + 2.5rem);
+      margin-top: 0;
+      margin-right: -2.5rem;
+      font-size: clamp(1.125rem, 1.05rem + 0.2vw, 1.1875rem);
+      line-height: 1.6;
+  }
+
   .about-points {
       display: flex;
       flex-direction: column;
@@ -1079,7 +1088,58 @@
       color: #7dd3fc;
       font-size: 1.5rem;
   }
-  
+
+  .founder-label {
+      color: #7dd3fc;
+      font-size: clamp(0.875rem, 0.8rem + 0.2vw, 0.9375rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+  }
+
+  /* Trust Section */
+  .trust-strip {
+      background: transparent;
+      color: white;
+      padding: 20px 0 70px;
+      position: relative;
+  }
+
+  .trust-strip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem 3rem;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      font-weight: 500;
+  }
+
+  .trust-item i {
+      color: #7dd3fc;
+      font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+      .trust-strip-grid {
+          gap: 1.5rem 2rem;
+      }
+
+      .trust-item {
+          font-size: 0.9rem;
+      }
+  }
+
   .about-image {
       display: flex;
       align-items: center;
@@ -1109,24 +1169,25 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       position: relative;
       /* backdrop-filter: blur(10px); Removed for performance */
-      transition: all 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
       aspect-ratio: 3/4;
       max-height: 100%;
       min-height: 100%;
       overflow: visible; /* Allow natural expansion */
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       /* Image quality preservation */
       image-rendering: high-quality;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
   }
-  
+
   .photo-container:hover {
-      transform: scale(1.02);
+      transform: translateZ(0) scale(1.02);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-      border: none;
-      border-radius: 0;
   }
   
   /* Photo link and overlay styles */
@@ -1182,12 +1243,6 @@
       transform-style: preserve-3d;
   }
   
-  .tutor-photo:hover {
-      filter: brightness(1.1) contrast(1.05) saturate(1.1);
-      transform: scale(1.02);
-      transform-origin: center center;
-  }
-  
   .photo-icon {
       position: absolute;
       top: 50%;
@@ -1239,7 +1294,12 @@
       .about-text p {
           text-align: center;
       }
-      
+
+      .founder-intro {
+          width: 100%;
+          margin-right: 0;
+      }
+
       .about-points {
           align-items: center;
           flex-grow: 0;

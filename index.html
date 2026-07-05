@@ -486,25 +486,11 @@
             <div class="about-content">
                 <div class="about-text">
                     <div class="subtitle">
+                        <span class="founder-label">Meet the Founder</span>
                         <h3 style="margin-bottom: 5px; text-align: left;">Lukas Jovaisa</h3>
-                        <span style="text-align: left;">Mathematics Student & Tutor</span>
+                        <span style="text-align: left;">Founder of Yuli &middot; Mathematics Tutor</span>
                     </div>
-                    <p style="text-align: left;">I'm a university student with 4 years of experience tutoring KS3 through A-Level students. I founded Yuli to make quality tutoring accessible during the cost-of-living crisis.</p>
-                    
-                    <div class="about-points">
-                        <div class="point">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Currently studying Mathematics</span>
-                        </div>
-                        <div class="point">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                            <span>4 years tutoring experience</span>
-                        </div>
-                        <div class="point">
-                            <i class="fas fa-pound-sign"></i>
-                            <span>Flexible pricing from &pound;12/hr</span>
-                        </div>
-                    </div>
+                    <p class="founder-intro" style="text-align: left;">After more than five years of tutoring students from KS3 to A Level, Lukas founded Yuli around a simple belief: students remember what they understand, not what they memorise. That principle shapes every lesson at Yuli. We break subjects down to their logic so students enter exams with real confidence, not just recall.</p>
                 </div>
                 <div class="about-image">
                     <div class="photo-container">
@@ -533,12 +519,36 @@
         </div>
     </section>
 
+    <!-- Trust Section -->
+    <section class="trust-strip">
+        <div class="container">
+            <div class="trust-strip-grid">
+                <div class="trust-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>5+ years tutoring experience</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>KS3 to A-Level</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-book"></i>
+                    <span>All major UK exam boards</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>DBS checked</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Subjects Section - Layout Option 2: Horizontal Scroll with Categories -->
     <section id="subjects" class="subjects layout-option-2">
         <div class="container">
             <div class="section-header-scroll">
                 <div class="header-content">
-                    <h2>Subjects I Teach</h2>
+                    <h2>Subjects We Teach</h2>
                     <p class="section-subtitle">Explore subjects by category - swipe to see more</p>
                 </div>
                 <div class="level-selector">
@@ -1996,14 +2006,16 @@
 
     <script>
       function scrollToAbout() {
-        const aboutSection = document.getElementById('about');
-        if (aboutSection) {
-          // Scroll to just before the white section begins
-          // Position to show Lukas's profile and make the scroll button visible
-          const scrollPosition = aboutSection.offsetTop - 20; // Position further down into white section
-          
+        const subjectsSection = document.getElementById('subjects');
+        if (subjectsSection) {
+          // Land the bottom of the viewport exactly at the DOM boundary
+          // where the dark intro section ends and the white section begins,
+          // computed live so it holds at any viewport size/zoom/aspect ratio.
+          const boundaryY = subjectsSection.getBoundingClientRect().top + window.scrollY;
+          const targetScrollTop = Math.max(boundaryY - window.innerHeight, 0);
+
           window.scrollTo({
-            top: scrollPosition,
+            top: targetScrollTop,
             behavior: 'smooth'
           });
         }
@@ -2012,7 +2024,16 @@
       function scrollToSubjects() {
         const subjectsSection = document.getElementById('subjects');
         if (subjectsSection) {
-          subjectsSection.scrollIntoView({ behavior: 'smooth' });
+          // Align the Subjects section's own top boundary with the top of the
+          // viewport, computed live from the actual DOM so it holds at any
+          // viewport size, zoom or aspect ratio.
+          const boundaryY = subjectsSection.getBoundingClientRect().top + window.scrollY;
+          const targetScrollTop = Math.max(boundaryY, 0);
+
+          window.scrollTo({
+            top: targetScrollTop,
+            behavior: 'smooth'
+          });
         }
       }
 

@@ -5,6 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yuli. | Expert GCSE & A-Level Tutoring</title>
     <base href="/">
+    <!-- Set <html lang> early from any saved language preference, to avoid a flash of the wrong lang attribute before js/i18n.js runs -->
+    <script>(function(){try{var l=localStorage.getItem('yuli_lang');if(l==='zh-CN')document.documentElement.setAttribute('lang','zh-CN');}catch(e){}})();</script>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
@@ -59,30 +61,30 @@
     <div class="ethical-banner">
         <div class="container">
             <i class="fas fa-hand-holding-heart"></i>
-            <span>Discounted rates available for eligible students</span>
-            <a href="#pricing">Learn more</a>
+            <span data-i18n="common.ethicalBanner">Discounted rates available for eligible students</span>
+            <a href="#pricing" data-i18n="common.learnMore">Learn more</a>
         </div>
     </div>
-    
+
     <!-- Header -->
     <header>
     <div class="container">
         <a href="/" class="logo">Yuli<span>.</span></a>
         <nav>
-            <a href="#subjects">Subjects</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="pages/tutor-dashboard.html" id="dashboard-link" style="display: none;">Dashboard</a>
+            <a href="#subjects" data-i18n="nav.subjects">Subjects</a>
+            <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+            <a href="#about" data-i18n="nav.about">About</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+            <a href="pages/tutor-dashboard.html" id="dashboard-link" style="display: none;" data-i18n="nav.dashboard">Dashboard</a>
         </nav>
         <div class="auth-actions">
             <button id="profile-btn" class="profile-btn" style="display: none;" tabindex="0">
-                <i class="fas fa-user"></i> Profile
+                <i class="fas fa-user"></i> <span data-i18n="nav.profile">Profile</span>
             </button>
-            <button id="login-btn" class="login-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign In</button>
-            <button id="register-btn" class="register-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;">Sign Up</button>
+            <button id="login-btn" class="login-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;" data-i18n="nav.signIn">Sign In</button>
+            <button id="register-btn" class="register-btn" style="display:none; opacity: 0; transition: opacity 0.3s ease;" data-i18n="nav.signUp">Sign Up</button>
             <button id="admin-link" class="admin-link" style="display: none;" onclick="window.location.href='admin.html'">
-                <i class="fas fa-crown"></i> Admin
+                <i class="fas fa-crown"></i> <span data-i18n="nav.admin">Admin</span>
             </button>
         </div>
     </div>
@@ -351,16 +353,16 @@
     <div id="auth-modal" class="auth-overlay" style="display:none;">
   <div class="auth-card auth-card--minimal">
     <div class="auth-header-integrated">
-      <button id="auth-close" class="auth-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <button id="auth-close" class="auth-close" aria-label="Close" data-i18n-aria-label="common.close"><i class="fas fa-times"></i></button>
       <div class="auth-brand-section">
         <div class="auth-logo">Yuli<span class="logo-accent">.</span></div>
         <h2 id="auth-title">Sign in to continue</h2>
       </div>
     </div>
         <form id="auth-form">
-          <label class="muted" for="auth-email">Email</label>
+          <label class="muted" for="auth-email" data-i18n="auth.email">Email</label>
           <input id="auth-email" class="auth-input" type="email" autocomplete="email" required />
-          <label class="muted" for="auth-pass">Password</label>
+          <label class="muted" for="auth-pass" data-i18n="auth.password">Password</label>
           <div class="pw-wrap">
             <input id="auth-pass" class="auth-input pw-input" type="password" autocomplete="current-password" required />
             <button id="toggle-auth-pass" type="button" class="pw-toggle" aria-label="Show password" title="Show password">
@@ -371,7 +373,7 @@
             </button>
           </div>
           <div id="confirm-wrap" style="display:none">
-            <label class="muted" for="auth-pass2">Confirm password</label>
+            <label class="muted" for="auth-pass2" data-i18n="auth.confirmPassword">Confirm password</label>
             <div class="pw-wrap">
               <input id="auth-pass2" class="auth-input pw-input" type="password" autocomplete="new-password" />
               <button id="toggle-auth-pass2" type="button" class="pw-toggle" aria-label="Show password" title="Show password">
@@ -383,25 +385,25 @@
             </div>
           </div>
           <div id="role-wrap" class="auth-role" style="display:none;">
-            <div class="label">Continue as</div>
+            <div class="label" data-i18n="auth.continueAs">Continue as</div>
             <div class="options">
               <label>
-                <input type="radio" name="auth-role" value="student" checked /> Student/Parent
+                <input type="radio" name="auth-role" value="student" checked /> <span data-i18n="auth.studentParent">Student/Parent</span>
               </label>
               <label>
-                <input type="radio" name="auth-role" value="tutor" /> Tutor (admin approval required)
+                <input type="radio" name="auth-role" value="tutor" /> <span data-i18n="auth.tutorRole">Tutor (admin approval required)</span>
               </label>
             </div>
           </div>
           <div class="auth-row">
-            <label class="muted"><input id="auth-remember" type="checkbox" checked /> Keep me signed in</label>
-            <a id="auth-forgot" class="link">Forgot password?</a>
+            <label class="muted"><input id="auth-remember" type="checkbox" checked /> <span data-i18n="auth.keepSignedIn">Keep me signed in</span></label>
+            <a id="auth-forgot" class="link" data-i18n="auth.forgotPassword">Forgot password?</a>
           </div>
           <button id="auth-submit" class="auth-btn" type="submit">Sign In</button>
           <div id="auth-msg" class="error"></div>
         </form>
         <div class="auth-actions-modal">
-          <button id="auth-google" class="auth-btn google-btn" type="button">Continue with Google</button>
+          <button id="auth-google" class="auth-btn google-btn" type="button" data-i18n="auth.continueWithGoogle">Continue with Google</button>
         </div>
       </div>
     </div>
@@ -410,31 +412,31 @@
         <div class="container">
             <div class="hero-content">
                 <h1>
-                    <div class="hero-line">Real learning means <span class="highlight">understanding</span>,</div>
-                    <div class="hero-line">not <em>memorising</em>.</div>
+                    <div class="hero-line" data-i18n-html="home.hero.line1">Real learning means <span class="highlight">understanding</span>,</div>
+                    <div class="hero-line" data-i18n-html="home.hero.line2">not <em>memorising</em>.</div>
                 </h1>
-                
-                <p class="hero-subtitle">
+
+                <p class="hero-subtitle" data-i18n="home.hero.subtitle">
                     Expert GCSE & A-Level tutoring that actually works — through understanding, not memorising
                 </p>
-                
+
                 <div class="hero-buttons">
                     <a href="#subjects" class="cta-button">
-                        <span>Explore Subjects</span>
+                        <span data-i18n="home.hero.exploreSubjects">Explore Subjects</span>
                     </a>
                     <a href="#pricing" class="cta-button">
-                        <span>View Pricing</span>
+                        <span data-i18n="home.hero.viewPricing">View Pricing</span>
                     </a>
                 </div>
-                
+
                 <div class="hero-price">
-                    <span>Flexible pricing from &pound;12/hr</span>
+                    <span data-i18n="home.hero.priceFrom">Flexible pricing from &pound;12/hr</span>
                 </div>
             </div>
         </div>
         
         <div class="scroll-cue" onclick="scrollToAbout()">
-            <span>Scroll</span>
+            <span data-i18n="common.scroll">Scroll</span>
             <div class="scroll-line"></div>
         </div>
     </section>
@@ -486,11 +488,11 @@
             <div class="about-content">
                 <div class="about-text">
                     <div class="subtitle">
-                        <span class="founder-label">Meet the Founder</span>
+                        <span class="founder-label" data-i18n="home.founder.label">Meet the Founder</span>
                         <h3 style="margin-bottom: 5px; text-align: left;">Lukas Jovaisa</h3>
-                        <span style="text-align: left;">Founder of Yuli &middot; Mathematics Tutor</span>
+                        <span style="text-align: left;" data-i18n="home.founder.role">Founder of Yuli &middot; Mathematics Tutor</span>
                     </div>
-                    <p class="founder-intro" style="text-align: left;">After more than five years of tutoring students from KS3 to A Level, Lukas founded Yuli around a simple belief: students remember what they understand, not what they memorise. That principle shapes every lesson at Yuli. We break subjects down to their logic so students enter exams with real confidence, not just recall.</p>
+                    <p class="founder-intro" style="text-align: left;" data-i18n="home.founder.intro">After more than five years of tutoring students from KS3 to A Level, Lukas founded Yuli around a simple belief: students remember what they understand, not what they memorise. That principle shapes every lesson at Yuli. We break subjects down to their logic so students enter exams with real confidence, not just recall.</p>
                 </div>
                 <div class="about-image">
                     <div class="photo-container">
@@ -513,7 +515,7 @@
             
             <!-- Scroll cue at bottom of about section -->
             <div class="scroll-cue-about" onclick="scrollToSubjects()">
-                <span>Scroll</span>
+                <span data-i18n="common.scroll">Scroll</span>
                 <div class="scroll-line"></div>
             </div>
         </div>
@@ -525,19 +527,19 @@
             <div class="trust-strip-grid">
                 <div class="trust-item">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span>5+ years tutoring experience</span>
+                    <span data-i18n="home.trust.experience">5+ years tutoring experience</span>
                 </div>
                 <div class="trust-item">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>KS3 to A-Level</span>
+                    <span data-i18n="home.trust.levels">KS3 to A-Level</span>
                 </div>
                 <div class="trust-item">
                     <i class="fas fa-book"></i>
-                    <span>All major UK exam boards</span>
+                    <span data-i18n="home.trust.boards">All major UK exam boards</span>
                 </div>
                 <div class="trust-item">
                     <i class="fas fa-shield-alt"></i>
-                    <span>DBS checked</span>
+                    <span data-i18n="home.trust.dbs">DBS checked</span>
                 </div>
             </div>
         </div>
@@ -548,8 +550,8 @@
         <div class="container">
             <div class="section-header-scroll">
                 <div class="header-content">
-                    <h2>Subjects We Teach</h2>
-                    <p class="section-subtitle">Explore subjects by category - swipe to see more</p>
+                    <h2 data-i18n="home.subjects.heading">Subjects We Teach</h2>
+                    <p class="section-subtitle" data-i18n="home.subjects.subtitle">Explore subjects by category - swipe to see more</p>
                 </div>
                 <div class="level-selector">
                     <button class="level-btn active" data-level="gcse">
@@ -572,10 +574,10 @@
                             <i class="fas fa-calculator"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Mathematics</h3>
-                            <p>Foundation to Advanced Mathematical Concepts</p>
+                            <h3 data-i18n="home.subjects.cat.maths.name">Mathematics</h3>
+                            <p data-i18n="home.subjects.cat.maths.desc">Foundation to Advanced Mathematical Concepts</p>
                         </div>
-                        <div class="category-count">2 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count2">2 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -587,16 +589,16 @@
                                     </div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>GCSE Mathematics</h4>
-                                    <p>Master mathematical concepts from foundation to higher tier</p>
+                                    <h4 data-i18n="home.subjects.item.gcseMaths.title">GCSE Mathematics</h4>
+                                    <p data-i18n="home.subjects.item.gcseMaths.desc">Master mathematical concepts from foundation to higher tier</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">Foundation</span>
-                                        <span class="quick-tag">Higher</span>
-                                        <span class="quick-tag">All Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.foundation">Foundation</span>
+                                        <span class="quick-tag" data-i18n="tag.higher">Higher</span>
+                                        <span class="quick-tag" data-i18n="tag.allBoards">All Boards</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'maths', 'GCSE Maths')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -609,15 +611,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>GCSE Further Maths</h4>
-                                    <p>Advanced mathematical concepts for high achievers</p>
+                                    <h4 data-i18n="home.subjects.item.furtherMaths.title">GCSE Further Maths</h4>
+                                    <p data-i18n="home.subjects.item.furtherMaths.desc">Advanced mathematical concepts for high achievers</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">Complex Numbers</span>
-                                        <span class="quick-tag">Matrices</span>
+                                        <span class="quick-tag" data-i18n="tag.complexNumbers">Complex Numbers</span>
+                                        <span class="quick-tag" data-i18n="tag.matrices">Matrices</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'further-maths', 'GCSE Further Maths')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -632,10 +634,10 @@
                             <i class="fas fa-atom"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Sciences</h3>
-                            <p>Biology, Chemistry, and Physics</p>
+                            <h3 data-i18n="home.subjects.cat.sciences.name">Sciences</h3>
+                            <p data-i18n="home.subjects.cat.sciences.desc">Biology, Chemistry, and Physics</p>
                         </div>
-                        <div class="category-count">3 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count3">3 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -647,15 +649,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>GCSE Biology</h4>
-                                    <p>Explore living organisms and biological processes</p>
+                                    <h4 data-i18n="home.subjects.item.gcseBiology.title">GCSE Biology</h4>
+                                    <p data-i18n="home.subjects.item.gcseBiology.desc">Explore living organisms and biological processes</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">Triple Science</span>
-                                        <span class="quick-tag">Separate Science</span>
+                                        <span class="quick-tag" data-i18n="tag.tripleScience">Triple Science</span>
+                                        <span class="quick-tag" data-i18n="tag.separateScience">Separate Science</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'biology', 'GCSE Biology')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -668,15 +670,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>GCSE Chemistry</h4>
-                                    <p>Chemical reactions and molecular structures</p>
+                                    <h4 data-i18n="home.subjects.item.gcseChemistry.title">GCSE Chemistry</h4>
+                                    <p data-i18n="home.subjects.item.gcseChemistry.desc">Chemical reactions and molecular structures</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">Triple Science</span>
-                                        <span class="quick-tag">Separate Science</span>
+                                        <span class="quick-tag" data-i18n="tag.tripleScience">Triple Science</span>
+                                        <span class="quick-tag" data-i18n="tag.separateScience">Separate Science</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'chemistry', 'GCSE Chemistry')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -689,15 +691,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>GCSE Physics</h4>
-                                    <p>Forces, energy, and the fundamental principles</p>
+                                    <h4 data-i18n="home.subjects.item.gcsePhysics.title">GCSE Physics</h4>
+                                    <p data-i18n="home.subjects.item.gcsePhysics.desc">Forces, energy, and the fundamental principles</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">Triple Science</span>
-                                        <span class="quick-tag">Separate Science</span>
+                                        <span class="quick-tag" data-i18n="tag.tripleScience">Triple Science</span>
+                                        <span class="quick-tag" data-i18n="tag.separateScience">Separate Science</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'physics', 'GCSE Physics')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -712,10 +714,10 @@
                             <i class="fas fa-book-open"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Languages & Humanities</h3>
-                            <p>English Literature, Language, and History</p>
+                            <h3 data-i18n="home.subjects.cat.humanities.name">Languages &amp; Humanities</h3>
+                            <p data-i18n="home.subjects.cat.humanities.desc">English Literature, Language, and History</p>
                         </div>
-                        <div class="category-count">10 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count10">10 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -726,15 +728,15 @@
                                     </div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>English Literature</h4>
-                                    <p>Classic texts and critical analysis skills for comprehensive literary understanding</p>
+                                    <h4 data-i18n="home.subjects.item.englishLit.title">English Literature</h4>
+                                    <p data-i18n="home.subjects.item.englishLit.desc">Classic texts and critical analysis skills for comprehensive literary understanding</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Tiers</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allTiers">All Tiers</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'english-lit', 'GCSE English Literature')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -746,15 +748,15 @@
                                     </div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>English Language</h4>
-                                    <p>Writing, reading, and communication skills development</p>
+                                    <h4 data-i18n="home.subjects.item.englishLang.title">English Language</h4>
+                                    <p data-i18n="home.subjects.item.englishLang.desc">Writing, reading, and communication skills development</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Tiers</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allTiers">All Tiers</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="goToEnglishLanguage()">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -767,15 +769,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>History</h4>
-                                    <p>Historical events and source analysis across different time periods</p>
+                                    <h4 data-i18n="home.subjects.item.history.title">History</h4>
+                                    <p data-i18n="home.subjects.item.history.desc">Historical events and source analysis across different time periods</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Topics</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allTopics">All Topics</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'history', 'GCSE History')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -788,15 +790,15 @@
                                     </div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Geography</h4>
-                                    <p>Human and physical geography exploration covering landscapes, climate, and societies</p>
+                                    <h4 data-i18n="home.subjects.item.geography.title">Geography</h4>
+                                    <p data-i18n="home.subjects.item.geography.desc">Human and physical geography exploration covering landscapes, climate, and societies</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Topics</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allTopics">All Topics</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn" onclick="showSubjectDetails('gcse', 'geography', 'GCSE Geography')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -807,18 +809,18 @@
                                     <div class="scroll-icon humanities coming-soon-icon">
                                         <i class="fas fa-flag"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>French</h4>
-                                    <p>Language skills and cultural understanding through practical communication</p>
+                                    <h4 data-i18n="home.subjects.item.french.title">French</h4>
+                                    <p data-i18n="home.subjects.item.french.desc">Language skills and cultural understanding through practical communication</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Skills</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allSkills">All Skills</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'french', 'GCSE French')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -829,18 +831,18 @@
                                     <div class="scroll-icon humanities coming-soon-icon">
                                         <i class="fas fa-globe-americas"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Spanish</h4>
-                                    <p>Language skills and cultural exploration through immersive learning</p>
+                                    <h4 data-i18n="home.subjects.item.spanish.title">Spanish</h4>
+                                    <p data-i18n="home.subjects.item.spanish.desc">Language skills and cultural exploration through immersive learning</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Skills</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allSkills">All Skills</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'spanish', 'GCSE Spanish')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -851,18 +853,18 @@
                                     <div class="scroll-icon humanities coming-soon-icon">
                                         <i class="fas fa-flag"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>German</h4>
-                                    <p>Language proficiency and cultural understanding</p>
+                                    <h4 data-i18n="home.subjects.item.german.title">German</h4>
+                                    <p data-i18n="home.subjects.item.german.desc">Language proficiency and cultural understanding</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Skills</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allSkills">All Skills</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'german', 'GCSE German')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -873,18 +875,18 @@
                                     <div class="scroll-icon humanities coming-soon-icon">
                                         <i class="fas fa-pray"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Religious Studies</h4>
-                                    <p>Ethics, philosophy and world religions exploration</p>
+                                    <h4 data-i18n="home.subjects.item.religiousStudies.title">Religious Studies</h4>
+                                    <p data-i18n="home.subjects.item.religiousStudies.desc">Ethics, philosophy and world religions exploration</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">All Themes</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allThemes">All Themes</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'religious-studies', 'GCSE Religious Studies')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -895,18 +897,18 @@
                                     <div class="scroll-icon humanities coming-soon-icon">
                                         <i class="fas fa-palette"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Art & Design</h4>
-                                    <p>Creative expression and visual communication through artistic techniques</p>
+                                    <h4 data-i18n="home.subjects.item.art.title">Art &amp; Design</h4>
+                                    <p data-i18n="home.subjects.item.art.desc">Creative expression and visual communication through artistic techniques</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Portfolio</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.portfolio">Portfolio</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'art', 'GCSE Art & Design')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -923,10 +925,10 @@
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Technology & Creative</h3>
-                            <p>Computer Science, Business, Economics, and Creative Subjects</p>
+                            <h3 data-i18n="home.subjects.cat.tech.name">Technology &amp; Creative</h3>
+                            <p data-i18n="home.subjects.cat.tech.desc">Computer Science, Business, Economics, and Creative Subjects</p>
                         </div>
-                        <div class="category-count">4 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count4">4 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -936,18 +938,18 @@
                                     <div class="scroll-icon creative coming-soon-icon">
                                         <i class="fas fa-laptop-code"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Computer Science</h4>
-                                    <p>Programming, algorithms, and computational thinking</p>
+                                    <h4 data-i18n="home.subjects.item.computerScience.title">Computer Science</h4>
+                                    <p data-i18n="home.subjects.item.computerScience.desc">Programming, algorithms, and computational thinking</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Programming</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.programming">Programming</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'computer-science', 'GCSE Computer Science')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -958,18 +960,18 @@
                                     <div class="scroll-icon creative coming-soon-icon">
                                         <i class="fas fa-briefcase"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Business Studies</h4>
-                                    <p>Enterprise, marketing, and business operations</p>
+                                    <h4 data-i18n="home.subjects.item.business.title">Business Studies</h4>
+                                    <p data-i18n="home.subjects.item.business.desc">Enterprise, marketing, and business operations</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Real World</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.realWorld">Real World</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'business', 'GCSE Business Studies')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -980,18 +982,18 @@
                                     <div class="scroll-icon creative coming-soon-icon">
                                         <i class="fas fa-music"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Music</h4>
-                                    <p>Performance, composition, and music theory</p>
+                                    <h4 data-i18n="home.subjects.item.music.title">Music</h4>
+                                    <p data-i18n="home.subjects.item.music.desc">Performance, composition, and music theory</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Creative</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.creative">Creative</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'music', 'GCSE Music')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1002,18 +1004,18 @@
                                     <div class="scroll-icon creative coming-soon-icon">
                                         <i class="fas fa-chart-line"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>Economics</h4>
-                                    <p>Economic principles and business applications</p>
+                                    <h4 data-i18n="home.subjects.item.economics.title">Economics</h4>
+                                    <p data-i18n="home.subjects.item.economics.desc">Economic principles and business applications</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Real World</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.realWorld">Real World</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('gcse', 'economics', 'GCSE Economics')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1031,10 +1033,10 @@
                             <i class="fas fa-infinity"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Mathematics</h3>
-                            <p>Advanced Mathematical Concepts</p>
+                            <h3 data-i18n="home.subjects.cat.maths.name">Mathematics</h3>
+                            <p data-i18n="home.subjects.cat.alevelMaths.desc">Advanced Mathematical Concepts</p>
                         </div>
-                        <div class="category-count">2 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count2">2 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -1046,15 +1048,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Mathematics</h4>
-                                    <p>Advanced mathematical concepts and proof techniques</p>
+                                    <h4 data-i18n="home.subjects.item.alevelMaths.title">A-Level Mathematics</h4>
+                                    <p data-i18n="home.subjects.item.alevelMaths.desc">Advanced mathematical concepts and proof techniques</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'maths', 'A-Level Maths')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-graduation-cap"></i>
                                 </button>
                             </div>
@@ -1064,18 +1066,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-infinity"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Further Maths</h4>
-                                    <p>Advanced mathematical concepts beyond A-Level</p>
+                                    <h4 data-i18n="home.subjects.item.alevelFurtherMaths.title">A-Level Further Maths</h4>
+                                    <p data-i18n="home.subjects.item.alevelFurtherMaths.desc">Advanced mathematical concepts beyond A-Level</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'further-maths', 'A-Level Further Maths')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1090,10 +1092,10 @@
                             <i class="fas fa-microscope"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Sciences</h3>
-                            <p>Advanced Scientific Concepts & Laboratory Skills</p>
+                            <h3 data-i18n="home.subjects.cat.sciences.name">Sciences</h3>
+                            <p data-i18n="home.subjects.cat.alevelSciences.desc">Advanced Scientific Concepts &amp; Laboratory Skills</p>
                         </div>
-                        <div class="category-count">3 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count3">3 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -1106,15 +1108,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Biology</h4>
-                                    <p>Advanced biological systems and processes</p>
+                                    <h4 data-i18n="home.subjects.item.alevelBiology.title">A-Level Biology</h4>
+                                    <p data-i18n="home.subjects.item.alevelBiology.desc">Advanced biological systems and processes</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'biology', 'A-Level Biology')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-graduation-cap"></i>
                                 </button>
                             </div>
@@ -1127,15 +1129,15 @@
 
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Chemistry</h4>
-                                    <p>Complex chemical reactions and analysis</p>
+                                    <h4 data-i18n="home.subjects.item.alevelChemistry.title">A-Level Chemistry</h4>
+                                    <p data-i18n="home.subjects.item.alevelChemistry.desc">Complex chemical reactions and analysis</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn alevel-btn" onclick="showSubjectDetails('alevel', 'chemistry', 'A-Level Chemistry')">
-                                    <span>Explore</span>
+                                    <span data-i18n="common.explore">Explore</span>
                                     <i class="fas fa-graduation-cap"></i>
                                 </button>
                             </div>
@@ -1145,18 +1147,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-atom"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Physics</h4>
-                                    <p>Advanced physics concepts and applications</p>
+                                    <h4 data-i18n="home.subjects.item.alevelPhysics.title">A-Level Physics</h4>
+                                    <p data-i18n="home.subjects.item.alevelPhysics.desc">Advanced physics concepts and applications</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'physics', 'A-Level Physics')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1171,10 +1173,10 @@
                             <i class="fas fa-chart-pie"></i>
                         </div>
                         <div class="category-info">
-                            <h3>Business & Social Sciences</h3>
-                            <p>Economic Principles & Social Analysis</p>
+                            <h3 data-i18n="home.subjects.cat.business.name">Business &amp; Social Sciences</h3>
+                            <p data-i18n="home.subjects.cat.business.desc">Economic Principles &amp; Social Analysis</p>
                         </div>
-                        <div class="category-count">5 subjects</div>
+                        <div class="category-count" data-i18n="home.subjects.count5">5 subjects</div>
                     </div>
                     <div class="subjects-scroll">
                         <div class="scroll-container">
@@ -1183,18 +1185,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-chart-line"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Economics</h4>
-                                    <p>Economic theory and real-world applications</p>
+                                    <h4 data-i18n="home.subjects.item.alevelEconomics.title">A-Level Economics</h4>
+                                    <p data-i18n="home.subjects.item.alevelEconomics.desc">Economic theory and real-world applications</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'economics', 'A-Level Economics')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1204,18 +1206,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-briefcase"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Business Studies</h4>
-                                    <p>Enterprise, marketing, and business operations</p>
+                                    <h4 data-i18n="home.subjects.item.alevelBusiness.title">A-Level Business Studies</h4>
+                                    <p data-i18n="home.subjects.item.alevelBusiness.desc">Enterprise, marketing, and business operations</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Real World</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.realWorld">Real World</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'business', 'A-Level Business Studies')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1225,18 +1227,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-brain"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Psychology</h4>
-                                    <p>Human behaviour and mental processes through scientific analysis</p>
+                                    <h4 data-i18n="home.subjects.item.alevelPsychology.title">A-Level Psychology</h4>
+                                    <p data-i18n="home.subjects.item.alevelPsychology.desc">Human behaviour and mental processes through scientific analysis</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
 
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'psychology', 'A-Level Psychology')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1246,18 +1248,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-users"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Sociology</h4>
-                                    <p>Society, culture, and social behaviour through critical analysis</p>
+                                    <h4 data-i18n="home.subjects.item.alevelSociology.title">A-Level Sociology</h4>
+                                    <p data-i18n="home.subjects.item.alevelSociology.desc">Society, culture, and social behaviour through critical analysis</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Critical Thinking</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.criticalThinking">Critical Thinking</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'sociology', 'A-Level Sociology')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1267,18 +1269,18 @@
                                     <div class="scroll-icon advanced coming-soon-icon">
                                         <i class="fas fa-code"></i>
                                     </div>
-                                    <div class="coming-soon-badge">Coming Soon</div>
+                                    <div class="coming-soon-badge" data-i18n="common.comingSoon">Coming Soon</div>
                                 </div>
                                 <div class="scroll-content">
-                                    <h4>A-Level Computer Science</h4>
-                                    <p>Programming, algorithms, and computational thinking</p>
+                                    <h4 data-i18n="home.subjects.item.alevelComputerScience.title">A-Level Computer Science</h4>
+                                    <p data-i18n="home.subjects.item.alevelComputerScience.desc">Programming, algorithms, and computational thinking</p>
                                     <div class="quick-features">
-                                        <span class="quick-tag">All Exam Boards</span>
-                                        <span class="quick-tag">Programming</span>
+                                        <span class="quick-tag" data-i18n="tag.allExamBoards">All Exam Boards</span>
+                                        <span class="quick-tag" data-i18n="tag.programming">Programming</span>
                                     </div>
                                 </div>
                                 <button class="scroll-btn coming-soon-btn" onclick="showComingSoonModal('alevel', 'computer-science', 'A-Level Computer Science')">
-                                    <span>Coming Soon</span>
+                                    <span data-i18n="common.comingSoon">Coming Soon</span>
                                     <i class="fas fa-clock"></i>
                                 </button>
                             </div>
@@ -1773,106 +1775,106 @@
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
         <div class="container">
-            <h2>Pricing</h2>
-            <p class="section-subtitle">Flexible pricing for quality tutoring across all subjects</p>
-            <p class="discount-notice"><a href="#discounted-pricing" class="discount-link">View discounted rates if applicable &darr;</a></p>
-            
+            <h2 data-i18n="home.pricing.heading">Pricing</h2>
+            <p class="section-subtitle" data-i18n="home.pricing.subtitle">Flexible pricing for quality tutoring across all subjects</p>
+            <p class="discount-notice"><a href="#discounted-pricing" class="discount-link" data-i18n="home.pricing.viewDiscounted">View discounted rates if applicable &darr;</a></p>
+
             <div class="pricing-cards">
                 <div class="price-card highlighted">
-                    <div class="badge">Most Popular</div>
-                    <h3>GCSE Subjects</h3>
+                    <div class="badge" data-i18n="home.pricing.mostPopular">Most Popular</div>
+                    <h3 data-i18n="home.pricing.gcseSubjects">GCSE Subjects</h3>
                     <div class="price">
                         <span class="amount">&pound;20</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>1:1 Private Sessions</li>
-                        <li>Maths, Sciences, English & More</li>
-                        <li>Foundation & Higher Tier</li>
-                        <li>Flexible Scheduling</li>
+                        <li data-i18n="home.pricing.oneToOne">1:1 Private Sessions</li>
+                        <li data-i18n="home.pricing.gcseSubjectList">Maths, Sciences, English & More</li>
+                        <li data-i18n="home.pricing.foundationHigher">Foundation & Higher Tier</li>
+                        <li data-i18n="home.pricing.flexibleScheduling">Flexible Scheduling</li>
                     </ul>
                 </div>
-                
+
                 <div class="price-card">
-                    <div class="badge">Advanced Level</div>
-                    <h3>A-Level Subjects</h3>
+                    <div class="badge" data-i18n="home.pricing.advancedLevel">Advanced Level</div>
+                    <h3 data-i18n="home.pricing.alevelSubjects">A-Level Subjects</h3>
                     <div class="price">
                         <span class="amount">&pound;35</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>1:1 Private Sessions</li>
-                        <li>Maths, Sciences & More</li>
-                        <li>Exam Preparation</li>
+                        <li data-i18n="home.pricing.oneToOne">1:1 Private Sessions</li>
+                        <li data-i18n="home.pricing.alevelSubjectList">Maths, Sciences & More</li>
+                        <li data-i18n="home.pricing.examPrep">Exam Preparation</li>
 
                     </ul>
                 </div>
-                
+
                 <div class="price-card">
-                    <div class="badge">Best Value</div>
-                    <h3>Group Sessions</h3>
+                    <div class="badge" data-i18n="home.pricing.bestValue">Best Value</div>
+                    <h3 data-i18n="home.pricing.groupSessions">Group Sessions</h3>
                     <div class="price">
                         <span class="amount">&pound;10-15</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>Small Group Learning</li>
-                        <li>Peer Collaboration</li>
-                        <li>Reduced Cost</li>
-                        <li>Shared Resources</li>
+                        <li data-i18n="home.pricing.smallGroup">Small Group Learning</li>
+                        <li data-i18n="home.pricing.peerCollab">Peer Collaboration</li>
+                        <li data-i18n="home.pricing.reducedCost">Reduced Cost</li>
+                        <li data-i18n="home.pricing.sharedResources">Shared Resources</li>
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Discounted Pricing Cards -->
             <div id="discounted-pricing" class="pricing-subtitle">
-                <h3>Discounted Rates for Eligible Students</h3>
-                <p>We believe quality education should be accessible to everyone</p>
+                <h3 data-i18n="home.pricing.discountedHeading">Discounted Rates for Eligible Students</h3>
+                <p data-i18n="home.pricing.discountedSubtitle">We believe quality education should be accessible to everyone</p>
             </div>
-            
+
             <div class="pricing-cards discounted-cards">
                 <div class="price-card discounted">
-                    <div class="badge discount-badge">Discounted Rate</div>
-                    <h3>GCSE Subjects</h3>
+                    <div class="badge discount-badge" data-i18n="home.pricing.discountedRate">Discounted Rate</div>
+                    <h3 data-i18n="home.pricing.gcseSubjects">GCSE Subjects</h3>
                     <div class="price">
                         <span class="amount">&pound;12</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>1:1 Private Sessions</li>
-                        <li>Maths, Sciences, English & More</li>
-                        <li>Foundation & Higher Tier</li>
-                        <li>Flexible Scheduling</li>
+                        <li data-i18n="home.pricing.oneToOne">1:1 Private Sessions</li>
+                        <li data-i18n="home.pricing.gcseSubjectList">Maths, Sciences, English & More</li>
+                        <li data-i18n="home.pricing.foundationHigher">Foundation & Higher Tier</li>
+                        <li data-i18n="home.pricing.flexibleScheduling">Flexible Scheduling</li>
                     </ul>
                 </div>
-                
+
                 <div class="price-card discounted highlighted">
-                    <div class="badge discount-badge">Discounted Rate</div>
-                    <h3>A-Level Subjects</h3>
+                    <div class="badge discount-badge" data-i18n="home.pricing.discountedRate">Discounted Rate</div>
+                    <h3 data-i18n="home.pricing.alevelSubjects">A-Level Subjects</h3>
                     <div class="price">
                         <span class="amount">&pound;18</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>1:1 Private Sessions</li>
-                        <li>Maths, Sciences & More</li>
-                        <li>Exam Preparation</li>
+                        <li data-i18n="home.pricing.oneToOne">1:1 Private Sessions</li>
+                        <li data-i18n="home.pricing.alevelSubjectList">Maths, Sciences & More</li>
+                        <li data-i18n="home.pricing.examPrep">Exam Preparation</li>
 
                     </ul>
                 </div>
-                
+
                 <div class="price-card discounted">
-                    <div class="badge discount-badge">Discounted Rate</div>
-                    <h3>Group Sessions</h3>
+                    <div class="badge discount-badge" data-i18n="home.pricing.discountedRate">Discounted Rate</div>
+                    <h3 data-i18n="home.pricing.groupSessions">Group Sessions</h3>
                     <div class="price">
                         <span class="amount">&pound;8-12</span>
-                        <span class="period">/hour</span>
+                        <span class="period" data-i18n="common.perHour">/hour</span>
                     </div>
                     <ul>
-                        <li>Small Group Learning</li>
-                        <li>Peer Collaboration</li>
-                        <li>Reduced Cost</li>
-                        <li>Shared Resources</li>
+                        <li data-i18n="home.pricing.smallGroup">Small Group Learning</li>
+                        <li data-i18n="home.pricing.peerCollab">Peer Collaboration</li>
+                        <li data-i18n="home.pricing.reducedCost">Reduced Cost</li>
+                        <li data-i18n="home.pricing.sharedResources">Shared Resources</li>
                     </ul>
                 </div>
             </div>
@@ -1882,29 +1884,29 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get Started</h2>
-            <p class="section-subtitle">Ready to improve your academic performance?</p>
-            
+            <h2 data-i18n="home.contact.heading">Get Started</h2>
+            <p class="section-subtitle" data-i18n="home.contact.subtitle">Ready to improve your academic performance?</p>
+
             <div class="contact-options">
                 <div class="contact-card">
                     <i class="fas fa-calendar-check"></i>
-                    <h3>Book a Session</h3>
-                    <p>Schedule your first tutoring session</p>
-                    <button class="cta-button" onclick="handleBookingClick()">Book Now</button>
+                    <h3 data-i18n="home.contact.bookTitle">Book a Session</h3>
+                    <p data-i18n="home.contact.bookDesc">Schedule your first tutoring session</p>
+                    <button class="cta-button" onclick="handleBookingClick()" data-i18n="common.bookNow">Book Now</button>
                 </div>
-                
+
                 <div class="contact-card">
                     <i class="fas fa-envelope"></i>
-                    <h3>Email Us</h3>
-                    <p>Have questions? Send us a message</p>
-                    <a href="mailto:lukas@yuli-learning.com" class="cta-button">Email</a>
+                    <h3 data-i18n="home.contact.emailTitle">Email Us</h3>
+                    <p data-i18n="home.contact.emailDesc">Have questions? Send us a message</p>
+                    <a href="mailto:lukas@yuli-learning.com" class="cta-button" data-i18n="common.email">Email</a>
                 </div>
-                
+
                 <div class="contact-card">
                     <i class="fas fa-phone"></i>
-                    <h3>Call Us</h3>
-                    <p>Speak directly with Lukas</p>
-                    <a href="tel:+44123456789" class="cta-button">Call</a>
+                    <h3 data-i18n="home.contact.callTitle">Call Us</h3>
+                    <p data-i18n="home.contact.callDesc">Speak directly with Lukas</p>
+                    <a href="tel:+44123456789" class="cta-button" data-i18n="common.call">Call</a>
                 </div>
             </div>
         </div>
@@ -1927,41 +1929,42 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit" data-i18n="footer.company">Company</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/about.html">About Yuli</a></li>
-                        <li><a href="/site/careers.html">Careers</a></li>
+                        <li><a href="/about.html" data-i18n="footer.aboutYuli">About Yuli</a></li>
+                        <li><a href="/site/careers.html" data-i18n="footer.careers">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit" data-i18n="footer.legal">Legal</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
-                        <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
-                        <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
-                        <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+                        <li><a href="/site/legal/terms.html" data-i18n="footer.terms">Terms & Conditions</a></li>
+                        <li><a href="/site/legal/privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="/site/legal/cookies.html" data-i18n="footer.cookies">Cookie Policy</a></li>
+                        <li><a href="/site/about/safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit" data-i18n="footer.support">Support</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/site/contact.html">Contact Us</a></li>
-                        <li><a href="/site/faqs.html">FAQs</a></li>
-                        <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+                        <li><a href="/site/contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+                        <li><a href="/site/faqs.html" data-i18n="footer.faqs">FAQs</a></li>
+                        <li><a href="/site/legal/refunds.html" data-i18n="footer.refundPolicy">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Yuli. All rights reserved.</p>
-                <p>Designed and built with ❤️ for quality education</p>
+                <p data-i18n="footer.copyright">&copy; 2024 Yuli. All rights reserved.</p>
+                <p data-i18n="footer.tagline">Designed and built with ❤️ for quality education</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="js/i18n.js"></script>
     <script src="lib/config.js"></script>
     <script src="lib/api.js"></script>
     <!-- removed legacy something-clean.js to prevent duplicate modal/scroll locking -->

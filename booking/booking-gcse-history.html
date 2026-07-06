@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book Your Session | Yuli</title>
+  <script>(function(){try{var l=localStorage.getItem('yuli_lang');if(l==='zh-CN')document.documentElement.setAttribute('lang','zh-CN');}catch(e){}})();</script>
 
   <!-- Icons & Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -269,6 +270,14 @@
     }
     .footer-bottom p{font-size:.92rem;margin:5px 0;color:rgba(255,255,255,.6);}
 
+    /* Language switcher (EN | 中文) */
+    .ap-nav-cta{display:flex;gap:12px;margin-left:auto;align-items:center;}
+    .lang-switch{display:flex;align-items:center;gap:6px;font-family:'Poppins',sans-serif;margin-left:8px;}
+    .lang-switch-sep{color:var(--border-light);font-size:12px;}
+    .lang-btn{background:transparent;border:none;padding:4px 6px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;border-radius:4px;transition:color .2s ease,background .2s ease;}
+    .lang-btn:hover{color:var(--yuli-primary);}
+    .lang-btn.active{color:var(--yuli-primary);background:rgba(67,97,238,.08);}
+
     /* Responsive */
     @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;row-gap:22px;}}
     @media (max-width:640px){
@@ -292,7 +301,9 @@
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="logo">Yuli<span>.</span></a>
-      <a href="/pages/subjects/gcse-history.html?theme=neo" class="back-button"><i class="fas fa-arrow-left"></i> Back to History</a>
+      <div class="ap-nav-cta">
+        <a href="/pages/subjects/gcse-history.html?theme=neo" class="back-button"><i class="fas fa-arrow-left"></i> <span data-i18n="booking.gcseHistory.backLink">Back to History</span></a>
+      </div>
     </div>
   </header>
 
@@ -301,73 +312,73 @@
     <!-- Left Column -->
     <div class="hero-section">
       <div class="hero-content">
-        <div class="subject-badge" id="subjectBadge">GCSE History</div>
-        <h1>Book Your Session</h1>
-        <p class="hero-description">
+        <div class="subject-badge" id="subjectBadge" data-subject-id="GCSE History" data-i18n="booking.gcseHistory.badge">GCSE History</div>
+        <h1 data-i18n="booking.common.bookYourSession">Book Your Session</h1>
+        <p class="hero-description" data-i18n="booking.common.heroDescription">
           Choose your preferred date and time for a personalised tutoring session.
           We'll confirm your booking and send you the session details via your preferred contact method.
         </p>
 
         <!-- What Happens Next -->
         <div class="what-happens-next">
-          <h3 class="section-title"><i class="fas fa-route"></i> What Happens Next</h3>
+          <h3 class="section-title"><i class="fas fa-route"></i> <span data-i18n="booking.common.whatHappensNext">What Happens Next</span></h3>
 
           <div class="timeline-steps">
             <div class="timeline-step">
               <div class="timeline-icon"><i class="fas fa-bolt"></i></div>
               <div class="timeline-content">
-                <div class="timeline-timing">Immediately</div>
-                <div class="timeline-description">Booking confirmation email sent to your inbox</div>
+                <div class="timeline-timing" data-i18n="booking.common.timeline.immediately.t">Immediately</div>
+                <div class="timeline-description" data-i18n="booking.common.timeline.immediately.d">Booking confirmation email sent to your inbox</div>
               </div>
             </div>
 
             <div class="timeline-step">
               <div class="timeline-icon"><i class="fas fa-clock"></i></div>
               <div class="timeline-content">
-                <div class="timeline-timing">Within 2 hours</div>
-                <div class="timeline-description">Session link and preparation guide delivered</div>
+                <div class="timeline-timing" data-i18n="booking.common.timeline.within2h.t">Within 2 hours</div>
+                <div class="timeline-description" data-i18n="booking.common.timeline.within2h.d">Session link and preparation guide delivered</div>
               </div>
             </div>
 
             <div class="timeline-step">
               <div class="timeline-icon"><i class="fas fa-bell"></i></div>
               <div class="timeline-content">
-                <div class="timeline-timing">24 hours before</div>
-                <div class="timeline-description">Reminder email with session materials</div>
+                <div class="timeline-timing" data-i18n="booking.common.timeline.before24h.t">24 hours before</div>
+                <div class="timeline-description" data-i18n="booking.common.timeline.before24h.d">Reminder email with session materials</div>
               </div>
             </div>
 
             <div class="timeline-step">
               <div class="timeline-icon"><i class="fas fa-video"></i></div>
               <div class="timeline-content">
-                <div class="timeline-timing">Day of session</div>
-                <div class="timeline-description">Join link active 10 minutes early</div>
+                <div class="timeline-timing" data-i18n="booking.common.timeline.dayOf.t">Day of session</div>
+                <div class="timeline-description" data-i18n="booking.common.timeline.dayOf.d">Join link active 10 minutes early</div>
               </div>
             </div>
 
             <div class="timeline-step">
               <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
               <div class="timeline-content">
-                <div class="timeline-timing">After session</div>
-                <div class="timeline-description">Progress summary and next steps sent to parents</div>
+                <div class="timeline-timing" data-i18n="booking.common.timeline.after.t">After session</div>
+                <div class="timeline-description" data-i18n="booking.common.timeline.after.d">Progress summary and next steps sent to parents</div>
               </div>
             </div>
           </div>
 
           <div class="info-box">
-            <div class="info-box-title"><i class="fas fa-desktop"></i> Technical Setup</div>
-            <div class="info-item"><span class="info-item-label">Platform:</span><span class="info-item-value">Microsoft Teams (link provided after booking)</span></div>
-            <div class="info-item"><span class="info-item-label">You'll need:</span><span class="info-item-value">Stable internet, headphones, pen & paper</span></div>
-            <div class="info-item"><span class="info-item-label">Test connection:</span><span class="info-item-value">5-minute setup check available</span></div>
-            <div class="info-item"><span class="info-item-label">Support:</span><span class="info-item-value">Phone number provided for technical issues</span></div>
+            <div class="info-box-title"><i class="fas fa-desktop"></i> <span data-i18n="booking.common.technicalSetup">Technical Setup</span></div>
+            <div class="info-item"><span class="info-item-label" data-i18n="booking.common.tech.platform">Platform:</span><span class="info-item-value" data-i18n="booking.common.tech.platformValue">Microsoft Teams (link provided after booking)</span></div>
+            <div class="info-item"><span class="info-item-label" data-i18n="booking.common.tech.needed">You'll need:</span><span class="info-item-value" data-i18n="booking.common.tech.neededValue">Stable internet, headphones, pen &amp; paper</span></div>
+            <div class="info-item"><span class="info-item-label" data-i18n="booking.common.tech.test">Test connection:</span><span class="info-item-value" data-i18n="booking.common.tech.testValue">5-minute setup check available</span></div>
+            <div class="info-item"><span class="info-item-label" data-i18n="booking.common.tech.support">Support:</span><span class="info-item-value" data-i18n="booking.common.tech.supportValue">Phone number provided for technical issues</span></div>
           </div>
 
           <div class="info-box">
-            <div class="info-box-title"><i class="fas fa-play-circle"></i> First Session Structure</div>
-            <div class="session-structure-item"><span class="session-timing">Opening (10 mins):</span><span class="session-description">Goals discussion and level assessment</span></div>
-            <div class="session-structure-item"><span class="session-timing">Main session (35-45 mins):</span><span class="session-description">Diagnostic teaching and practice</span></div>
-            <div class="session-structure-item"><span class="session-timing">Closing (5-10 mins):</span><span class="session-description">Feedback and planning next steps</span></div>
-            <div class="session-structure-item"><span class="session-timing">Parent update:</span><span class="session-description">Email summary within 24 hours</span></div>
+            <div class="info-box-title"><i class="fas fa-play-circle"></i> <span data-i18n="booking.common.firstSessionStructure">First Session Structure</span></div>
+            <div class="session-structure-item"><span class="session-timing" data-i18n="booking.common.session.opening.t">Opening (10 mins):</span><span class="session-description" data-i18n="booking.common.session.opening.d">Goals discussion and level assessment</span></div>
+            <div class="session-structure-item"><span class="session-timing" data-i18n="booking.common.session.main.t">Main session (35-45 mins):</span><span class="session-description" data-i18n="booking.common.session.main.d">Diagnostic teaching and practice</span></div>
+            <div class="session-structure-item"><span class="session-timing" data-i18n="booking.common.session.closing.t">Closing (5-10 mins):</span><span class="session-description" data-i18n="booking.common.session.closing.d">Feedback and planning next steps</span></div>
+            <div class="session-structure-item"><span class="session-timing" data-i18n="booking.common.session.parentUpdate.t">Parent update:</span><span class="session-description" data-i18n="booking.common.session.parentUpdate.d">Email summary within 24 hours</span></div>
           </div>
         </div>
       </div>
@@ -382,7 +393,7 @@
             <div class="step-header-left">
               <div class="step-number">1</div>
               <div>
-                <div class="step-title">Course Details</div>
+                <div class="step-title" data-i18n="booking.common.courseDetails">Course Details</div>
                 <div class="step-summary" id="step1Summary" style="display:none;"></div>
               </div>
             </div>
@@ -391,23 +402,23 @@
 
           <div class="step-content" id="step1Content">
             <div class="form-group">
-              <label class="form-label" for="examBoard">Exam Board <span class="required">*</span></label>
+              <label class="form-label" for="examBoard"><span data-i18n="booking.common.examBoard">Exam Board</span> <span class="required">*</span></label>
               <select id="examBoard" class="form-select" required>
-                <option value="">Select exam board...</option>
+                <option value="" data-i18n="booking.common.selectExamBoard">Select exam board...</option>
                 <option value="AQA">AQA</option>
-                <option value="Edexcel">Edexcel (Pearson)</option>
+                <option value="Edexcel" data-i18n="booking.common.edexcelLabel">Edexcel (Pearson)</option>
                 <option value="OCR">OCR</option>
                 <option value="WJEC">WJEC</option>
-                <option value="CIE">CIE (Cambridge International)</option>
-                <option value="Other">Other</option>
-                <option value="Not sure">Not sure</option>
+                <option value="CIE" data-i18n="booking.common.cieLabel">CIE (Cambridge International)</option>
+                <option value="Other" data-i18n="booking.common.other">Other</option>
+                <option value="Not sure" data-i18n="booking.common.notSure">Not sure</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="currentGrade">Current Grade <span class="required">*</span></label>
+              <label class="form-label" for="currentGrade"><span data-i18n="booking.common.currentGrade">Current Grade</span> <span class="required">*</span></label>
               <select id="currentGrade" class="form-select" required>
-                <option value="">Select current grade...</option>
+                <option value="" data-i18n="booking.common.selectCurrentGrade">Select current grade...</option>
                 <option value="Grade 3">Grade 3</option>
                 <option value="Grade 4">Grade 4</option>
                 <option value="Grade 5">Grade 5</option>
@@ -415,31 +426,31 @@
                 <option value="Grade 7">Grade 7</option>
                 <option value="Grade 8">Grade 8</option>
                 <option value="Grade 9">Grade 9</option>
-                <option value="Not sure">Not sure - we can assess this</option>
+                <option value="Not sure" data-i18n="booking.common.notSureAssess">Not sure - we can assess this</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="targetGrade">Target Grade <span class="required">*</span></label>
+              <label class="form-label" for="targetGrade"><span data-i18n="booking.common.targetGrade">Target Grade</span> <span class="required">*</span></label>
               <select id="targetGrade" class="form-select" required>
-                <option value="">Select target grade...</option>
-                <option value="Grade 4">Grade 4 (Standard Pass)</option>
-                <option value="Grade 5">Grade 5 (Strong Pass)</option>
+                <option value="" data-i18n="booking.common.selectTargetGrade">Select target grade...</option>
+                <option value="Grade 4" data-i18n="booking.common.grade4Standard">Grade 4 (Standard Pass)</option>
+                <option value="Grade 5" data-i18n="booking.common.grade5Strong">Grade 5 (Strong Pass)</option>
                 <option value="Grade 6">Grade 6</option>
                 <option value="Grade 7">Grade 7</option>
                 <option value="Grade 8">Grade 8</option>
                 <option value="Grade 9">Grade 9</option>
-                <option value="Not sure">Not sure</option>
+                <option value="Not sure" data-i18n="booking.common.notSure">Not sure</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="specificAreas">Specific Areas to Focus On (Optional)</label>
-              <textarea id="specificAreas" class="form-input" rows="3" placeholder="e.g., Algebra, Quadratic equations, Trigonometry..."></textarea>
+              <label class="form-label" for="specificAreas" data-i18n="booking.common.specificAreas">Specific Areas to Focus On (Optional)</label>
+              <textarea id="specificAreas" class="form-input" rows="3" placeholder="e.g., Algebra, Quadratic equations, Trigonometry..." data-i18n-placeholder="booking.gcseHistory.specificAreasPlaceholder"></textarea>
             </div>
 
             <button class="continue-button" id="continueToDateTime" disabled>
-              <i class="fas fa-arrow-right"></i> Continue to Date & Time
+              <i class="fas fa-arrow-right"></i> <span data-i18n="booking.common.continueToDateTime">Continue to Date &amp; Time</span>
             </button>
           </div>
         </div>
@@ -450,7 +461,7 @@
             <div class="step-header-left">
               <div class="step-number">2</div>
               <div>
-                <div class="step-title">Select Date & Time</div>
+                <div class="step-title" data-i18n="booking.common.selectDateTime">Select Date & Time</div>
                 <div class="step-summary" id="step2Summary" style="display:none;"></div>
               </div>
             </div>
@@ -477,7 +488,7 @@
             <div class="step-header-left">
               <div class="step-number">3</div>
               <div>
-                <div class="step-title">Session Duration</div>
+                <div class="step-title" data-i18n="booking.common.sessionDuration">Session Duration</div>
                 <div class="step-summary" id="step3Summary" style="display:none;"></div>
               </div>
             </div>
@@ -487,46 +498,45 @@
           <div class="step-content" id="step3Content" style="display:none;">
             <!-- Session Type Selection -->
             <div class="form-group" id="sessionTypeSection">
-              <label class="form-label">Session Type</label>
+              <label class="form-label" data-i18n="booking.common.sessionType">Session Type</label>
               <div class="session-type-selector" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
                 <div class="session-type-option" data-type="individual" style="flex: 1; padding: 1.25rem 1rem; border: 2px solid var(--border-light); border-radius: 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: center; min-height: 80px;">
-                  <div style="font-weight: 600; margin-bottom: 4px;">Individual</div>
-                  <div style="font-size: 0.9rem; color: var(--text-muted);">One-on-one session</div>
+                  <div style="font-weight: 600; margin-bottom: 4px;" data-i18n="booking.common.individual">Individual</div>
+                  <div style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="booking.common.oneOnOne">One-on-one session</div>
                 </div>
                 <div class="session-type-option" data-type="group" style="flex: 1; padding: 1.25rem 1rem; border: 2px solid var(--border-light); border-radius: 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: center; min-height: 80px;">
-                  <div style="font-weight: 600; margin-bottom: 4px;">Group Session</div>
-                  <div style="font-size: 0.9rem; color: var(--text-muted);">2-4 students (£10/hour each)</div>
-                </div> 
+                  <div style="font-weight: 600; margin-bottom: 4px;" data-i18n="booking.common.groupSession">Group Session</div>
+                  <div style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="booking.gcseHistory.groupSessionSubtext">2-4 students (£10/hour each)</div>
+                </div>
               </div>
             </div>
 
             <!-- Duration Selection (appears after session type is selected) -->
             <div class="form-group" id="durationSection" style="display: none;">
-              <label class="form-label">Session Duration</label>
+              <label class="form-label" data-i18n="booking.common.sessionDuration">Session Duration</label>
               <div class="duration-selector" id="durationSelector">
                 <div class="duration-option" data-duration="60" data-price="20">
-                  <div class="duration-time">1 Hour</div>
+                  <div class="duration-time" data-i18n="booking.common.oneHour">1 Hour</div>
                   <div class="duration-price">£20</div>
                 </div>
                 <div class="duration-option" data-duration="90" data-price="30" id="duration90">
-                  <div class="duration-time">90 Minutes</div>
+                  <div class="duration-time" data-i18n="booking.common.ninetyMinutes">90 Minutes</div>
                   <div class="duration-price">£30</div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Group Session Info -->
             <div id="groupSessionInfo" style="display: none; background: var(--bg-blue-tint); border-radius: 12px; padding: 1rem; margin-top: 1rem;">
               <div style="font-weight: 600; color: var(--yuli-primary); margin-bottom: 0.5rem;">
-                <i class="fas fa-users"></i> Group Session Information
+                <i class="fas fa-users"></i> <span data-i18n="booking.common.groupSessionInfoTitle">Group Session Information</span>
               </div>
               <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">
-                We need 2-4 students to run a group session. If we can't form a group within 48 hours, 
-                we'll contact you to either:
+                <span data-i18n="booking.common.groupSessionInfoIntro">We need 2-4 students to run a group session. If we can't form a group within 48 hours, we'll contact you to either:</span>
                 <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                  <li>Schedule an individual session at the same time</li>
-                  <li>Join you with another available group session</li>
-                  <li>Provide a full refund</li>
+                  <li data-i18n="booking.common.groupSessionOption1">Schedule an individual session at the same time</li>
+                  <li data-i18n="booking.common.groupSessionOption2">Join you with another available group session</li>
+                  <li data-i18n="booking.common.groupSessionOption3">Provide a full refund</li>
                 </ul>
               </div>
             </div>
@@ -556,7 +566,7 @@
             <div class="step-header-left">
               <div class="step-number">4</div>
               <div>
-                <div class="step-title">Contact Details</div>
+                <div class="step-title" data-i18n="booking.common.contactDetails">Contact Details</div>
                 <div class="step-summary" id="step4Summary" style="display:none;"></div>
               </div>
             </div>
@@ -566,27 +576,27 @@
           <div class="step-content" id="step4Content" style="display:none;">
             <div class="contact-details" id="contactDetails">
               <div class="form-group">
-                <label class="form-label" for="email">Email Address</label>
+                <label class="form-label" for="email" data-i18n="booking.common.emailAddress">Email Address</label>
                 <input type="email" id="email" class="form-input" placeholder="your@email.com">
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="phone">Phone Number</label>
+                <label class="form-label" for="phone" data-i18n="booking.common.phoneNumber">Phone Number</label>
                 <input type="tel" id="phone" class="form-input" placeholder="+44 7700 900000" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Preferred Contact Method</label>
+                <label class="form-label" data-i18n="booking.common.preferredContactMethod">Preferred Contact Method</label>
                 <div class="contact-method">
-                  <div class="contact-option selected" data-method="email"><i class="fas fa-envelope"></i> Email</div>
-                  <div class="contact-option" data-method="phone"><i class="fas fa-phone"></i> Phone</div>
-                  <div class="contact-option" data-method="sms"><i class="fas fa-sms"></i> SMS</div>
+                  <div class="contact-option selected" data-method="email"><i class="fas fa-envelope"></i> <span data-i18n="booking.common.email">Email</span></div>
+                  <div class="contact-option" data-method="phone"><i class="fas fa-phone"></i> <span data-i18n="booking.common.phone">Phone</span></div>
+                  <div class="contact-option" data-method="sms"><i class="fas fa-sms"></i> <span data-i18n="booking.common.sms">SMS</span></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="notes">Additional Notes (Optional)</label>
-                <textarea id="notes" class="form-input" rows="3" placeholder="Any specific topics you'd like to focus on or questions you have..."></textarea>
+                <label class="form-label" for="notes" data-i18n="booking.common.additionalNotes">Additional Notes (Optional)</label>
+                <textarea id="notes" class="form-input" rows="3" placeholder="Any specific topics you'd like to focus on or questions you have..." data-i18n-placeholder="booking.common.notesPlaceholder"></textarea>
               </div>
             </div>
           </div>
@@ -595,21 +605,21 @@
 
       <!-- Summary -->
       <div class="booking-summary" id="bookingSummary" style="display:none;">
-        <div class="summary-title">Booking Summary</div>
-        <div class="summary-item"><span class="summary-label">Subject:</span><span class="summary-value" id="summarySubject">GCSE History</span></div>
-        <div class="summary-item"><span class="summary-label">Exam Board:</span><span class="summary-value" id="summaryExamBoard">-</span></div>
-        <div class="summary-item"><span class="summary-label">Current → Target:</span><span class="summary-value" id="summaryGrades">-</span></div>
-        <div class="summary-item"><span class="summary-label">Date:</span><span class="summary-value" id="summaryDate">-</span></div>
-        <div class="summary-item"><span class="summary-label">Time:</span><span class="summary-value" id="summaryTime">-</span></div>
-        <div class="summary-item"><span class="summary-label">Duration:</span><span class="summary-value" id="summaryDuration">-</span></div>
-        <div class="summary-item total-price"><span class="summary-label">Total:</span><span class="summary-value" id="summaryTotal">£0</span></div>
+        <div class="summary-title" data-i18n="booking.common.bookingSummary">Booking Summary</div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.subjectLabel">Subject:</span><span class="summary-value" id="summarySubject" data-subject-id="GCSE History" data-i18n="booking.gcseHistory.badge">GCSE History</span></div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.examBoardLabel">Exam Board:</span><span class="summary-value" id="summaryExamBoard">-</span></div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.currentToTarget">Current → Target:</span><span class="summary-value" id="summaryGrades">-</span></div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.dateLabel">Date:</span><span class="summary-value" id="summaryDate">-</span></div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.timeLabel">Time:</span><span class="summary-value" id="summaryTime">-</span></div>
+        <div class="summary-item"><span class="summary-label" data-i18n="booking.common.durationLabel">Duration:</span><span class="summary-value" id="summaryDuration">-</span></div>
+        <div class="summary-item total-price"><span class="summary-label" data-i18n="booking.common.totalLabel">Total:</span><span class="summary-value" id="summaryTotal">£0</span></div>
       </div>
 
       <button class="submit-button" id="submitBooking" style="display:none;">
-        <i class="fas fa-calendar-check"></i> Confirm Booking
+        <i class="fas fa-calendar-check"></i> <span data-i18n="booking.common.confirmBooking">Confirm Booking</span>
       </button>
 
-      <p class="disclaimer">
+      <p class="disclaimer" data-i18n="booking.common.disclaimer">
         We may contact you to adjust the time if there are any scheduling conflicts.
         You'll receive a confirmation email with session details within 24 hours.
       </p>
@@ -624,6 +634,18 @@
       date:null,time:null,duration:null,price:null,contactMethod:'email'
     };
     let currentDate=new Date();let selectedDate=null;let currentOpenStep=1;
+
+    // Translation helper for dynamic JS-generated strings
+    function t(key, fallback){
+      if (window.YuliI18n){
+        const v = YuliI18n.t(key);
+        if (v !== undefined) return v;
+      }
+      return fallback !== undefined ? fallback : key;
+    }
+    function currentLocale(){
+      return (window.YuliI18n && YuliI18n.getLang() === 'zh-CN') ? 'zh-CN' : 'en-GB';
+    }
 
     // Discount system variables
 let userDiscountStatus = null;
@@ -684,14 +706,14 @@ function showDiscountAppliedMessage() {
     ">
       <i class="fas fa-check-circle" style="color: #16a34a;"></i>
       <div style="flex: 1;">
-        <div style="font-weight: 600; margin-bottom: 0.25rem;">Discount Applied</div>
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">${t('booking.common.discountAppliedTitle')}</div>
         <div style="font-size: 0.9rem;">
-          Your financial support discount has been approved and applied to these rates.
+          ${t('booking.common.discountAppliedText')}
         </div>
       </div>
     </div>
   `;
-  
+
   bookingCard.insertBefore(infoDiv, bookingCard.firstChild);
 }
 
@@ -732,8 +754,8 @@ function showDiscountInfo() {
       <i class="fas fa-info-circle" style="color: #4361EE;"></i>
       <div style="flex: 1;">
         <div style="font-size: 0.9rem;">
-          Financial support available - discounted rates for families receiving benefits or free school meals. 
-          <a href="/profile.html" style="color: #4361EE; text-decoration: none; font-weight: 500;">Apply in your profile</a>
+          ${t('booking.common.discountInfoText')}
+          <a href="/profile.html" style="color: #4361EE; text-decoration: none; font-weight: 500;">${t('booking.common.applyInProfile')}</a>
         </div>
       </div>
     </div>
@@ -884,9 +906,9 @@ function updateDurationPrices() {
 
     // --- DOM Ready ---
     document.addEventListener('DOMContentLoaded', function() {
-      // Subject from badge
+      // Subject from badge (use fixed data-subject-id so internal value stays English regardless of display language)
       const subjectBadge = document.getElementById('subjectBadge');
-      if (subjectBadge) bookingData.subject = subjectBadge.textContent.trim();
+      if (subjectBadge) bookingData.subject = subjectBadge.dataset.subjectId || subjectBadge.textContent.trim();
 
       // Step 1 field listeners
       document.getElementById('examBoard').addEventListener('change', checkStep1Completion);
@@ -967,7 +989,9 @@ function updateDurationPrices() {
       document.getElementById('step2Content').style.display = 'none';
 
       const s2 = document.getElementById('step2Summary');
-      s2.textContent = `${selectedDate ? selectedDate.toLocaleDateString('en-GB') : 'Today'} at ${time}`;
+      const s2DateStr = selectedDate ? selectedDate.toLocaleDateString(currentLocale()) : t('booking.common.today', 'Today');
+      const s2AtWord = t('booking.common.at', 'at');
+      s2.textContent = s2AtWord ? `${s2DateStr} ${s2AtWord} ${time}` : `${s2DateStr} ${time}`;
       s2.style.display = 'block';
 
       currentOpenStep=3;
@@ -1019,7 +1043,7 @@ document.querySelectorAll('.session-type-option:not(.selected)').forEach(opt => 
       // Handle 90 minute option for group sessions
       if (isGroup) {
         duration90.classList.add('coming-soon');
-        duration90.querySelector('.duration-price').innerHTML = 'Coming Soon';
+        duration90.querySelector('.duration-price').innerHTML = t('booking.common.comingSoon', 'Coming Soon');
         // Remove any existing click listeners
         duration90.style.pointerEvents = 'none';
       } else {
@@ -1079,9 +1103,9 @@ if (!isGroup) {
       document.getElementById('step3Content').style.display = 'none';
 
       const s3 = document.getElementById('step3Summary');
-      const sessionType = bookingData.sessionType === 'group' ? 'Group' : 'Individual';
-      const duration = bookingData.duration === 60 ? '1 Hour' : '90 Minutes';
-      const price = bookingData.sessionType === 'group' ? `£${bookingData.price} each` : `£${bookingData.price}`;
+      const sessionType = bookingData.sessionType === 'group' ? t('booking.common.groupSession', 'Group') : t('booking.common.individual', 'Individual');
+      const duration = bookingData.duration === 60 ? t('booking.common.oneHour', '1 Hour') : t('booking.common.ninetyMinutes', '90 Minutes');
+      const price = bookingData.sessionType === 'group' ? `£${bookingData.price} ${t('booking.common.each', 'each')}` : `£${bookingData.price}`;
       s3.textContent = `${sessionType} • ${duration} • ${price}`;
       s3.style.display = 'block';
 
@@ -1111,11 +1135,16 @@ if (!isGroup) {
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
       if (monthLabel){
-        monthLabel.textContent = currentDate.toLocaleString('en-GB', { month: 'long', year: 'numeric' });
+        monthLabel.textContent = currentDate.toLocaleString(currentLocale(), { month: 'long', year: 'numeric' });
       }
 
       grid.innerHTML = '';
-      const dayHeaders = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      // Reference week starting Monday 2024-01-01, localized so headers read naturally per language
+      const dayHeaders = [];
+      for (let i = 0; i < 7; i++){
+        const refDay = new Date(Date.UTC(2024, 0, 1 + i));
+        dayHeaders.push(refDay.toLocaleDateString(currentLocale(), { weekday: 'short', timeZone: 'UTC' }));
+      }
       dayHeaders.forEach(day => {
         const header = document.createElement('div');
         header.className = 'calendar-day-header';
@@ -1156,10 +1185,10 @@ const isPast = dateObj < tomorrow;
           cell.classList.add('disabled');
           cell.style.opacity = '0.3';
           cell.style.cursor = 'not-allowed';
-          cell.title = 'Bookings must be made at least 1 day in advance';
+          cell.title = t('booking.common.calendarPastTooltip', 'Bookings must be made at least 1 day in advance');
         } else {
           cell.style.cursor = 'pointer';
-          cell.title = 'Click to select this date';
+          cell.title = t('booking.common.calendarSelectTooltip', 'Click to select this date');
           cell.addEventListener('click', () => {
             document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
             cell.classList.add('selected');
@@ -1186,7 +1215,8 @@ const isPast = dateObj < tomorrow;
     // --- Summary ---
     function updateSummary(){
       const g=id=>document.getElementById(id);
-      g('summarySubject').textContent=bookingData.subject;
+      // Display translated subject label; bookingData.subject (used for Firebase/logic) stays untouched
+      g('summarySubject').textContent=t('booking.gcseHistory.badge', bookingData.subject);
       g('summaryExamBoard').textContent=bookingData.examBoard||'-';
       if(bookingData.currentGrade&&bookingData.targetGrade){
         const cur=bookingData.currentGrade.replace('Grade ','');
@@ -1195,10 +1225,10 @@ const isPast = dateObj < tomorrow;
         g('summaryGrades').textContent=`${cur} → ${tgt}`;
       }
       if(bookingData.date){
-        g('summaryDate').textContent=bookingData.date.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        g('summaryDate').textContent=bookingData.date.toLocaleDateString(currentLocale(),{weekday:'long',day:'numeric',month:'long',year:'numeric'});
       }
       g('summaryTime').textContent=bookingData.time||'-';
-      if(bookingData.duration){ g('summaryDuration').textContent=bookingData.duration===60?'1 Hour':'90 Minutes'; }
+      if(bookingData.duration){ g('summaryDuration').textContent=bookingData.duration===60?t('booking.common.oneHour','1 Hour'):t('booking.common.ninetyMinutes','90 Minutes'); }
       g('summaryTotal').textContent=bookingData.price?`£${bookingData.price}`:'£0';
     }
 
@@ -1214,19 +1244,19 @@ document.getElementById('submitBooking')?.addEventListener('click', async functi
   const specificAreas = document.getElementById('specificAreas').value.trim();
   
   if (!email && !phone) {
-    alert('Please provide either an email or phone number.');
+    alert(t('booking.common.provideEmailOrPhone', 'Please provide either an email or phone number.'));
     return;
   }
-  
+
   // Check if user is authenticated
   if (!firebase.auth().currentUser) {
-    alert('Please sign in to complete your booking.');
+    alert(t('booking.common.pleaseSignIn', 'Please sign in to complete your booking.'));
     return;
   }
-  
+
   // Show loading state
   submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + t('booking.common.processing', 'Processing...');
   
   try {
     // Add Firestore
@@ -1308,26 +1338,26 @@ document.getElementById('submitBooking')?.addEventListener('click', async functi
         const urlWithParams = `${stripeUrl}?success_url=${encodeURIComponent(successUrl)}&cancel_url=${encodeURIComponent(cancelUrl)}`;
         
         // Redirect to Stripe
-        submitBtn.innerHTML = '<i class="fas fa-check"></i> Redirecting to Payment...';
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> ' + t('booking.common.redirectingToPayment', 'Redirecting to Payment...');
         submitBtn.style.background = '#16a34a';
-        
+
         setTimeout(() => {
           window.location.href = urlWithParams;
         }, 1000);
-        
+
       } catch (innerError) {
         console.error('Inner booking error:', innerError);
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Confirm Booking';
-        alert('Sorry, there was an error processing your booking. Please try again.');
+        submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> ' + t('booking.common.confirmBooking', 'Confirm Booking');
+        alert(t('booking.common.bookingError', "Sorry, there was an error processing your booking. Please try again."));
       }
     };
-    
+
   } catch (error) {
     console.error('Booking error:', error);
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Confirm Booking';
-    alert('Sorry, there was an error processing your booking. Please try again.');
+    submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> ' + t('booking.common.confirmBooking', 'Confirm Booking');
+    alert(t('booking.common.bookingError', "Sorry, there was an error processing your booking. Please try again."));
   }
 });
   </script>
@@ -1349,39 +1379,40 @@ document.getElementById('submitBooking')?.addEventListener('click', async functi
         </div>
 
         <div class="footer-section">
-          <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+          <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit" data-i18n="footer.company">Company</a></h4>
           <ul class="footer-links">
-            <li><a href="/about.html">About Yuli</a></li>
-            <li><a href="/site/careers.html">Careers</a></li>
+            <li><a href="/about.html" data-i18n="footer.aboutYuli">About Yuli</a></li>
+            <li><a href="/site/careers.html" data-i18n="footer.careers">Careers</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+          <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit" data-i18n="footer.legal">Legal</a></h4>
           <ul class="footer-links">
-            <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
-            <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
-            <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
-            <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+            <li><a href="/site/legal/terms.html" data-i18n="footer.terms">Terms & Conditions</a></li>
+            <li><a href="/site/legal/privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="/site/legal/cookies.html" data-i18n="footer.cookies">Cookie Policy</a></li>
+            <li><a href="/site/about/safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+          <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit" data-i18n="footer.support">Support</a></h4>
           <ul class="footer-links">
-            <li><a href="/site/contact.html">Contact Us</a></li>
-            <li><a href="/site/faqs.html">FAQs</a></li>
-            <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+            <li><a href="/site/contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+            <li><a href="/site/faqs.html" data-i18n="footer.faqs">FAQs</a></li>
+            <li><a href="/site/legal/refunds.html" data-i18n="footer.refundPolicy">Refund Policy</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2024 Yuli. All rights reserved.</p>
-        <p>Designed and built with ❤️ for quality education</p>
+        <p data-i18n="footer.copyright">&copy; 2024 Yuli. All rights reserved.</p>
+        <p data-i18n="footer.tagline">Designed and built with ❤️ for quality education</p>
       </div>
     </div>
   </footer>
+  <script src="/js/i18n.js"></script>
   <!-- Auto-fill Email Address with the signed-in Firebase user -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

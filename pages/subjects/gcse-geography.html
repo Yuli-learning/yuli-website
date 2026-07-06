@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GCSE Geography | Expert Tutoring | Yuli</title>
+    <script>(function(){try{var l=localStorage.getItem('yuli_lang');if(l==='zh-CN')document.documentElement.setAttribute('lang','zh-CN');}catch(e){}})();</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
@@ -1158,20 +1159,22 @@
     <div class="ethical-banner">
         <div class="container">
             <i class="fas fa-hand-holding-heart"></i>
-            <span>Discounted rates available for eligible students</span>
-            <a href="#pricing">Learn more</a>
+            <span data-i18n="common.ethicalBanner">Discounted rates available for eligible students</span>
+            <a href="#pricing" data-i18n="common.learnMore">Learn more</a>
         </div>
     </div>
-    
-    
+
+
     <!-- Header -->
     <header>
         <div class="container">
             <a href="/" class="logo">Yuli<span>.</span></a>
-            <a href="/" class="back-button">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </a>
+            <div class="ap-nav-cta">
+                <a href="/" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    <span data-i18n="subjectPage.common.backToHome">Back to Home</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -1480,17 +1483,17 @@
 
         <div class="container">
             <div class="hero-content">
-                <h1>GCSE Geography</h1>
-                <p class="tagline">Clarity, confidence, and exam results that last.</p>
+                <h1 data-i18n="subjectPage.gcseGeography.hero.title">GCSE Geography</h1>
+                <p class="tagline" data-i18n="subjectPage.gcseGeography.hero.tagline">Clarity, confidence, and exam results that last.</p>
                 <a href="/booking/booking-gcse-geography.html" class="cta-button">
                     <i class="fas fa-calendar-check"></i>
-                    Start Learning Geography
+                    <span data-i18n="subjectPage.gcseGeography.hero.cta">Start Learning Geography</span>
                 </a>
-                <div class="cta-subtext">From £20/hr · All UK exam boards covered</div>
+                <div class="cta-subtext" data-i18n="subjectPage.gcseGeography.hero.subtext">From £20/hr · All UK exam boards covered</div>
             </div>
         </div>
         <div class="scroll-cue" onclick="scrollToContent()">
-            <span>Scroll</span>
+            <span data-i18n="common.scroll">Scroll</span>
             <div class="scroll-line"></div>
         </div>
         
@@ -1507,7 +1510,7 @@
         <div class="container">
             <!-- Exam Boards Section -->
             <section class="section exam-boards-container" aria-labelledby="exam-boards-title">
-                <h2 id="exam-boards-title" class="section-title">Exam Boards We Teach</h2>
+                <h2 id="exam-boards-title" class="section-title" data-i18n="subjectPage.common.examBoardsTitle">Exam Boards We Teach</h2>
 
                 <div class="exam-boards-logos" role="list" aria-describedby="exam-boards-note">
                     <div class="exam-board-logo" role="listitem" data-board="OCR" title="OCR" aria-label="OCR">
@@ -1527,7 +1530,7 @@
                     </div>
                 </div>
 
-                <p id="exam-boards-note" class="exam-boards-note">Yuli is not affiliated with or endorsed by AQA, Edexcel, OCR, WJEC/Eduqas, or CCEA.</p>
+                <p id="exam-boards-note" class="exam-boards-note" data-i18n="subjectPage.common.examBoardsNote">Yuli is not affiliated with or endorsed by AQA, Edexcel, OCR, WJEC/Eduqas, or CCEA.</p>
             </section>
 
             
@@ -1632,8 +1635,8 @@
             </style>
             <section id="how-we-teach" class="section hwt" aria-labelledby="hwt-title" data-active="1" tabindex="0">
                 <div class="hwt-header">
-                    <h2 id="hwt-title" class="hwt-title section-title">How We Teach</h2>
-                    <p class="hwt-sub">A personalised approach that builds confidence, true understanding, and results that last.</p>
+                    <h2 id="hwt-title" class="hwt-title section-title" data-i18n="subjectPage.common.howWeTeach.title">How We Teach</h2>
+                    <p class="hwt-sub" data-i18n="subjectPage.common.howWeTeach.subtitle">A personalised approach that builds confidence, true understanding, and results that last.</p>
                 </div>
                 <!-- Decorative cloud background (full width) -->
                 <div class="plane-anim" aria-hidden="true">
@@ -1657,8 +1660,8 @@
                               <span class="hwt-badge-num">1</span>
                             </div>
                             <div>
-                              <h3><span class="step">1. Diagnostic first</span></h3>
-                              <p>I begin with the goals parents and students bring to me, whether it is passing an exam, improving confidence, or filling gaps. Everything I do is adapted to the student’s needs.</p>
+                              <h3><span class="step" data-i18n="subjectPage.common.howWeTeach.step1.title">1. Diagnostic first</span></h3>
+                              <p data-i18n="subjectPage.common.howWeTeach.step1.desc">I begin with the goals parents and students bring to me, whether it is passing an exam, improving confidence, or filling gaps. Everything I do is adapted to the student’s needs.</p>
                             </div>
                           </article>
                           <article class="hwt-node right reveal" role="listitem" data-step="2">
@@ -1666,8 +1669,8 @@
                               <span class="hwt-badge-num">2</span>
                             </div>
                             <div>
-                              <h3><span class="step">2. Guided teaching</span></h3>
-                              <p>When I notice missing knowledge, I go back and rebuild the foundations until the student truly understands. No skipping and no rushing, just clarity.</p>
+                              <h3><span class="step" data-i18n="subjectPage.common.howWeTeach.step2.title">2. Guided teaching</span></h3>
+                              <p data-i18n="subjectPage.common.howWeTeach.step2.desc">When I notice missing knowledge, I go back and rebuild the foundations until the student truly understands. No skipping and no rushing, just clarity.</p>
                             </div>
                           </article>
                           <article class="hwt-node left reveal" role="listitem" data-step="3">
@@ -1675,8 +1678,8 @@
                               <span class="hwt-badge-num">3</span>
                             </div>
                             <div>
-                              <h3><span class="step">3. Targeted retrieval</span></h3>
-                              <p>Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Geography becomes relevant, understandable, and easier to remember.</p>
+                              <h3><span class="step" data-i18n="subjectPage.common.howWeTeach.step3.title">3. Targeted retrieval</span></h3>
+                              <p data-i18n="subjectPage.gcseGeography.hwtStep3Desc">Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Geography becomes relevant, understandable, and easier to remember.</p>
                             </div>
                           </article>
                           <article class="hwt-node right reveal" role="listitem" data-step="4">
@@ -1684,8 +1687,8 @@
                               <span class="hwt-badge-num">4</span>
                             </div>
                             <div>
-                              <h3><span class="step">4. Perform under pressure</span></h3>
-                              <p>I know what it’s like to worry about being judged. My students never have to feel embarrassed about not knowing something. With patience and practice, I help them build confidence for exams and understanding that really lasts.</p>
+                              <h3><span class="step" data-i18n="subjectPage.common.howWeTeach.step4.title">4. Perform under pressure</span></h3>
+                              <p data-i18n="subjectPage.common.howWeTeach.step4.desc">I know what it’s like to worry about being judged. My students never have to feel embarrassed about not knowing something. With patience and practice, I help them build confidence for exams and understanding that really lasts.</p>
                             </div>
                           </article>
                         </div>
@@ -1701,7 +1704,7 @@
 
             <!-- Corporate Testimonials (Swiper) -->
             <section class="section corp-testimonials" aria-labelledby="corp-testimonials-title">
-                <h2 id="corp-testimonials-title" class="section-title">What Students Say</h2>
+                <h2 id="corp-testimonials-title" class="section-title" data-i18n="subjectPage.common.testimonialsTitle">What Students Say</h2>
 
                 <div class="swiper" aria-roledescription="carousel" aria-label="Student testimonials">
                     <div class="swiper-wrapper">
@@ -1710,8 +1713,8 @@
                           <div class="corp-logo" aria-hidden="true">
                               <img src="../../assets/logos/Ant.jpg" alt="Anthony profile" loading="lazy" />
                           </div>
-                          <blockquote class="corp-quote">“I used to find Geography overwhelming, especially the case studies, but breaking them down step by step really helped. I never thought it would become one of the subjects I felt confident in.”</blockquote>
-                          <div class="corp-meta">Anthony Q • Student</div>
+                          <blockquote class="corp-quote" data-i18n="subjectPage.gcseGeography.testimonial1.quote">“I used to find Geography overwhelming, especially the case studies, but breaking them down step by step really helped. I never thought it would become one of the subjects I felt confident in.”</blockquote>
+                          <div class="corp-meta" data-i18n="subjectPage.gcseGeography.testimonial1.meta">Anthony Q • Student</div>
                         </div>
                       </div>
                       <div class="swiper-slide">
@@ -1719,8 +1722,8 @@
                           <div class="corp-logo" aria-hidden="true">
                               <img src="../../assets/logos/robin.jpg" alt="Robin profile" loading="lazy" />
                           </div>
-                          <blockquote class="corp-quote">“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”</blockquote>
-                          <div class="corp-meta">Robin • Student</div>
+                          <blockquote class="corp-quote" data-i18n="subjectPage.gcseGeography.testimonial2.quote">“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”</blockquote>
+                          <div class="corp-meta" data-i18n="subjectPage.gcseGeography.testimonial2.meta">Robin • Student</div>
                         </div>
                       </div>
                       <div class="swiper-slide">
@@ -1728,8 +1731,8 @@
                           <div class="corp-logo" aria-hidden="true">
                               <img src="../../assets/logos/ethan.jpg" alt="Ethan Y profile" loading="lazy" />
                           </div>
-                          <blockquote class="corp-quote">“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”</blockquote>
-                          <div class="corp-meta">Ethan Y • Student</div>
+                          <blockquote class="corp-quote" data-i18n="subjectPage.gcseGeography.testimonial3.quote">“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”</blockquote>
+                          <div class="corp-meta" data-i18n="subjectPage.gcseGeography.testimonial3.meta">Ethan Y • Student</div>
                         </div>
                       </div>
                     </div>
@@ -1746,8 +1749,8 @@
                         <path d="M7 3h6l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
                         <path d="M13 3v6h6"/>
                       </svg>
-                    </span>Customised exam papers</div>
-                    <div class="benefit-note">
+                    </span><span data-i18n="subjectPage.common.benefit1.title">Customised exam papers</span></div>
+                    <div class="benefit-note" data-i18n="subjectPage.common.benefit1.desc">
                       Practice papers tailored to your exam board and current gaps, with mark schemes and worked solutions.
                     </div>
                   </div>
@@ -1758,8 +1761,8 @@
                         <path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8l-4 3V7a2 2 0 0 1 2-2z"/>
                         <path d="M8 10h8M8 14h5"/>
                       </svg>
-                    </span>Parent feedback every lesson</div>
-                    <div class="benefit-note">
+                    </span><span data-i18n="subjectPage.common.benefit2.title">Parent feedback every lesson</span></div>
+                    <div class="benefit-note" data-i18n="subjectPage.common.benefit2.desc">
                       A short summary after each session—what we covered, next steps, and anything to watch before the next lesson.
                     </div>
                   </div>
@@ -1770,8 +1773,8 @@
                         <path d="M3 17l6-6 4 4 8-8"/>
                         <path d="M14 7h7v7"/>
                       </svg>
-                    </span>Progress tracker & next steps</div>
-                    <div class="benefit-note">
+                    </span><span data-i18n="subjectPage.common.benefit3.title">Progress tracker & next steps</span></div>
+                    <div class="benefit-note" data-i18n="subjectPage.common.benefit3.desc">
                       Clear milestones from the diagnostic plan, weekly targets, and visible progress over time.
                     </div>
                   </div>
@@ -1917,68 +1920,68 @@
 
             <!-- FAQ Section -->
             <section class="section">
-                <h2 class="section-title">Frequently Asked Questions</h2>
+                <h2 class="section-title" data-i18n="subjectPage.common.faqTitle">Frequently Asked Questions</h2>
                 <div class="faq-container">
                     <div class="faq-item">
                         <button class="faq-question">
-                            What exam boards do you cover?
+                            <span data-i18n="subjectPage.gcseGeography.faqExamBoards.q">What exam boards do you cover?</span>
                             <i class="fas fa-plus faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>We cover all major GCSE Geography exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus.</p>
+                            <p data-i18n="subjectPage.gcseGeography.faqExamBoards.a">We cover all major GCSE Geography exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
-                            Do you teach both Foundation and Higher tier?
+                            <span data-i18n="subjectPage.gcseGeography.faqTier.q">Do you teach both Foundation and Higher tier?</span>
                             <span class="faq-icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes, we teach both Foundation and Higher tier GCSE Geography. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades.</p>
+                            <p data-i18n="subjectPage.gcseGeography.faqTier.a">Yes, we teach both Foundation and Higher tier GCSE Geography. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
-                            How do online sessions work?
+                            <span data-i18n="subjectPage.common.faq.onlineSessions.q">How do online sessions work?</span>
                             <span class="faq-icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                         </button>
                         <div class="faq-answer">
-                            <p>Sessions are currently run on Microsoft Teams. I share my screen and use digital tools to explain topics clearly, step by step, while students work through problems with me in real time.</p>
-                            <p>We are also developing our own interactive online whiteboard, which is in beta testing. Once ready, it will make lessons even more engaging and give students an easy way to practice and save their work in one place.</p>
+                            <p data-i18n="subjectPage.common.faq.onlineSessions.a1">Sessions are currently run on Microsoft Teams. I share my screen and use digital tools to explain topics clearly, step by step, while students work through problems with me in real time.</p>
+                            <p data-i18n="subjectPage.common.faq.onlineSessions.a2">We are also developing our own interactive online whiteboard, which is in beta testing. Once ready, it will make lessons even more engaging and give students an easy way to practice and save their work in one place.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
-                            Can I get discounts on sessions?
+                            <span data-i18n="subjectPage.common.faq.discounts.q">Can I get discounts on sessions?</span>
                             <span class="faq-icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes! We offer discounted rates for students who qualify based on household income. We believe quality education should be accessible to all students regardless of financial circumstances.</p>
+                            <p data-i18n="subjectPage.common.faq.discounts.a">Yes! We offer discounted rates for students who qualify based on household income. We believe quality education should be accessible to all students regardless of financial circumstances.</p>
                         </div>
                     </div>
                     <!-- Added FAQs -->
                     <div class="faq-item">
                         <button class="faq-question">
-                            How much do GCSE Geography sessions cost?
+                            <span data-i18n="subjectPage.gcseGeography.faqPrice.q">How much do GCSE Geography sessions cost?</span>
                             <i class="fas fa-plus faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>GCSE Geography sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions.</p>
+                            <p data-i18n="subjectPage.gcseGeography.faqPrice.a">GCSE Geography sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
-                            Do you provide homework or practice after lessons?
+                            <span data-i18n="subjectPage.common.faq.homework.q">Do you provide homework or practice after lessons?</span>
                             <i class="fas fa-plus faq-icon"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes. I often set short, focused practice tasks after lessons. These help students reinforce what we covered and prepare for the next session.</p>
+                            <p data-i18n="subjectPage.common.faq.homework.a">Yes. I often set short, focused practice tasks after lessons. These help students reinforce what we covered and prepare for the next session.</p>
                         </div>
                     </div>
                 </div>
@@ -2389,40 +2392,41 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit">Company</a></h4>
+                    <h4 class="footer-heading"><a href="/about.html" style="text-decoration:none;color:inherit" data-i18n="footer.company">Company</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/about.html">About Yuli</a></li>
-                        <li><a href="/site/careers.html">Careers</a></li>
+                        <li><a href="/about.html" data-i18n="footer.aboutYuli">About Yuli</a></li>
+                        <li><a href="/site/careers.html" data-i18n="footer.careers">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit">Legal</a></h4>
+                    <h4 class="footer-heading"><a href="/site/legal/index.html" style="text-decoration:none;color:inherit" data-i18n="footer.legal">Legal</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/site/legal/terms.html">Terms & Conditions</a></li>
-                        <li><a href="/site/legal/privacy.html">Privacy Policy</a></li>
-                        <li><a href="/site/legal/cookies.html">Cookie Policy</a></li>
-                        <li><a href="/site/about/safeguarding.html">Safeguarding</a></li>
+                        <li><a href="/site/legal/terms.html" data-i18n="footer.terms">Terms & Conditions</a></li>
+                        <li><a href="/site/legal/privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="/site/legal/cookies.html" data-i18n="footer.cookies">Cookie Policy</a></li>
+                        <li><a href="/site/about/safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit">Support</a></h4>
+                    <h4 class="footer-heading"><a href="/site/faqs.html" style="text-decoration:none;color:inherit" data-i18n="footer.support">Support</a></h4>
                     <ul class="footer-links">
-                        <li><a href="/site/contact.html">Contact Us</a></li>
-                        <li><a href="/site/faqs.html">FAQs</a></li>
-                        <li><a href="/site/legal/refunds.html">Refund Policy</a></li>
+                        <li><a href="/site/contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+                        <li><a href="/site/faqs.html" data-i18n="footer.faqs">FAQs</a></li>
+                        <li><a href="/site/legal/refunds.html" data-i18n="footer.refundPolicy">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Yuli. All rights reserved.</p>
-                <p>Designed and built with ❤️ for quality education</p>
+                <p data-i18n="footer.copyright">&copy; 2024 Yuli. All rights reserved.</p>
+                <p data-i18n="footer.tagline">Designed and built with ❤️ for quality education</p>
             </div>
         </div>
     </footer>
 
+    <script src="/js/i18n.js"></script>
     <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>

@@ -816,7 +816,58 @@
       background: var(--primary);
       transform: translateY(-1px);
   }
-  
+
+  /* Generic right-aligned header actions wrapper (used to mount the
+     language switcher next to a page's own nav/back-button, on pages
+     that don't have the homepage's .auth-actions block) */
+  .ap-nav-cta {
+      display: flex;
+      gap: 12px;
+      margin-left: auto;
+      align-items: center;
+  }
+
+  /* Language switcher (EN | 中文) */
+  .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      margin-left: 8px;
+  }
+
+  .lang-switch-sep {
+      color: var(--light-gray, #e9ecef);
+      font-size: 12px;
+  }
+
+  .lang-btn {
+      background: transparent;
+      border: none;
+      padding: 4px 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #8a8f98;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .lang-btn:hover {
+      color: var(--primary);
+  }
+
+  .lang-btn.active {
+      color: var(--primary);
+      background: rgba(67, 97, 238, 0.08);
+  }
+
+  @media (max-width: 768px) {
+      .lang-switch {
+          margin-left: 0;
+      }
+  }
+
   /* Buttons */
   .cta-button {
       display: inline-block;

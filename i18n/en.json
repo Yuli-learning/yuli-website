@@ -1,0 +1,521 @@
+{
+  "common": {
+    "bookNow": "Book Now",
+    "call": "Call",
+    "comingSoon": "Coming Soon",
+    "email": "Email",
+    "ethicalBanner": "Discounted rates available for eligible students",
+    "explore": "Explore",
+    "learnMore": "Learn more",
+    "perHour": "/hour",
+    "scroll": "Scroll",
+    "view": "View",
+    "close": "Close"
+  },
+  "nav": {
+    "about": "About",
+    "admin": "Admin",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "pricing": "Pricing",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "subjects": "Subjects"
+  },
+  "auth": {
+    "confirmPassword": "Confirm password",
+    "continueAs": "Continue as",
+    "continueWithGoogle": "Continue with Google",
+    "email": "Email",
+    "forgotPassword": "Forgot password?",
+    "keepSignedIn": "Keep me signed in",
+    "password": "Password",
+    "studentParent": "Student/Parent",
+    "tutorRole": "Tutor (admin approval required)"
+  },
+  "footer": {
+    "aboutYuli": "About Yuli",
+    "careers": "Careers",
+    "company": "Company",
+    "contactUs": "Contact Us",
+    "cookies": "Cookie Policy",
+    "copyright": "© 2024 Yuli. All rights reserved.",
+    "faqs": "FAQs",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "refundPolicy": "Refund Policy",
+    "safeguarding": "Safeguarding",
+    "support": "Support",
+    "tagline": "Designed and built with ❤️ for quality education",
+    "terms": "Terms & Conditions"
+  },
+  "home": {
+    "hero": {
+      "line1": "Real learning means <span class=\"highlight\">understanding</span>,",
+      "line2": "not <em>memorising</em>.",
+      "subtitle": "Expert GCSE & A-Level tutoring that actually works — through understanding, not memorising",
+      "exploreSubjects": "Explore Subjects",
+      "viewPricing": "View Pricing",
+      "priceFrom": "Flexible pricing from £12/hr"
+    },
+    "founder": {
+      "label": "Meet the Founder",
+      "role": "Founder of Yuli · Mathematics Tutor",
+      "intro": "After more than five years of tutoring students from KS3 to A Level, Lukas founded Yuli around a simple belief: students remember what they understand, not what they memorise. That principle shapes every lesson at Yuli. We break subjects down to their logic so students enter exams with real confidence, not just recall."
+    },
+    "trust": {
+      "experience": "5+ years tutoring experience",
+      "levels": "KS3 to A-Level",
+      "boards": "All major UK exam boards",
+      "dbs": "DBS checked"
+    },
+    "subjects": {
+      "heading": "Subjects We Teach",
+      "subtitle": "Explore subjects by category - swipe to see more",
+      "count2": "2 subjects",
+      "count3": "3 subjects",
+      "count4": "4 subjects",
+      "count5": "5 subjects",
+      "count10": "10 subjects",
+      "cat": {
+        "maths": { "name": "Mathematics", "desc": "Foundation to Advanced Mathematical Concepts" },
+        "alevelMaths": { "desc": "Advanced Mathematical Concepts" },
+        "sciences": { "name": "Sciences", "desc": "Biology, Chemistry, and Physics" },
+        "alevelSciences": { "desc": "Advanced Scientific Concepts & Laboratory Skills" },
+        "humanities": { "name": "Languages & Humanities", "desc": "English Literature, Language, and History" },
+        "tech": { "name": "Technology & Creative", "desc": "Computer Science, Business, Economics, and Creative Subjects" },
+        "business": { "name": "Business & Social Sciences", "desc": "Economic Principles & Social Analysis" }
+      },
+      "item": {
+        "gcseMaths": { "title": "GCSE Mathematics", "desc": "Master mathematical concepts from foundation to higher tier" },
+        "furtherMaths": { "title": "GCSE Further Maths", "desc": "Advanced mathematical concepts for high achievers" },
+        "gcseBiology": { "title": "GCSE Biology", "desc": "Explore living organisms and biological processes" },
+        "gcseChemistry": { "title": "GCSE Chemistry", "desc": "Chemical reactions and molecular structures" },
+        "gcsePhysics": { "title": "GCSE Physics", "desc": "Forces, energy, and the fundamental principles" },
+        "englishLit": { "title": "English Literature", "desc": "Classic texts and critical analysis skills for comprehensive literary understanding" },
+        "englishLang": { "title": "English Language", "desc": "Writing, reading, and communication skills development" },
+        "history": { "title": "History", "desc": "Historical events and source analysis across different time periods" },
+        "geography": { "title": "Geography", "desc": "Human and physical geography exploration covering landscapes, climate, and societies" },
+        "french": { "title": "French", "desc": "Language skills and cultural understanding through practical communication" },
+        "spanish": { "title": "Spanish", "desc": "Language skills and cultural exploration through immersive learning" },
+        "german": { "title": "German", "desc": "Language proficiency and cultural understanding" },
+        "religiousStudies": { "title": "Religious Studies", "desc": "Ethics, philosophy and world religions exploration" },
+        "art": { "title": "Art & Design", "desc": "Creative expression and visual communication through artistic techniques" },
+        "computerScience": { "title": "Computer Science", "desc": "Programming, algorithms, and computational thinking" },
+        "business": { "title": "Business Studies", "desc": "Enterprise, marketing, and business operations" },
+        "music": { "title": "Music", "desc": "Performance, composition, and music theory" },
+        "economics": { "title": "Economics", "desc": "Economic principles and business applications" },
+        "alevelMaths": { "title": "A-Level Mathematics", "desc": "Advanced mathematical concepts and proof techniques" },
+        "alevelFurtherMaths": { "title": "A-Level Further Maths", "desc": "Advanced mathematical concepts beyond A-Level" },
+        "alevelBiology": { "title": "A-Level Biology", "desc": "Advanced biological systems and processes" },
+        "alevelChemistry": { "title": "A-Level Chemistry", "desc": "Complex chemical reactions and analysis" },
+        "alevelPhysics": { "title": "A-Level Physics", "desc": "Advanced physics concepts and applications" },
+        "alevelEconomics": { "title": "A-Level Economics", "desc": "Economic theory and real-world applications" },
+        "alevelBusiness": { "title": "A-Level Business Studies", "desc": "Enterprise, marketing, and business operations" },
+        "alevelPsychology": { "title": "A-Level Psychology", "desc": "Human behaviour and mental processes through scientific analysis" },
+        "alevelSociology": { "title": "A-Level Sociology", "desc": "Society, culture, and social behaviour through critical analysis" },
+        "alevelComputerScience": { "title": "A-Level Computer Science", "desc": "Programming, algorithms, and computational thinking" }
+      }
+    },
+    "pricing": {
+      "heading": "Pricing",
+      "subtitle": "Flexible pricing for quality tutoring across all subjects",
+      "viewDiscounted": "View discounted rates if applicable ↓",
+      "mostPopular": "Most Popular",
+      "gcseSubjects": "GCSE Subjects",
+      "advancedLevel": "Advanced Level",
+      "alevelSubjects": "A-Level Subjects",
+      "bestValue": "Best Value",
+      "groupSessions": "Group Sessions",
+      "oneToOne": "1:1 Private Sessions",
+      "gcseSubjectList": "Maths, Sciences, English & More",
+      "foundationHigher": "Foundation & Higher Tier",
+      "flexibleScheduling": "Flexible Scheduling",
+      "alevelSubjectList": "Maths, Sciences & More",
+      "examPrep": "Exam Preparation",
+      "smallGroup": "Small Group Learning",
+      "peerCollab": "Peer Collaboration",
+      "reducedCost": "Reduced Cost",
+      "sharedResources": "Shared Resources",
+      "discountedHeading": "Discounted Rates for Eligible Students",
+      "discountedSubtitle": "We believe quality education should be accessible to everyone",
+      "discountedRate": "Discounted Rate"
+    },
+    "contact": {
+      "heading": "Get Started",
+      "subtitle": "Ready to improve your academic performance?",
+      "bookTitle": "Book a Session",
+      "bookDesc": "Schedule your first tutoring session",
+      "emailTitle": "Email Us",
+      "emailDesc": "Have questions? Send us a message",
+      "callTitle": "Call Us",
+      "callDesc": "Speak directly with Lukas"
+    }
+  },
+  "tag": {
+    "allBoards": "All Boards",
+    "allExamBoards": "All Exam Boards",
+    "allSkills": "All Skills",
+    "allThemes": "All Themes",
+    "allTiers": "All Tiers",
+    "allTopics": "All Topics",
+    "complexNumbers": "Complex Numbers",
+    "creative": "Creative",
+    "criticalThinking": "Critical Thinking",
+    "foundation": "Foundation",
+    "higher": "Higher",
+    "matrices": "Matrices",
+    "portfolio": "Portfolio",
+    "programming": "Programming",
+    "realWorld": "Real World",
+    "separateScience": "Separate Science",
+    "tripleScience": "Triple Science"
+  },
+  "about": {
+    "intro": {
+      "eyebrow": "About Yuli",
+      "h1": "Understanding first, always",
+      "p1": "Yuli is a tutoring company for GCSE and A-Level students, covering subjects from Mathematics to English Literature, from KS3 through to A-Level, against every major UK exam board.",
+      "p2": "It was made around one belief: students remember what they understand, not what they memorise. Most tutoring optimises for the next test, drilling answers until they stick. That rarely lasts, once the wording changes or the topic moves on, memorised answers fall apart. Understanding doesn't. Every Yuli lesson is built around making a topic actually make sense, not just recallable for a few weeks."
+    },
+    "approach": {
+      "eyebrow": "Our Approach",
+      "h2": "How every lesson works",
+      "lead": "The method stays consistent, even though every student is different.",
+      "card1": { "title": "Clear explanations", "desc": "Every topic is broken down to its underlying logic first, rather than handed over as a shortcut to memorise." },
+      "card2": { "title": "Adapted to the student", "desc": "No fixed script. Lessons adapt to how each student thinks and learns, not the other way round." },
+      "card3": { "title": "Real understanding, real confidence", "desc": "Ideas are connected to real examples so they genuinely make sense, building confidence that holds up under pressure." },
+      "card4": { "title": "Applied in exams", "desc": "Understanding is tested against real past-paper questions, so it holds up on exam day, not just in conversation." }
+    },
+    "founder": {
+      "eyebrow": "Meet the Founder",
+      "photoAlt": "Lukas Jovaisa, founder of Yuli",
+      "p1": "Yuli was founded by Lukas Jovaisa, who's currently studying Mathematics at university. He's been tutoring for 5+ years, working with students from KS3 through to A Level, and started Yuli because he kept seeing the same gap: students taught to pass exams, not to understand them.",
+      "p2": "His approach comes from a simple belief, first found in language learning: understanding beats memorising, every time. He adapts to how each student thinks rather than sticking to one method, and goes outside the exam spec whenever it helps something click.",
+      "p3": "He still tutors while he studies, because he wants every student to reach the same moment: <em>“wait, I can actually do this.”</em>"
+    },
+    "going": {
+      "eyebrow": "Where Yuli Is Going",
+      "h2": "Growing without losing what makes it work",
+      "p1": "Yuli is still young, and growing carefully matters more than growing fast. The plan is to bring in more tutors who share the same belief, that understanding lasts and memorising doesn't, so more students can learn this way without losing the personal attention that makes it work.",
+      "p2": "Longer term, Lukas would like Yuli to move closer to the free, logic-first teaching he first found in resources like Language Transfer: making genuine understanding a little more accessible, not just for those who can pay for it."
+    },
+    "cta": {
+      "h2": "Ready to get started?",
+      "p": "Explore the subjects Yuli covers, see pricing, or get in touch with any questions.",
+      "contactYuli": "Contact Yuli"
+    }
+  },
+  "subjectPage": {
+    "common": {
+      "backToHome": "Back to Home",
+      "examBoardsTitle": "Exam Boards We Teach",
+      "examBoardsNote": "Yuli is not affiliated with or endorsed by AQA, Edexcel, OCR, WJEC/Eduqas, or CCEA.",
+      "testimonialsTitle": "What Students Say",
+      "faqTitle": "Frequently Asked Questions",
+      "howWeTeach": {
+        "title": "How We Teach",
+        "subtitle": "A personalised approach that builds confidence, true understanding, and results that last.",
+        "step1": { "title": "1. Diagnostic first", "desc": "I begin with the goals parents and students bring to me, whether it is passing an exam, improving confidence, or filling gaps. Everything I do is adapted to the student’s needs." },
+        "step2": { "title": "2. Guided teaching", "desc": "When I notice missing knowledge, I go back and rebuild the foundations until the student truly understands. No skipping and no rushing, just clarity." },
+        "step3": { "title": "3. Targeted retrieval" },
+        "step4": { "title": "4. Perform under pressure", "desc": "I know what it’s like to worry about being judged. My students never have to feel embarrassed about not knowing something. With patience and practice, I help them build confidence for exams and understanding that really lasts." }
+      },
+      "benefit1": { "title": "Customised exam papers", "desc": "Practice papers tailored to your exam board and current gaps, with mark schemes and worked solutions." },
+      "benefit2": { "title": "Parent feedback every lesson", "desc": "A short summary after each session—what we covered, next steps, and anything to watch before the next lesson." },
+      "benefit3": { "title": "Progress tracker & next steps", "desc": "Clear milestones from the diagnostic plan, weekly targets, and visible progress over time." },
+      "faq": {
+        "onlineSessions": { "q": "How do online sessions work?", "a1": "Sessions are currently run on Microsoft Teams. I share my screen and use digital tools to explain topics clearly, step by step, while students work through problems with me in real time.", "a2": "We are also developing our own interactive online whiteboard, which is in beta testing. Once ready, it will make lessons even more engaging and give students an easy way to practice and save their work in one place." },
+        "discounts": { "q": "Can I get discounts on sessions?", "a": "Yes! We offer discounted rates for students who qualify based on household income. We believe quality education should be accessible to all students regardless of financial circumstances." },
+        "homework": { "q": "Do you provide homework or practice after lessons?", "a": "Yes. I often set short, focused practice tasks after lessons. These help students reinforce what we covered and prepare for the next session." }
+      }
+    },
+    "gcseMaths": {
+      "hero": { "title": "GCSE Mathematics", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Mathematics", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Maths becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“He’s not one of those tutors who make you wish the lesson was over from the first minute. He keeps you engaged at all times, is friendly and patient, knows how to turn your weak areas into strengths, and supports you every step of the way.”", "meta": "Adam R • Student" },
+      "testimonial2": { "quote": "“I usually hate maths, but I actually enjoyed the sessions with Lukas. He explained things in a way that was easy to understand and made me feel comfortable. The one-to-one classes helped a lot and weren’t stressful at all.”", "meta": "Yahya O • Student" },
+      "testimonial3": { "quote": "“Lukas has been brilliant with Yahya. Maths has always been a subject he struggled with, but Lukas’s easy-going approach and clear explanations made the lessons engaging and effective. Yahya felt comfortable and supported, and I could see his confidence grow.”", "meta": "Alida O• Parent" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Mathematics exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Mathematics. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Mathematics sessions cost?", "a": "GCSE Mathematics sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseBio": {
+      "hero": { "title": "GCSE Biology", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Biology", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Biology becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“The way GCSE Biology was taught step by step made it so much clearer. I felt so much more confident with the exam questions and improved a lot.”", "meta": "Kaishu S • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Biology exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Biology. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Biology sessions cost?", "a": "GCSE Biology sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseChem": {
+      "hero": { "title": "GCSE Chemistry", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Chemistry", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Chemistry becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“I panicked with calculations at first, but learning the exam techniques made it so much easier. I felt so much more prepared going into my GCSEs.”", "meta": "Nez A • Student" },
+      "testimonial2": { "quote": "“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Chemistry exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Chemistry. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Chemistry sessions cost?", "a": "GCSE Chemistry sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcsePhysics": {
+      "hero": { "title": "GCSE Physics", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Physics", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Physics becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“Physics finally makes sense! Instead of guessing through questions, I understand the ideas behind them, which makes solving problems so much less stressful.”", "meta": "Danilo T • Student" },
+      "testimonial2": { "quote": "“Physics was the subject I always left to last because I didn’t get it, especially electricity. Once it was explained properly though, I realised it wasn’t as scary as I thought. I actually started to get the hang of it and did way better than I expected in my GCSEs.”", "meta": "Henry L • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Physics exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Physics. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Physics sessions cost?", "a": "GCSE Physics sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseEngLang": {
+      "hero": { "title": "GCSE English Language", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning English Language", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. English Language becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“Lukas is an amazing tutor always clear, supportive and encouraging. His guidance really helps build confidence and progress. Makes learning alot more fun!”", "meta": "Mahdiya T • Student" },
+      "testimonial2": { "quote": "“Yuli really helped me with my creative writing and grammar, it's something I've always struggled with but now I can confidently say I am really good at.”", "meta": "Afifa A • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE English Language exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE English Language. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE English Language sessions cost?", "a": "GCSE English Language sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseEngLit": {
+      "hero": { "title": "GCSE English Literature", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning English Literature", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. English Literature becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“Lukas is an amazing tutor always clear, supportive and encouraging. His guidance really helps build confidence and progress. Makes learning alot more fun!”", "meta": "Mahdiya T • Student" },
+      "testimonial2": { "quote": "“Yuli helped me realise that memorising quotes was not as important as getting the structure and understanding of the book or play we were studying. Now I can write actually considering my own perspectives as well as maintaining structure.”", "meta": "Afifa A • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE English Literature exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE English Literature. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE English Literature sessions cost?", "a": "GCSE English Literature sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseHistory": {
+      "hero": { "title": "GCSE History", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning History", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. History becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“I felt like I finally understood what the History exam board wanted. The way the Cold War and Weimar Germany were explained made the topics so much clearer, and my grades improved a lot.”", "meta": "Elion G • Student" },
+      "testimonial2": { "quote": "“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE History exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE History. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE History sessions cost?", "a": "GCSE History sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseGeography": {
+      "hero": { "title": "GCSE Geography", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Geography", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Geography becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“I used to find Geography overwhelming, especially the case studies, but breaking them down step by step really helped. I never thought it would become one of the subjects I felt confident in.”", "meta": "Anthony Q • Student" },
+      "testimonial2": { "quote": "“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Geography exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Geography. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Geography sessions cost?", "a": "GCSE Geography sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "gcseFurtherMaths": {
+      "hero": { "title": "GCSE Further Mathematics", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Further Mathematics", "subtext": "From £20/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. FurtherMaths becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“He’s not one of those tutors who make you wish the lesson was over from the first minute. He keeps you engaged at all times, is friendly and patient, knows how to turn your weak areas into strengths, and supports you every step of the way.”", "meta": "Adam R • Student" },
+      "testimonial2": { "quote": "“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major GCSE Further Mathematics exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier GCSE Further Mathematics. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do GCSE Further Mathematics sessions cost?", "a": "GCSE Further Mathematics sessions are £20 per hour for one to one and £10 per hour for group sessions. GCSE sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "alevelMaths": {
+      "hero": { "title": "A-Level Mathematics", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Mathematics", "subtext": "From £35/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Maths becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“I always saw stats, mechanics and pure as three separate headaches, but you helped me piece them together. Now I get how the mechanics links to the pure maths, and even stats feels less random. It’s the first time A-Level Maths has actually made sense as one subject.”", "meta": "Maksym I • Student" },
+      "testimonial2": { "quote": "“An amazing return on investment, I am really glad I went through Yuli Learning for my A-Levels!”", "meta": "Judy K • Student" },
+      "testimonial3": { "quote": "“Throughout my tutoring I always felt I was supported without having my hand held, this gave me the best circumstances to learn complex topics and succeed in my maths course”", "meta": "Zach Z • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major A-Level Mathematics exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier A-Level Mathematics. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do A-Level Mathematics sessions cost?", "a": "A-Level Mathematics sessions are £20 per hour for one to one and £10 per hour for group sessions. A-Level sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "alevelBio": {
+      "hero": { "title": "A-Level Biology", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Biology", "subtext": "From £35/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Biology becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“The hardest part of A-level Biology for me was keeping up with the amount of detail, but learning how to pick out what really mattered helped a lot. It made the exams feel much less stressful.”", "meta": "George B • Student" },
+      "testimonial2": { "quote": "“What really helped me was how we went beyond just memorising the spec. We spent time building the background understanding, so when topics like protein synthesis or gene regulation came up, I actually knew why things worked the way they did. It made the harder A level questions feel so much more manageable.”", "meta": "Kaishu S • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major A-Level Biology exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier A-Level Biology. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do A-Level Biology sessions cost?", "a": "A-Level Biology sessions are £20 per hour for one to one and £10 per hour for group sessions. A-Level sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    },
+    "alevelChem": {
+      "hero": { "title": "A-Level Chemistry", "tagline": "Clarity, confidence, and exam results that last.", "cta": "Start Learning Chemistry", "subtext": "From £35/hr · All UK exam boards covered" },
+      "hwtStep3Desc": "Every student learns differently. I find out what motivates them, whether it is cars, football, or music, and use that to make lessons engaging. Chemistry becomes relevant, understandable, and easier to remember.",
+      "testimonial1": { "quote": "“A-level Chemistry was so much more detailed than GCSE, but breaking everything into manageable steps made it feel possible. I never thought I’d say it, but I actually started to like the challenge.”", "meta": "Nez A • Student" },
+      "testimonial2": { "quote": "“Professional, calm, and effective. The diagnostic lesson gave us a clear roadmap — we finally knew what to focus on.”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“Weekly sessions built confidence and timing. My daughter walked into the exam prepared and came out smiling.”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "What exam boards do you cover?", "a": "We cover all major A-Level Chemistry exam boards including AQA, Edexcel, OCR, WJEC/Eduqas, and CCEA. Each board has slightly different approaches, and we tailor our teaching to match your specific syllabus." },
+      "faqTier": { "q": "Do you teach both Foundation and Higher tier?", "a": "Yes, we teach both Foundation and Higher tier A-Level Chemistry. We'll assess your current level and work towards your target grade, whether that's securing a solid pass or aiming for the top grades." },
+      "faqPrice": { "q": "How much do A-Level Chemistry sessions cost?", "a": "A-Level Chemistry sessions are £20 per hour for one to one and £10 per hour for group sessions. A-Level sessions are £20 per hour for one to one and £10 per hour for group sessions. If a discount is applied the price becomes £12 per hour for one to one and £6 per hour for group sessions." }
+    }
+  },
+  "booking": {
+    "common": {
+      "bookYourSession": "Book Your Session",
+      "heroDescription": "Choose your preferred date and time for a personalised tutoring session. We'll confirm your booking and send you the session details via your preferred contact method.",
+      "whatHappensNext": "What Happens Next",
+      "timeline": {
+        "immediately": { "t": "Immediately", "d": "Booking confirmation email sent to your inbox" },
+        "within2h": { "t": "Within 2 hours", "d": "Session link and preparation guide delivered" },
+        "before24h": { "t": "24 hours before", "d": "Reminder email with session materials" },
+        "dayOf": { "t": "Day of session", "d": "Join link active 10 minutes early" },
+        "after": { "t": "After session", "d": "Progress summary and next steps sent to parents" }
+      },
+      "technicalSetup": "Technical Setup",
+      "tech": {
+        "platform": "Platform:",
+        "platformValue": "Microsoft Teams (link provided after booking)",
+        "needed": "You'll need:",
+        "neededValue": "Stable internet, headphones, pen & paper",
+        "test": "Test connection:",
+        "testValue": "5-minute setup check available",
+        "support": "Support:",
+        "supportValue": "Phone number provided for technical issues"
+      },
+      "firstSessionStructure": "First Session Structure",
+      "session": {
+        "opening": { "t": "Opening (10 mins):", "d": "Goals discussion and level assessment" },
+        "main": { "t": "Main session (35-45 mins):", "d": "Diagnostic teaching and practice" },
+        "closing": { "t": "Closing (5-10 mins):", "d": "Feedback and planning next steps" },
+        "parentUpdate": { "t": "Parent update:", "d": "Email summary within 24 hours" }
+      },
+      "courseDetails": "Course Details",
+      "examBoard": "Exam Board",
+      "selectExamBoard": "Select exam board...",
+      "edexcelLabel": "Edexcel (Pearson)",
+      "cieLabel": "CIE (Cambridge International)",
+      "other": "Other",
+      "notSure": "Not sure",
+      "currentGrade": "Current Grade",
+      "selectCurrentGrade": "Select current grade...",
+      "notSureAssess": "Not sure - we can assess this",
+      "targetGrade": "Target Grade",
+      "selectTargetGrade": "Select target grade...",
+      "grade4Standard": "Grade 4 (Standard Pass)",
+      "grade5Strong": "Grade 5 (Strong Pass)",
+      "specificAreas": "Specific Areas to Focus On (Optional)",
+      "continueToDateTime": "Continue to Date & Time",
+      "selectDateTime": "Select Date & Time",
+      "sessionDuration": "Session Duration",
+      "sessionType": "Session Type",
+      "individual": "Individual",
+      "oneOnOne": "One-on-one session",
+      "groupSession": "Group Session",
+      "oneHour": "1 Hour",
+      "ninetyMinutes": "90 Minutes",
+      "groupSessionInfoTitle": "Group Session Information",
+      "groupSessionInfoIntro": "We need 2-4 students to run a group session. If we can't form a group within 48 hours, we'll contact you to either:",
+      "groupSessionOption1": "Schedule an individual session at the same time",
+      "groupSessionOption2": "Join you with another available group session",
+      "groupSessionOption3": "Provide a full refund",
+      "contactDetails": "Contact Details",
+      "emailAddress": "Email Address",
+      "phoneNumber": "Phone Number",
+      "preferredContactMethod": "Preferred Contact Method",
+      "email": "Email",
+      "phone": "Phone",
+      "sms": "SMS",
+      "additionalNotes": "Additional Notes (Optional)",
+      "notesPlaceholder": "Any specific topics you'd like to focus on or questions you have...",
+      "bookingSummary": "Booking Summary",
+      "subjectLabel": "Subject:",
+      "examBoardLabel": "Exam Board:",
+      "currentToTarget": "Current → Target:",
+      "dateLabel": "Date:",
+      "timeLabel": "Time:",
+      "durationLabel": "Duration:",
+      "totalLabel": "Total:",
+      "confirmBooking": "Confirm Booking",
+      "disclaimer": "We may contact you to adjust the time if there are any scheduling conflicts. You'll receive a confirmation email with session details within 24 hours.",
+      "discountAppliedTitle": "Discount Applied",
+      "discountAppliedText": "Your financial support discount has been approved and applied to these rates.",
+      "discountInfoText": "Financial support available - discounted rates for families receiving benefits or free school meals.",
+      "applyInProfile": "Apply in your profile",
+      "comingSoon": "Coming Soon",
+      "each": "each",
+      "today": "Today",
+      "at": "at",
+      "calendarPastTooltip": "Bookings must be made at least 1 day in advance",
+      "calendarSelectTooltip": "Click to select this date",
+      "provideEmailOrPhone": "Please provide either an email or phone number.",
+      "pleaseSignIn": "Please sign in to complete your booking.",
+      "processing": "Processing...",
+      "redirectingToPayment": "Redirecting to Payment...",
+      "bookingError": "Sorry, there was an error processing your booking. Please try again."
+    },
+    "gcseMaths": {
+      "backLink": "Back to Mathematics",
+      "badge": "GCSE Mathematics",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseBio": {
+      "backLink": "Back to Biology",
+      "badge": "GCSE Biology",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseChem": {
+      "backLink": "Back to Chemistry",
+      "badge": "GCSE Chemistry",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcsePhysics": {
+      "backLink": "Back to Physics",
+      "badge": "GCSE Physics",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseEngLang": {
+      "backLink": "Back to English Language",
+      "badge": "GCSE English Language",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseEngLit": {
+      "backLink": "Back to English Literature",
+      "badge": "GCSE English Literature",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseGeography": {
+      "backLink": "Back to Geography",
+      "badge": "GCSE Geography",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseHistory": {
+      "backLink": "Back to History",
+      "badge": "GCSE History",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "gcseFurtherMaths": {
+      "backLink": "Back to Further Mathematics",
+      "badge": "GCSE Further Mathematics",
+      "groupSessionSubtext": "2-4 students (£10/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "alevelMaths": {
+      "backLink": "Back to Mathematics",
+      "badge": "A-Level Mathematics",
+      "groupSessionSubtext": "2-4 students (£15/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "alevelBio": {
+      "backLink": "Back to Biology",
+      "badge": "A-Level Biology",
+      "groupSessionSubtext": "2-4 students (£15/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    },
+    "alevelChem": {
+      "backLink": "Back to Chemistry",
+      "badge": "A-Level Chemistry",
+      "groupSessionSubtext": "2-4 students (£15/hour each)",
+      "specificAreasPlaceholder": "e.g., Algebra, Quadratic equations, Trigonometry..."
+    }
+  }
+}

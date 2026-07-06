@@ -1,0 +1,521 @@
+{
+  "common": {
+    "bookNow": "立即预约",
+    "call": "致电",
+    "comingSoon": "即将推出",
+    "email": "发送邮件",
+    "ethicalBanner": "符合条件的学生可享受优惠价格",
+    "explore": "了解详情",
+    "learnMore": "了解更多",
+    "perHour": "/小时",
+    "scroll": "向下滑动",
+    "view": "查看",
+    "close": "关闭"
+  },
+  "nav": {
+    "about": "关于我们",
+    "admin": "管理员",
+    "contact": "联系我们",
+    "dashboard": "控制台",
+    "pricing": "价格",
+    "profile": "个人资料",
+    "signIn": "登录",
+    "signUp": "注册",
+    "subjects": "科目"
+  },
+  "auth": {
+    "confirmPassword": "确认密码",
+    "continueAs": "选择身份",
+    "continueWithGoogle": "使用 Google 继续",
+    "email": "邮箱",
+    "forgotPassword": "忘记密码？",
+    "keepSignedIn": "保持登录状态",
+    "password": "密码",
+    "studentParent": "学生/家长",
+    "tutorRole": "导师（需管理员审核）"
+  },
+  "footer": {
+    "aboutYuli": "关于 Yuli",
+    "careers": "招聘",
+    "company": "公司",
+    "contactUs": "联系我们",
+    "cookies": "Cookie 政策",
+    "copyright": "© 2024 Yuli，保留所有权利。",
+    "faqs": "常见问题",
+    "legal": "法律信息",
+    "privacy": "隐私政策",
+    "refundPolicy": "退款政策",
+    "safeguarding": "学生保护政策",
+    "support": "支持",
+    "tagline": "用心打造，只为优质教育 ❤️",
+    "terms": "条款与条件"
+  },
+  "home": {
+    "hero": {
+      "line1": "真正的学习是<span class=\"highlight\">理解</span>，",
+      "line2": "而不是<em>死记硬背</em>。",
+      "subtitle": "专业的 GCSE 和 A Level 辅导，真正有效——靠的是理解，而不是死记硬背",
+      "exploreSubjects": "浏览科目",
+      "viewPricing": "查看价格",
+      "priceFrom": "灵活定价，最低每小时 £12"
+    },
+    "founder": {
+      "label": "创始人",
+      "role": "Yuli 创始人 · 数学导师",
+      "intro": "Lukas 拥有 5 年以上的教学经验，教授范围从 KS3 到 A Level。他创立 Yuli 源于一个简单的信念：学生记住的是他们真正理解的内容，而不是死记硬背的内容。这一理念贯穿 Yuli 的每一堂课——我们会把知识点拆解到最基本的逻辑，让学生带着真正的信心走进考场，而不仅仅依靠死记硬背。"
+    },
+    "trust": {
+      "experience": "5 年以上教学经验",
+      "levels": "覆盖 KS3 至 A Level",
+      "boards": "涵盖英国主要考试局",
+      "dbs": "已通过 DBS 背景审查"
+    },
+    "subjects": {
+      "heading": "我们教授的科目",
+      "subtitle": "按类别浏览科目——左右滑动查看更多",
+      "count2": "2 个科目",
+      "count3": "3 个科目",
+      "count4": "4 个科目",
+      "count5": "5 个科目",
+      "count10": "10 个科目",
+      "cat": {
+        "maths": { "name": "数学", "desc": "从基础到高阶的数学知识" },
+        "alevelMaths": { "desc": "高阶数学知识" },
+        "sciences": { "name": "科学", "desc": "生物、化学与物理" },
+        "alevelSciences": { "desc": "高阶科学知识与实验技能" },
+        "humanities": { "name": "语言与人文学科", "desc": "英语文学、英语语言与历史" },
+        "tech": { "name": "科技与创意学科", "desc": "计算机科学、商业、经济学与创意类科目" },
+        "business": { "name": "商业与社会科学", "desc": "经济学原理与社会分析" }
+      },
+      "item": {
+        "gcseMaths": { "title": "GCSE 数学", "desc": "掌握从基础层到较高层的数学知识" },
+        "furtherMaths": { "title": "GCSE 进阶数学", "desc": "面向优秀学生的高阶数学内容" },
+        "gcseBiology": { "title": "GCSE 生物", "desc": "探索生物体的结构与生命过程" },
+        "gcseChemistry": { "title": "GCSE 化学", "desc": "化学反应与分子结构" },
+        "gcsePhysics": { "title": "GCSE 物理", "desc": "力、能量与基本原理" },
+        "englishLit": { "title": "英语文学", "desc": "研读经典文本，培养文学鉴赏与批判性分析能力" },
+        "englishLang": { "title": "英语语言", "desc": "培养写作、阅读与沟通能力" },
+        "history": { "title": "历史", "desc": "不同历史时期的事件与史料分析" },
+        "geography": { "title": "地理", "desc": "探索人文与自然地理，涵盖地貌、气候与社会等主题" },
+        "french": { "title": "法语", "desc": "通过实际交流培养语言能力与文化理解" },
+        "spanish": { "title": "西班牙语", "desc": "通过沉浸式学习培养语言能力与文化理解" },
+        "german": { "title": "德语", "desc": "语言能力与文化理解" },
+        "religiousStudies": { "title": "宗教研究", "desc": "探索伦理、哲学与世界宗教" },
+        "art": { "title": "艺术与设计", "desc": "通过艺术技巧培养创意表达与视觉沟通能力" },
+        "computerScience": { "title": "计算机科学", "desc": "编程、算法与计算思维" },
+        "business": { "title": "商业研究", "desc": "企业经营、市场营销与商业运作" },
+        "music": { "title": "音乐", "desc": "演奏、创作与乐理知识" },
+        "economics": { "title": "经济学", "desc": "经济学原理与商业应用" },
+        "alevelMaths": { "title": "A-Level 数学", "desc": "高阶数学概念与证明技巧" },
+        "alevelFurtherMaths": { "title": "A-Level 进阶数学", "desc": "超越 A-Level 的高阶数学内容" },
+        "alevelBiology": { "title": "A-Level 生物", "desc": "高阶生物系统与生命过程" },
+        "alevelChemistry": { "title": "A-Level 化学", "desc": "复杂化学反应与分析" },
+        "alevelPhysics": { "title": "A-Level 物理", "desc": "高阶物理概念与应用" },
+        "alevelEconomics": { "title": "A-Level 经济学", "desc": "经济学理论与现实应用" },
+        "alevelBusiness": { "title": "A-Level 商业研究", "desc": "企业经营、市场营销与商业运作" },
+        "alevelPsychology": { "title": "A-Level 心理学", "desc": "通过科学分析理解人类行为与心理过程" },
+        "alevelSociology": { "title": "A-Level 社会学", "desc": "通过批判性分析理解社会、文化与人类行为" },
+        "alevelComputerScience": { "title": "A-Level 计算机科学", "desc": "编程、算法与计算思维" }
+      }
+    },
+    "pricing": {
+      "heading": "价格",
+      "subtitle": "各科目均提供灵活优质的辅导价格",
+      "viewDiscounted": "查看适用的优惠价格 ↓",
+      "mostPopular": "最受欢迎",
+      "gcseSubjects": "GCSE 科目",
+      "advancedLevel": "进阶课程",
+      "alevelSubjects": "A-Level 科目",
+      "bestValue": "超值之选",
+      "groupSessions": "小组课程",
+      "oneToOne": "一对一私人课程",
+      "gcseSubjectList": "数学、科学、英语等多个科目",
+      "foundationHigher": "基础层与较高层",
+      "flexibleScheduling": "灵活排课",
+      "alevelSubjectList": "数学、科学等多个科目",
+      "examPrep": "备考辅导",
+      "smallGroup": "小组学习",
+      "peerCollab": "同伴协作学习",
+      "reducedCost": "更低费用",
+      "sharedResources": "共享学习资源",
+      "discountedHeading": "符合条件学生的优惠价格",
+      "discountedSubtitle": "我们相信优质教育应该人人可享",
+      "discountedRate": "优惠价格"
+    },
+    "contact": {
+      "heading": "立即开始",
+      "subtitle": "准备好提升学业成绩了吗？",
+      "bookTitle": "预约课程",
+      "bookDesc": "安排您的第一节辅导课",
+      "emailTitle": "给我们发邮件",
+      "emailDesc": "如有疑问，欢迎给我们留言",
+      "callTitle": "致电我们",
+      "callDesc": "直接与 Lukas 交流"
+    }
+  },
+  "tag": {
+    "allBoards": "适用所有考试局",
+    "allExamBoards": "适用所有考试局",
+    "allSkills": "涵盖所有技能",
+    "allThemes": "涵盖所有主题",
+    "allTiers": "适用所有层级",
+    "allTopics": "涵盖所有主题",
+    "complexNumbers": "复数",
+    "creative": "创意表达",
+    "criticalThinking": "批判性思维",
+    "foundation": "基础层",
+    "higher": "较高层",
+    "matrices": "矩阵",
+    "portfolio": "作品集",
+    "programming": "编程实践",
+    "realWorld": "贴近现实",
+    "separateScience": "单科制科学",
+    "tripleScience": "三科制科学"
+  },
+  "about": {
+    "intro": {
+      "eyebrow": "关于 Yuli",
+      "h1": "始终以理解为先",
+      "p1": "Yuli 是一家面向 GCSE 和 A-Level 学生的辅导机构，教授科目从数学到英语文学，覆盖 KS3 至 A-Level，并对接英国所有主要考试局。",
+      "p2": "Yuli 的创立源于一个信念：学生记住的是他们真正理解的内容，而不是死记硬背的内容。大多数辅导只专注于应付下一次考试，靠反复操练让答案“记住”，但这种方法很难持久——一旦题目表述变化或知识点延伸，死记硬背的答案就会站不住脚。Yuli 的每一堂课都致力于让学生真正理解一个知识点，而不只是让它在脑海中停留几周。"
+    },
+    "approach": {
+      "eyebrow": "我们的教学方法",
+      "h2": "每一堂课如何进行",
+      "lead": "尽管每位学生各不相同，我们的教学方法始终保持一致。",
+      "card1": { "title": "清晰的讲解", "desc": "每个知识点都会先拆解到最基本的逻辑，而不是直接给出用于死记硬背的捷径。" },
+      "card2": { "title": "因材施教", "desc": "没有固定的教学模板。课程会根据每位学生的思维方式和学习节奏灵活调整。" },
+      "card3": { "title": "真正的理解与自信", "desc": "知识点会与真实例子相结合，让学生真正理解，并建立起在压力下依然稳固的自信。" },
+      "card4": { "title": "运用于考试", "desc": "所学的理解会通过真实的历年试题反复检验，确保在考场上同样管用，而不仅仅停留在讲解阶段。" }
+    },
+    "founder": {
+      "eyebrow": "创始人",
+      "photoAlt": "Lukas Jovaisa，Yuli 创始人",
+      "p1": "Yuli 由 Lukas Jovaisa 创立，他目前在大学攻读数学专业。他已有 5 年以上的辅导经验，教授学生范围从 KS3 到 A-Level。他创立 Yuli，是因为他一直看到同样的问题：学生被教导如何应付考试，而不是真正理解知识。",
+      "p2": "他的教学理念来自一个简单的信念——最初是在语言学习中发现的：理解永远胜过死记硬背。他会根据每位学生的思维方式调整教学，而不是固守一种方法，并且只要有帮助，他也会跳出考试大纲去讲解。",
+      "p3": "他一边攻读学位，一边坚持授课，因为他希望每一位学生都能体会到同一种感觉：<em>“原来我真的可以做到。”</em>"
+    },
+    "going": {
+      "eyebrow": "Yuli 的未来",
+      "h2": "在成长的同时，不丢失核心价值",
+      "p1": "Yuli 目前仍处于起步阶段，稳步成长比快速扩张更重要。接下来的计划是引入更多认同同一理念的导师——理解才能持久，死记硬背不能——让更多学生以这种方式学习，同时不失去让这一切奏效的个性化关注。",
+      "p2": "从长远来看，Lukas 希望 Yuli 能更接近他最初从 Language Transfer 等语言学习资源中发现的那种免费、以逻辑为先的教学方式，让真正的理解变得更容易被每个人获得，而不只是那些负担得起学费的人。"
+    },
+    "cta": {
+      "h2": "准备好开始了吗？",
+      "p": "浏览 Yuli 提供的科目、查看价格，或联系我们咨询任何问题。",
+      "contactYuli": "联系 Yuli"
+    }
+  },
+  "subjectPage": {
+    "common": {
+      "backToHome": "返回首页",
+      "examBoardsTitle": "我们教授的考试局",
+      "examBoardsNote": "Yuli 与 AQA、Edexcel、OCR、WJEC/Eduqas 及 CCEA 均无关联，也未获得其认可或授权。",
+      "testimonialsTitle": "学生怎么说",
+      "faqTitle": "常见问题",
+      "howWeTeach": {
+        "title": "我们的教学方式",
+        "subtitle": "个性化的教学方法，帮助学生建立自信、真正理解知识，并取得持久的学习成果。",
+        "step1": { "title": "1. 先诊断", "desc": "我会先了解家长和学生的目标，无论是通过考试、提升自信，还是补齐知识漏洞，我所做的一切都会围绕学生的实际需求展开。" },
+        "step2": { "title": "2. 有针对性地教学", "desc": "一旦发现知识漏洞，我会回头重新打好基础，直到学生真正理解为止。不跳步，不赶进度，只求讲清楚。" },
+        "step3": { "title": "3. 针对性巩固" },
+        "step4": { "title": "4. 从容应对考试", "desc": "我明白担心被人评判是什么感觉。我的学生永远不需要因为不懂而感到尴尬。通过耐心和练习，我帮助他们建立起应对考试的信心，以及真正持久的理解。" }
+      },
+      "benefit1": { "title": "定制化练习试卷", "desc": "根据你所在的考试局和当前的薄弱环节量身定制练习卷，并附有评分标准和详细解答。" },
+      "benefit2": { "title": "每节课后的家长反馈", "desc": "每节课后提供简要总结——本节课学了什么、下一步计划，以及下节课前需要留意的地方。" },
+      "benefit3": { "title": "进度跟踪与后续计划", "desc": "根据诊断计划制定清晰的阶段目标、每周计划，并可随时查看进步情况。" },
+      "faq": {
+        "onlineSessions": { "q": "线上课程是如何进行的？", "a1": "目前课程通过 Microsoft Teams 进行。我会共享屏幕，使用数字工具逐步清晰地讲解知识点，学生也可以和我实时一起解题。", "a2": "我们也在开发自己的互动式线上白板，目前处于测试阶段。上线后，课堂会更有互动性，学生也能更方便地练习并保存学习记录。" },
+        "discounts": { "q": "课程可以申请优惠吗？", "a": "可以！我们为符合家庭收入条件的学生提供优惠价格。我们相信，无论经济状况如何，每个学生都应该享有优质教育。" },
+        "homework": { "q": "课后会安排作业或练习吗？", "a": "会的。我通常会在课后布置简短且有针对性的练习，帮助学生巩固所学内容，并为下一节课做好准备。" }
+      }
+    },
+    "gcseMaths": {
+      "hero": { "title": "GCSE 数学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习数学", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，数学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“他不是那种让你从第一分钟就盼着下课的老师。他始终能让你保持专注，为人友善又有耐心，懂得如何把你的薄弱环节转化为优势，并在每一步都支持着你。”", "meta": "Adam R • Student" },
+      "testimonial2": { "quote": "“我通常很讨厌数学，但和 Lukas 上课时我却真心投入。他讲解的方式很容易理解，也让我感到很自在。这种一对一的课程帮助很大，而且完全不会有压力。”", "meta": "Yahya O • Student" },
+      "testimonial3": { "quote": "“Lukas 教 Yahya 教得非常出色。数学一直是他觉得很吃力的科目，但 Lukas 轻松自在的教学方式和清晰的讲解让课堂既有吸引力又有成效。Yahya 感到很自在也很受支持，我也能明显看到他的自信在成长。”", "meta": "Alida O• Parent" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 数学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 数学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 数学课程收费是多少？", "a": "GCSE 数学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseBio": {
+      "hero": { "title": "GCSE 生物", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习生物", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，生物也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“GCSE 生物课上一步步的讲解方式让内容清晰了很多。做题时我感到更有信心，成绩也提高了不少。”", "meta": "Kaishu S • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 生物考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 生物的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 生物课程收费是多少？", "a": "GCSE 生物课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseChem": {
+      "hero": { "title": "GCSE 化学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习化学", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，化学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“一开始我对计算题很慌张，但学会考试技巧之后感觉容易多了。面对 GCSE 考试时我感到更有准备。”", "meta": "Nez A • Student" },
+      "testimonial2": { "quote": "“非常专业、沉稳且高效。诊断课让我们有了清晰的方向——终于知道该重点关注什么了。”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 化学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 化学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 化学课程收费是多少？", "a": "GCSE 化学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcsePhysics": {
+      "hero": { "title": "GCSE 物理", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习物理", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，物理也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“物理终于说得通了！我不再是靠猜题，而是真正理解了背后的原理，解题时也不再感到那么大压力。”", "meta": "Danilo T • Student" },
+      "testimonial2": { "quote": "“物理一直是我最后才愿意碰的科目，尤其是电学部分，因为我完全搞不懂。但真正讲清楚之后，我发现它并没有我想象中那么可怕。我渐渐上手，GCSE 的表现也比预期好很多。”", "meta": "Henry L • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 物理考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 物理的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 物理课程收费是多少？", "a": "GCSE 物理课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseEngLang": {
+      "hero": { "title": "GCSE 英语语言", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习英语语言", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，英语语言也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“Lukas 是一位非常出色的导师，讲解清晰、耐心支持又懂得鼓励人。他的指导切实帮助我建立了信心，也让我不断进步。学习也因此变得更有趣！”", "meta": "Mahdiya T • Student" },
+      "testimonial2": { "quote": "“Yuli 在创意写作和语法方面帮了我很大的忙，这一直是我的弱项，但现在我可以自信地说自己在这方面表现不错了。”", "meta": "Afifa A • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 英语语言考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 英语语言的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 英语语言课程收费是多少？", "a": "GCSE 英语语言课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseEngLit": {
+      "hero": { "title": "GCSE 英语文学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习英语文学", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，英语文学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“Lukas 是一位非常出色的导师，讲解清晰、耐心支持又懂得鼓励人。他的指导切实帮助我建立了信心，也让我不断进步。学习也因此变得更有趣！”", "meta": "Mahdiya T • Student" },
+      "testimonial2": { "quote": "“Yuli 让我明白，比起死记硬背引文，更重要的是理解我们所学作品的结构和内涵。现在我在写作时能够真正结合自己的观点，同时保持文章结构清晰。”", "meta": "Afifa A • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 英语文学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 英语文学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 英语文学课程收费是多少？", "a": "GCSE 英语文学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseHistory": {
+      "hero": { "title": "GCSE 历史", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习历史", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，历史也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“我终于明白了历史考试局到底想要什么。冷战和魏玛德国这些内容被讲解得清晰多了，我的成绩也提高了不少。”", "meta": "Elion G • Student" },
+      "testimonial2": { "quote": "“非常专业、沉稳且高效。诊断课让我们有了清晰的方向——终于知道该重点关注什么了。”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 历史考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 历史的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 历史课程收费是多少？", "a": "GCSE 历史课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseGeography": {
+      "hero": { "title": "GCSE 地理", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习地理", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，地理也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“我以前觉得地理很让人吃不消，尤其是案例分析，但一步步拆解之后帮助很大。我从没想过它会成为我最有信心的科目之一。”", "meta": "Anthony Q • Student" },
+      "testimonial2": { "quote": "“非常专业、沉稳且高效。诊断课让我们有了清晰的方向——终于知道该重点关注什么了。”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 地理考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 地理的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 地理课程收费是多少？", "a": "GCSE 地理课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "gcseFurtherMaths": {
+      "hero": { "title": "GCSE 进阶数学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习进阶数学", "subtext": "低至每小时 £20 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，进阶数学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“他不是那种让你从第一分钟就盼着下课的老师。他始终能让你保持专注，为人友善又有耐心，懂得如何把你的薄弱环节转化为优势，并在每一步都支持着你。”", "meta": "Adam R • Student" },
+      "testimonial2": { "quote": "“非常专业、沉稳且高效。诊断课让我们有了清晰的方向——终于知道该重点关注什么了。”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 GCSE 进阶数学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 GCSE 进阶数学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "GCSE 进阶数学课程收费是多少？", "a": "GCSE 进阶数学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "alevelMaths": {
+      "hero": { "title": "A-Level 数学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习数学", "subtext": "低至每小时 £35 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，数学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“以前我总把统计、力学和纯数学看作三个各自独立的难题，但你帮我把它们串联了起来。现在我明白了力学是怎么和纯数学联系起来的，连统计也不再显得那么随机了。这是我第一次觉得 A-Level 数学真正成为了一个整体的学科。”", "meta": "Maksym I • Student" },
+      "testimonial2": { "quote": "“投入产出比非常高，我很庆幸自己通过 Yuli Learning 完成了 A-Level 的学习！”", "meta": "Judy K • Student" },
+      "testimonial3": { "quote": "“在整个辅导过程中，我一直感到自己是被支持的，而不是被过度依赖或牵着走，这让我在学习复杂知识点、并在数学课程中取得成功方面拥有了最好的条件。”", "meta": "Zach Z • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 A-Level 数学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 A-Level 数学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "A-Level 数学课程收费是多少？", "a": "A-Level 数学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "alevelBio": {
+      "hero": { "title": "A-Level 生物", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习生物", "subtext": "低至每小时 £35 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，生物也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“对我来说，A-Level 生物最难的部分是知识点的细节量太大，但学会如何抓住真正重要的内容后帮助很大，也让考试压力小了很多。”", "meta": "George B • Student" },
+      "testimonial2": { "quote": "“真正帮到我的是，我们不只是死记硬背考纲内容，而是花时间建立背景理解，所以当蛋白质合成或基因调控这类内容出现时，我真的明白了它们运作的原理，这让更难的 A-Level 题目也变得容易应对多了。”", "meta": "Kaishu S • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 A-Level 生物考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 A-Level 生物的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "A-Level 生物课程收费是多少？", "a": "A-Level 生物课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    },
+    "alevelChem": {
+      "hero": { "title": "A-Level 化学", "tagline": "清晰易懂，建立自信，取得持久的考试成绩。", "cta": "开始学习化学", "subtext": "低至每小时 £35 起 · 覆盖英国所有主要考试局" },
+      "hwtStep3Desc": "每位学生的学习方式都不同。我会了解是什么能激发他们的兴趣，无论是汽车、足球还是音乐，并借此让课堂更有吸引力。这样一来，化学也会变得更贴近生活、更容易理解，也更容易记住。",
+      "testimonial1": { "quote": "“A-Level 化学比 GCSE 详细得多，但把所有内容拆解成可以逐步完成的小步骤后，感觉一切都变得可行了。没想到我居然会喜欢上这种挑战。”", "meta": "Nez A • Student" },
+      "testimonial2": { "quote": "“非常专业、沉稳且高效。诊断课让我们有了清晰的方向——终于知道该重点关注什么了。”", "meta": "Robin • Student" },
+      "testimonial3": { "quote": "“每周固定的课程培养了信心和答题节奏感。我女儿走进考场时已经准备充分，走出来时也露出了笑容。”", "meta": "Ethan Y • Student" },
+      "faqExamBoards": { "q": "你们教授哪些考试局的内容？", "a": "我们教授所有主要的 A-Level 化学考试局课程，包括 AQA、Edexcel、OCR、WJEC/Eduqas 和 CCEA。各个考试局的侧重点略有不同，我们会根据你的具体考纲调整教学内容。" },
+      "faqTier": { "q": "基础层和较高层你们都教吗？", "a": "是的，我们教授 A-Level 化学的基础层和较高层课程。我们会评估你目前的水平，并根据你的目标分数制定教学计划，无论是稳拿及格，还是冲刺最高等级。" },
+      "faqPrice": { "q": "A-Level 化学课程收费是多少？", "a": "A-Level 化学课程一对一每小时 £20，小组课程每小时 £10。如符合优惠条件，一对一价格为每小时 £12，小组课程为每小时 £6。" }
+    }
+  },
+  "booking": {
+    "common": {
+      "bookYourSession": "预约你的课程",
+      "heroDescription": "选择你偏好的日期和时间，预约一对一辅导课程。我们会确认你的预约，并通过你偏好的联系方式发送课程详情。",
+      "whatHappensNext": "接下来会发生什么",
+      "timeline": {
+        "immediately": { "t": "立即", "d": "预约确认邮件将发送到你的邮箱" },
+        "within2h": { "t": "2 小时内", "d": "发送课程链接和准备指南" },
+        "before24h": { "t": "课程开始前 24 小时", "d": "发送提醒邮件及课程材料" },
+        "dayOf": { "t": "课程当天", "d": "课程链接将提前 10 分钟开启" },
+        "after": { "t": "课程结束后", "d": "向家长发送进度总结和后续计划" }
+      },
+      "technicalSetup": "技术设置",
+      "tech": {
+        "platform": "平台：",
+        "platformValue": "Microsoft Teams（预约后提供链接）",
+        "needed": "你需要准备：",
+        "neededValue": "稳定的网络连接、耳机、纸和笔",
+        "test": "连接测试：",
+        "testValue": "提供 5 分钟的设备检测",
+        "support": "技术支持：",
+        "supportValue": "如遇技术问题，可致电提供的支持电话"
+      },
+      "firstSessionStructure": "首次课程安排",
+      "session": {
+        "opening": { "t": "开场（10 分钟）：", "d": "讨论学习目标并评估当前水平" },
+        "main": { "t": "主要教学（35-45 分钟）：", "d": "诊断式教学与练习" },
+        "closing": { "t": "总结（5-10 分钟）：", "d": "反馈情况并规划下一步" },
+        "parentUpdate": { "t": "家长反馈：", "d": "24 小时内发送邮件总结" }
+      },
+      "courseDetails": "课程详情",
+      "examBoard": "考试局",
+      "selectExamBoard": "请选择考试局……",
+      "edexcelLabel": "Edexcel（培生）",
+      "cieLabel": "CIE（剑桥国际）",
+      "other": "其他",
+      "notSure": "不确定",
+      "currentGrade": "当前成绩",
+      "selectCurrentGrade": "请选择当前成绩……",
+      "notSureAssess": "不确定——我们可以帮你评估",
+      "targetGrade": "目标成绩",
+      "selectTargetGrade": "请选择目标成绩……",
+      "grade4Standard": "Grade 4（标准及格）",
+      "grade5Strong": "Grade 5（优良及格）",
+      "specificAreas": "希望重点提升的具体内容（选填）",
+      "continueToDateTime": "下一步：选择日期和时间",
+      "selectDateTime": "选择日期和时间",
+      "sessionDuration": "课程时长",
+      "sessionType": "课程类型",
+      "individual": "一对一课程",
+      "oneOnOne": "一对一课程",
+      "groupSession": "小组课程",
+      "oneHour": "1 小时",
+      "ninetyMinutes": "90 分钟",
+      "groupSessionInfoTitle": "小组课程说明",
+      "groupSessionInfoIntro": "小组课程需要 2-4 名学生。如果 48 小时内无法组成小组，我们会联系你，为你提供以下选择：",
+      "groupSessionOption1": "以相同时间安排一对一课程",
+      "groupSessionOption2": "为你安排加入其他可行的小组课程",
+      "groupSessionOption3": "提供全额退款",
+      "contactDetails": "联系方式",
+      "emailAddress": "电子邮箱",
+      "phoneNumber": "电话号码",
+      "preferredContactMethod": "偏好的联系方式",
+      "email": "邮箱",
+      "phone": "电话",
+      "sms": "短信",
+      "additionalNotes": "补充说明（选填）",
+      "notesPlaceholder": "例如：你希望重点关注的内容或任何问题……",
+      "bookingSummary": "预约摘要",
+      "subjectLabel": "科目：",
+      "examBoardLabel": "考试局：",
+      "currentToTarget": "当前 → 目标：",
+      "dateLabel": "日期：",
+      "timeLabel": "时间：",
+      "durationLabel": "时长：",
+      "totalLabel": "总计：",
+      "confirmBooking": "确认预约",
+      "disclaimer": "如时间安排有冲突，我们可能会联系你调整时间。你将在 24 小时内收到包含课程详情的确认邮件。",
+      "discountAppliedTitle": "优惠已生效",
+      "discountAppliedText": "你的助学优惠申请已获批准，并已应用于以下价格。",
+      "discountInfoText": "如家庭正在领取相关福利或符合免费校餐资格，可申请优惠价格。",
+      "applyInProfile": "前往个人资料页申请",
+      "comingSoon": "即将推出",
+      "each": "每人",
+      "today": "今天",
+      "at": "",
+      "calendarPastTooltip": "预约需至少提前 1 天进行",
+      "calendarSelectTooltip": "点击选择此日期",
+      "provideEmailOrPhone": "请提供邮箱或电话号码。",
+      "pleaseSignIn": "请登录后完成预约。",
+      "processing": "处理中……",
+      "redirectingToPayment": "正在跳转至支付页面……",
+      "bookingError": "抱歉，处理你的预约时出现错误，请重试。"
+    },
+    "gcseMaths": {
+      "backLink": "返回数学页面",
+      "badge": "GCSE 数学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseBio": {
+      "backLink": "返回生物页面",
+      "badge": "GCSE 生物",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseChem": {
+      "backLink": "返回化学页面",
+      "badge": "GCSE 化学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcsePhysics": {
+      "backLink": "返回物理页面",
+      "badge": "GCSE 物理",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseEngLang": {
+      "backLink": "返回英语语言页面",
+      "badge": "GCSE 英语语言",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseEngLit": {
+      "backLink": "返回英语文学页面",
+      "badge": "GCSE 英语文学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseGeography": {
+      "backLink": "返回地理页面",
+      "badge": "GCSE 地理",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseHistory": {
+      "backLink": "返回历史页面",
+      "badge": "GCSE 历史",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "gcseFurtherMaths": {
+      "backLink": "返回进阶数学页面",
+      "badge": "GCSE 进阶数学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £10）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "alevelMaths": {
+      "backLink": "返回数学页面",
+      "badge": "A-Level 数学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £15）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "alevelBio": {
+      "backLink": "返回生物页面",
+      "badge": "A-Level 生物",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £15）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    },
+    "alevelChem": {
+      "backLink": "返回化学页面",
+      "badge": "A-Level 化学",
+      "groupSessionSubtext": "2-4 名学生（每人每小时 £15）",
+      "specificAreasPlaceholder": "例如：代数、二次方程、三角函数……"
+    }
+  }
+}
